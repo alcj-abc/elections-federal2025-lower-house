@@ -4,12 +4,13 @@ import { decodeSchema, encodeSchema, getRleCodec } from 'hash-codec';
 
 import layouts from '../../data/appdata-layouts.json';
 import data from '../../data/appdata-built.json';
-import historical22 from '../../data/appdata-historical-22.json';
+import historical19 from '../../data/appdata-historical-2019.json';
+import historical22 from '../../data/appdata-historical-2022.json';
 import { invertMap } from '../lib/utils';
 /** Array containing all the individual electorate hexes */
 export const electorates = data.groups.flatMap(group => group.hexes).toSorted((a, b) => a.id - b.id);
 
-export { historical22 };
+export { historical19, historical22 };
 
 const rleDelineator = 'q';
 const nullAllocationDelineator = 'x';

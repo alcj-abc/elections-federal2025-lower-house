@@ -1,11 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { electorates, hashConfig, historical22, schema } from './hashConfig';
+  import { electorates, hashConfig, historical19, historical22, schema } from './hashConfig';
   import HexMap from '../components/HexMap/HexMap.svelte';
   import HexagonContextMenu from './components/HexagonContextMenu/HexagonContextMenu.svelte';
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
-
-  const electorateData = historical22;
 
   let modal = $state<{
     electorate: any;
@@ -73,15 +71,25 @@
           <button
             onclick={e => {
               e.preventDefault();
-              $hashConfig = {
-                ...$hashConfig,
-                allocations: electorateData.reduce((obj, electorate) => {
-                  obj[electorate.id] = electorate.holder;
-                  return obj;
-                }, {})
-              };
-            }}>2019 results</button
+              $hashConfig.allocations = historical19.reduce((obj, electorate) => {
+                obj[electorate.id] = electorate.holder;
+                return obj;
+              }, {});
+            }}
           >
+            2019 results
+          </button>
+          <button
+            onclick={e => {
+              e.preventDefault();
+              $hashConfig.allocations = historical22.reduce((obj, electorate) => {
+                obj[electorate.id] = electorate.holder;
+                return obj;
+              }, {});
+            }}
+          >
+            2022 results
+          </button>
         </fieldset>
       </form>
     </div>
@@ -124,6 +132,7 @@
   .fieldset,
   fieldset {
     margin-bottom: 1rem;
+    border-radius: 0.2rem;
   }
 
   label {

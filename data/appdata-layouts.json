@@ -1,94 +1,67 @@
 {
   "COUNTRY": {
-    "ACT": [9, 10],
-    "NSW": [4, 6],
-    "NT": [2.5, 5],
-    "QLD": [5, 0],
-    "SA": [2, 6],
-    "TAS": [7, 16.75, true],
-    "VIC": [4, 10],
-    "WA": [0, 6]
+    "viewbox": [-50, 0, 480, 500],
+    "positions": {
+      "ACT": [9, 10],
+      "NSW": [4, 6],
+      "NT": [2.5, 5],
+      "QLD": [5, 0],
+      "SA": [2, 6],
+      "TAS": [7, 16.75, true],
+      "VIC": [4, 10],
+      "WA": [0, 6]
+    }
   },
   "EXPLODED": {
-    "ACT": [11.5, 11.25, true],
-    "NSW": [6.75, 6.75],
-    "NT": [3.5, 5],
-    "QLD": [5.75, 0],
-    "SA": [3, 6.75],
-    "TAS": [9.26, 18.5, true],
-    "VIC": [6.25, 11.75, true],
-    "WA": [0, 5.75]
+    "viewbox": [0, 0, 480, 500],
+    "positions": {
+      "ACT": [11.5, 11.25, true],
+      "NSW": [6.75, 6.75],
+      "NT": [3.5, 5],
+      "QLD": [5.75, 0],
+      "SA": [3, 6.75],
+      "TAS": [9.26, 18.5, true],
+      "VIC": [6.25, 11.75, true],
+      "WA": [0, 5.75]
+    }
   },
   "EXPLODED_STATES_ONLY": {
-    "NSW": [6.75, 6.75],
-    "QLD": [5.75, 0],
-    "SA": [3, 6.75],
-    "TAS": [9.26, 18.5, true],
-    "VIC": [6.25, 11.75, true],
-    "WA": [0, 5.75]
+    "viewbox": [0, 0, 480, 500],
+    "positions": {
+      "NSW": [6.75, 6.75],
+      "QLD": [5.75, 0],
+      "SA": [3, 6.75],
+      "TAS": [9.26, 18.5, true],
+      "VIC": [6.25, 11.75, true],
+      "WA": [0, 5.75]
+    }
   },
   "GRID": {
-    "ACT": [10, 19, true],
-    "NSW": [0, 0],
-    "NT": [15, 19],
-    "QLD": [1, 9, true],
-    "SA": [17, 9, true],
-    "TAS": [3, 19],
-    "VIC": [12, 0],
-    "WA": [11, 7]
+    "viewbox": [0, 0, 570, 515],
+    "positions": {
+      "ACT": [10, 19, true],
+      "NSW": [0, 0],
+      "NT": [15, 19],
+      "QLD": [1, 9, true],
+      "SA": [17, 9, true],
+      "TAS": [3, 19],
+      "VIC": [12, 0],
+      "WA": [11, 7]
+    }
   },
-  "ACT": {
-    "ACT": [4.5, 1.5, true]
-  },
-  "NSW": {
-    "NSW": [0, 0]
-  },
-  "NT": {
-    "NT": [3.75, 1.5]
-  },
-  "QLD": {
-    "QLD": [0.75, 0]
-  },
-  "SA": {
-    "SA": [3.75, 0]
-  },
-  "TAS": {
-    "TAS": [3.25, 1.5]
-  },
-  "VIC": {
-    "VIC": [1, 0]
-  },
-  "WA": {
-    "WA": [3.5, -1]
-  },
-  "ACT_NT": {
-    "ACT": [8, 11.5, true],
-    "NT": [7.75, 6, true]
-  },
-  "NSW_QLD": {
-    "NSW": [3.5, 12],
-    "QLD": [4.75, 3, true]
-  },
-  "NSW_VIC": {
-    "NSW": [3.75, 3, true],
-    "VIC": [4.25, 12]
-  },
-  "QLD_VIC": {
-    "QLD": [4.75, 3, true],
-    "VIC": [4.25, 12]
-  },
-  "QLD_WA": {
-    "QLD": [7, 7, true],
-    "WA": [2, 5]
-  },
-  "QLD_NSW_VIC": {
-    "QLD": [1, 2],
-    "NSW": [7, 10],
-    "VIC": [0, 14]
-  },
-  "SA_TAS_WA": {
-    "SA": [7.25, 7, true],
-    "TAS": [11, 9],
-    "WA": [2, 5]
-  }
+  "ACT": { "viewbox": [0, 0, 300, 300], "positions": { "ACT": [4.5, 2, true] } },
+  "NSW": { "viewbox": [0, 0, 300, 300], "positions": { "NSW": [0, 1] } },
+  "NT": { "viewbox": [0, 0, 300, 300], "positions": { "NT": [5, 3] } },
+  "QLD": { "viewbox": [0, 0, 300, 300], "positions": { "QLD": [1, 1] } },
+  "SA": { "viewbox": [0, 0, 300, 300], "positions": { "SA": [4, 1] } },
+  "TAS": { "viewbox": [0, 0, 300, 300], "positions": { "TAS": [4, 1.5] } },
+  "VIC": { "viewbox": [0, 0, 300, 300], "positions": { "VIC": [1.5, 1] } },
+  "WA": { "viewbox": [0, 0, 300, 300], "positions": { "WA": [3.5, 0] } },
+  "ACT_NT": { "viewbox": [0, 0, 480, 500], "positions": { "ACT": [8, 11.5, true], "NT": [7.75, 6, true] } },
+  "NSW_QLD": { "viewbox": [0, 0, 480, 500], "positions": { "NSW": [3.5, 12], "QLD": [4.75, 3, true] } },
+  "NSW_VIC": { "viewbox": [0, 0, 480, 500], "positions": { "NSW": [3.75, 3, true], "VIC": [4.25, 12] } },
+  "QLD_VIC": { "viewbox": [0, 0, 480, 500], "positions": { "QLD": [4.75, 3, true], "VIC": [4.25, 12] } },
+  "QLD_WA": { "viewbox": [0, 0, 480, 500], "positions": { "QLD": [7, 7, true], "WA": [2, 5] } },
+  "QLD_NSW_VIC": { "viewbox": [0, 0, 480, 500], "positions": { "QLD": [1, 2], "NSW": [7, 10], "VIC": [0, 14] } },
+  "SA_TAS_WA": { "viewbox": [0, 0, 480, 500], "positions": { "SA": [7.25, 7, true], "TAS": [11, 9], "WA": [2, 5] } }
 }

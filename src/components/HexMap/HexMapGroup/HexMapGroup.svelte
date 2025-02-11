@@ -24,10 +24,13 @@
 
 <style lang="scss">
   .group {
-    transition: all 0.5s;
+    transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
+  }
+  .group--hidden {
+    opacity: 0;
   }
   .group :global(.hex) {
-    transition: all 0.3s;
+    transition: all 0.5s;
     vector-effect: non-scaling-stroke;
     fill: var(--c-white);
     stroke: 1px solid var(--c-lightgrey);
