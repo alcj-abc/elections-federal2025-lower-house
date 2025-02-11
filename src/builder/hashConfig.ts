@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import { parse, stringify } from '@abcnews/alternating-case-to-object';
-import { decodeSchema, encodeSchema, getRleCodec, stringCodec } from 'hash-codec';
+import { decodeSchema, encodeSchema, getRleCodec } from 'hash-codec';
 
 import layouts from '../../data/appdata-layouts.json';
 import data from '../../data/appdata-built.json';

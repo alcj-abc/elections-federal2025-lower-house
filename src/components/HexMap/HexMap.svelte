@@ -26,7 +26,7 @@
         return;
       }
       // set allocation
-      const newAllocation = _allocations[electorateCode];
+      const newAllocation = _allocations[electorateCode] || null;
       if (_previousAllocations[electorateCode] !== newAllocation) {
         hex.style.setProperty('fill', `var(--a-${newAllocation})`);
         hex.style.setProperty('stroke', newAllocation ? `var(--c-white)` : `var(--c-lightgrey)`);

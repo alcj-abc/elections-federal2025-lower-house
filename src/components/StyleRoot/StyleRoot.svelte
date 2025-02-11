@@ -11,7 +11,11 @@
 <div class="style-root">{@render children?.()}</div>
 
 <style lang="scss">
+  .style-root :global(*) {
+    box-sizing: border-box;
+  }
   .style-root {
+    font-family: ABCSans, sans-serif;
     --c-black: #000;
     --c-grey: #989494;
     --c-lightgrey: #ddd;

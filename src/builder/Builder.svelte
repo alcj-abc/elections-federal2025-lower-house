@@ -47,10 +47,10 @@
         />
       {/if}
 
-      <form>
-        <div>
+      <form class="container-controls">
+        <div class="fieldset">
           <label>
-            Layout
+            <span>Layout</span>
             <select
               bind:value={$hashConfig.layout}
               onchange={e => hashConfig.set({ ...$hashConfig, layout: e.target?.value })}
@@ -62,8 +62,14 @@
           >
         </div>
 
-        <div>
-          <h2>Mix-ins</h2>
+        <fieldset>
+          <legend>Mix-ins</legend>
+          <button
+            onclick={e => {
+              e.preventDefault();
+              $hashConfig.allocations = {};
+            }}>Blank</button
+          >
           <button
             onclick={e => {
               e.preventDefault();
@@ -76,20 +82,69 @@
               };
             }}>2019 results</button
           >
-        </div>
+        </fieldset>
       </form>
     </div>
   {/if}
 </StyleRoot>
 
 <style lang="scss">
+  :global(body) {
+    margin: 0;
+    padding: 0;
+  }
   .container {
     display: flex;
   }
   .container-viz {
     flex: 1;
+    min-width: 50%;
+    justify-content: center;
+    align-items: center;
   }
-  .container form {
-    width: 480px;
+  .container-controls {
+    width: 18rem;
+    padding: 2rem 1rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    overflow: auto;
+  }
+
+  fieldset {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid var(--c-grey);
+  }
+
+  .fieldset {
+    padding: 0 0.75rem;
+    border: 1px solid transparent;
+  }
+  .fieldset,
+  fieldset {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    & > span {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    margin-bottom: 0.5rem;
+  }
+
+  select,
+  button {
+    padding: 0.25rem 0.5rem;
+    background: var(--c-white);
+    border: 1px solid var(--c-grey);
+    border-radius: 0.2rem;
+    cursor: pointer;
+    &:hover,
+    &:focus-visible {
+      border-color: var(--c-black);
+      background: var(--c-lightgrey);
+    }
   }
 </style>
