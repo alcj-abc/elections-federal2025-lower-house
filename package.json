@@ -1,0 +1,35 @@
+{
+  "name": "elections-federal2025-hex",
+  "version": "1.0.0-pre",
+  "description": "A project generated from aunty's svelte project template.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "contributors": [
+    "Ash Kyd <kyd.ashley@abc.net.au>"
+  ],
+  "aunty": {
+    "type": "svelte"
+  },
+  "scripts": {
+    "start": "aunty serve",
+    "build-data": "node data/build.js",
+    "dev": "aunty serve",
+    "test": "aunty test"
+  },
+  "devDependencies": {
+    "@abcnews/aunty": "git+https://github.com/abcnews/aunty/tree/svelte-5",
+    "@testing-library/svelte": "^5.2.6",
+    "@types/jest": "^29.5.14",
+    "@types/webpack-env": "^1.18.8",
+    "honeycomb-grid": "^4.1.5",
+    "polygon-clipping": "^0.15.7",
+    "polylabel": "^2.0.1"
+  },
+  "dependencies": {
+    "@abcnews/alternating-case-to-object": "^3.1.1",
+    "@abcnews/env-utils": "^4.0.0",
+    "@abcnews/mount-utils": "^3.0.0",
+    "svelte": "^5.19.7"
+  }
+}
