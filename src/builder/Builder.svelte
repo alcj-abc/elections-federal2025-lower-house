@@ -1,17 +1,16 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { electorates, hashConfig, historical19, historical22, schema } from './hashConfig';
+  import { electorates, hashConfig, historical19, historical22, schema, groups } from './hashConfig';
   import HexMap from '../components/HexMap/HexMap.svelte';
   import HexagonContextMenu from './components/HexagonContextMenu/HexagonContextMenu.svelte';
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
-
+  import Focuses from './components/Focuses/Focuses.svelte';
   let modal = $state<{
     electorate: any;
     allocation: string;
     position: [number, number];
   }>();
 
-  function onMapClick({ srcElement, clientX, clientY }) {
+  function onVizClick({ srcElement, clientX, clientY }) {
     const code = srcElement.dataset.code;
     if (!code) {
       return;
@@ -31,7 +30,7 @@
     <div class="container">
       <!-- svelte-ignore a11y_click_events_have_key_events -->
       <!-- svelte-ignore a11y_no_static_element_interactions -->
-      <div class="container-viz" onclick={onMapClick}>
+      <div class="container-viz" onclick={onVizClick}>
         <HexMap layout={$hashConfig.layout} allocations={$hashConfig.allocations} />
       </div>
 
@@ -39,7 +38,6 @@
         <HexagonContextMenu
           {...modal}
           onClose={() => {
-            console.log('onClose');
             modal = undefined;
           }}
         />
@@ -49,12 +47,9 @@
         <div class="fieldset">
           <label>
             <span>Layout</span>
-            <select
-              bind:value={$hashConfig.layout}
-              onchange={e => hashConfig.set({ ...$hashConfig, layout: e.target?.value })}
-            >
+            <select name="layout" bind:value={$hashConfig.layout}>
               {#each schema.layout.values as item}
-                <option>{item}</option>
+                <option>{item || 'argh'}</option>
               {/each}
             </select></label
           >
@@ -62,35 +57,38 @@
 
         <fieldset>
           <legend>Mix-ins</legend>
-          <button
-            onclick={e => {
-              e.preventDefault();
-              $hashConfig.allocations = {};
-            }}>Blank</button
-          >
-          <button
-            onclick={e => {
-              e.preventDefault();
-              $hashConfig.allocations = historical19.reduce((obj, electorate) => {
-                obj[electorate.id] = electorate.holder;
-                return obj;
-              }, {});
-            }}
-          >
-            2019 results
-          </button>
-          <button
-            onclick={e => {
-              e.preventDefault();
-              $hashConfig.allocations = historical22.reduce((obj, electorate) => {
-                obj[electorate.id] = electorate.holder;
-                return obj;
-              }, {});
-            }}
-          >
-            2022 results
-          </button>
+          <div class="buttons">
+            <button
+              onclick={e => {
+                e.preventDefault();
+                $hashConfig.allocations = {};
+              }}>Blank</button
+            >
+            <button
+              onclick={e => {
+                e.preventDefault();
+                $hashConfig.allocations = historical19.reduce((obj, electorate) => {
+                  obj[electorate.id] = electorate.holder;
+                  return obj;
+                }, {});
+              }}
+            >
+              2019 results
+            </button>
+            <button
+              onclick={e => {
+                e.preventDefault();
+                $hashConfig.allocations = historical22.reduce((obj, electorate) => {
+                  obj[electorate.id] = electorate.holder;
+                  return obj;
+                }, {});
+              }}
+            >
+              2022 results
+            </button>
+          </div>
         </fieldset>
+        <Focuses />
       </form>
     </div>
   {/if}
@@ -119,41 +117,69 @@
     overflow: auto;
   }
 
-  fieldset {
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border: 1px solid var(--c-grey);
-  }
-
-  .fieldset {
-    padding: 0 0.75rem;
-    border: 1px solid transparent;
-  }
-  .fieldset,
-  fieldset {
-    margin-bottom: 1rem;
-    border-radius: 0.2rem;
-  }
-
-  label {
-    & > span {
-      display: block;
-      margin-bottom: 0.3rem;
+  .container {
+    :global(fieldset) {
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: 1px solid var(--c-grey);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
-    margin-bottom: 0.5rem;
-  }
 
-  select,
-  button {
-    padding: 0.25rem 0.5rem;
-    background: var(--c-white);
-    border: 1px solid var(--c-grey);
-    border-radius: 0.2rem;
-    cursor: pointer;
-    &:hover,
-    &:focus-visible {
-      border-color: var(--c-black);
-      background: var(--c-lightgrey);
+    .fieldset {
+      padding: 0 0.75rem;
+      border: 1px solid transparent;
+    }
+    .fieldset,
+    :global(fieldset) {
+      margin-bottom: 1rem;
+      border-radius: 0.2rem;
+    }
+
+    :global(.buttons) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    :global(label) {
+      & > :global(span) {
+        display: block;
+        margin-bottom: 0.3rem;
+      }
+      margin-bottom: 0.5rem;
+    }
+
+    :global(select),
+    :global(button) {
+      padding: 0.25rem 0.5rem;
+      background: var(--c-white);
+      border: 1px solid var(--c-grey);
+      border-radius: 0.2rem;
+    }
+    :global(select:not([multiple])),
+    :global(button:not(:disabled)) {
+      cursor: pointer;
+      &:hover,
+      &:focus-visible {
+        border-color: var(--c-black);
+        background: var(--c-lightgrey);
+      }
+    }
+
+    :global(select) {
+      width: 100%;
+    }
+
+    :global(.btn-icon) {
+      padding: 0;
+      display: inline-flex;
+      height: 1.5rem;
+      width: 1.5rem;
+      justify-content: center;
+      align-items: center;
     }
   }
 </style>

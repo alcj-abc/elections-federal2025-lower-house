@@ -46,10 +46,12 @@
       }
       // set allocation
       const newAllocation = _allocations[electorateCode] || null;
-      if (_previousAllocations[electorateCode] !== newAllocation) {
-        hex.style.setProperty('fill', `var(--a-${newAllocation})`);
-        hex.style.setProperty('stroke', newAllocation ? `var(--c-white)` : `var(--c-lightgrey)`);
-      }
+      // if (_previousAllocations[electorateCode] !== newAllocation) {
+      hex.style.setProperty('fill', `var(--a-${newAllocation})`);
+      hex.style.setProperty('stroke', newAllocation ? `var(--c-white)` : `var(--c-lightgrey)`);
+      // } else {
+      //   console.log('skipping', electorateCode, newAllocation);
+      // }
     });
     previousAllocations = allocations;
   });
