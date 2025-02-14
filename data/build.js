@@ -81,10 +81,10 @@ const groups = config.map(({ name, hexes }) => {
 
   const svgHexes = svgHexCoords.map(svgCoordsToPolygonString).join('');
 
-  const outlineCoords = (svgHexCoords.length ? polygonClipping.union(svgHexCoords.map(hex => hex.ring)) : []).sort(
+  const hexRings = svgHexCoords.map(hex => [hex.ring]);
+  const outlineCoords = (svgHexCoords.length ? polygonClipping.union(...hexRings) : []).sort(
     (a, b) => b[0].length - a[0].length
   );
-
   const svgOutline = svgCoordsToPolygonString({ ring: outlineCoords, className: 'hex-outline', code: name });
 
   return {

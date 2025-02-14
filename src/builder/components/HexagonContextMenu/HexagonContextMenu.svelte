@@ -3,8 +3,6 @@
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
   const allocationStrings = Object.values(allocationMap);
 
-  console.log({ allocationStrings });
-
   let { position = [0, 0], electorate = {}, allocation = 'n', onClose = () => {} } = $props();
 </script>
 
@@ -22,7 +20,7 @@
             class="item"
             onclick={e => {
               e.preventDefault();
-              $hashConfig.allocations[electorate.code] = allocation;
+              $hashConfig.allocations[electorate.code] = allocation === 'None' ? null : allocation;
               onClose();
             }}
           >

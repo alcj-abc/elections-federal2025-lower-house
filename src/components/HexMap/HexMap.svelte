@@ -4,11 +4,22 @@
   import config from '../../../data/appdata-built.json';
   import layouts from '../../../data/appdata-layouts.json';
   import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
-  import { cubicInOut, cubicOut, linear, quartInOut } from 'svelte/easing';
-  let { layout = 'COUNTRY', allocations = {} } = $props();
+  import { cubicInOut } from 'svelte/easing';
+  let { layout = 'COUNTRY', allocations = {}, focuses = {} } = $props();
   let svgEl = $state<SVGElement>();
   let previousAllocations = $state();
+  let previousFocuses = $state();
 
+  /** Are any of the electorates focused? If so, we use different styles for unallocated */
+  let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
+
+  /** Are all of the electorates allocated? If so, turn off state borders. */
+  let isFilled = $derived.by(() => {
+    const allocationValues = Object.values(allocations);
+    return allocationValues.length !== 0 && allocationValues.every(Boolean);
+  });
+
+  $effect(() => console.log(allocations, { isFilled }));
   const initial = layouts[layout].viewbox;
   const tweenOptions = {
     easing: cubicInOut,
@@ -31,7 +42,9 @@
   // be performant creating all 150+ electorates
   $effect(() => {
     const _allocations = allocations;
+    const _focuses = focuses;
     const _previousAllocations = untrack(() => previousAllocations || {});
+    const _previousFocuses = untrack(() => previousFocuses || {});
     if (!svgEl) {
       return;
     }
@@ -46,22 +59,46 @@
       }
       // set allocation
       const newAllocation = _allocations[electorateCode] || null;
-      // if (_previousAllocations[electorateCode] !== newAllocation) {
-      hex.style.setProperty('fill', `var(--a-${newAllocation})`);
-      hex.style.setProperty('stroke', newAllocation ? `var(--c-white)` : `var(--c-lightgrey)`);
-      // } else {
-      //   console.log('skipping', electorateCode, newAllocation);
-      // }
+      hex.dataset.allocation = newAllocation;
+      const newFocus = hasAnyFocuses ? _focuses[electorateCode] || false : true;
+      hex.dataset.focused = newFocus;
     });
-    previousAllocations = allocations;
+    previousAllocations = _allocations;
+    previousFocuses = _focuses;
   });
 </script>
 
 <svg
+  class="hexmap"
+  class:hexmap--has-focuses={hasAnyFocuses}
   bind:this={svgEl}
   viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
 >
   {#each config.groups as group}
-    <HexMapGroup {...group} offset={layouts[layout].positions[group.name]} />
+    <HexMapGroup {...group} offset={layouts[layout].positions[group.name]} {isFilled} />
   {/each}
 </svg>
+
+<style lang="scss">
+  $parties: Any, ALP, NXT, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal;
+  @each $code in $parties {
+    .hexmap :global(.hex[data-allocation='#{$code}']) {
+      fill: var(--a-#{$code});
+      stroke: var(--c-white);
+    }
+  }
+  .hexmap :global(.hex[data-allocation='null']) {
+    fill: var(--a-null);
+    stroke: var(--c-lightgrey);
+  }
+  .hexmap :global(.hex[data-allocation='null'][data-focused='true']) {
+    stroke: var(--c-black);
+  }
+  .hexmap.hexmap--has-focuses :global(.hex[data-allocation='null'][data-focused='false']) {
+    fill: #ebebeb;
+    stroke: #fff;
+  }
+  .hexmap :global(.hex:not([data-allocation='null'])[data-focused='false']) {
+    opacity: 0.2; // FIXME: needs design
+  }
+</style>

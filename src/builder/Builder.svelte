@@ -31,7 +31,7 @@
       <!-- svelte-ignore a11y_click_events_have_key_events -->
       <!-- svelte-ignore a11y_no_static_element_interactions -->
       <div class="container-viz" onclick={onVizClick}>
-        <HexMap layout={$hashConfig.layout} allocations={$hashConfig.allocations} />
+        <HexMap layout={$hashConfig.layout} allocations={$hashConfig.allocations} focuses={$hashConfig.focuses} />
       </div>
 
       {#if modal}

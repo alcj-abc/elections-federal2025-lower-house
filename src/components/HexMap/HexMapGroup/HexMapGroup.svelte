@@ -1,5 +1,5 @@
 <script lang="ts">
-  let { name = '', svgHexes = '', svgOutline = '', offset = [Infinity, Infinity] } = $props();
+  let { name = '', svgHexes = '', svgOutline = '', offset = [Infinity, Infinity], isFilled } = $props();
 
   const radius = 16;
   function hexToPx(coord = [0, 0]) {
@@ -18,8 +18,8 @@
 </script>
 
 <g class="group" data-name={name} style:transform class:group--hidden={!isVisible}>
-  <g style="display:none">{@html svgOutline}</g>
   {@html svgHexes}
+  <g class="group-outline" class:group-outline--map-is-filled={isFilled}>{@html svgOutline}</g>
 </g>
 
 <style lang="scss">
@@ -34,5 +34,20 @@
     vector-effect: non-scaling-stroke;
     fill: var(--c-white);
     stroke: 1px solid var(--c-lightgrey);
+  }
+
+  .group-outline :global(.hex-outline) {
+    fill: none;
+    stroke: var(--c-black);
+    stroke-width: 2px;
+    transition:
+      opacity 0.5s,
+      stroke 0.2s;
+  }
+  .group-outline--map-is-filled :global(.hex-outline) {
+    opacity: 0;
+    // transition to white because it's the same colour as the hex outlines and
+    // black looks weird.
+    stroke: white;
   }
 </style>
