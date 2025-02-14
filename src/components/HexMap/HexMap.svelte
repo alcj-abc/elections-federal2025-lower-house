@@ -19,7 +19,6 @@
     return allocationValues.length !== 0 && allocationValues.every(Boolean);
   });
 
-  $effect(() => console.log(allocations, { isFilled }));
   const initial = layouts[layout].viewbox;
   const tweenOptions = {
     easing: cubicInOut,
@@ -70,35 +69,10 @@
 
 <svg
   class="hexmap"
-  class:hexmap--has-focuses={hasAnyFocuses}
   bind:this={svgEl}
   viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
 >
   {#each config.groups as group}
-    <HexMapGroup {...group} offset={layouts[layout].positions[group.name]} {isFilled} />
+    <HexMapGroup {...group} offset={layouts[layout].positions[group.name]} {isFilled} {hasAnyFocuses} />
   {/each}
 </svg>
-
-<style lang="scss">
-  $parties: Any, ALP, NXT, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal;
-  @each $code in $parties {
-    .hexmap :global(.hex[data-allocation='#{$code}']) {
-      fill: var(--a-#{$code});
-      stroke: var(--c-white);
-    }
-  }
-  .hexmap :global(.hex[data-allocation='null']) {
-    fill: var(--a-null);
-    stroke: var(--c-lightgrey);
-  }
-  .hexmap :global(.hex[data-allocation='null'][data-focused='true']) {
-    stroke: var(--c-black);
-  }
-  .hexmap.hexmap--has-focuses :global(.hex[data-allocation='null'][data-focused='false']) {
-    fill: #ebebeb;
-    stroke: #fff;
-  }
-  .hexmap :global(.hex:not([data-allocation='null'])[data-focused='false']) {
-    opacity: 0.2; // FIXME: needs design
-  }
-</style>

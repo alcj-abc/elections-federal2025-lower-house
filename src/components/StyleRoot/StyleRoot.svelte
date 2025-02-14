@@ -55,5 +55,7 @@
     --a-OTH: var(--c-ptyblack);
     --a-PUP: var(--c-ptygold);
     --a-Teal: var(--c-ptyteal);
+
+    --c-empty-border: #cdcbcb;
   }
 </style>

@@ -1,5 +1,12 @@
 <script lang="ts">
-  let { name = '', svgHexes = '', svgOutline = '', offset = [Infinity, Infinity], isFilled } = $props();
+  let {
+    name = '',
+    svgHexes = '',
+    svgOutline = '',
+    offset = [Infinity, Infinity],
+    isFilled = false,
+    hasAnyFocuses = false
+  } = $props();
 
   const radius = 16;
   function hexToPx(coord = [0, 0]) {
@@ -17,9 +24,21 @@
   });
 </script>
 
-<g class="group" data-name={name} style:transform class:group--hidden={!isVisible}>
-  {@html svgHexes}
-  <g class="group-outline" class:group-outline--map-is-filled={isFilled}>{@html svgOutline}</g>
+<g
+  class="group"
+  data-name={name}
+  style:transform
+  class:group--hidden={!isVisible}
+  class:group--map-is-filled={isFilled}
+  class:group--has-focuses={hasAnyFocuses}
+>
+  <g class="group-hexes">
+    {@html svgHexes}
+  </g>
+  <g class="group-hex-strokes">
+    {@html svgHexes}
+  </g>
+  <g class="group-outline">{@html svgOutline}</g>
 </g>
 
 <style lang="scss">
@@ -32,10 +51,9 @@
   .group :global(.hex) {
     transition: all 0.5s;
     vector-effect: non-scaling-stroke;
-    fill: var(--c-white);
-    stroke: 1px solid var(--c-lightgrey);
   }
 
+  // Group/state outlines
   .group-outline :global(.hex-outline) {
     fill: none;
     stroke: var(--c-black);
@@ -49,5 +67,57 @@
     // transition to white because it's the same colour as the hex outlines and
     // black looks weird.
     stroke: white;
+  }
+
+  // Party colours
+  $parties: Any, ALP, NXT, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal;
+  @each $code in $parties {
+    .group-hexes :global(.hex[data-allocation='#{$code}']) {
+      fill: var(--a-#{$code});
+    }
+  }
+  .group-hexes :global(.hex[data-allocation='null']) {
+    fill: var(--a-null);
+    stroke: var(--c-lightgrey);
+  }
+
+  // Strokes
+  .group-hex-strokes :global(.hex) {
+    fill: none;
+    stroke: var(--c-empty-border);
+    stroke-width: 1px;
+  }
+
+  .group--has-focuses {
+    // remove state borders
+    :global(.hex-outline) {
+      opacity: 0;
+      stroke: white;
+    }
+
+    // Focused null hexes turn white w black border
+    .group-hexes :global(.hex[data-allocation='null'][data-focused='true']) {
+      fill: var(--c-white);
+    }
+    .group-hex-strokes :global(.hex[data-allocation='null'][data-focused='true']) {
+      stroke: var(--c-black);
+    }
+
+    // unfocused null hexes turn white with grey border underneath
+    .group-hexes :global(.hex[data-allocation='null'][data-focused='false']) {
+      fill: #ebebeb;
+      stroke: #fff;
+    }
+    .group-hex-strokes :global(.hex[data-allocation='null'][data-focused='false']) {
+      stroke: transparent;
+    }
+
+    // allocated but unfocused hexes fade out
+    .group-hexes :global(.hex:not([data-allocation='null'])[data-focused='false']) {
+      opacity: 0.2; // FIXME: needs design
+    }
+    .group-hex-strokes :global(.hex:not([data-allocation='null'])[data-focused='false']) {
+      stroke: var(--c-white);
+    }
   }
 </style>

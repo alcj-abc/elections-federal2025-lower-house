@@ -61,7 +61,10 @@
             <button
               onclick={e => {
                 e.preventDefault();
-                $hashConfig.allocations = {};
+                $hashConfig.allocations = electorates.reduce((obj, electorate) => {
+                  obj[electorate.code] = null;
+                  return obj;
+                }, {});
               }}>Blank</button
             >
             <button

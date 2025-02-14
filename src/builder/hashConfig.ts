@@ -18,7 +18,6 @@ export const electoratesByCode = Object.values(electorates).reduce((obj, elector
   return obj;
 }, {});
 
-console.log({ electorates });
 const groups = data.groups;
 export { historical19, historical22, groups };
 
