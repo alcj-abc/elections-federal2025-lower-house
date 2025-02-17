@@ -1,11 +1,18 @@
 <script lang="ts">
   import { Tween } from 'svelte/motion';
   import { untrack } from 'svelte';
-  import config from '../../../data/appdata-built.json';
-  import layouts from '../../../data/appdata-layouts.json';
   import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
   import { cubicInOut } from 'svelte/easing';
-  let { layout = 'COUNTRY', allocations = {}, focuses = {} } = $props();
+  import HexMapLabels from './HexMapLabels/HexMapLabels.svelte';
+  let {
+    config = {},
+    layout = {},
+    allocations = {},
+    focuses = {},
+    onClick = () => {},
+    onHover = () => {},
+    onBlur = () => {}
+  } = $props();
   let svgEl = $state<SVGElement>();
   let previousAllocations = $state();
   let previousFocuses = $state();
@@ -19,7 +26,7 @@
     return allocationValues.length !== 0 && allocationValues.every(Boolean);
   });
 
-  const initial = layouts[layout].viewbox;
+  const initial = layout.viewbox;
   const tweenOptions = {
     easing: cubicInOut,
     duration: 1100
@@ -30,7 +37,7 @@
   let viewboxHeight = new Tween(initial[3], tweenOptions);
 
   $effect(() => {
-    const [newX, newY, newW, newH] = layouts[layout].viewbox;
+    const [newX, newY, newW, newH] = layout.viewbox;
     viewboxX.set(newX);
     viewboxY.set(newY);
     viewboxWidth.set(newW);
@@ -42,8 +49,8 @@
   $effect(() => {
     const _allocations = allocations;
     const _focuses = focuses;
-    const _previousAllocations = untrack(() => previousAllocations || {});
-    const _previousFocuses = untrack(() => previousFocuses || {});
+    // const _previousAllocations = untrack(() => previousAllocations || {});
+    // const _previousFocuses = untrack(() => previousFocuses || {});
     if (!svgEl) {
       return;
     }
@@ -62,17 +69,33 @@
       const newFocus = hasAnyFocuses ? _focuses[electorateCode] || false : true;
       hex.dataset.focused = newFocus;
     });
-    previousAllocations = _allocations;
-    previousFocuses = _focuses;
+    // previousAllocations = _allocations;
+    // previousFocuses = _focuses;
   });
 </script>
 
-<svg
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div
   class="hexmap"
-  bind:this={svgEl}
-  viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
+  onclick={onClick
+    ? ({ target, clientX, clientY }) =>
+        onClick({ code: (target as SVGPolygonElement)?.dataset?.code, clientX, clientY })
+    : undefined}
 >
-  {#each config.groups as group}
-    <HexMapGroup {...group} offset={layouts[layout].positions[group.name]} {isFilled} {hasAnyFocuses} />
-  {/each}
-</svg>
+  <svg
+    bind:this={svgEl}
+    viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
+  >
+    {#each config.groups as group}
+      <HexMapGroup {...group} offset={layout.positions[group.name]} {isFilled} {hasAnyFocuses} />
+    {/each}
+  </svg>
+  <HexMapLabels labels={layout.labels} />
+</div>
+
+<style lang="scss">
+  .hexmap {
+    position: relative;
+  }
+</style>

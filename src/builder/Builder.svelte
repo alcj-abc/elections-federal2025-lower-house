@@ -4,14 +4,15 @@
   import HexagonContextMenu from './components/HexagonContextMenu/HexagonContextMenu.svelte';
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
   import Focuses from './components/Focuses/Focuses.svelte';
+  import config from '../../data/appdata-built.json';
+  import layouts from '../../data/appdata-layouts.json';
   let modal = $state<{
     electorate: any;
     allocation: string;
     position: [number, number];
   }>();
 
-  function onVizClick({ srcElement, clientX, clientY }) {
-    const code = srcElement.dataset.code;
+  function onVizClick({ code, clientX, clientY }) {
     if (!code) {
       return;
     }
@@ -28,10 +29,14 @@
 <StyleRoot>
   {#if $hashConfig}
     <div class="container">
-      <!-- svelte-ignore a11y_click_events_have_key_events -->
-      <!-- svelte-ignore a11y_no_static_element_interactions -->
-      <div class="container-viz" onclick={onVizClick}>
-        <HexMap layout={$hashConfig.layout} allocations={$hashConfig.allocations} focuses={$hashConfig.focuses} />
+      <div class="container-viz">
+        <HexMap
+          {config}
+          layout={layouts[$hashConfig.layout]}
+          allocations={$hashConfig.allocations}
+          focuses={$hashConfig.focuses}
+          onClick={onVizClick}
+        />
       </div>
 
       {#if modal}

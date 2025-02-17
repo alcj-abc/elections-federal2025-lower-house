@@ -10,7 +10,17 @@
       "TAS": [7, 16.75, true],
       "VIC": [4, 10],
       "WA": [0, 6]
-    }
+    },
+    "labels": [
+      { "left": 30, "top": 27, "width": 8, "name": "NT" },
+      { "left": 68, "top": 17, "width": 8, "name": "QLD" },
+      { "left": 64, "top": 40, "width": 8, "name": "NSW" },
+      { "left": 71, "top": 55.5, "width": 8, "name": "ACT" },
+      { "left": 59, "top": 65, "width": 8, "name": "VIC" },
+      { "left": 59, "top": 85.5, "width": 8, "name": "TAS" },
+      { "left": 30, "top": 46, "width": 8, "name": "SA" },
+      { "left": 19, "top": 46, "width": 8, "name": "WA" }
+    ]
   },
   "EXPLODED": {
     "viewbox": [0, 0, 480, 500],
@@ -23,7 +33,17 @@
       "TAS": [9.26, 18.5, true],
       "VIC": [6.25, 11.75, true],
       "WA": [0, 5.75]
-    }
+    },
+    "labels": [
+      { "left": 26, "top": 27, "width": 8, "name": "NT" },
+      { "left": 61, "top": 17, "width": 8, "name": "QLD" },
+      { "left": 70, "top": 44, "width": 8, "name": "NSW" },
+      { "left": 75, "top": 61.5, "width": 8, "name": "ACT" },
+      { "left": 59, "top": 72, "width": 8, "name": "VIC" },
+      { "left": 62, "top": 93.5, "width": 8, "name": "TAS" },
+      { "left": 26, "top": 50, "width": 8, "name": "SA" },
+      { "left": 8.5, "top": 50, "width": 8, "name": "WA" }
+    ]
   },
   "EXPLODED_STATES_ONLY": {
     "viewbox": [0, 0, 480, 500],
@@ -34,10 +54,18 @@
       "TAS": [9.26, 18.5, true],
       "VIC": [6.25, 11.75, true],
       "WA": [0, 5.75]
-    }
+    },
+    "labels": [
+      { "left": 61, "top": 17, "width": 8, "name": "QLD" },
+      { "left": 70, "top": 44, "width": 8, "name": "NSW" },
+      { "left": 59, "top": 72, "width": 8, "name": "VIC" },
+      { "left": 62, "top": 93.5, "width": 8, "name": "TAS" },
+      { "left": 26, "top": 50, "width": 8, "name": "SA" },
+      { "left": 8.5, "top": 50, "width": 8, "name": "WA" }
+    ]
   },
   "GRID": {
-    "viewbox": [0, 0, 570, 515],
+    "viewbox": [-40, -40, 650, 595],
     "positions": {
       "ACT": [10, 19, true],
       "NSW": [0, 0],
@@ -46,17 +74,59 @@
       "SA": [17, 9, true],
       "TAS": [3, 19],
       "VIC": [12, 0],
-      "WA": [11, 7]
-    }
+      "WA": [11, 8]
+    },
+    "labels": [
+      { "left": 75, "top": 80, "width": 8, "name": "NT" },
+      { "left": 31, "top": 40, "width": 8, "name": "QLD" },
+      { "left": 29, "top": 3.5, "width": 8, "name": "NSW" },
+      { "left": 55, "top": 80, "width": 8, "name": "ACT" },
+      { "left": 74, "top": 3.5, "width": 8, "name": "VIC" },
+      { "left": 25, "top": 80, "width": 8, "name": "TAS" },
+      { "left": 85, "top": 40, "width": 8, "name": "SA" },
+      { "left": 56, "top": 40, "width": 8, "name": "WA" }
+    ]
   },
-  "ACT": { "viewbox": [0, 0, 300, 300], "positions": { "ACT": [4.5, 2, true] } },
-  "NSW": { "viewbox": [0, 0, 300, 300], "positions": { "NSW": [0, 1] } },
-  "NT": { "viewbox": [0, 0, 300, 300], "positions": { "NT": [5, 3] } },
-  "QLD": { "viewbox": [0, 0, 300, 300], "positions": { "QLD": [1, 1] } },
-  "SA": { "viewbox": [0, 0, 300, 300], "positions": { "SA": [4, 1] } },
-  "TAS": { "viewbox": [0, 0, 300, 300], "positions": { "TAS": [4, 1.5] } },
-  "VIC": { "viewbox": [0, 0, 300, 300], "positions": { "VIC": [1.5, 1] } },
-  "WA": { "viewbox": [0, 0, 300, 300], "positions": { "WA": [3.5, 0] } },
+  "ACT": {
+    "viewbox": [0, 0, 300, 300],
+    "positions": { "ACT": [4, 2, true] },
+    "labels": [{ "left": 50, "top": 10, "width": 8, "name": "ACT" }]
+  },
+  "NSW": {
+    "viewbox": [0, 0, 300, 300],
+    "positions": { "NSW": [0.15, 2] },
+    "labels": [{ "left": 50, "top": 10, "width": 8, "name": "NSW" }]
+  },
+  "NT": {
+    "viewbox": [0, 0, 300, 300],
+    "positions": { "NT": [4.5, 2] },
+    "labels": [{ "left": 50, "top": 10, "width": 8, "name": "NT" }]
+  },
+  "QLD": {
+    "viewbox": [0, 0, 300, 300],
+    "positions": { "QLD": [0.5, 2] },
+    "labels": [{ "left": 50, "top": 10, "width": 8, "name": "QLD" }]
+  },
+  "SA": {
+    "viewbox": [0, 0, 300, 300],
+    "positions": { "SA": [4, 2] },
+    "labels": [{ "left": 50, "top": 10, "width": 8, "name": "SA" }]
+  },
+  "TAS": {
+    "viewbox": [0, 0, 300, 300],
+    "positions": { "TAS": [4, 2] },
+    "labels": [{ "left": 50, "top": 10, "width": 8, "name": "TAS" }]
+  },
+  "VIC": {
+    "viewbox": [0, 0, 300, 300],
+    "positions": { "VIC": [1.5, 2] },
+    "labels": [{ "left": 50, "top": 10, "width": 8, "name": "VIC" }]
+  },
+  "WA": {
+    "viewbox": [0, 0, 300, 300],
+    "positions": { "WA": [3.5, 2] },
+    "labels": [{ "left": 50, "top": 10, "width": 8, "name": "WA" }]
+  },
   "ACT_NT": { "viewbox": [0, 0, 480, 500], "positions": { "ACT": [8, 11.5, true], "NT": [7.75, 6, true] } },
   "NSW_QLD": { "viewbox": [0, 0, 480, 500], "positions": { "NSW": [3.5, 12], "QLD": [4.75, 3, true] } },
   "NSW_VIC": { "viewbox": [0, 0, 480, 500], "positions": { "NSW": [3.75, 3, true], "VIC": [4.25, 12] } },

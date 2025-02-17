@@ -92,7 +92,7 @@ export const schema = {
   layout: {
     type: 'enum',
     key: 'l',
-    defaultValue: 'EXPLODED',
+    defaultValue: 'COUNTRY',
     values: Object.keys(layouts)
   },
   allocations: {

@@ -61,6 +61,7 @@
     transition:
       opacity 0.5s,
       stroke 0.2s;
+    vector-effect: non-scaling-stroke;
   }
   .group-outline--map-is-filled :global(.hex-outline) {
     opacity: 0;

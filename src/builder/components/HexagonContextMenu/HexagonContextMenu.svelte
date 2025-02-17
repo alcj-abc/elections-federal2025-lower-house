@@ -58,6 +58,7 @@
   .menu--double {
     display: grid;
     grid-template-columns: 50% 50%;
+    gap: 0.25rem;
     & li {
       white-space: nowrap;
     }
@@ -73,7 +74,8 @@
     height: 0.75em;
   }
 
-  .item {
+  .item,
+  button.item {
     display: block;
     width: 100%;
     border: none;
