@@ -4,15 +4,7 @@
   import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
   import { cubicInOut } from 'svelte/easing';
   import HexMapLabels from './HexMapLabels/HexMapLabels.svelte';
-  let {
-    config = {},
-    layout = {},
-    allocations = {},
-    focuses = {},
-    onClick = () => {},
-    onHover = () => {},
-    onBlur = () => {}
-  } = $props();
+  let { config = {}, layout = {}, allocations = {}, focuses = {}, onClick = () => {} } = $props();
   let svgEl = $state<SVGElement>();
   let previousAllocations = $state();
   let previousFocuses = $state();
@@ -78,10 +70,13 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="hexmap"
-  onclick={onClick
-    ? ({ target, clientX, clientY }) =>
-        onClick({ code: (target as SVGPolygonElement)?.dataset?.code, clientX, clientY })
-    : undefined}
+  onclick={({ target, clientX, clientY }) => {
+    const code = (target as SVGPolygonElement)?.dataset?.code;
+    if (!code || !onClick) {
+      return;
+    }
+    onClick({ code, clientX, clientY });
+  }}
 >
   <svg
     bind:this={svgEl}

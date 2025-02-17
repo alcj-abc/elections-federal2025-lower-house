@@ -4,18 +4,18 @@ import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import type { Mount } from '@abcnews/mount-utils';
 // import App from './components/App/App.svelte';
 import { mount } from 'svelte';
-import Builder from './builder/Builder.svelte';
 
 let appMountEl: Mount;
 let appProps;
 
-function mountThing(id, App) {
+async function mountThing(id, AppFetcher) {
   [appMountEl] = selectMounts(id);
 
   if (appMountEl) {
     appProps = acto(getMountValue(appMountEl));
 
-    mount(App, {
+    const App = await AppFetcher();
+    mount(App.default, {
       target: appMountEl,
       props: appProps
     });
@@ -25,7 +25,14 @@ function mountThing(id, App) {
 // Load the Odyssey app
 whenOdysseyLoaded.then(() => {
   // mountThing('electionsfederal2025hex', App);
-  mountThing('electionsfederal2025builder', Builder);
+  mountThing(
+    'electionsfederal2025builder',
+    () => import(/* webpackChunkName: "dynamic-builder" */ './builder/Builder.svelte')
+  );
+  mountThing(
+    'electionsfederal2025iframe',
+    () => import(/* webpackChunkName: "dynamic-iframe" */ './components/Iframe/Iframe.svelte')
+  );
 });
 
 if (process.env.NODE_ENV === 'development') {

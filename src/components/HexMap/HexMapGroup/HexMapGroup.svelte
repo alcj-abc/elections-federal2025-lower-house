@@ -63,7 +63,7 @@
       stroke 0.2s;
     vector-effect: non-scaling-stroke;
   }
-  .group-outline--map-is-filled :global(.hex-outline) {
+  .group--map-is-filled :global(.hex-outline) {
     opacity: 0;
     // transition to white because it's the same colour as the hex outlines and
     // black looks weird.
