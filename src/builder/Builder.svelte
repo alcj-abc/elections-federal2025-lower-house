@@ -6,6 +6,7 @@
   import Focuses from './components/Focuses/Focuses.svelte';
   import config from '../../data/appdata-built.json';
   import layouts from '../../data/appdata-layouts.json';
+  import Labels from './components/Labels/Labels.svelte';
   let modal = $state<{
     electorate: any;
     allocation: string;
@@ -24,6 +25,10 @@
       position: [clientX, clientY]
     };
   }
+
+  $effect(() => {
+    console.log($hashConfig?.labels);
+  });
 </script>
 
 <StyleRoot>
@@ -35,6 +40,10 @@
           layout={layouts[$hashConfig.layout]}
           allocations={$hashConfig.allocations}
           focuses={$hashConfig.focuses}
+          labelsToShow={$hashConfig.labelsToShow}
+          showStateLabels={$hashConfig.showStateLabels}
+          showElectorateLabels={$hashConfig.showElectorateLabels}
+          showFocusedElectorateLabels={$hashConfig.showFocusedElectorateLabels}
           onClick={onVizClick}
         />
       </div>
@@ -97,6 +106,7 @@
           </div>
         </fieldset>
         <Focuses />
+        <Labels />
       </form>
     </div>
   {/if}
@@ -173,7 +183,8 @@
       &:hover,
       &:focus-visible {
         border-color: var(--c-black);
-        background: var(--c-lightgrey);
+        background: Highlight;
+        color: HighlightText;
       }
     }
 

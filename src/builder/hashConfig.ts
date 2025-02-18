@@ -55,6 +55,18 @@ function putValues(arr) {
 }
 
 const binaryCodecRle = getBinaryCodec({ maxBits: 4 });
+
+const binaryElectorateCodec = {
+  encode: async function (electorates) {
+    const values = getSortedValues(electorates);
+    const bin = binaryCodecRle.encode(values);
+    return bin;
+  },
+  decode: async function (encodedString) {
+    const values = binaryCodecRle.decode(encodedString);
+    return putValues(values);
+  }
+};
 export const schema = {
   layout: {
     type: 'enum',
@@ -91,29 +103,55 @@ export const schema = {
       }
     },
     key: 'a',
-    defaultValue: electorates.reduce((obj, current) => {
-      obj[current.code] = null;
-      return obj;
-    }, {})
+    defaultValue: Object.freeze(
+      electorates.reduce((obj, current) => {
+        obj[current.code] = null;
+        return obj;
+      }, {})
+    )
   },
   focuses: {
     type: 'custom',
-    codec: {
-      encode: async function (focuses) {
-        const values = getSortedValues(focuses);
-        const bin = binaryCodecRle.encode(values);
-        return bin;
-      },
-      decode: async function (encodedString) {
-        const values = binaryCodecRle.decode(encodedString);
-
-        return putValues(values);
-      }
-    },
-    defaultValue: electorates.reduce((obj, current) => {
-      obj[current.code] = null;
-      return obj;
-    }, {})
+    codec: binaryElectorateCodec,
+    key: 'f',
+    defaultValue: Object.freeze(
+      electorates.reduce((obj, current) => {
+        obj[current.code] = null;
+        return obj;
+      }, {})
+    )
+  },
+  showLabelsWhen: {
+    type: 'enum',
+    key: 'lb',
+    defaultValue: 'none',
+    values: ['none', 'states', 'electorates']
+  },
+  showStateLabels: {
+    type: 'boolean',
+    key: 'ls',
+    defaultValue: false
+  },
+  showElectorateLabels: {
+    type: 'boolean',
+    key: 'le',
+    defaultValue: false
+  },
+  showFocusedElectorateLabels: {
+    type: 'boolean',
+    key: 'lf',
+    defaultValue: false
+  },
+  labelsToShow: {
+    type: 'custom',
+    codec: binaryElectorateCodec,
+    key: 'li',
+    defaultValue: Object.freeze(
+      electorates.reduce((obj, current) => {
+        obj[current.code] = null;
+        return obj;
+      }, {})
+    )
   }
 };
 
@@ -121,4 +159,8 @@ export const hashConfig = makeSvelteStore<{
   layout: string;
   allocations: Object;
   focuses: Object;
+  labelsToShow: Object;
+  showStateLabels: boolean;
+  showElectorateLabels: boolean;
+  showFocusedElectorateLabels: boolean;
 }>(schema);

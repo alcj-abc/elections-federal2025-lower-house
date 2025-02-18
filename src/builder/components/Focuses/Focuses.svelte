@@ -9,22 +9,12 @@
     electoratesByCode
   } from '../../hashConfig';
   import situations from '../../../../data/appdata-situation.json';
-
-  let localFocuses = $state<string[]>([]);
+  import MultiselectBox from '../MultiselectBox/MultiselectBox.svelte';
 
   const historicalByCode = Object.values(historical19).reduce((obj, electorate) => {
     obj[electorate.id] = electorate;
     return obj;
   }, {});
-
-  // Bugwatch: accessing $hashConfig.focuses directly in the template throws
-  // errors in other selects in the page. Don't know why, suspect a Svelte bug.
-  $effect(() => {
-    localFocuses = Object.entries($hashConfig.focuses)
-      .filter(([code, focus]) => focus)
-      .map(([code]) => code)
-      .filter(Boolean);
-  });
 
   /**
    * Shorthand method to set focuses, each electorate is passed to the function
@@ -101,21 +91,17 @@
     <span>Focuses <small>{Object.values($hashConfig.focuses).filter(Boolean).length} focused</small></span>
   </legend>
 
-  <select
-    name="focuses"
-    multiple
-    value={localFocuses}
-    onchange={e => {
-      $hashConfig.focuses = Array.from(e.currentTarget.options).reduce((obj, option) => {
-        obj[String(option.value)] = option.selected;
-        return obj;
-      }, {});
+  <MultiselectBox
+    values={electorates.map(electorate => ({
+      value: electorate.code,
+      label: `${electorate.code} - ${electorate.name}`
+    }))}
+    value={$hashConfig.focuses}
+    onChange={value => {
+      $hashConfig.focuses = value;
     }}
-  >
-    {#each electorates as electorate}
-      <option value={electorate.code}>{electorate.code} - {electorate.name}</option>
-    {/each}
-  </select>
+  />
+
   <div class="buttons">
     {#each focusButtons as button}
       <button

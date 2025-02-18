@@ -3,7 +3,17 @@
   import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
   import { cubicInOut } from 'svelte/easing';
   import HexMapLabels from './HexMapLabels/HexMapLabels.svelte';
-  let { config = {}, layout = {}, allocations = {}, focuses = {}, onClick = () => {} } = $props();
+  let {
+    config = {},
+    layout = {},
+    allocations = {},
+    focuses = {},
+    labelsToShow = {},
+    showStateLabels = false,
+    showElectorateLabels = false,
+    showFocusedElectorateLabels = false,
+    onClick = () => {}
+  } = $props();
   let svgEl = $state<SVGElement>();
   let previousAllocations = $state();
   let previousFocuses = $state();
@@ -82,10 +92,21 @@
     viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
   >
     {#each config.groups as group}
-      <HexMapGroup {...group} offset={layout.positions[group.name]} {isFilled} {hasAnyFocuses} />
+      <HexMapGroup
+        {...group}
+        offset={layout.positions[group.name]}
+        {isFilled}
+        {focuses}
+        {hasAnyFocuses}
+        {showElectorateLabels}
+        {showFocusedElectorateLabels}
+        {labelsToShow}
+      />
     {/each}
   </svg>
-  <HexMapLabels labels={layout.labels} />
+  {#if showStateLabels}
+    <HexMapLabels labels={layout.labels} />
+  {/if}
 </div>
 
 <style lang="scss">

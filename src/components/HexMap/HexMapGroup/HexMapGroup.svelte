@@ -1,11 +1,18 @@
 <script lang="ts">
+  import HexLabels from './HexLabels/HexLabels.svelte';
+
   let {
     name = '',
     svgHexes = '',
+    hexes = [],
     svgOutline = '',
     offset = [Infinity, Infinity],
     isFilled = false,
-    hasAnyFocuses = false
+    focuses,
+    hasAnyFocuses = false,
+    labelsToShow = {},
+    showElectorateLabels,
+    showFocusedElectorateLabels
   } = $props();
 
   const radius = 16;
@@ -22,6 +29,14 @@
       transform = `translate(${hexToPx(offset).join(',')})`;
     }
   });
+
+  let labels = $derived.by(() => {
+    if (hasAnyFocuses && showFocusedElectorateLabels) {
+      console.log('showing focusetd electoraotsts', focuses);
+      return focuses;
+    }
+    return labelsToShow;
+  });
 </script>
 
 <g
@@ -35,6 +50,9 @@
   <g class="group-hexes">
     {@html svgHexes}
   </g>
+  {#if isVisible}
+    <HexLabels {hexes} labelsToShow={labels} {showElectorateLabels} />
+  {/if}
   <g class="group-hex-strokes">
     {@html svgHexes}
   </g>
