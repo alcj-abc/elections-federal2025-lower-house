@@ -5,14 +5,11 @@ import type { Mount } from '@abcnews/mount-utils';
 // import App from './components/App/App.svelte';
 import { mount } from 'svelte';
 
-let appMountEl: Mount;
-let appProps;
-
 async function mountThing(id, AppFetcher) {
-  [appMountEl] = selectMounts(id);
+  const [appMountEl] = selectMounts(id);
 
   if (appMountEl) {
-    appProps = acto(getMountValue(appMountEl));
+    const appProps = acto(getMountValue(appMountEl));
 
     const App = await AppFetcher();
     mount(App.default, {
