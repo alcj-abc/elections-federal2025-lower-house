@@ -8,6 +8,7 @@ const config = JSON.parse(fs.readFileSync('data/config.json', 'utf8'));
 /** Round number to 1 decimal place */
 const round = number => Math.round(number * 10) / 10;
 
+/** Get max x,y dimensions for the grid of hexagons */
 function getDims(coords) {
   // Grid of hexagons
   let gridDimensions = {
@@ -29,14 +30,17 @@ function getDims(coords) {
   return gridDimensions;
 }
 
-function svgCoordsToPolygonString({ ring, className = '', code = '', id }) {
+/** Convert a `ring` array of coordinates to a <polygon> string for the browser to render */
+function svgCoordsToPolygonString({ ring, className = '', code = '', id = '' }) {
   const coordString = ring.map(xy => xy.join(',')).join(' ');
   return `<polygon
-  data-id="${id}"
-  class="${className}"
-  data-code="${code}"
-  points="${coordString}"
-  />`.replace(/\n/g, ' ');
+  data-id='${id}'
+  class='${className}'
+  data-code='${code}'
+  points='${coordString}'
+  />`
+    .replace(/\n/g, ' ')
+    .replace(/(\n|\s{2,})/g, ' ');
 }
 
 const gridDimensions = getDims(
@@ -60,7 +64,7 @@ let svgHeight = Math.ceil(radius * 1.5 * (gridDimensions.height + 1 / 3));
 const idCheckMap = {};
 const groups = config.map(({ name, hexes }) => {
   const svgHexCoords = hexes
-    .map(({ code, coord, id }) => {
+    .map(({ code, coord, id, ...meta }) => {
       if (idCheckMap[id]) {
         throw new Error('ID check map contains duplicates, must be unique');
       }
@@ -75,7 +79,7 @@ const groups = config.map(({ name, hexes }) => {
         return;
       }
       const ring = hex.corners.map(({ x, y }) => [round(x), round(y)]);
-      return { ring, className: 'hex', code, id };
+      return { ring, className: 'hex', code, id, hexCoord: [hex.x, hex.y].map(round) };
     })
     .filter(Boolean);
 
@@ -91,7 +95,7 @@ const groups = config.map(({ name, hexes }) => {
     name,
     svgHexes,
     svgOutline,
-    hexes
+    hexes: hexes.map((hex, i) => ({ ...hex, coordPx: svgHexCoords[i].hexCoord }))
   };
 });
 

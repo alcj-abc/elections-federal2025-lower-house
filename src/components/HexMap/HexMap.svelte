@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Tween } from 'svelte/motion';
-  import { untrack } from 'svelte';
   import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
   import { cubicInOut } from 'svelte/easing';
   import HexMapLabels from './HexMapLabels/HexMapLabels.svelte';

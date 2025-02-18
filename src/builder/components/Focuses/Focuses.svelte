@@ -8,6 +8,7 @@
     groups,
     electoratesByCode
   } from '../../hashConfig';
+  import situations from '../../../../data/appdata-situation.json';
 
   let localFocuses = $state<string[]>([]);
 
@@ -52,7 +53,7 @@
       })),
       ...['Outer metro', 'Inner metro', 'Rural', 'Regional'].map(situation => ({
         name: situation,
-        focusCheck: code => electoratesByCode[code].situation === situation.replace(' ', '_').toUpperCase()
+        focusCheck: code => situations[code] === situation.replace(' ', '_').toUpperCase()
       })),
       {
         name: 'Key seats',

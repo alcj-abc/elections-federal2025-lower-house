@@ -1,13 +1,9 @@
-import { writable } from 'svelte/store';
-import { parse, stringify } from '@abcnews/alternating-case-to-object';
-import { decodeSchema, encodeSchema, getRleCodec } from 'hash-codec';
-
+import { getRleCodec, makeSvelteStore, getBinaryCodec } from 'hash-codec';
 import layouts from '../../data/appdata-layouts.json';
 import data from '../../data/appdata-built.json';
 import historical19 from '../../data/appdata-historical-2019.json';
 import historical22 from '../../data/appdata-historical-2022.json';
 import { invertMap } from '../lib/utils';
-import { getBinaryCodec } from 'hash-codec/src/BinaryCodec/BinaryCodec';
 /** Array containing all the individual electorate hexes */
 export const electorates = data.groups
   .flatMap(group => group.hexes.map(hex => ({ ...hex, group: group.name })))
@@ -44,35 +40,6 @@ export const allocationMap = {
 // @ts-ignore
 if (allocationMap[rleDelineator] || nullAllocationDelineator === rleDelineator) {
   throw new Error('Can not use delineator in allocation map');
-}
-
-/**
- * Take a schema and set up a Svelte Store to sync with the url bar
- * @param schema
- */
-function makeHashConfigStore<T>(schema) {
-  async function getHash() {
-    const hash = window.location.hash.slice(1);
-    const data = parse(hash);
-    const decodedData = await decodeSchema({ schema, data: data });
-    return decodedData;
-  }
-
-  const hashConfig = writable<T>();
-
-  getHash().then(data => {
-    hashConfig.set(data);
-    hashConfig.subscribe(async data => {
-      if (!data) return;
-      const encodedData = await encodeSchema({ schema, data });
-      const stringifiedHash = '#' + stringify(encodedData);
-      if (window.location.hash !== stringifiedHash) {
-        window.location.hash = stringifiedHash;
-      }
-    });
-  });
-
-  return hashConfig;
 }
 
 /** get electorate values in a stable order */
@@ -150,7 +117,7 @@ export const schema = {
   }
 };
 
-export const hashConfig = makeHashConfigStore<{
+export const hashConfig = makeSvelteStore<{
   layout: string;
   allocations: Object;
   focuses: Object;

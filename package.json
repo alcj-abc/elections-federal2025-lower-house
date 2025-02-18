@@ -14,6 +14,7 @@
   "scripts": {
     "start": "aunty serve",
     "build-data": "node data/build.js",
+    "build": "npm run build-data && aunty build",
     "dev": "aunty serve",
     "test": "aunty test"
   },
