@@ -32,7 +32,6 @@
 
   let labels = $derived.by(() => {
     if (hasAnyFocuses && showFocusedElectorateLabels) {
-      console.log('showing focusetd electoraotsts', focuses);
       return focuses;
     }
     return labelsToShow;

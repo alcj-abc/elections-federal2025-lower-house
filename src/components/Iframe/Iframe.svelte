@@ -48,7 +48,6 @@
     // Validate the action to run, then run it
     const actionFn = actions[String(action)];
     if (!actionFn) {
-      console.log(event);
       throw new Error(`Action "${action}" doesn't exist. Expected one of ${Object.keys(actions)}"`);
     }
 

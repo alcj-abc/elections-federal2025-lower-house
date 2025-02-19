@@ -18,7 +18,6 @@
   {disabled}
   value={localValues}
   onchange={e => {
-    console.log('changing');
     onChange(
       Array.from(e.currentTarget.options).reduce((obj, option) => {
         obj[String(option.value)] = option.selected;

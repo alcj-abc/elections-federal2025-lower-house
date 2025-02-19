@@ -1,14 +1,24 @@
 <script lang="ts">
-  let { allocations = {}, children } = $props();
+  import { onMount } from 'svelte';
+  import parties from '../../../data/parties.json';
+  import { partyColours } from './store';
 
-  // const allocationStyles = $derived.by(() => {
-  //   const styles = Object.entries(allocations, ([electorateCode, alocation]) => {
-
-  //   })
-  // })
+  let { children } = $props();
+  let rootEl = $state<HTMLDivElement>();
+  onMount(() => {
+    if (!rootEl) {
+      return;
+    }
+    const styles = window.getComputedStyle(rootEl);
+    $partyColours = {};
+    const partyCodes = Object.keys(parties);
+    partyCodes.forEach(partyCode => {
+      $partyColours[partyCode] = styles.getPropertyValue(`--a-${partyCode}`);
+    });
+  });
 </script>
 
-<div class="style-root">{@render children?.()}</div>
+<div class="style-root" bind:this={rootEl}>{@render children?.()}</div>
 
 <style lang="scss">
   .style-root :global(*) {

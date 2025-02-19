@@ -68,6 +68,12 @@ const binaryElectorateCodec = {
   }
 };
 export const schema = {
+  vizType: {
+    type: 'enum',
+    key: 'v',
+    defaultValue: 'hex',
+    values: ['hex', 'geo']
+  },
   layout: {
     type: 'enum',
     key: 'l',

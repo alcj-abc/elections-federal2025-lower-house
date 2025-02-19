@@ -18,3 +18,20 @@ The iframe communicates over postMessage and limits communication to ABC origins
 
 - `postMessage({ type: 'setAllocations', payload: {ADEL: 'OTH'}})`
   - You should set all electorate codes at once. Codes should align with Antony Green's database. Supported codes are listed in [./data/parties.json]()
+
+## WebComponent embed
+
+The country hex map is exported as a web component in [dist-wc/elections-federal2025-hex.js].
+
+Load it in as type="module" and then you have access to the <abcnews-hexmap /> component.
+
+The properties are:
+
+```
+{
+  allocations = {},
+  showStateLabels = false,
+  showElectorateLabels = false,
+  onClick = () => {}
+}
+```

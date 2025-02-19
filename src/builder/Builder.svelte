@@ -7,6 +7,7 @@
   import config from '../../data/appdata-built.json';
   import layouts from '../../data/appdata-layouts.json';
   import Labels from './components/Labels/Labels.svelte';
+  import MapRoot from '../components/MapRoot/MapRoot.svelte';
   let modal = $state<{
     electorate: any;
     allocation: string;
@@ -25,27 +26,13 @@
       position: [clientX, clientY]
     };
   }
-
-  $effect(() => {
-    console.log($hashConfig?.labels);
-  });
 </script>
 
 <StyleRoot>
   {#if $hashConfig}
     <div class="container">
       <div class="container-viz">
-        <HexMap
-          {config}
-          layout={layouts[$hashConfig.layout]}
-          allocations={$hashConfig.allocations}
-          focuses={$hashConfig.focuses}
-          labelsToShow={$hashConfig.labelsToShow}
-          showStateLabels={$hashConfig.showStateLabels}
-          showElectorateLabels={$hashConfig.showElectorateLabels}
-          showFocusedElectorateLabels={$hashConfig.showFocusedElectorateLabels}
-          onClick={onVizClick}
-        />
+        <MapRoot {config} {...$hashConfig} layout={layouts[$hashConfig.layout]} onClick={onVizClick} />
       </div>
 
       {#if modal}
@@ -58,6 +45,28 @@
       {/if}
 
       <form class="container-controls">
+        <div class="fieldset">
+          <label
+            ><input
+              name="vizType"
+              type="radio"
+              checked={$hashConfig.vizType === 'geo'}
+              onchange={() => {
+                $hashConfig.vizType = 'geo';
+              }}
+            />Geo map</label
+          >
+          <label
+            ><input
+              name="vizType"
+              type="radio"
+              checked={$hashConfig.vizType === 'hex'}
+              onchange={() => {
+                $hashConfig.vizType = 'hex';
+              }}
+            />Hex map</label
+          >
+        </div>
         <div class="fieldset">
           <label>
             <span>Layout</span>
