@@ -3,6 +3,8 @@ import layouts from '../../data/appdata-layouts.json';
 import data from '../../data/appdata-built.json';
 import historical19 from '../../data/appdata-historical-2019.json';
 import historical22 from '../../data/appdata-historical-2022.json';
+import mapConfig from '../../data/appdata-mapconfig.json';
+
 import { invertMap } from '../lib/utils';
 /** Array containing all the individual electorate hexes */
 export const electorates = data.groups
@@ -15,7 +17,7 @@ export const electoratesByCode = Object.values(electorates).reduce((obj, elector
 }, {});
 
 const groups = data.groups;
-export { historical19, historical22, groups };
+export { historical19, historical22, groups, mapConfig };
 
 const rleDelineator = 'q';
 const nullAllocationDelineator = 'x';
@@ -67,6 +69,13 @@ const binaryElectorateCodec = {
     return putValues(values);
   }
 };
+
+const defaultNullElectorates = Object.freeze(
+  electorates.reduce((obj, current) => {
+    obj[current.code] = null;
+    return obj;
+  }, {})
+);
 export const schema = {
   vizType: {
     type: 'enum',
@@ -79,6 +88,12 @@ export const schema = {
     key: 'l',
     defaultValue: 'COUNTRY',
     values: Object.keys(layouts)
+  },
+  geoArea: {
+    type: 'enum',
+    key: 'g',
+    defaultValue: 'Australia',
+    values: Object.keys(mapConfig.areas)
   },
   allocations: {
     type: 'custom',
@@ -109,23 +124,25 @@ export const schema = {
       }
     },
     key: 'a',
-    defaultValue: Object.freeze(
-      electorates.reduce((obj, current) => {
-        obj[current.code] = null;
-        return obj;
-      }, {})
-    )
+    defaultValue: defaultNullElectorates
   },
   focuses: {
     type: 'custom',
     codec: binaryElectorateCodec,
     key: 'f',
-    defaultValue: Object.freeze(
-      electorates.reduce((obj, current) => {
-        obj[current.code] = null;
-        return obj;
-      }, {})
-    )
+    defaultValue: defaultNullElectorates
+  },
+  certainties: {
+    type: 'custom',
+    codec: binaryElectorateCodec,
+    key: 'c',
+    defaultValue: defaultNullElectorates
+  },
+  labelsToShow: {
+    type: 'custom',
+    codec: binaryElectorateCodec,
+    key: 'li',
+    defaultValue: defaultNullElectorates
   },
   showLabelsWhen: {
     type: 'enum',
@@ -147,24 +164,15 @@ export const schema = {
     type: 'boolean',
     key: 'lf',
     defaultValue: false
-  },
-  labelsToShow: {
-    type: 'custom',
-    codec: binaryElectorateCodec,
-    key: 'li',
-    defaultValue: Object.freeze(
-      electorates.reduce((obj, current) => {
-        obj[current.code] = null;
-        return obj;
-      }, {})
-    )
   }
 };
 
 export const hashConfig = makeSvelteStore<{
   layout: string;
+  geoArea: string;
   allocations: Object;
   focuses: Object;
+  certainties: Object;
   labelsToShow: Object;
   showStateLabels: boolean;
   showElectorateLabels: boolean;

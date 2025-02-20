@@ -1,17 +1,18 @@
 <script lang="ts">
   import debounce from 'debounce';
-  import * as maplibregl from 'maplibre-gl';
-  import mapConfig from './mapConfig.json';
+  import { type Map as MapType, type MapOptions, LngLatBounds, Map } from 'maplibre-gl';
+  import mapConfig from '../../../data/appdata-mapconfig.json';
   import { onMount, untrack } from 'svelte';
   import { electorateIdToNumber } from './utils';
   import patternURL from './pattern.png';
   import { partyColours } from '../StyleRoot/store';
   let {
-    area = 'Australia',
+    geoArea = 'Australia',
     isInteractive = false,
     config = {},
     allocations = {},
     focuses = {},
+    certainties = {},
     labelsToShow = {},
     showStateLabels = false,
     showElectorateLabels = false,
@@ -20,8 +21,11 @@
   } = $props();
 
   let mapRootEl = $state<HTMLElement>();
-  let map = $state<maplibregl.Map>();
-  let bounds = $state();
+  let map = $state<MapType>();
+  let bounds = $state([
+    [0, 0],
+    [0, 0]
+  ]);
   let isElectoratePolygonsLoaded = $state(false);
   let isInspecting = $state(false);
   let resizeDirtyValue = $state(Math.random());
@@ -38,16 +42,24 @@
         id,
         name: electorate.name,
         allocation,
-        // hasAllocation: allocation && determineIfAllocationIsMade(allocation),
-        // hasDefinitiveAllocation: allocation && determineIfAllocationIsDefinitive(allocation),
-        // certainty: certainties ? certainties[id] :true,
-        // annotation: annotations ? annotations[id] : false,
+        hasAllocation: allocation !== null, // && determineIfAllocationIsMade(allocation),
+        hasDefinitiveAllocation: true, //allocation && determineIfAllocationIsDefinitive(allocation),
+        certainty: certainties ? certainties[id] : true,
+        annotation: showElectorateLabels || labelsToShow ? labelsToShow[id] : false,
         focus: focuses ? focuses[id] : false,
+        // @ts-ignore
         color: $partyColours[allocation] || $partyColours.null,
         geoProps: mapConfig.electoratesGeo.find(geoProps => geoProps.id.toUpperCase() === id)
       };
     })
   );
+
+  $effect(() => {
+    console.log({
+      showElectorateLabels,
+      electoratesRenderProps
+    });
+  });
 
   // Load the map, set up the layers, get everything started
   $effect(() => {
@@ -58,14 +70,14 @@
       if (!mapRootEl) {
         return;
       }
-      const center = new maplibregl.LngLatBounds(mapConfig.areas[area] || mapConfig.areas.Australia).getCenter();
+      const center = new LngLatBounds(mapConfig.areas[geoArea] || mapConfig.areas.Australia).getCenter();
       const mapOptions = {
         ...mapConfig.baseConfig,
         container: mapRootEl,
         center,
         interactive: isInteractive
-      } as maplibregl.MapOptions;
-      map = new maplibregl.Map(mapOptions);
+      } as MapOptions;
+      map = new Map(mapOptions);
 
       map.on('load', () => {
         if (!mapRootEl || !map) {
@@ -175,6 +187,7 @@
             return;
           }
           isElectoratePolygonsLoaded = !!map.getSource('electorate_polygons');
+          map.resize();
         });
 
         map.on(
@@ -245,13 +258,13 @@
     });
 
     if (!isInspectionChange) {
-      let nextBounds = mapConfig.areas[area];
+      let nextBounds = mapConfig.areas[geoArea];
 
       const focusedElectoratesGeoProperties = electoratesRenderProps
         .filter(({ focus }) => focus)
         .map(electorate => electorate.geoProps);
 
-      if (area === 'FocusDriven' && focusedElectoratesGeoProperties.length > 0) {
+      if (geoArea === 'FocusDriven' && focusedElectoratesGeoProperties.length > 0) {
         const [{ east, north, south, west }, ...remainingGeoProps] = focusedElectoratesGeoProperties;
 
         nextBounds = [
@@ -276,7 +289,7 @@
 
   // When dependencies change, update the map.
   $effect(() => {
-    const deps = [isElectoratePolygonsLoaded, area, electoratesRenderProps];
+    const deps = [isElectoratePolygonsLoaded, geoArea, electoratesRenderProps];
     deps && updateMapState(false);
   });
 
@@ -292,10 +305,10 @@
     }
     let textIgnorePlacementTimeout;
 
-    map.fitBounds(new maplibregl.LngLatBounds(bounds), mapConfig.fitBounds);
+    map.fitBounds(new LngLatBounds(bounds), mapConfig.fitBounds);
     textIgnorePlacementTimeout = setTimeout(
-      () => map?.setLayoutProperty('electorate_points_label', 'text-ignore-placement', area !== 'Australia'),
-      area === 'Australia' ? 250 : 750
+      () => map?.setLayoutProperty('electorate_points_label', 'text-ignore-placement', geoArea !== 'Australia'),
+      geoArea === 'Australia' ? 250 : 750
     );
 
     return () => {
@@ -305,11 +318,18 @@
 </script>
 
 <!-- While the alt key is held down on an interactive graphic, we enable
-'inspecting' mode. Currentnly, this displays labels on each electorate to
+'inspecting' mode. Currently, this displays labels on each electorate to
 help with authoring graphics in the editor. -->
 <svelte:window
   onkeydown={event => (isInspecting = isInteractive ? event.altKey : false)}
   onkeyup={event => (isInspecting = isInteractive ? event.altKey : false)}
 />
 
-<div id="geomap" bind:this={mapRootEl}></div>
+<div class="geomap" bind:this={mapRootEl}></div>
+
+<style lang="scss">
+  .geomap {
+    width: 100%;
+    height: 100%;
+  }
+</style>

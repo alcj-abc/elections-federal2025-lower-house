@@ -25,6 +25,7 @@
     box-sizing: border-box;
   }
   .style-root {
+    height: 100%;
     font-family: ABCSans, sans-serif;
     --c-black: #000;
     --c-grey: #989494;

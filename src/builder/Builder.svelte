@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { electorates, hashConfig, historical19, historical22, schema, groups } from './hashConfig';
-  import HexMap from '../components/HexMap/HexMap.svelte';
+  import { electorates, hashConfig, historical19, historical22, schema, groups, mapConfig } from './hashConfig';
   import HexagonContextMenu from './components/HexagonContextMenu/HexagonContextMenu.svelte';
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
   import Focuses from './components/Focuses/Focuses.svelte';
@@ -32,7 +31,13 @@
   {#if $hashConfig}
     <div class="container">
       <div class="container-viz">
-        <MapRoot {config} {...$hashConfig} layout={layouts[$hashConfig.layout]} onClick={onVizClick} />
+        <MapRoot
+          {config}
+          {...$hashConfig}
+          layout={layouts[$hashConfig.layout]}
+          onClick={onVizClick}
+          isInteractive={true}
+        />
       </div>
 
       {#if modal}
@@ -56,8 +61,9 @@
               }}
             />Geo map</label
           >
-          <label
-            ><input
+
+          <label>
+            <input
               name="vizType"
               type="radio"
               checked={$hashConfig.vizType === 'hex'}
@@ -67,16 +73,32 @@
             />Hex map</label
           >
         </div>
-        <div class="fieldset">
-          <label>
-            <span>Layout</span>
-            <select name="layout" bind:value={$hashConfig.layout}>
-              {#each schema.layout.values as item}
-                <option>{item || 'argh'}</option>
-              {/each}
-            </select></label
-          >
-        </div>
+
+        {#if $hashConfig.vizType === 'hex'}
+          <div class="fieldset">
+            <label>
+              <span>Layout</span>
+              <select name="layout" bind:value={$hashConfig.layout}>
+                {#each schema.layout.values as item}
+                  <option>{item}</option>
+                {/each}
+              </select>
+            </label>
+          </div>
+        {/if}
+
+        {#if $hashConfig.vizType === 'geo'}
+          <div class="fieldset">
+            <label>
+              <span>Map area</span>
+              <select name="layout" bind:value={$hashConfig.geoArea}>
+                {#each Object.keys(mapConfig.areas) as item}
+                  <option>{item}</option>
+                {/each}
+              </select>
+            </label>
+          </div>
+        {/if}
 
         <fieldset>
           <legend>Mix-ins</legend>
@@ -97,6 +119,10 @@
                   obj[electorate.id] = electorate.holder;
                   return obj;
                 }, {});
+                $hashConfig.certainties = historical19.reduce((obj, electorate) => {
+                  obj[electorate.id] = true;
+                  return obj;
+                }, {});
               }}
             >
               2019 results
@@ -106,6 +132,10 @@
                 e.preventDefault();
                 $hashConfig.allocations = historical22.reduce((obj, electorate) => {
                   obj[electorate.id] = electorate.holder;
+                  return obj;
+                }, {});
+                $hashConfig.certainties = historical19.reduce((obj, electorate) => {
+                  obj[electorate.id] = true;
                   return obj;
                 }, {});
               }}
@@ -128,12 +158,15 @@
   }
   .container {
     display: flex;
+    height: 100vh;
   }
   .container-viz {
     flex: 1;
     min-width: 50%;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
   }
   .container-controls {
     width: 18rem;

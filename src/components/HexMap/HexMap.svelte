@@ -15,6 +15,8 @@
     onClick = () => {}
   } = $props();
   let svgEl = $state<SVGElement>();
+  let svgWidth = $state(0);
+  let svgHeight = $state(0);
   let previousAllocations = $state();
   let previousFocuses = $state();
 
@@ -89,6 +91,8 @@
 >
   <svg
     bind:this={svgEl}
+    bind:clientWidth={svgWidth}
+    bind:clientHeight={svgHeight}
     viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
   >
     {#each config.groups as group}
@@ -104,13 +108,37 @@
       />
     {/each}
   </svg>
+
   {#if showStateLabels}
-    <HexMapLabels labels={layout.labels} />
+    <div
+      class="hexmap__labels"
+      style:width={`${svgWidth}px`}
+      style:height={`${svgHeight}px`}
+      style:margin-left={`${0 - svgWidth / 2}px`}
+      style:margin-top={`${0 - svgHeight / 2}px`}
+    >
+      <HexMapLabels labels={layout.labels} />
+    </div>
   {/if}
 </div>
 
 <style lang="scss">
   .hexmap {
     position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hexmap__labels {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    top: 50%;
+    pointer-events: none;
+  }
+  .hexmap svg {
+    max-width: 100%;
+    max-height: 100%;
   }
 </style>

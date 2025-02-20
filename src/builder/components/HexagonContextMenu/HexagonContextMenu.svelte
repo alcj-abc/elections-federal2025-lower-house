@@ -25,10 +25,10 @@
           onClose();
         }}
       /> Focused
-    </div></label
-  >
-  <label class="item"
-    ><div class="section">
+    </div>
+  </label>
+  <label class="item">
+    <div class="section">
       <input
         type="checkbox"
         disabled={$hashConfig.showElectorateLabels || $hashConfig.showFocusedElectorateLabels}
@@ -41,8 +41,23 @@
           onClose();
         }}
       /> Show Label
-    </div></label
-  >
+    </div>
+  </label>
+  <label class="item">
+    <div class="section">
+      <input
+        type="checkbox"
+        checked={$hashConfig.certainties[electorate.code]}
+        onchange={e => {
+          $hashConfig.certainties = {
+            ...$hashConfig.labelsToShow,
+            [electorate.code]: (e.target as HTMLInputElement)?.checked
+          };
+          onClose();
+        }}
+      /> Is certain
+    </div>
+  </label>
   <hr />
   <div class="section">
     <ul class="menu menu--double">
