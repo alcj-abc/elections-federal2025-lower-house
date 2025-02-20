@@ -10,7 +10,13 @@
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
   import layouts from '../../data/appdata-layouts.json';
   import config from '../../data/appdata-built.json';
-  let { allocations = {}, showStateLabels = false, showElectorateLabels = false, onClick = () => {} } = $props();
+  let {
+    allocations = {},
+    certainties = {},
+    showStateLabels = false,
+    showElectorateLabels = false,
+    onClick = () => {}
+  } = $props();
 </script>
 
 <StyleRoot>
@@ -18,6 +24,7 @@
     {config}
     layout={layouts.COUNTRY}
     {allocations}
+    {certainties}
     focuses={{}}
     {showStateLabels}
     {showElectorateLabels}

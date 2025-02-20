@@ -26,10 +26,6 @@ whenOdysseyLoaded.then(() => {
     'electionsfederal2025builder',
     () => import(/* webpackChunkName: "dynamic-builder" */ './builder/Builder.svelte')
   );
-  mountThing(
-    'electionsfederal2025iframe',
-    () => import(/* webpackChunkName: "dynamic-iframe" */ './components/Iframe/Iframe.svelte')
-  );
 });
 
 if (process.env.NODE_ENV === 'development') {
