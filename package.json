@@ -1,5 +1,5 @@
 {
-  "name": "elections-federal2025-hex",
+  "name": "@abcnews/elections-federal2025-lower-house",
   "version": "1.0.0-pre",
   "description": "Election hexagons & geo maps for 2025",
   "license": "MIT",
@@ -39,5 +39,10 @@
   },
   "files": [
     "dist-wc"
-  ]
+  ],
+  "exports": {
+    "./wc": {
+      "default": "./dist-wc/elections-federal2025-lower-house.js"
+    }
+  }
 }
