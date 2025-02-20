@@ -8,6 +8,7 @@
     layout = {},
     allocations = {},
     focuses = {},
+    certainties = {},
     labelsToShow = {},
     showStateLabels = false,
     showElectorateLabels = false,
@@ -52,6 +53,7 @@
   $effect(() => {
     const _allocations = allocations;
     const _focuses = focuses;
+    const _certainties = certainties;
     // const _previousAllocations = untrack(() => previousAllocations || {});
     // const _previousFocuses = untrack(() => previousFocuses || {});
     if (!svgEl) {
@@ -71,6 +73,8 @@
       hex.dataset.allocation = newAllocation;
       const newFocus = hasAnyFocuses ? _focuses[electorateCode] || false : true;
       hex.dataset.focused = newFocus;
+      const newCertainty = _certainties[electorateCode] || null;
+      hex.dataset.certain = newCertainty;
     });
     // previousAllocations = _allocations;
     // previousFocuses = _focuses;
