@@ -1,6 +1,6 @@
 {
   "COUNTRY": {
-    "viewbox": [-50, 0, 480, 500],
+    "viewbox": [-50, -1, 480, 502],
     "positions": {
       "ACT": [9.0035, 10],
       "NSW": [4, 6],
@@ -23,7 +23,7 @@
     ]
   },
   "EXPLODED": {
-    "viewbox": [0, 0, 480, 500],
+    "viewbox": [0, -1, 480, 502],
     "positions": {
       "ACT": [11.5, 11.25, true],
       "NSW": [6.75, 6.75],
@@ -46,7 +46,7 @@
     ]
   },
   "EXPLODED_STATES_ONLY": {
-    "viewbox": [0, 0, 480, 500],
+    "viewbox": [0, -1, 480, 502],
     "positions": {
       "NSW": [6.75, 6.75],
       "QLD": [5.75, 0],

@@ -68,5 +68,6 @@
     --a-Teal: var(--c-ptyteal);
 
     --c-empty-border: #cdcbcb;
+    --c-filled-border: #fff;
   }
 </style>

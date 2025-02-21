@@ -1,10 +1,7 @@
 <script lang="ts">
   import { allocationMap, hashConfig } from '../../hashConfig';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
-  const allocationStrings = Object.values(allocationMap);
-
   let { position = [0, 0], electorate = {}, onClose = () => {} } = $props();
-
   let allocation = $derived.by(() => $hashConfig.allocations[electorate.code]);
 </script>
 
@@ -50,7 +47,7 @@
         checked={$hashConfig.certainties[electorate.code]}
         onchange={e => {
           $hashConfig.certainties = {
-            ...$hashConfig.labelsToShow,
+            ...$hashConfig.certainties,
             [electorate.code]: (e.target as HTMLInputElement)?.checked
           };
           onClose();

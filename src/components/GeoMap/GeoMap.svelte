@@ -4,7 +4,7 @@
   import mapConfig from '../../../data/appdata-mapconfig.json';
   import { onMount, untrack } from 'svelte';
   import { electorateIdToNumber } from './utils';
-  import patternURL from './pattern.png';
+  import patternURL from './pattern.webp';
   import { partyColours } from '../StyleRoot/store';
   let {
     geoArea = 'Australia',

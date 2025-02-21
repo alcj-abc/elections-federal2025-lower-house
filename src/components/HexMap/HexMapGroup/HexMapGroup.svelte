@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import HexLabels from './HexLabels/HexLabels.svelte';
 
   let {
@@ -22,11 +23,13 @@
     return [newX, newY].map(px => `${Math.round(px)}px`);
   }
 
-  let transform = $state('');
+  let transform = $state(`translate(${hexToPx(offset).join(',')})`);
+  let hasBeenVisible = $state(false);
   let isVisible = $derived.by(() => offset[0] !== Infinity);
   $effect(() => {
     if (isVisible) {
       transform = `translate(${hexToPx(offset).join(',')})`;
+      hasBeenVisible = true;
     }
   });
 
@@ -42,6 +45,7 @@
   class="group"
   data-name={name}
   style:transform
+  class:group--never-rendered={!hasBeenVisible}
   class:group--hidden={!isVisible}
   class:group--map-is-filled={isFilled}
   class:group--has-focuses={hasAnyFocuses}
@@ -61,6 +65,11 @@
 <style lang="scss">
   .group {
     transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
+  }
+  .group--never-rendered {
+    // don't render states at all if they're not needed.
+    // prevents flash on first load
+    display: none;
   }
   .group--hidden {
     opacity: 0;
@@ -96,14 +105,24 @@
   }
   .group-hexes :global(.hex[data-allocation='null']) {
     fill: var(--a-null);
-    stroke: var(--c-lightgrey);
+    stroke: var(--c-empty-border);
   }
 
   // Strokes
   .group-hex-strokes :global(.hex) {
     fill: none;
-    stroke: var(--c-empty-border);
+    stroke: none;
     stroke-width: 1px;
+  }
+  .group-hex-strokes :global(.hex:not([data-allocation='null'])) {
+    fill: none;
+    stroke: var(--c-filled-border);
+    stroke-width: 1px;
+  }
+
+  // Uncertainty hash
+  .group-hex-strokes :global(.hex[data-certain='null']) {
+    fill: url(#uncertainty-hash);
   }
 
   .group--has-focuses {

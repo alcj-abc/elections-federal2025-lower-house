@@ -136,7 +136,12 @@ export const schema = {
     type: 'custom',
     codec: binaryElectorateCodec,
     key: 'c',
-    defaultValue: defaultNullElectorates
+    defaultValue: Object.freeze(
+      electorates.reduce((obj, current) => {
+        obj[current.code] = true;
+        return obj;
+      }, {})
+    )
   },
   labelsToShow: {
     type: 'custom',

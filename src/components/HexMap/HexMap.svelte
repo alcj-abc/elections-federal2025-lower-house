@@ -99,9 +99,26 @@
     bind:clientHeight={svgHeight}
     viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
   >
+    <defs id="defs1">
+      <pattern
+        id="uncertainty-hash"
+        patternUnits="userSpaceOnUse"
+        width="5.2070173"
+        height="2.9824252"
+        patternTransform="translate(393.99999,558.99999)"
+        preserveAspectRatio="xMidYMid"
+      >
+        <path
+          clip-path="none"
+          style="opacity:0.8;fill:#ffffff;fill-opacity:0.8;stroke:none;stroke-width:0.00999999;stroke-dasharray:none"
+          d="M 2.0117291,0 0,1.1523402 v 1.830085 L 5.2050898,0 Z M 5.2070173,1.1503748 2.0117291,2.9824252 h 3.1952882 z"
+        />
+      </pattern>
+    </defs>
     {#each config.groups as group}
       <HexMapGroup
         {...group}
+        {layout}
         offset={layout.positions[group.name]}
         {isFilled}
         {focuses}
