@@ -52,12 +52,12 @@
   <g class="group-hexes">
     {@html svgHexes}
   </g>
-  {#if isVisible}
-    <HexLabels {hexes} labelsToShow={labels} {showElectorateLabels} />
-  {/if}
   <g class="group-hex-strokes">
     {@html svgHexes}
   </g>
+  {#if isVisible}
+    <HexLabels {hexes} labelsToShow={labels} {showElectorateLabels} />
+  {/if}
   <g class="group-outline">{@html svgOutline}</g>
 </g>
 

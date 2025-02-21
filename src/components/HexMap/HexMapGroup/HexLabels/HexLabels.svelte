@@ -12,7 +12,7 @@
 </script>
 
 <g class="hexlabels">
-  {#each labels as { coordPx, code }}
+  {#each labels as { coordPx, shortName }}
     <g transform={`translate(${coordPx.join(' ')})`}>
       <text class="hexlabels__text">
         <!-- {multiLineLabel
@@ -22,7 +22,7 @@
           </tspan>
         ))
       : label} -->
-        {code}
+        {shortName}
       </text>
     </g>
   {/each}
@@ -32,7 +32,7 @@
   .hexlabels__text {
     transform: rotate(30deg) translate(0, 0.3em);
     fill: black;
-    font-size: 6px;
+    font-size: 9px;
     font-family: sans-serif;
     text-anchor: middle;
   }
