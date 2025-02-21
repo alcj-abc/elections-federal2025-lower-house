@@ -54,7 +54,11 @@
 <fieldset>
   <legend>Label options</legend>
   <label>
-    <input type="checkbox" bind:checked={$hashConfig.showStateLabels} />
+    {#if $hashConfig.vizType === 'geo'}
+      <input type="checkbox" disabled />
+    {:else}
+      <input type="checkbox" bind:checked={$hashConfig.showStateLabels} />
+    {/if}
     Show state labels
   </label>
   <label>

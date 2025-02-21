@@ -38,6 +38,7 @@
     electorates.map(electorate => {
       const id = electorate.id;
       const allocation = allocations ? allocations[id] : null;
+      const annotationBecauseFocused = showFocusedElectorateLabels ? focuses[id] : false;
       return {
         id,
         name: electorate.name,
@@ -45,7 +46,7 @@
         hasAllocation: allocation !== null, // && determineIfAllocationIsMade(allocation),
         hasDefinitiveAllocation: true, //allocation && determineIfAllocationIsDefinitive(allocation),
         certainty: certainties ? certainties[id] : true,
-        annotation: showElectorateLabels || (labelsToShow ? labelsToShow[id] : false),
+        annotation: annotationBecauseFocused || showElectorateLabels || (labelsToShow ? labelsToShow[id] : false),
         focus: focuses ? focuses[id] : false,
         // @ts-ignore
         color: $partyColours[allocation] || $partyColours.null,
