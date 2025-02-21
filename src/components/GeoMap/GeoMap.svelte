@@ -45,7 +45,7 @@
         hasAllocation: allocation !== null, // && determineIfAllocationIsMade(allocation),
         hasDefinitiveAllocation: true, //allocation && determineIfAllocationIsDefinitive(allocation),
         certainty: certainties ? certainties[id] : true,
-        annotation: showElectorateLabels || labelsToShow ? labelsToShow[id] : false,
+        annotation: showElectorateLabels || (labelsToShow ? labelsToShow[id] : false),
         focus: focuses ? focuses[id] : false,
         // @ts-ignore
         color: $partyColours[allocation] || $partyColours.null,

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import HexLabels from './HexLabels/HexLabels.svelte';
 
   let {
