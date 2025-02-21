@@ -8,6 +8,7 @@
     svgOutline = '',
     offset = [Infinity, Infinity],
     isFilled = false,
+    allocations,
     focuses,
     hasAnyFocuses = false,
     labelsToShow = {},
@@ -56,7 +57,7 @@
     {@html svgHexes}
   </g>
   {#if isVisible}
-    <HexLabels {hexes} labelsToShow={labels} {showElectorateLabels} />
+    <HexLabels {hexes} {allocations} labelsToShow={labels} {showElectorateLabels} />
   {/if}
   <g class="group-outline">{@html svgOutline}</g>
 </g>
@@ -72,6 +73,10 @@
   }
   .group--hidden {
     opacity: 0;
+  }
+  .group-hex-strokes,
+  .group-outline {
+    pointer-events: none;
   }
   .group :global(.hex) {
     transition: all 0.5s;

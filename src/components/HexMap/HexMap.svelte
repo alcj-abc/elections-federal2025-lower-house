@@ -86,7 +86,7 @@
 <div
   class="hexmap"
   onclick={({ target, clientX, clientY }) => {
-    const code = (target as SVGPolygonElement)?.dataset?.code;
+    const code = (target as SVGPolygonElement)?.dataset?.id;
     if (!code || !onClick) {
       return;
     }
@@ -121,6 +121,7 @@
         {layout}
         offset={layout.positions[group.name]}
         {isFilled}
+        {allocations}
         {focuses}
         {hasAnyFocuses}
         {showElectorateLabels}

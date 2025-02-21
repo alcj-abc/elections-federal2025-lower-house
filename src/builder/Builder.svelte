@@ -142,6 +142,28 @@
             >
               2022 results
             </button>
+            <button
+              onclick={e => {
+                e.preventDefault();
+                $hashConfig.certainties = historical19.reduce((obj, electorate) => {
+                  obj[electorate.id] = null;
+                  return obj;
+                }, {});
+              }}
+            >
+              No certainty
+            </button>
+            <button
+              onclick={e => {
+                e.preventDefault();
+                $hashConfig.certainties = historical19.reduce((obj, electorate) => {
+                  obj[electorate.id] = true;
+                  return obj;
+                }, {});
+              }}
+            >
+              Full certainty
+            </button>
           </div>
         </fieldset>
         <Focuses />
