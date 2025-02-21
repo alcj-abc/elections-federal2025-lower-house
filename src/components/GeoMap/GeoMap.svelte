@@ -36,7 +36,7 @@
 
   let electoratesRenderProps = $derived.by(() =>
     electorates.map(electorate => {
-      const id = electorate.code;
+      const id = electorate.id;
       const allocation = allocations ? allocations[id] : null;
       return {
         id,
@@ -108,7 +108,7 @@
               id: electorateIdToNumber(geoProps.id),
               properties: {
                 ...geoProps,
-                name: electorates.find(electorate => electorate.code === geoProps.id.toUpperCase()).name
+                name: electorates.find(electorate => electorate.id === geoProps.id.toUpperCase()).name
               }
             }))
           }

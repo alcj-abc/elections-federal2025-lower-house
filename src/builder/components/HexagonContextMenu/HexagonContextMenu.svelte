@@ -2,13 +2,13 @@
   import { allocationMap, hashConfig } from '../../hashConfig';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
   let { position = [0, 0], electorate = {}, onClose = () => {} } = $props();
-  let allocation = $derived.by(() => $hashConfig.allocations[electorate.code]);
+  let allocation = $derived.by(() => $hashConfig.allocations[electorate.id]);
 </script>
 
 <ContextMenu {position} {onClose}>
   <h1 class="section">
     <strong>{electorate.name}</strong>
-    <small style="color: var(--c-grey)">{electorate.code}</small>
+    <small style="color: var(--c-grey)">{electorate.id}</small>
   </h1>
   <hr />
 
@@ -16,9 +16,9 @@
     <div class="section">
       <input
         type="checkbox"
-        checked={$hashConfig.focuses[electorate.code]}
+        checked={$hashConfig.focuses[electorate.id]}
         onchange={e => {
-          $hashConfig.focuses = { ...$hashConfig.focuses, [electorate.code]: (e.target as HTMLInputElement)?.checked };
+          $hashConfig.focuses = { ...$hashConfig.focuses, [electorate.id]: (e.target as HTMLInputElement)?.checked };
           onClose();
         }}
       /> Focused
@@ -29,11 +29,11 @@
       <input
         type="checkbox"
         disabled={$hashConfig.showElectorateLabels || $hashConfig.showFocusedElectorateLabels}
-        checked={$hashConfig.labelsToShow[electorate.code]}
+        checked={$hashConfig.labelsToShow[electorate.id]}
         onchange={e => {
           $hashConfig.labelsToShow = {
             ...$hashConfig.labelsToShow,
-            [electorate.code]: (e.target as HTMLInputElement)?.checked
+            [electorate.id]: (e.target as HTMLInputElement)?.checked
           };
           onClose();
         }}
@@ -44,11 +44,11 @@
     <div class="section">
       <input
         type="checkbox"
-        checked={$hashConfig.certainties[electorate.code]}
+        checked={$hashConfig.certainties[electorate.id]}
         onchange={e => {
           $hashConfig.certainties = {
             ...$hashConfig.certainties,
-            [electorate.code]: (e.target as HTMLInputElement)?.checked
+            [electorate.id]: (e.target as HTMLInputElement)?.checked
           };
           onClose();
         }}
@@ -67,7 +67,7 @@
               e.preventDefault();
               $hashConfig.allocations = {
                 ...$hashConfig.allocations,
-                [electorate.code]: allocationOption === 'None' ? null : allocationOption
+                [electorate.id]: allocationOption === 'None' ? null : allocationOption
               };
               onClose();
             }}

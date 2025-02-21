@@ -9,10 +9,10 @@ import { invertMap } from '../lib/utils';
 /** Array containing all the individual electorate hexes */
 export const electorates = data.groups
   .flatMap(group => group.hexes.map(hex => ({ ...hex, group: group.name })))
-  .toSorted((a, b) => a.id - b.id);
+  .toSorted((a, b) => a.index - b.index);
 
 export const electoratesByCode = Object.values(electorates).reduce((obj, electorate) => {
-  obj[electorate.code] = electorate;
+  obj[electorate.id] = electorate;
   return obj;
 }, {});
 
@@ -46,12 +46,12 @@ if (allocationMap[rleDelineator] || nullAllocationDelineator === rleDelineator) 
 
 /** get electorate values in a stable order */
 function getSortedValues(obj) {
-  return electorates.map(({ code }) => obj[code]);
+  return electorates.map(({ id }) => obj[id]);
 }
 
 function putValues(arr) {
-  return electorates.reduce((obj, { code }, i) => {
-    obj[code] = arr[i] ?? null;
+  return electorates.reduce((obj, { id }, i) => {
+    obj[id] = arr[i] ?? null;
     return obj;
   }, {});
 }
@@ -72,7 +72,7 @@ const binaryElectorateCodec = {
 
 const defaultNullElectorates = Object.freeze(
   electorates.reduce((obj, current) => {
-    obj[current.code] = null;
+    obj[current.id] = null;
     return obj;
   }, {})
 );
@@ -116,7 +116,7 @@ export const schema = {
           return '';
         });
         const electorateMap = str.split('').reduce((obj, val, index) => {
-          const key = electorates[index].code;
+          const key = electorates[index].id;
           obj[key] = allocationMap[String(val)] || null;
           return obj;
         }, {});
@@ -138,7 +138,7 @@ export const schema = {
     key: 'c',
     defaultValue: Object.freeze(
       electorates.reduce((obj, current) => {
-        obj[current.code] = true;
+        obj[current.id] = true;
         return obj;
       }, {})
     )

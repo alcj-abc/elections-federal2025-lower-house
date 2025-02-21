@@ -17,7 +17,7 @@
     if (!code) {
       return;
     }
-    const electorate = electorates.find(electorate => electorate.code === code);
+    const electorate = electorates.find(electorate => electorate.id === code);
     const allocation = $hashConfig.allocations[code];
     modal = {
       electorate,
@@ -107,7 +107,7 @@
               onclick={e => {
                 e.preventDefault();
                 $hashConfig.allocations = electorates.reduce((obj, electorate) => {
-                  obj[electorate.code] = null;
+                  obj[electorate.id] = null;
                   return obj;
                 }, {});
               }}>Blank</button

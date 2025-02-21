@@ -2,192 +2,1098 @@
   {
     "name": "ACT",
     "hexes": [
-      { "name": "Bean", "coord": [0, 1], "id": 21, "code": "BEAN" },
-      { "name": "Canberra", "coord": [1, 1], "id": 2, "code": "CANB" },
-      { "name": "Fenner", "coord": [0, 0], "id": 26, "code": "FENN" }
+      {
+        "name": "Bean",
+        "coord": [0, 1],
+        "shortName": "Bean",
+        "index": 21,
+        "id": "BEAN"
+      },
+      {
+        "name": "Canberra",
+        "coord": [1, 1],
+        "shortName": "Canb.",
+        "index": 2,
+        "id": "CANB"
+      },
+      {
+        "name": "Fenner",
+        "coord": [0, 0],
+        "shortName": "Fenn.",
+        "index": 26,
+        "id": "FENN"
+      }
     ]
   },
   {
     "name": "NSW",
     "hexes": [
-      { "name": "Banks", "coord": [7, 4], "id": 83, "code": "BANK" },
-      { "name": "Barton", "coord": [7, 5], "id": 20, "code": "BART" },
-      { "name": "Bennelong", "coord": [6, 1], "id": 84, "code": "BENN" },
-      { "name": "Berowra", "coord": [4, 1], "id": 70, "code": "BERO" },
-      { "name": "Blaxland", "coord": [7, 3], "id": 0, "code": "BLAX" },
-      { "name": "Bradfield", "coord": [8, 1], "id": 71, "code": "BRFD" },
-      { "name": "Calare", "coord": [0, 1], "id": 135, "code": "CALA" },
-      { "name": "Chifley", "coord": [5, 2], "id": 3, "code": "CHIF" },
-      { "name": "Cook", "coord": [5, 3], "id": 72, "code": "COOK" },
-      { "name": "Cowper", "coord": [1, 0], "id": 143, "code": "COWP" },
-      { "name": "Cunningham", "coord": [3, 3], "id": 5, "code": "CUNN" },
-      { "name": "Dobell", "coord": [6, 0], "id": 49, "code": "DOBE" },
-      { "name": "Eden-Monaro", "coord": [2, 2], "id": 51, "code": "EMON" },
-      { "name": "Farrer", "coord": [0, 3], "id": 75, "code": "FARR" },
-      { "name": "Fowler", "coord": [6, 2], "id": 6, "code": "FOWL" },
-      { "name": "Gilmore", "coord": [2, 3], "id": 52, "code": "GILM" },
-      { "name": "Grayndler", "coord": [8, 3], "id": 11, "code": "GRAY" },
-      { "name": "Greenway", "coord": [7, 2], "id": 53, "code": "GREE" },
-      { "name": "Hughes", "coord": [6, 4], "id": 87, "code": "HUGH" },
-      { "name": "Hume", "coord": [1, 3], "id": 78, "code": "HUME" },
-      { "name": "Hunter", "coord": [8, 0], "id": 55, "code": "HUNT" },
-      { "name": "Kingsford Smith", "coord": [8, 6], "id": 34, "code": "KSMI" },
-      { "name": "Lindsay", "coord": [3, 0], "id": 107, "code": "LIND" },
-      { "name": "Lyne", "coord": [2, 0], "id": 137, "code": "LYNE" },
-      { "name": "Macarthur", "coord": [4, 2], "id": 36, "code": "MACA" },
-      { "name": "Mackellar", "coord": [5, 1], "id": 79, "code": "MACK" },
-      { "name": "Macquarie", "coord": [4, 0], "id": 59, "code": "MACQ" },
-      { "name": "McMahon", "coord": [3, 1], "id": 40, "code": "MCMA" },
-      { "name": "Mitchell", "coord": [7, 1], "id": 80, "code": "MITC" },
-      { "name": "New England", "coord": [1, 2], "id": 139, "code": "NENG" },
-      { "name": "Newcastle", "coord": [9, 1], "id": 13, "code": "NEWC" },
-      { "name": "North Sydney", "coord": [9, 3], "id": 91, "code": "NSYD" },
-      { "name": "Page", "coord": [1, 1], "id": 144, "code": "PAGE" },
-      { "name": "Parkes", "coord": [0, 0], "id": 141, "code": "PARK" },
-      { "name": "Parramatta", "coord": [6, 3], "id": 62, "code": "PARR" },
-      { "name": "Paterson", "coord": [9, 0], "id": 63, "code": "PATE" },
-      { "name": "Reid", "coord": [8, 2], "id": 108, "code": "REID" },
-      { "name": "Richmond", "coord": [2, 1], "id": 65, "code": "RICH" },
-      { "name": "Riverina", "coord": [0, 2], "id": 142, "code": "RIVE" },
-      { "name": "Robertson", "coord": [5, 0], "id": 109, "code": "ROBE" },
-      { "name": "Shortland", "coord": [7, 0], "id": 66, "code": "SHOR" },
-      { "name": "Sydney", "coord": [9, 4], "id": 16, "code": "SYDN" },
-      { "name": "Warringah", "coord": [9, 2], "id": 146, "code": "WARR" },
-      { "name": "Watson", "coord": [8, 4], "id": 17, "code": "WATS" },
-      { "name": "Wentworth", "coord": [8, 5], "id": 111, "code": "WENT" },
-      { "name": "Werriwa", "coord": [4, 3], "id": 68, "code": "WERR" },
-      { "name": "Whitlam", "coord": [3, 2], "id": 43, "code": "WHIT" }
+      {
+        "name": "Banks",
+        "coord": [7, 4],
+        "shortName": "Banks",
+        "index": 83,
+        "id": "BANK"
+      },
+      {
+        "name": "Barton",
+        "coord": [7, 5],
+        "shortName": "Bart.",
+        "index": 20,
+        "id": "BART"
+      },
+      {
+        "name": "Bennelong",
+        "coord": [6, 1],
+        "shortName": "Benn.",
+        "index": 84,
+        "id": "BENN"
+      },
+      {
+        "name": "Berowra",
+        "coord": [4, 1],
+        "shortName": "Bero.",
+        "index": 70,
+        "id": "BERO"
+      },
+      {
+        "name": "Blaxland",
+        "coord": [7, 3],
+        "shortName": "Blax.",
+        "index": 0,
+        "id": "BLAX"
+      },
+      {
+        "name": "Bradfield",
+        "coord": [8, 1],
+        "shortName": "Brad.",
+        "index": 71,
+        "id": "BRFD"
+      },
+      {
+        "name": "Calare",
+        "coord": [0, 1],
+        "shortName": "Cala.",
+        "index": 135,
+        "id": "CALA"
+      },
+      {
+        "name": "Chifley",
+        "coord": [5, 2],
+        "shortName": "Chifl.",
+        "index": 3,
+        "id": "CHIF"
+      },
+      {
+        "name": "Cook",
+        "coord": [5, 3],
+        "shortName": "Cook",
+        "index": 72,
+        "id": "COOK"
+      },
+      {
+        "name": "Cowper",
+        "coord": [1, 0],
+        "shortName": "Cowp.",
+        "index": 143,
+        "id": "COWP"
+      },
+      {
+        "name": "Cunningham",
+        "coord": [3, 3],
+        "shortName": "Cunni.",
+        "index": 5,
+        "id": "CUNN"
+      },
+      {
+        "name": "Dobell",
+        "coord": [6, 0],
+        "shortName": "Dobe.",
+        "index": 49,
+        "id": "DOBE"
+      },
+      {
+        "name": "Eden-Monaro",
+        "coord": [2, 2],
+        "shortName": "Eden.",
+        "index": 51,
+        "id": "EMON"
+      },
+      {
+        "name": "Farrer",
+        "coord": [0, 3],
+        "shortName": "Farr.",
+        "index": 75,
+        "id": "FARR"
+      },
+      {
+        "name": "Fowler",
+        "coord": [6, 2],
+        "shortName": "Fowl.",
+        "index": 6,
+        "id": "FOWL"
+      },
+      {
+        "name": "Gilmore",
+        "coord": [2, 3],
+        "shortName": "Gilm.",
+        "index": 52,
+        "id": "GILM"
+      },
+      {
+        "name": "Grayndler",
+        "coord": [8, 3],
+        "shortName": "Gray.",
+        "index": 11,
+        "id": "GRAY"
+      },
+      {
+        "name": "Greenway",
+        "coord": [7, 2],
+        "shortName": "Gree.",
+        "index": 53,
+        "id": "GREE"
+      },
+      {
+        "name": "Hughes",
+        "coord": [6, 4],
+        "shortName": "Hugh.",
+        "index": 87,
+        "id": "HUGH"
+      },
+      {
+        "name": "Hume",
+        "coord": [1, 3],
+        "shortName": "Hume",
+        "index": 78,
+        "id": "HUME"
+      },
+      {
+        "name": "Hunter",
+        "coord": [8, 0],
+        "shortName": "Hunt.",
+        "index": 55,
+        "id": "HUNT"
+      },
+      {
+        "name": "Kingsford Smith",
+        "coord": [8, 6],
+        "shortName": "Kings.",
+        "index": 34,
+        "id": "KSMI"
+      },
+      {
+        "name": "Lindsay",
+        "coord": [3, 0],
+        "shortName": "Linds.",
+        "index": 107,
+        "id": "LIND"
+      },
+      {
+        "name": "Lyne",
+        "coord": [2, 0],
+        "shortName": "Lyne",
+        "index": 137,
+        "id": "LYNE"
+      },
+      {
+        "name": "Macarthur",
+        "coord": [4, 2],
+        "shortName": "Maca.",
+        "index": 36,
+        "id": "MACA"
+      },
+      {
+        "name": "Mackellar",
+        "coord": [5, 1],
+        "shortName": "Mack.",
+        "index": 79,
+        "id": "MACK"
+      },
+      {
+        "name": "Macquarie",
+        "coord": [4, 0],
+        "shortName": "Macq.",
+        "index": 59,
+        "id": "MACQ"
+      },
+      {
+        "name": "McMahon",
+        "coord": [3, 1],
+        "shortName": "McMa.",
+        "index": 40,
+        "id": "MCMA"
+      },
+      {
+        "name": "Mitchell",
+        "coord": [7, 1],
+        "shortName": "Mitc.",
+        "index": 80,
+        "id": "MITC"
+      },
+      {
+        "name": "New England",
+        "coord": [1, 2],
+        "shortName": "New.",
+        "index": 139,
+        "id": "NENG"
+      },
+      {
+        "name": "Newcastle",
+        "coord": [9, 1],
+        "shortName": "Newc.",
+        "index": 13,
+        "id": "NEWC"
+      },
+      {
+        "name": "North Sydney",
+        "coord": [9, 3],
+        "shortName": "Nort.",
+        "index": 91,
+        "id": "NSYD"
+      },
+      {
+        "name": "Page",
+        "coord": [1, 1],
+        "shortName": "Page",
+        "index": 144,
+        "id": "PAGE"
+      },
+      {
+        "name": "Parkes",
+        "coord": [0, 0],
+        "shortName": "Park.",
+        "index": 141,
+        "id": "PARK"
+      },
+      {
+        "name": "Parramatta",
+        "coord": [6, 3],
+        "shortName": "Parr.",
+        "index": 62,
+        "id": "PARR"
+      },
+      {
+        "name": "Paterson",
+        "coord": [9, 0],
+        "shortName": "Pate.",
+        "index": 63,
+        "id": "PATE"
+      },
+      {
+        "name": "Reid",
+        "coord": [8, 2],
+        "shortName": "Reid",
+        "index": 108,
+        "id": "REID"
+      },
+      {
+        "name": "Richmond",
+        "coord": [2, 1],
+        "shortName": "Rich.",
+        "index": 65,
+        "id": "RICH"
+      },
+      {
+        "name": "Riverina",
+        "coord": [0, 2],
+        "shortName": "River.",
+        "index": 142,
+        "id": "RIVE"
+      },
+      {
+        "name": "Robertson",
+        "coord": [5, 0],
+        "shortName": "Robe.",
+        "index": 109,
+        "id": "ROBE"
+      },
+      {
+        "name": "Shortland",
+        "coord": [7, 0],
+        "shortName": "Shor.",
+        "index": 66,
+        "id": "SHOR"
+      },
+      {
+        "name": "Sydney",
+        "coord": [9, 4],
+        "shortName": "Sydn.",
+        "index": 16,
+        "id": "SYDN"
+      },
+      {
+        "name": "Warringah",
+        "coord": [9, 2],
+        "shortName": "Warr.",
+        "index": 146,
+        "id": "WARR"
+      },
+      {
+        "name": "Watson",
+        "coord": [8, 4],
+        "shortName": "Wats.",
+        "index": 17,
+        "id": "WATS"
+      },
+      {
+        "name": "Wentworth",
+        "coord": [8, 5],
+        "shortName": "Went.",
+        "index": 111,
+        "id": "WENT"
+      },
+      {
+        "name": "Werriwa",
+        "coord": [4, 3],
+        "shortName": "Werr.",
+        "index": 68,
+        "id": "WERR"
+      },
+      {
+        "name": "Whitlam",
+        "coord": [3, 2],
+        "shortName": "Whit.",
+        "index": 43,
+        "id": "WHIT"
+      }
     ]
   },
   {
     "name": "NT",
     "hexes": [
-      { "name": "Lingiari", "coord": [1, 0], "id": 57, "code": "LING" },
-      { "name": "Solomon", "coord": [0, 0], "id": 67, "code": "SOLO" }
+      {
+        "name": "Lingiari",
+        "coord": [1, 0],
+        "shortName": "Lingi.",
+        "index": 57,
+        "id": "LING"
+      },
+      {
+        "name": "Solomon",
+        "coord": [0, 0],
+        "shortName": "Solo.",
+        "index": 67,
+        "id": "SOLO"
+      }
     ]
   },
   {
     "name": "QLD",
     "hexes": [
-      { "name": "Blair", "coord": [2, 5], "id": 45, "code": "BLAI" },
-      { "name": "Bonner", "coord": [6, 2], "id": 124, "code": "BONN" },
-      { "name": "Bowman", "coord": [7, 4], "id": 125, "code": "BOWM" },
-      { "name": "Brisbane", "coord": [5, 3], "id": 131, "code": "BRIS" },
-      { "name": "Capricornia", "coord": [3, 2], "id": 112, "code": "CAPR" },
-      { "name": "Dawson", "coord": [3, 1], "id": 113, "code": "DAWS" },
-      { "name": "Dickson", "coord": [3, 3], "id": 132, "code": "DICK" },
-      { "name": "Fadden", "coord": [6, 4], "id": 114, "code": "FADD" },
-      { "name": "Fairfax", "coord": [5, 1], "id": 115, "code": "FAIR" },
-      { "name": "Fisher", "coord": [5, 2], "id": 116, "code": "FISH" },
-      { "name": "Flynn", "coord": [2, 3], "id": 126, "code": "FLYN" },
-      { "name": "Forde", "coord": [5, 5], "id": 127, "code": "FORD" },
-      { "name": "Griffith", "coord": [5, 4], "id": 54, "code": "GRIF" },
-      { "name": "Groom", "coord": [1, 5], "id": 117, "code": "GROO" },
-      { "name": "Herbert", "coord": [4, 1], "id": 128, "code": "HERB" },
-      { "name": "Hinkler", "coord": [1, 3], "id": 118, "code": "HINK" },
-      { "name": "Kennedy", "coord": [1, 4], "id": 148, "code": "KENN" },
-      { "name": "Leichhardt", "coord": [5, 0], "id": 133, "code": "LEIC" },
-      { "name": "Lilley", "coord": [6, 3], "id": 56, "code": "LILL" },
-      { "name": "Longman", "coord": [4, 2], "id": 134, "code": "LONG" },
-      { "name": "Maranoa", "coord": [0, 5], "id": 119, "code": "MARA" },
-      { "name": "McPherson", "coord": [7, 5], "id": 120, "code": "MCPH" },
-      { "name": "Moncrieff", "coord": [6, 5], "id": 121, "code": "MONC" },
-      { "name": "Moreton", "coord": [4, 4], "id": 61, "code": "MORE" },
-      { "name": "Oxley", "coord": [3, 5], "id": 41, "code": "OXLE" },
-      { "name": "Petrie", "coord": [4, 3], "id": 129, "code": "PETR" },
-      { "name": "Rankin", "coord": [3, 4], "id": 42, "code": "RANK" },
-      { "name": "Ryan", "coord": [4, 5], "id": 130, "code": "RYAN" },
-      { "name": "Wide Bay", "coord": [4, 0], "id": 122, "code": "WBAY" },
-      { "name": "Wright", "coord": [2, 4], "id": 123, "code": "WRIG" }
+      {
+        "name": "Blair",
+        "coord": [2, 5],
+        "shortName": "Blair",
+        "index": 45,
+        "id": "BLAI"
+      },
+      {
+        "name": "Bonner",
+        "coord": [6, 2],
+        "shortName": "Bonn.",
+        "index": 124,
+        "id": "BONN"
+      },
+      {
+        "name": "Bowman",
+        "coord": [7, 4],
+        "shortName": "Bowm.",
+        "index": 125,
+        "id": "BOWM"
+      },
+      {
+        "name": "Brisbane",
+        "coord": [5, 3],
+        "shortName": "Brisb.",
+        "index": 131,
+        "id": "BRIS"
+      },
+      {
+        "name": "Capricornia",
+        "coord": [3, 2],
+        "shortName": "Capri.",
+        "index": 112,
+        "id": "CAPR"
+      },
+      {
+        "name": "Dawson",
+        "coord": [3, 1],
+        "shortName": "Daws.",
+        "index": 113,
+        "id": "DAWS"
+      },
+      {
+        "name": "Dickson",
+        "coord": [3, 3],
+        "shortName": "Dicks.",
+        "index": 132,
+        "id": "DICK"
+      },
+      {
+        "name": "Fadden",
+        "coord": [6, 4],
+        "shortName": "Fadd.",
+        "index": 114,
+        "id": "FADD"
+      },
+      {
+        "name": "Fairfax",
+        "coord": [5, 1],
+        "shortName": "Fairf.",
+        "index": 115,
+        "id": "FAIR"
+      },
+      {
+        "name": "Fisher",
+        "coord": [5, 2],
+        "shortName": "Fishe",
+        "index": 116,
+        "id": "FISH"
+      },
+      {
+        "name": "Flynn",
+        "coord": [2, 3],
+        "shortName": "Flynn",
+        "index": 126,
+        "id": "FLYN"
+      },
+      {
+        "name": "Forde",
+        "coord": [5, 5],
+        "shortName": "Forde",
+        "index": 127,
+        "id": "FORD"
+      },
+      {
+        "name": "Griffith",
+        "coord": [5, 4],
+        "shortName": "Griff.",
+        "index": 54,
+        "id": "GRIF"
+      },
+      {
+        "name": "Groom",
+        "coord": [1, 5],
+        "shortName": "Groom",
+        "index": 117,
+        "id": "GROO"
+      },
+      {
+        "name": "Herbert",
+        "coord": [4, 1],
+        "shortName": "Herb.",
+        "index": 128,
+        "id": "HERB"
+      },
+      {
+        "name": "Hinkler",
+        "coord": [1, 3],
+        "shortName": "Hinkl.",
+        "index": 118,
+        "id": "HINK"
+      },
+      {
+        "name": "Kennedy",
+        "coord": [1, 4],
+        "shortName": "Kenn.",
+        "index": 148,
+        "id": "KENN"
+      },
+      {
+        "name": "Leichhardt",
+        "coord": [5, 0],
+        "shortName": "Leich.",
+        "index": 133,
+        "id": "LEIC"
+      },
+      {
+        "name": "Lilley",
+        "coord": [6, 3],
+        "shortName": "Lille",
+        "index": 56,
+        "id": "LILL"
+      },
+      {
+        "name": "Longman",
+        "coord": [4, 2],
+        "shortName": "Long.",
+        "index": 134,
+        "id": "LONG"
+      },
+      {
+        "name": "Maranoa",
+        "coord": [0, 5],
+        "shortName": "Mara.",
+        "index": 119,
+        "id": "MARA"
+      },
+      {
+        "name": "McPherson",
+        "coord": [7, 5],
+        "shortName": "McPh.",
+        "index": 120,
+        "id": "MCPH"
+      },
+      {
+        "name": "Moncrieff",
+        "coord": [6, 5],
+        "shortName": "Monc.",
+        "index": 121,
+        "id": "MONC"
+      },
+      {
+        "name": "Moreton",
+        "coord": [4, 4],
+        "shortName": "More.",
+        "index": 61,
+        "id": "MORE"
+      },
+      {
+        "name": "Oxley",
+        "coord": [3, 5],
+        "shortName": "Oxley",
+        "index": 41,
+        "id": "OXLE"
+      },
+      {
+        "name": "Petrie",
+        "coord": [4, 3],
+        "shortName": "Petri",
+        "index": 129,
+        "id": "PETR"
+      },
+      {
+        "name": "Rankin",
+        "coord": [3, 4],
+        "shortName": "Ranki",
+        "index": 42,
+        "id": "RANK"
+      },
+      {
+        "name": "Ryan",
+        "coord": [4, 5],
+        "shortName": "Ryan",
+        "index": 130,
+        "id": "RYAN"
+      },
+      {
+        "name": "Wide Bay",
+        "coord": [4, 0],
+        "shortName": "Wide.",
+        "index": 122,
+        "id": "WBAY"
+      },
+      {
+        "name": "Wright",
+        "coord": [2, 4],
+        "shortName": "Wrig.",
+        "index": 123,
+        "id": "WRIG"
+      }
     ]
   },
   {
     "name": "SA",
     "hexes": [
-      { "name": "Adelaide", "coord": [1, 4], "id": 18, "code": "ADEL" },
-      { "name": "Barker", "coord": [0, 1], "id": 69, "code": "BARK" },
-      { "name": "Boothby", "coord": [1, 3], "id": 97, "code": "BOOT" },
-      { "name": "Grey", "coord": [1, 0], "id": 77, "code": "GREY" },
-      { "name": "Hindmarsh", "coord": [0, 3], "id": 29, "code": "HIND" },
-      { "name": "Kingston", "coord": [1, 5], "id": 35, "code": "KING" },
-      { "name": "Makin", "coord": [1, 2], "id": 38, "code": "MAKI" },
-      { "name": "Mayo", "coord": [1, 6], "id": 149, "code": "MAYO" },
-      { "name": "Spence", "coord": [1, 1], "id": 15, "code": "SPEN" },
-      { "name": "Sturt", "coord": [0, 5], "id": 93, "code": "STUR" }
+      {
+        "name": "Adelaide",
+        "coord": [1, 4],
+        "shortName": "Adel.",
+        "index": 18,
+        "id": "ADEL"
+      },
+      {
+        "name": "Barker",
+        "coord": [0, 1],
+        "shortName": "Bark.",
+        "index": 69,
+        "id": "BARK"
+      },
+      {
+        "name": "Boothby",
+        "coord": [1, 3],
+        "shortName": "Boot.",
+        "index": 97,
+        "id": "BOOT"
+      },
+      {
+        "name": "Grey",
+        "coord": [1, 0],
+        "shortName": "Grey",
+        "index": 77,
+        "id": "GREY"
+      },
+      {
+        "name": "Hindmarsh",
+        "coord": [0, 3],
+        "shortName": "Hind.",
+        "index": 29,
+        "id": "HIND"
+      },
+      {
+        "name": "Kingston",
+        "coord": [1, 5],
+        "shortName": "Kings.",
+        "index": 35,
+        "id": "KING"
+      },
+      {
+        "name": "Makin",
+        "coord": [1, 2],
+        "shortName": "Makin",
+        "index": 38,
+        "id": "MAKI"
+      },
+      {
+        "name": "Mayo",
+        "coord": [1, 6],
+        "shortName": "Mayo",
+        "index": 149,
+        "id": "MAYO"
+      },
+      {
+        "name": "Spence",
+        "coord": [1, 1],
+        "shortName": "Spen.",
+        "index": 15,
+        "id": "SPEN"
+      },
+      {
+        "name": "Sturt",
+        "coord": [0, 5],
+        "shortName": "Sturt",
+        "index": 93,
+        "id": "STUR"
+      }
     ]
   },
   {
     "name": "TAS",
     "hexes": [
-      { "name": "Bass", "coord": [2, 0], "id": 96, "code": "BASS" },
-      { "name": "Braddon", "coord": [0, 0], "id": 98, "code": "BRAD" },
-      { "name": "Clark", "coord": [0, 1], "id": 145, "code": "CLAR" },
-      { "name": "Franklin", "coord": [1, 1], "id": 7, "code": "FRAN" },
-      { "name": "Lyons", "coord": [1, 0], "id": 58, "code": "LYON" }
+      {
+        "name": "Bass",
+        "coord": [2, 0],
+        "shortName": "Bass",
+        "index": 96,
+        "id": "BASS"
+      },
+      {
+        "name": "Braddon",
+        "coord": [0, 0],
+        "shortName": "Brad.",
+        "index": 98,
+        "id": "BRAD"
+      },
+      {
+        "name": "Clark",
+        "coord": [0, 1],
+        "shortName": "Clark",
+        "index": 145,
+        "id": "CLAR"
+      },
+      {
+        "name": "Franklin",
+        "coord": [1, 1],
+        "shortName": "Fran.",
+        "index": 7,
+        "id": "FRAN"
+      },
+      {
+        "name": "Lyons",
+        "coord": [1, 0],
+        "shortName": "Lyons",
+        "index": 58,
+        "id": "LYON"
+      }
     ]
   },
   {
     "name": "VIC",
     "hexes": [
-      { "name": "Aston", "coord": [5, 2], "id": 82, "code": "ASTO" },
-      { "name": "Ballarat", "coord": [1, 4], "id": 19, "code": "BALL" },
-      { "name": "Bendigo", "coord": [0, 1], "id": 22, "code": "BEND" },
-      { "name": "Bruce", "coord": [5, 3], "id": 24, "code": "BRUC" },
-      { "name": "Calwell", "coord": [2, 0], "id": 1, "code": "CALW" },
-      { "name": "Casey", "coord": [6, 3], "id": 99, "code": "CASE" },
-      { "name": "Chisholm", "coord": [3, 3], "id": 100, "code": "CHIS" },
-      { "name": "Cooper", "coord": [4, 2], "id": 4, "code": "COOP" },
-      { "name": "Corangamite", "coord": [1, 5], "id": 47, "code": "CORA" },
-      { "name": "Corio", "coord": [0, 2], "id": 25, "code": "CORI" },
-      { "name": "Deakin", "coord": [4, 1], "id": 101, "code": "DEAK" },
-      { "name": "Dunkley", "coord": [5, 5], "id": 50, "code": "DUNK" },
-      { "name": "Flinders", "coord": [6, 5], "id": 102, "code": "FLIN" },
-      { "name": "Fraser", "coord": [2, 2], "id": 8, "code": "FRAS" },
-      { "name": "Gellibrand", "coord": [2, 5], "id": 9, "code": "GELL" },
-      { "name": "Gippsland", "coord": [7, 2], "id": 136, "code": "GIPP" },
-      { "name": "Goldstein", "coord": [4, 5], "id": 86, "code": "GOLD" },
-      { "name": "Gorton", "coord": [1, 1], "id": 10, "code": "GORT" },
-      { "name": "Hawke", "coord": [1, 3], "id": 28, "code": "HAWK" },
-      { "name": "Higgins", "coord": [4, 4], "id": 104, "code": "HIGG" },
-      { "name": "Holt", "coord": [6, 4], "id": 30, "code": "HOLT" },
-      { "name": "Hotham", "coord": [4, 3], "id": 31, "code": "HOTH" },
-      { "name": "Indi", "coord": [4, 0], "id": 147, "code": "INDI" },
-      { "name": "Isaacs", "coord": [5, 4], "id": 32, "code": "ISAA" },
-      { "name": "Jagajaga", "coord": [2, 1], "id": 33, "code": "JAGA" },
-      { "name": "Kooyong", "coord": [2, 3], "id": 105, "code": "KOOY" },
-      { "name": "La Trobe", "coord": [7, 4], "id": 106, "code": "LTRO" },
-      { "name": "Lalor", "coord": [1, 2], "id": 12, "code": "LALO" },
-      { "name": "Macnamara", "coord": [3, 5], "id": 37, "code": "MACN" },
-      { "name": "Mallee", "coord": [0, 0], "id": 138, "code": "MALL" },
-      { "name": "Maribyrnong", "coord": [2, 4], "id": 39, "code": "MARI" },
-      { "name": "McEwen", "coord": [6, 2], "id": 60, "code": "MCEW" },
-      { "name": "Melbourne", "coord": [3, 4], "id": 150, "code": "MELB" },
-      { "name": "Menzies", "coord": [3, 1], "id": 88, "code": "MENZ" },
-      { "name": "Monash", "coord": [7, 3], "id": 89, "code": "MONA" },
-      { "name": "Nicholls", "coord": [1, 0], "id": 140, "code": "NICH" },
-      { "name": "Scullin", "coord": [3, 0], "id": 14, "code": "SCUL" },
-      { "name": "Wannon", "coord": [0, 3], "id": 95, "code": "WANN" },
-      { "name": "Wills", "coord": [3, 2], "id": 44, "code": "WILL" }
+      {
+        "name": "Aston",
+        "coord": [5, 2],
+        "shortName": "Aston",
+        "index": 82,
+        "id": "ASTO"
+      },
+      {
+        "name": "Ballarat",
+        "coord": [1, 4],
+        "shortName": "Ball.",
+        "index": 19,
+        "id": "BALL"
+      },
+      {
+        "name": "Bendigo",
+        "coord": [0, 1],
+        "shortName": "Bendi.",
+        "index": 22,
+        "id": "BEND"
+      },
+      {
+        "name": "Bruce",
+        "coord": [5, 3],
+        "shortName": "Bruce",
+        "index": 24,
+        "id": "BRUC"
+      },
+      {
+        "name": "Calwell",
+        "coord": [2, 0],
+        "shortName": "Calw.",
+        "index": 1,
+        "id": "CALW"
+      },
+      {
+        "name": "Casey",
+        "coord": [6, 3],
+        "shortName": "Casey",
+        "index": 99,
+        "id": "CASE"
+      },
+      {
+        "name": "Chisholm",
+        "coord": [3, 3],
+        "shortName": "Chish.",
+        "index": 100,
+        "id": "CHIS"
+      },
+      {
+        "name": "Cooper",
+        "coord": [4, 2],
+        "shortName": "Coop.",
+        "index": 4,
+        "id": "COOP"
+      },
+      {
+        "name": "Corangamite",
+        "coord": [1, 5],
+        "shortName": "Cora.",
+        "index": 47,
+        "id": "CORA"
+      },
+      {
+        "name": "Corio",
+        "coord": [0, 2],
+        "shortName": "Corio",
+        "index": 25,
+        "id": "CORI"
+      },
+      {
+        "name": "Deakin",
+        "coord": [4, 1],
+        "shortName": "Deaki",
+        "index": 101,
+        "id": "DEAK"
+      },
+      {
+        "name": "Dunkley",
+        "coord": [5, 5],
+        "shortName": "Dunk.",
+        "index": 50,
+        "id": "DUNK"
+      },
+      {
+        "name": "Flinders",
+        "coord": [6, 5],
+        "shortName": "Flind.",
+        "index": 102,
+        "id": "FLIN"
+      },
+      {
+        "name": "Fraser",
+        "coord": [2, 2],
+        "shortName": "Fras.",
+        "index": 8,
+        "id": "FRAS"
+      },
+      {
+        "name": "Gellibrand",
+        "coord": [2, 5],
+        "shortName": "Gelli.",
+        "index": 9,
+        "id": "GELL"
+      },
+      {
+        "name": "Gippsland",
+        "coord": [7, 2],
+        "shortName": "Gipps.",
+        "index": 136,
+        "id": "GIPP"
+      },
+      {
+        "name": "Goldstein",
+        "coord": [4, 5],
+        "shortName": "Gold.",
+        "index": 86,
+        "id": "GOLD"
+      },
+      {
+        "name": "Gorton",
+        "coord": [1, 1],
+        "shortName": "Gort.",
+        "index": 10,
+        "id": "GORT"
+      },
+      {
+        "name": "Hawke",
+        "coord": [1, 3],
+        "shortName": "Hawke",
+        "index": 28,
+        "id": "HAWK"
+      },
+      {
+        "name": "Higgins",
+        "coord": [4, 4],
+        "shortName": "Higgi.",
+        "index": 104,
+        "id": "HIGG"
+      },
+      {
+        "name": "Holt",
+        "coord": [6, 4],
+        "shortName": "Holt",
+        "index": 30,
+        "id": "HOLT"
+      },
+      {
+        "name": "Hotham",
+        "coord": [4, 3],
+        "shortName": "Hoth.",
+        "index": 31,
+        "id": "HOTH"
+      },
+      {
+        "name": "Indi",
+        "coord": [4, 0],
+        "shortName": "Indi",
+        "index": 147,
+        "id": "INDI"
+      },
+      {
+        "name": "Isaacs",
+        "coord": [5, 4],
+        "shortName": "Isaac",
+        "index": 32,
+        "id": "ISAA"
+      },
+      {
+        "name": "Jagajaga",
+        "coord": [2, 1],
+        "shortName": "Jaga.",
+        "index": 33,
+        "id": "JAGA"
+      },
+      {
+        "name": "Kooyong",
+        "coord": [2, 3],
+        "shortName": "Kooy.",
+        "index": 105,
+        "id": "KOOY"
+      },
+      {
+        "name": "La Trobe",
+        "coord": [7, 4],
+        "shortName": "La Tr.",
+        "index": 106,
+        "id": "LTRO"
+      },
+      {
+        "name": "Lalor",
+        "coord": [1, 2],
+        "shortName": "Lalor",
+        "index": 12,
+        "id": "LALO"
+      },
+      {
+        "name": "Macnamara",
+        "coord": [3, 5],
+        "shortName": "Macn.",
+        "index": 37,
+        "id": "MACN"
+      },
+      {
+        "name": "Mallee",
+        "coord": [0, 0],
+        "shortName": "Mall.",
+        "index": 138,
+        "id": "MALL"
+      },
+      {
+        "name": "Maribyrnong",
+        "coord": [2, 4],
+        "shortName": "Mari.",
+        "index": 39,
+        "id": "MARI"
+      },
+      {
+        "name": "McEwen",
+        "coord": [6, 2],
+        "shortName": "McEw.",
+        "index": 60,
+        "id": "MCEW"
+      },
+      {
+        "name": "Melbourne",
+        "coord": [3, 4],
+        "shortName": "Melb.",
+        "index": 150,
+        "id": "MELB"
+      },
+      {
+        "name": "Menzies",
+        "coord": [3, 1],
+        "shortName": "Menz.",
+        "index": 88,
+        "id": "MENZ"
+      },
+      {
+        "name": "Monash",
+        "coord": [7, 3],
+        "shortName": "Mona.",
+        "index": 89,
+        "id": "MONA"
+      },
+      {
+        "name": "Nicholls",
+        "coord": [1, 0],
+        "shortName": "Nicho.",
+        "index": 140,
+        "id": "NICH"
+      },
+      {
+        "name": "Scullin",
+        "coord": [3, 0],
+        "shortName": "Scul.",
+        "index": 14,
+        "id": "SCUL"
+      },
+      {
+        "name": "Wannon",
+        "coord": [0, 3],
+        "shortName": "Wann.",
+        "index": 95,
+        "id": "WANN"
+      },
+      {
+        "name": "Wills",
+        "coord": [3, 2],
+        "shortName": "Wills",
+        "index": 44,
+        "id": "WILL"
+      }
     ]
   },
   {
     "name": "WA",
     "hexes": [
-      { "name": "Durack", "coord": [2, 0], "id": 74, "code": "DURA" },
-      { "name": "Pearce", "coord": [1, 1], "id": 92, "code": "PEAR" },
-      { "name": "Moore", "coord": [1, 2], "id": 90, "code": "MOOR" },
-      { "name": "Hasluck", "coord": [2, 2], "id": 103, "code": "HASL" },
-      { "name": "Curtin", "coord": [0, 3], "id": 73, "code": "CURT" },
-      { "name": "Cowan", "coord": [1, 3], "id": 48, "code": "COWA" },
-      { "name": "Fremantle", "coord": [0, 4], "id": 27, "code": "FREM" },
-      { "name": "Perth", "coord": [1, 4], "id": 64, "code": "PERT" },
-      { "name": "Swan", "coord": [2, 4], "id": 110, "code": "SWAN" },
-      { "name": "Brand", "coord": [0, 5], "id": 23, "code": "BRAN" },
-      { "name": "Tangney", "coord": [1, 5], "id": 94, "code": "TANG" },
-      { "name": "Canning", "coord": [1, 6], "id": 85, "code": "CANN" },
-      { "name": "Burt", "coord": [2, 6], "id": 46, "code": "BURT" },
-      { "name": "Forrest", "coord": [0, 7], "id": 76, "code": "FORR" },
-      { "name": "O'Connor", "coord": [1, 7], "id": 81, "code": "OCON" }
+      {
+        "name": "Durack",
+        "coord": [2, 0],
+        "shortName": "Dura.",
+        "index": 74,
+        "id": "DURA"
+      },
+      {
+        "name": "Pearce",
+        "coord": [1, 1],
+        "shortName": "Pear.",
+        "index": 92,
+        "id": "PEAR"
+      },
+      {
+        "name": "Moore",
+        "coord": [1, 2],
+        "shortName": "Moore",
+        "index": 90,
+        "id": "MOOR"
+      },
+      {
+        "name": "Hasluck",
+        "coord": [2, 2],
+        "shortName": "Hasl.",
+        "index": 103,
+        "id": "HASL"
+      },
+      {
+        "name": "Curtin",
+        "coord": [0, 3],
+        "shortName": "Curti",
+        "index": 73,
+        "id": "CURT"
+      },
+      {
+        "name": "Cowan",
+        "coord": [1, 3],
+        "shortName": "Cowan",
+        "index": 48,
+        "id": "COWA"
+      },
+      {
+        "name": "Fremantle",
+        "coord": [0, 4],
+        "shortName": "Frem.",
+        "index": 27,
+        "id": "FREM"
+      },
+      {
+        "name": "Perth",
+        "coord": [1, 4],
+        "shortName": "Perth",
+        "index": 64,
+        "id": "PERT"
+      },
+      {
+        "name": "Swan",
+        "coord": [2, 4],
+        "shortName": "Swan",
+        "index": 110,
+        "id": "SWAN"
+      },
+      {
+        "name": "Brand",
+        "coord": [0, 5],
+        "shortName": "Brand",
+        "index": 23,
+        "id": "BRAN"
+      },
+      {
+        "name": "Tangney",
+        "coord": [1, 5],
+        "shortName": "Tang.",
+        "index": 94,
+        "id": "TANG"
+      },
+      {
+        "name": "Canning",
+        "coord": [1, 6],
+        "shortName": "Canni.",
+        "index": 85,
+        "id": "CANN"
+      },
+      {
+        "name": "Burt",
+        "coord": [2, 6],
+        "shortName": "Burt",
+        "index": 46,
+        "id": "BURT"
+      },
+      {
+        "name": "Forrest",
+        "coord": [0, 7],
+        "shortName": "Forr.",
+        "index": 76,
+        "id": "FORR"
+      },
+      {
+        "name": "O'Connor",
+        "coord": [1, 7],
+        "shortName": "O'Con.",
+        "index": 81,
+        "id": "OCON"
+      }
     ]
   }
 ]

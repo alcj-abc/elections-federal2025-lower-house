@@ -42,8 +42,8 @@
     name="labels-picker"
     disabled={$hashConfig.showElectorateLabels || $hashConfig.showFocusedElectorateLabels}
     values={electorates.map(electorate => ({
-      value: electorate.code,
-      label: `${electorate.code} - ${electorate.name}`
+      value: electorate.id,
+      label: `${electorate.id} - ${electorate.name}`
     }))}
     value={$hashConfig.labelsToShow}
     onChange={value => {

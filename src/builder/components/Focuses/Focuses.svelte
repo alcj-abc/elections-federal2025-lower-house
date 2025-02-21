@@ -22,11 +22,11 @@
    */
   function setFocusesBy(fn, override = false) {
     $hashConfig.focuses = electorates.reduce((obj, electorate) => {
-      let newValue = fn(electorate.code);
+      let newValue = fn(electorate.id);
       if (override === false) {
-        newValue = newValue || $hashConfig.focuses[electorate.code];
+        newValue = newValue || $hashConfig.focuses[electorate.id];
       }
-      obj[electorate.code] = newValue;
+      obj[electorate.id] = newValue;
       return obj;
     }, {});
   }
@@ -93,8 +93,8 @@
 
   <MultiselectBox
     values={electorates.map(electorate => ({
-      value: electorate.code,
-      label: `${electorate.code} - ${electorate.name}`
+      value: electorate.id,
+      label: `${electorate.id} - ${electorate.name}`
     }))}
     value={$hashConfig.focuses}
     onChange={value => {

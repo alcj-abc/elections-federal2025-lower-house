@@ -64,7 +64,7 @@
       if (!(hex instanceof SVGPolygonElement)) {
         return;
       }
-      const electorateCode = hex.dataset.code;
+      const electorateCode = hex.dataset.id;
       if (!electorateCode) {
         return;
       }

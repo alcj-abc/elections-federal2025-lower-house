@@ -31,12 +31,11 @@ function getDims(coords) {
 }
 
 /** Convert a `ring` array of coordinates to a <polygon> string for the browser to render */
-function svgCoordsToPolygonString({ ring, className = '', code = '', id = '' }) {
+function svgCoordsToPolygonString({ ring, className = '', id = '' }) {
   const coordString = ring.map(xy => xy.join(',')).join(' ');
   return `<polygon
   data-id='${id}'
   class='${className}'
-  data-code='${code}'
   points='${coordString}'
   />`
     .replace(/\n/g, ' ')
