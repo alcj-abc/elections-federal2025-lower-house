@@ -3,6 +3,7 @@
   import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
   import { cubicInOut } from 'svelte/easing';
   import HexMapLabels from './HexMapLabels/HexMapLabels.svelte';
+  import { untrack } from 'svelte';
   let {
     config = {},
     layout = {},
@@ -18,8 +19,6 @@
   let svgEl = $state<SVGElement>();
   let svgWidth = $state(0);
   let svgHeight = $state(0);
-  let previousAllocations = $state();
-  let previousFocuses = $state();
 
   /** Are any of the electorates focused? If so, we use different styles for unallocated */
   let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
@@ -50,34 +49,42 @@
 
   // Set properties manually on hexes. Svelte is slow, and I don't trust it to
   // be performant creating all 150+ electorates
+  let hexes = $derived.by(() =>
+    Array.from(svgEl?.querySelectorAll('polygon.hex') || []).filter(hex => hex instanceof SVGPolygonElement)
+  );
+  let previousAllocations = $state();
+  let previousFocuses = $state();
+  let previousCertainties = $state();
   $effect(() => {
     const _allocations = allocations;
     const _focuses = focuses;
     const _certainties = certainties;
-    // const _previousAllocations = untrack(() => previousAllocations || {});
-    // const _previousFocuses = untrack(() => previousFocuses || {});
-    if (!svgEl) {
-      return;
-    }
-    const hexes = svgEl.querySelectorAll('polygon.hex');
+    const _previousAllocations = untrack(() => previousAllocations || {});
+    const _previousFocuses = untrack(() => previousFocuses || {});
+    const _previousCertainties = untrack(() => previousCertainties || {});
+
     hexes.forEach(hex => {
-      if (!(hex instanceof SVGPolygonElement)) {
-        return;
-      }
       const electorateCode = hex.dataset.id;
       if (!electorateCode) {
         return;
       }
       // set allocation
       const newAllocation = _allocations[electorateCode] || null;
-      hex.dataset.allocation = newAllocation;
+      if (newAllocation !== _previousAllocations[electorateCode]) {
+        hex.dataset.allocation = newAllocation;
+      }
       const newFocus = hasAnyFocuses ? _focuses[electorateCode] || false : true;
-      hex.dataset.focused = newFocus;
+      if (newFocus !== _previousFocuses[electorateCode]) {
+        hex.dataset.focused = newFocus;
+      }
       const newCertainty = _certainties[electorateCode] || null;
-      hex.dataset.certain = newCertainty;
+      if (newCertainty !== _previousCertainties[electorateCode]) {
+        hex.dataset.certain = newCertainty;
+      }
     });
-    // previousAllocations = _allocations;
-    // previousFocuses = _focuses;
+    previousAllocations = _allocations;
+    previousFocuses = _focuses;
+    previousCertainties = _certainties;
   });
 </script>
 
