@@ -125,7 +125,7 @@
   }
 
   // Uncertainty hash
-  .group-hex-strokes :global(.hex[data-certain='null']) {
+  .group-hex-strokes :global(.hex[data-certain='null']:not([data-allocation='null'])) {
     fill: url(#uncertainty-hash);
   }
 
