@@ -13,7 +13,8 @@
     hasAnyFocuses = false,
     labelsToShow = {},
     showElectorateLabels,
-    showFocusedElectorateLabels
+    showFocusedElectorateLabels,
+    isStatic
   } = $props();
 
   const radius = 16;
@@ -48,6 +49,7 @@
   class:group--never-rendered={!hasBeenVisible}
   class:group--hidden={!isVisible}
   class:group--map-is-filled={isFilled}
+  class:group--map-is-static={isStatic}
   class:group--has-focuses={hasAnyFocuses}
 >
   <g class="group-hexes">
@@ -63,9 +65,10 @@
 </g>
 
 <style lang="scss">
-  .group {
+  .group:not(.group--map-is-static) {
     transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
   }
+
   .group--never-rendered {
     // don't render states at all if they're not needed.
     // prevents flash on first load

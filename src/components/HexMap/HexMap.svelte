@@ -10,10 +10,16 @@
     allocations = {},
     focuses = {},
     certainties = {},
+    /* A custom list of labels to show */
     labelsToShow = {},
+    /** Show state labels */
     showStateLabels = false,
+    /** Show all electorate labels */
     showElectorateLabels = false,
+    /** When an electorate is focused, show the hex label */
     showFocusedElectorateLabels = false,
+    /** Should the map transition between layouts - no for the web component*/
+    isStatic = false,
     onClick = () => {}
   } = $props();
   let svgEl = $state<SVGElement>();
@@ -126,6 +132,7 @@
     {#each config.groups as group}
       <HexMapGroup
         {...group}
+        {isStatic}
         {layout}
         offset={layout.positions[group.name]}
         {isFilled}

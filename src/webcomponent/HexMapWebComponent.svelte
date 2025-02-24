@@ -29,5 +29,6 @@
     {showStateLabels}
     {showElectorateLabels}
     {onClick}
+    isStatic={true}
   />
 </StyleRoot>
