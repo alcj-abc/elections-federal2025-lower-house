@@ -11,9 +11,7 @@
   let modal = $state<{
     type: string;
     props?: {};
-  }>({
-    type: 'spreadsheetImport'
-  });
+  }>();
 
   function onVizClick({ code, clientX, clientY }) {
     if (!code) {

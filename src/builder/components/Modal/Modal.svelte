@@ -71,7 +71,7 @@
     animation: fadein 0.2s;
     &::backdrop {
       animation: fadein 0.2s;
-      background: rgba(0, 0, 0, 0.05);
+      background: rgba(0, 0, 0, 0.8);
     }
   }
 

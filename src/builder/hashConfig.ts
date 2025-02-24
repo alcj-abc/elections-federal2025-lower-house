@@ -51,7 +51,7 @@ const binaryElectorateCodec = {
     return bin;
   },
   decode: async function (encodedString) {
-    const values = binaryCodecRle.decode(encodedString);
+    const values = await binaryCodecRle.decode(encodedString);
     return putValues(values);
   }
 };

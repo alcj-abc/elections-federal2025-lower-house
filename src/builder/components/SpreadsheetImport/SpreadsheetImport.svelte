@@ -50,6 +50,17 @@
     return matched.code;
   }
 
+  /**
+   * Tidy up the CSV, if you copy rows from a spreadsheet you get a bunch of
+   * blank ones on the end
+   */
+  $effect(() => {
+    const newCsv = csv.trim();
+    if (csv !== newCsv) {
+      csv = newCsv;
+    }
+  });
+
   let rows = $derived.by(() => {
     const cells = csv
       .split('\n')
@@ -212,7 +223,7 @@
     color: var(--c-grey);
   }
   textarea {
-    width: min(450px, 90vw);
+    width: max(100%, min(450px, 90vw));
     height: 6rem;
   }
   tbody tr.badrow {
