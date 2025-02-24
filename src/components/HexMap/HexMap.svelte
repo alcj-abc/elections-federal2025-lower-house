@@ -58,16 +58,10 @@
   let hexes = $derived.by(() =>
     Array.from(svgEl?.querySelectorAll('polygon.hex') || []).filter(hex => hex instanceof SVGPolygonElement)
   );
-  let previousAllocations = $state();
-  let previousFocuses = $state();
-  let previousCertainties = $state();
   $effect(() => {
     const _allocations = allocations;
     const _focuses = focuses;
     const _certainties = certainties;
-    const _previousAllocations = untrack(() => previousAllocations || {});
-    const _previousFocuses = untrack(() => previousFocuses || {});
-    const _previousCertainties = untrack(() => previousCertainties || {});
 
     hexes.forEach(hex => {
       const electorateCode = hex.dataset.id;
@@ -77,21 +71,12 @@
 
       // set allocation
       const newAllocation = _allocations[electorateCode] || null;
-      if (newAllocation !== _previousAllocations[electorateCode]) {
-        hex.dataset.allocation = newAllocation;
-      }
+      hex.dataset.allocation = newAllocation;
       const newFocus = hasAnyFocuses ? _focuses[electorateCode] || false : true;
-      if (newFocus !== _previousFocuses[electorateCode]) {
-        hex.dataset.focused = newFocus;
-      }
+      hex.dataset.focused = newFocus;
       const newCertainty = _certainties[electorateCode] || null;
-      if (newCertainty !== _previousCertainties[electorateCode]) {
-        hex.dataset.certain = newCertainty;
-      }
+      hex.dataset.certain = newCertainty;
     });
-    previousAllocations = _allocations;
-    previousFocuses = _focuses;
-    previousCertainties = _certainties;
   });
 </script>
 

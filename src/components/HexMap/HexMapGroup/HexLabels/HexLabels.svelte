@@ -1,11 +1,11 @@
 <script lang="ts">
-  let { hexes, allocations, labelsToShow = {}, showAll = false, showElectorateLabels = false } = $props();
+  let { hexes, allocations, labelsToShow = {}, showElectorateLabels = false } = $props();
 
   let labels = $derived.by(() => {
     if (showElectorateLabels) {
       return hexes;
     }
-    return hexes.filter(({ code }) => labelsToShow[code]);
+    return hexes.filter(({ id }) => labelsToShow[id]);
   });
 </script>
 
