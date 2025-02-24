@@ -8,7 +8,7 @@ The country hex map is exported as a web component in [dist-wc/elections-federal
 
 1. Install with `npm i github:abcnews/elections-federal2025-lower-house`
 2. Then load the module either by:
-   ** `import CustomComponent from "@abcnews/elections-federal2025-lower-house/dist-wc/elections-federal2025-lower-house.js";`
+   ** `import '@abcnews/elections-federal2025-lower-house/wc';";`
    ** or load the code in as `<script type="module"`
 3. The <abcnews-hexmap /> component is available in the page
 
