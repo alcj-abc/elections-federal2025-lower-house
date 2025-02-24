@@ -105,7 +105,8 @@ export const schema = {
           return '';
         });
         const electorateMap = str.split('').reduce((obj, val, index) => {
-          const key = electorates[index].id;
+          const key = electorates[index]?.id;
+          if (!key) return;
           obj[key] = allocationMap[String(val)] || null;
           return obj;
         }, {});

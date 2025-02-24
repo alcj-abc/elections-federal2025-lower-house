@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { allocationMap, hashConfig } from '../../hashConfig';
+  import { allocationMap, electorates, hashConfig } from '../../hashConfig';
   import Circle from '../Circle/Circle.svelte';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
+  import HexagonRedistribute from './HexagonRedistribute/HexagonRedistribute.svelte';
   let { position = [0, 0], electorate = {}, onClose = () => {} } = $props();
   let allocation = $derived.by(() => $hashConfig.allocations[electorate.id]);
 </script>
@@ -12,6 +13,8 @@
     <small style="color: var(--c-grey)">{electorate.id}</small>
   </h1>
   <hr />
+  <!-- <HexagonRedistribute {electorate} />
+  <hr /> -->
 
   <label class="item">
     <div class="section">

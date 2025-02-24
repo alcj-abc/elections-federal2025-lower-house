@@ -76,6 +76,7 @@
   }
   .group--hidden {
     opacity: 0;
+    pointer-events: none;
   }
   .group-hex-strokes,
   .group-outline {

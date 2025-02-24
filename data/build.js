@@ -61,11 +61,17 @@ let svgWidth = Math.ceil(radius * Math.sqrt(3) * (gridDimensions.width + 0.5));
 let svgHeight = Math.ceil(radius * 1.5 * (gridDimensions.height + 1 / 3));
 
 const idCheckMap = {};
+const indexCheckMap = {};
 const groups = config.map(({ name, hexes }) => {
   const svgHexCoords = hexes
-    .map(({ code, coord, id, ...meta }) => {
+    .map(({ index, coord, id, ...meta }) => {
       if (idCheckMap[id]) {
+        console.error(`${id} is a duplicate ID`);
         throw new Error('ID check map contains duplicates, must be unique');
+      }
+      if (indexCheckMap[index]) {
+        console.error(`${code} has a duplicate index ${index}`);
+        throw new Error('Index check map contains duplicates, must be unique');
       }
       idCheckMap[id] = true;
       const [x, y] = coord;
@@ -78,7 +84,7 @@ const groups = config.map(({ name, hexes }) => {
         return;
       }
       const ring = hex.corners.map(({ x, y }) => [round(x), round(y)]);
-      return { ring, className: 'hex', code, id, hexCoord: [hex.x, hex.y].map(round) };
+      return { ring, className: 'hex', id, hexCoord: [hex.x, hex.y].map(round) };
     })
     .filter(Boolean);
 
