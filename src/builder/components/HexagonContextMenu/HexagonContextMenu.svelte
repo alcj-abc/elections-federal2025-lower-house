@@ -1,5 +1,6 @@
 <script lang="ts">
   import { allocationMap, hashConfig } from '../../hashConfig';
+  import Circle from '../Circle/Circle.svelte';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
   let { position = [0, 0], electorate = {}, onClose = () => {} } = $props();
   let allocation = $derived.by(() => $hashConfig.allocations[electorate.id]);
@@ -72,11 +73,7 @@
               onClose();
             }}
           >
-            <div
-              class="circle"
-              data-allocation={allocationOption}
-              style:background={`var(--a-${allocationOption})`}
-            ></div>
+            <Circle allocation={allocationOption} />
             {allocationOption}
           </button>
         </li>
@@ -107,16 +104,6 @@
   }
   .section {
     padding: 0.75rem;
-  }
-  .circle {
-    display: inline-block;
-    margin-right: 0.5em;
-    border-radius: 50%;
-    width: 0.75em;
-    height: 0.75em;
-  }
-  .circle[data-allocation='None'] {
-    border: 1px solid var(--c-grey);
   }
 
   .item,

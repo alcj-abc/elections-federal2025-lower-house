@@ -7,11 +7,13 @@
   import layouts from '../../data/appdata-layouts.json';
   import Labels from './components/Labels/Labels.svelte';
   import MapRoot from '../components/MapRoot/MapRoot.svelte';
+  import SpreadsheetImport from './components/SpreadsheetImport/SpreadsheetImport.svelte';
   let modal = $state<{
-    electorate: any;
-    allocation: string;
-    position: [number, number];
-  }>();
+    type: string;
+    props?: {};
+  }>({
+    type: 'spreadsheetImport'
+  });
 
   function onVizClick({ code, clientX, clientY }) {
     if (!code) {
@@ -20,9 +22,12 @@
     const electorate = electorates.find(electorate => electorate.id === code);
     const allocation = $hashConfig.allocations[code];
     modal = {
-      electorate,
-      allocation,
-      position: [clientX, clientY]
+      type: 'contextMenu',
+      props: {
+        electorate,
+        allocation,
+        position: [clientX, clientY]
+      }
     };
   }
 </script>
@@ -40,9 +45,18 @@
         />
       </div>
 
-      {#if modal}
+      {#if modal?.type === 'contextMenu'}
         <HexagonContextMenu
-          {...modal}
+          {...modal.props}
+          onClose={() => {
+            modal = undefined;
+          }}
+        />
+      {/if}
+
+      {#if modal?.type === 'spreadsheetImport'}
+        <SpreadsheetImport
+          {electorates}
           onClose={() => {
             modal = undefined;
           }}
@@ -168,6 +182,15 @@
         </fieldset>
         <Focuses />
         <Labels />
+        <fieldset>
+          <legend>Tools</legend>
+          <button
+            onclick={e => {
+              e.preventDefault();
+              modal = { type: 'spreadsheetImport' };
+            }}>Spreadsheet import</button
+          >
+        </fieldset>
       </form>
     </div>
   {/if}

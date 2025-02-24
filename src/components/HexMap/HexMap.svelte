@@ -68,6 +68,7 @@
       if (!electorateCode) {
         return;
       }
+
       // set allocation
       const newAllocation = _allocations[electorateCode] || null;
       if (newAllocation !== _previousAllocations[electorateCode]) {

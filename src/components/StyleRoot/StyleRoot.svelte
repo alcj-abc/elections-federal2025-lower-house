@@ -11,7 +11,7 @@
     }
     const styles = window.getComputedStyle(rootEl);
     $partyColours = {};
-    const partyCodes = Object.keys(parties);
+    const partyCodes = Object.keys(parties.hashCodes);
     partyCodes.forEach(partyCode => {
       $partyColours[partyCode] = styles.getPropertyValue(`--a-${partyCode}`);
     });

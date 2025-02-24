@@ -4,8 +4,10 @@ import data from '../../data/appdata-built.json';
 import historical19 from '../../data/appdata-historical-2019.json';
 import historical22 from '../../data/appdata-historical-2022.json';
 import mapConfig from '../../data/appdata-mapconfig.json';
+import parties from '../../data/parties.json';
 
 import { invertMap } from '../lib/utils';
+
 /** Array containing all the individual electorate hexes */
 export const electorates = data.groups
   .flatMap(group => group.hexes.map(hex => ({ ...hex, group: group.name })))
@@ -22,23 +24,7 @@ export { historical19, historical22, groups, mapConfig };
 const rleDelineator = 'q';
 const nullAllocationDelineator = 'x';
 const rleCodec = getRleCodec({ delineator: rleDelineator });
-export const allocationMap = {
-  a: 'None',
-  // z: 'Any',
-  b: 'ALP',
-  // c: 'NXT',
-  d: 'CLP',
-  e: 'GRN',
-  f: 'IND',
-  g: 'KAP',
-  h: 'LIB',
-  i: 'LNP',
-  j: 'NAT',
-  k: 'ONP',
-  l: 'OTH',
-  m: 'PUP',
-  t: 'Teal'
-};
+export const allocationMap = invertMap(parties.hashCodes);
 // @ts-ignore
 if (allocationMap[rleDelineator] || nullAllocationDelineator === rleDelineator) {
   throw new Error('Can not use delineator in allocation map');
@@ -99,9 +85,8 @@ export const schema = {
     type: 'custom',
     codec: {
       encode: async (electorateMap: { [key: string]: string }) => {
-        const allocationMapInverted = await invertMap(allocationMap);
         const replacedElectorates = Object.entries(electorateMap).reduce((obj, [electorateCode, allocation]) => {
-          obj[electorateCode] = allocationMapInverted[allocation] || 'x';
+          obj[electorateCode] = parties.hashCodes[allocation] || 'x';
           return obj;
         }, {});
         const string = getSortedValues(replacedElectorates)
@@ -183,3 +168,5 @@ export const hashConfig = makeSvelteStore<{
   showElectorateLabels: boolean;
   showFocusedElectorateLabels: boolean;
 }>(schema);
+
+hashConfig.subscribe(console.log);
