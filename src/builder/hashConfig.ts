@@ -63,6 +63,10 @@ const defaultNullElectorates = Object.freeze(
   }, {})
 );
 export const schema = {
+  version: {
+    type: 'number',
+    key: 'ver'
+  },
   vizType: {
     type: 'enum',
     key: 'v',
@@ -158,6 +162,7 @@ export const schema = {
 };
 
 export const hashConfig = makeSvelteStore<{
+  version: number;
   layout: string;
   geoArea: string;
   allocations: Object;
@@ -169,4 +174,10 @@ export const hashConfig = makeSvelteStore<{
   showFocusedElectorateLabels: boolean;
 }>(schema);
 
-hashConfig.subscribe(console.log);
+// Version our hash. This way we can introduce/deprecate/upgrade features as needed.
+hashConfig.subscribe(val => {
+  const CURRENT_VERSION = 1;
+  if (val && val.version !== CURRENT_VERSION) {
+    hashConfig.set({ ...val, version: CURRENT_VERSION });
+  }
+});
