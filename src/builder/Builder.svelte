@@ -8,6 +8,7 @@
   import Labels from './components/Labels/Labels.svelte';
   import MapRoot from '../components/MapRoot/MapRoot.svelte';
   import SpreadsheetImport from './components/SpreadsheetImport/SpreadsheetImport.svelte';
+  import UpdateChecker from './components/UpdateChecker/UpdateChecker.svelte';
   let modal = $state<{
     type: string;
     props?: {};
@@ -42,6 +43,8 @@
           isInteractive={true}
         />
       </div>
+
+      <UpdateChecker />
 
       {#if modal?.type === 'contextMenu'}
         <HexagonContextMenu
