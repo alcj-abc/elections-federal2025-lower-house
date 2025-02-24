@@ -246,13 +246,6 @@
         "id": "NEWC"
       },
       {
-        "name": "North Sydney",
-        "coord": [9, 3],
-        "shortName": "Nort.",
-        "index": 91,
-        "id": "NSYD"
-      },
-      {
         "name": "Page",
         "coord": [1, 1],
         "shortName": "Page",
@@ -383,210 +376,210 @@
     "hexes": [
       {
         "name": "Blair",
-        "coord": [2, 5],
+        "coord": [3, 6],
         "shortName": "Blair",
         "index": 45,
         "id": "BLAI"
       },
       {
         "name": "Bonner",
-        "coord": [6, 2],
+        "coord": [6, 3],
         "shortName": "Bonn.",
         "index": 124,
         "id": "BONN"
       },
       {
         "name": "Bowman",
-        "coord": [7, 4],
+        "coord": [7, 5],
         "shortName": "Bowm.",
         "index": 125,
         "id": "BOWM"
       },
       {
         "name": "Brisbane",
-        "coord": [5, 3],
+        "coord": [6, 4],
         "shortName": "Brisb.",
         "index": 131,
         "id": "BRIS"
       },
       {
         "name": "Capricornia",
-        "coord": [3, 2],
+        "coord": [3, 3],
         "shortName": "Capri.",
         "index": 112,
         "id": "CAPR"
       },
       {
         "name": "Dawson",
-        "coord": [3, 1],
+        "coord": [4, 2],
         "shortName": "Daws.",
         "index": 113,
         "id": "DAWS"
       },
       {
         "name": "Dickson",
-        "coord": [3, 3],
+        "coord": [4, 4],
         "shortName": "Dicks.",
         "index": 132,
         "id": "DICK"
       },
       {
         "name": "Fadden",
-        "coord": [6, 4],
+        "coord": [6, 5],
         "shortName": "Fadd.",
         "index": 114,
         "id": "FADD"
       },
       {
         "name": "Fairfax",
-        "coord": [5, 1],
+        "coord": [6, 2],
         "shortName": "Fairf.",
         "index": 115,
         "id": "FAIR"
       },
       {
         "name": "Fisher",
-        "coord": [5, 2],
+        "coord": [5, 3],
         "shortName": "Fishe",
         "index": 116,
         "id": "FISH"
       },
       {
         "name": "Flynn",
-        "coord": [2, 3],
+        "coord": [3, 4],
         "shortName": "Flynn",
         "index": 126,
         "id": "FLYN"
       },
       {
         "name": "Forde",
-        "coord": [5, 5],
+        "coord": [6, 6],
         "shortName": "Forde",
         "index": 127,
         "id": "FORD"
       },
       {
         "name": "Griffith",
-        "coord": [5, 4],
+        "coord": [5, 5],
         "shortName": "Griff.",
         "index": 54,
         "id": "GRIF"
       },
       {
         "name": "Groom",
-        "coord": [1, 5],
+        "coord": [2, 6],
         "shortName": "Groom",
         "index": 117,
         "id": "GROO"
       },
       {
         "name": "Herbert",
-        "coord": [4, 1],
+        "coord": [5, 2],
         "shortName": "Herb.",
         "index": 128,
         "id": "HERB"
       },
       {
         "name": "Hinkler",
-        "coord": [1, 3],
+        "coord": [5, 0],
         "shortName": "Hinkl.",
         "index": 118,
         "id": "HINK"
       },
       {
         "name": "Kennedy",
-        "coord": [1, 4],
+        "coord": [1, 5],
         "shortName": "Kenn.",
         "index": 148,
         "id": "KENN"
       },
       {
         "name": "Leichhardt",
-        "coord": [5, 0],
+        "coord": [5, 1],
         "shortName": "Leich.",
         "index": 133,
         "id": "LEIC"
       },
       {
         "name": "Lilley",
-        "coord": [6, 3],
+        "coord": [7, 4],
         "shortName": "Lille",
         "index": 56,
         "id": "LILL"
       },
       {
         "name": "Longman",
-        "coord": [4, 2],
+        "coord": [4, 3],
         "shortName": "Long.",
         "index": 134,
         "id": "LONG"
       },
       {
         "name": "Maranoa",
-        "coord": [0, 5],
+        "coord": [1, 6],
         "shortName": "Mara.",
         "index": 119,
         "id": "MARA"
       },
       {
         "name": "McPherson",
-        "coord": [7, 5],
+        "coord": [8, 6],
         "shortName": "McPh.",
         "index": 120,
         "id": "MCPH"
       },
       {
         "name": "Moncrieff",
-        "coord": [6, 5],
+        "coord": [7, 6],
         "shortName": "Monc.",
         "index": 121,
         "id": "MONC"
       },
       {
         "name": "Moreton",
-        "coord": [4, 4],
+        "coord": [4, 5],
         "shortName": "More.",
         "index": 61,
         "id": "MORE"
       },
       {
         "name": "Oxley",
-        "coord": [3, 5],
+        "coord": [4, 6],
         "shortName": "Oxley",
         "index": 41,
         "id": "OXLE"
       },
       {
         "name": "Petrie",
-        "coord": [4, 3],
+        "coord": [5, 4],
         "shortName": "Petrie",
         "index": 129,
         "id": "PETR"
       },
       {
         "name": "Rankin",
-        "coord": [3, 4],
+        "coord": [3, 5],
         "shortName": "Ranki",
         "index": 42,
         "id": "RANK"
       },
       {
         "name": "Ryan",
-        "coord": [4, 5],
+        "coord": [5, 6],
         "shortName": "Ryan",
         "index": 130,
         "id": "RYAN"
       },
       {
         "name": "Wide Bay",
-        "coord": [4, 0],
+        "coord": [4, 1],
         "shortName": "Wide.",
         "index": 122,
         "id": "WBAY"
       },
       {
         "name": "Wright",
-        "coord": [2, 4],
+        "coord": [2, 5],
         "shortName": "Wrig.",
         "index": 123,
         "id": "WRIG"
@@ -845,11 +838,11 @@
         "id": "HAWK"
       },
       {
-        "name": "Higgins",
+        "name": "Macnamara",
         "coord": [4, 4],
-        "shortName": "Higgi.",
-        "index": 104,
-        "id": "HIGG"
+        "shortName": "Macn.",
+        "index": 37,
+        "id": "MACN"
       },
       {
         "name": "Holt",
@@ -906,13 +899,6 @@
         "shortName": "Lalor",
         "index": 12,
         "id": "LALO"
-      },
-      {
-        "name": "Macnamara",
-        "coord": [3, 5],
-        "shortName": "Macn.",
-        "index": 37,
-        "id": "MACN"
       },
       {
         "name": "Mallee",
@@ -1058,6 +1044,13 @@
         "shortName": "Brand",
         "index": 23,
         "id": "BRAN"
+      },
+      {
+        "name": "Bullwinkel",
+        "coord": [0, 6],
+        "shortName": "Bull",
+        "index": 37,
+        "id": "TMP1"
       },
       {
         "name": "Tangney",
