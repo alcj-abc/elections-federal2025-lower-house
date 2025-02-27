@@ -164,6 +164,7 @@ export const schema = {
 
 export const hashConfig = makeSvelteStore<{
   version: number;
+  vizType: string;
   layout: string;
   geoArea: string;
   allocations: Object;

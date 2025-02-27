@@ -109,7 +109,8 @@
               id: electorateIdToNumber(geoProps.id),
               properties: {
                 ...geoProps,
-                name: electorates.find(electorate => electorate.id === geoProps.id.toUpperCase()).name
+                // FIXME: why does this throw?
+                name: electorates.find(electorate => electorate.id === geoProps.id.toUpperCase())?.name || ''
               }
             }))
           }

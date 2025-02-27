@@ -9,6 +9,8 @@
   import MapRoot from '../components/MapRoot/MapRoot.svelte';
   import SpreadsheetImport from './components/SpreadsheetImport/SpreadsheetImport.svelte';
   import UpdateChecker from './components/UpdateChecker/UpdateChecker.svelte';
+  import { Marker } from 'maplibre-gl';
+  import MarkerAdmin from './components/MarkerAdmin/MarkerAdmin.svelte';
   let modal = $state<{
     type: string;
     props?: {};
@@ -184,6 +186,18 @@
         <Focuses />
         <Labels />
         <fieldset>
+          <legend>Markers</legend>
+          <MarkerAdmin
+            defaultName={() =>
+              [
+                $hashConfig.vizType,
+                $hashConfig.vizType === 'geo'
+                  ? $hashConfig.geoArea
+                  : $hashConfig.layout.replace(/_/g, ' ').toLowerCase()
+              ].join(' ')}
+          />
+        </fieldset>
+        <fieldset>
           <legend>Tools</legend>
           <button
             onclick={e => {
@@ -216,6 +230,9 @@
   }
   .container-controls {
     width: 18rem;
+    @media (min-width: 1920px) {
+      width: 24rem;
+    }
     padding: 2rem 1rem;
     background: rgba(0, 0, 0, 0.04);
     border-left: 1px solid rgba(0, 0, 0, 0.1);
