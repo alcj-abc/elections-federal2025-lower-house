@@ -2,7 +2,14 @@
   import { onMount, untrack } from 'svelte';
   import { slide } from 'svelte/transition';
 
-  let { defaultName = () => '' } = $props();
+  let {
+    defaultName = () => '',
+    prefixes = {
+      'Scrolly mark': '#mark',
+      'Scrolly opener': '#scrollytellerNAMEscrolly1',
+      'Standalone graphic': '#graphic'
+    }
+  } = $props();
 
   type Marker = {
     /** human readable name */
@@ -15,7 +22,7 @@
 
   let hasLoaded = $state(false);
   let markers = $state<Marker[]>([]);
-  let mode = $state('scrolly-mark');
+  let mode = $state(Object.keys(prefixes)?.[0]);
 
   const [projectName = 'dev', version = '0.0.0'] =
     window.location.pathname.match(/\/news-projects\/([^/]+)\/(\d+\.\d+\.\d+)/)?.slice(1) || [];
@@ -104,19 +111,14 @@
 
 <div class="toolbar">
   <select bind:value={mode}>
-    <option value="scrolly-mark">Scrollyteller mark</option>
-    <option value="scrolly-opener">Scrollyteller opener</option>
-    <option value="standalone">Standalone graphic</option>
+    {#each Object.keys(prefixes) as prefix}
+      <option>{prefix}</option>
+    {/each}
   </select>
   <button
     title="Copy marker"
     onclick={e => {
       e.preventDefault();
-      const prefixes = {
-        'scrolly-mark': '#mark',
-        'scrolly-opener': '#scrollytellerNAMEelectionmap1',
-        standalone: '#graphic'
-      };
       const hash = window.location.hash.slice(1);
       navigator.clipboard.writeText(prefixes[mode] + hash);
     }}
@@ -129,7 +131,7 @@
       class="bi bi-copy"
       viewBox="0 0 16 16"
     >
-      <title>Copy</title>
+      <title>Copy to clipboard</title>
       <path
         fill-rule="evenodd"
         d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"
@@ -156,12 +158,13 @@
       width="16"
       height="16"
       fill="currentColor"
-      class="bi bi-save"
+      class="bi bi-floppy"
       viewBox="0 0 16 16"
     >
       <title>Save</title>
+      <path d="M11 2H9v3h2z" />
       <path
-        d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1z"
+        d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"
       />
     </svg>
   </button>
@@ -202,7 +205,11 @@
           {/if}
         </td>
         <td class="buttons">
-          <button onclick={e => onClickDelete(e, i)} title={marker.deleted ? 'Undo delete' : 'Delete marker'}>
+          <button
+            onclick={e => onClickDelete(e, i)}
+            title={marker.deleted ? 'Undo delete' : 'Delete marker'}
+            style:height="32px"
+          >
             {#if marker.deleted}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
