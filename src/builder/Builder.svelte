@@ -229,9 +229,9 @@
     overflow: hidden;
   }
   .container-controls {
-    width: 18rem;
+    width: 22rem;
     @media (min-width: 1920px) {
-      width: 24rem;
+      width: 25rem;
     }
     padding: 2rem 1rem;
     background: rgba(0, 0, 0, 0.04);

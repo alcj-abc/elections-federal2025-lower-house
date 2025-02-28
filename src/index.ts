@@ -31,7 +31,6 @@ whenOdysseyLoaded.then(() => {
 
   const MARKER_NAME = 'electionmap';
   const mounts = selectMounts(MARKER_NAME);
-  console.log({ mounts });
   mounts.forEach(appMountEl => {
     const id = appMountEl.id.match(/\d+$/)?.[0];
     if (mounts.length > 1 && !id) {
