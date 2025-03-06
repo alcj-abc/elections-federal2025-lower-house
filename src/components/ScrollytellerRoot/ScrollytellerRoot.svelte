@@ -7,12 +7,13 @@
   import { decodeSchema } from 'hash-codec';
   import { schema } from '../../builder/hashConfig';
 
-  let { panels = [] } = $props();
+  let { panels = [], onMarker = () => {} } = $props();
   let options = $state();
   let resolvedPanels = $state([]);
 
   const setConfig = d => {
     options = d;
+    onMarker(resolvedPanels.find(panel => panel.data === d));
   };
 
   $effect(() => {
@@ -27,7 +28,8 @@
         return {
           ...panel,
           panelClass: '',
-          data: decodedData
+          data: decodedData,
+          originalData: panel.data
         };
       })
     ).then(decodedPanels => {

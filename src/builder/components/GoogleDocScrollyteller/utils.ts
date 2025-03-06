@@ -24,7 +24,11 @@ export async function loadData({
 
   const pubURL = url.replace(/\/[^/]+?$/, '/pub');
   const html = await fetch(pubURL).then(response => response.text());
-  const body = new DOMParser().parseFromString(html, 'text/html').querySelector('#contents > div');
+  const dom = new DOMParser().parseFromString(html, 'text/html');
+  const body = dom.querySelector('#contents > div');
+
+  const title = dom.querySelector('title')?.textContent;
+  console.log({ title, html: body.innerHTML });
 
   if (!body) {
     throw new Error('Body not found');
@@ -111,6 +115,7 @@ export async function loadData({
   }
 
   return {
+    title,
     coreText,
     coreHTML,
     scrollytellerDefinition
