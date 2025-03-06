@@ -7,7 +7,7 @@
   import ScrollytellerRoot from '../../../components/ScrollytellerRoot/ScrollytellerRoot.svelte';
   import { stringify } from '@abcnews/alternating-case-to-object';
 
-  let { name = 'myscrollyteller', markerName = 'mark', preprocessCoreEl, preprocessScrollytellerDefinition } = $props();
+  let { name = 'myscrollyteller', markerName = 'mark' } = $props();
 
   const localStorageKey = `ABC_NEWS_BUILDER_GDOC_PREVIEW`;
 
@@ -43,9 +43,7 @@
     loadData({
       name,
       url: doc,
-      markerName,
-      preprocessCoreEl,
-      preprocessScrollytellerDefinition
+      markerName
     })
       .then(data => {
         title = data.title;

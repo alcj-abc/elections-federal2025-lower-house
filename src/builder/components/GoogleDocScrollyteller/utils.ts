@@ -10,12 +10,22 @@ function mountTextToMountEl(mountText: string) {
   return mountEl;
 }
 
+/**
+ *
+ * @param options
+ * @param {string} options.name - Name in the scrollyteller opener tag. E.g. `#scrollytellerNAMEelectionmap1` would be "electionmap"
+ * @param {string} options.className - Deprecated class to apply to every panel. This can be done at the top level scrollyteller nowadays.
+ * @param {string} options.markerName - What does a #mark look like?
+ * @param {function} [preprocessCoreEl] -
+ * @param {function} [postprocessScrollytellerDefinition] -
+ * @returns
+ */
 export async function loadData({
   name,
   className = 'u-full',
   markerName = 'mark',
   url,
-  preprocessCoreEl,
+  preprocessCoreEl = el => el,
   postprocessScrollytellerDefinition = a => a
 }) {
   if (!url) {
@@ -39,7 +49,7 @@ export async function loadData({
     el.removeAttribute('id');
   });
 
-  const coreEls: Element[] = Array.from(body.children).map(preprocessCoreEl ? preprocessCoreEl : el => el);
+  const coreEls: Element[] = Array.from(body.children).map(preprocessCoreEl);
 
   const coreText = coreEls.reduce<string>((memo, el) => {
     const text = String(el.textContent).trim();
