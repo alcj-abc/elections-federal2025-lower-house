@@ -4,8 +4,6 @@ import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import { loadScrollyteller } from '@abcnews/svelte-scrollyteller';
 import { mount } from 'svelte';
 import ScrollytellerRoot from './components/ScrollytellerRoot/ScrollytellerRoot.svelte';
-import { schema } from './builder/hashConfig';
-import { decodeSchema } from 'hash-codec';
 
 async function mountThing(id, AppFetcher) {
   const [appMountEl] = selectMounts(id);
@@ -28,6 +26,10 @@ whenOdysseyLoaded.then(() => {
     'electionsfederal2025builder',
     () => import(/* webpackChunkName: "dynamic-builder" */ './builder/Builder.svelte')
   );
+  mountThing(
+    'electionsfederal2025google-doc-preview',
+    () => import(/* webpackChunkName: "dynamic-builder" */ './builder/GoogleDocEntrypoint.svelte')
+  );
 
   const MARKER_NAME = 'electionmap';
   const mounts = selectMounts(MARKER_NAME);
@@ -40,21 +42,10 @@ whenOdysseyLoaded.then(() => {
 
     try {
       const scrollyConfig = loadScrollyteller(MARKER_NAME + (id || ''), 'u-full', 'mark');
-      const panels = Promise.all(
-        scrollyConfig.panels.map(async panel => {
-          const decodedData = await decodeSchema({ schema, data: panel.data });
-          return {
-            ...panel,
-            panelClass: '',
-            data: decodedData
-          };
-        })
-      );
-      panels.then(panels => {
-        mount(ScrollytellerRoot, {
-          target: scrollyConfig.mountNode,
-          props: { panels }
-        });
+
+      mount(ScrollytellerRoot, {
+        target: scrollyConfig.mountNode,
+        props: { panels: scrollyConfig.panels }
       });
     } catch (e) {
       const errorMessage = 'Unable to load interactive.';

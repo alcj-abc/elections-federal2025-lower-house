@@ -4,25 +4,41 @@
   import MapRoot from '../MapRoot/MapRoot.svelte';
   import config from '../../../data/appdata-built.json';
   import layouts from '../../../data/appdata-layouts.json';
+  import { decodeSchema } from 'hash-codec';
+  import { schema } from '../../builder/hashConfig';
 
   let { panels = [] } = $props();
   let options = $state();
+  let resolvedPanels = $state([]);
 
   const setConfig = d => {
     options = d;
   };
 
-  onMount(() => {
-    options = panels[0]?.data;
+  $effect(() => {
+    console.log('options', options);
   });
 
   $effect(() => {
-    console.log('options', options);
+    const _panels = panels;
+    Promise.all(
+      _panels.map(async panel => {
+        const decodedData = await decodeSchema({ schema, data: panel.data });
+        return {
+          ...panel,
+          panelClass: '',
+          data: decodedData
+        };
+      })
+    ).then(decodedPanels => {
+      resolvedPanels = decodedPanels;
+      options = resolvedPanels[0]?.data;
+    });
   });
 </script>
 
 {#if options}
-  <Scrollyteller {panels} onMarker={setConfig} layout={{ align: 'left', resizeInteractive: true }}>
+  <Scrollyteller panels={resolvedPanels} onMarker={setConfig} layout={{ align: 'left', resizeInteractive: true }}>
     <div class="container">
       <MapRoot {...options} layout={layouts[options.layout]} {config} />
     </div>
