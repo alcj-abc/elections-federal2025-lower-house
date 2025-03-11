@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { electorates, hashConfig, historical19, historical22, schema, mapConfig } from './hashConfig';
+  import { electorates, hashConfig, historical19, historical22, schema, mapConfig } from '../lib/hashConfig.ts';
   import HexagonContextMenu from './components/HexagonContextMenu/HexagonContextMenu.svelte';
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
   import Focuses from './components/Focuses/Focuses.svelte';

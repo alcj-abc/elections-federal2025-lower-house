@@ -2,7 +2,7 @@
   import Modal from '../Modal/Modal.svelte';
   import parties from '../../../../data/parties.json';
   import Circle from '../Circle/Circle.svelte';
-  import { electorates, hashConfig } from '../../hashConfig';
+  import { electorates, hashConfig } from '../../../lib/hashConfig.ts';
   let { onClose = () => {} } = $props();
 
   let status = $state('editing');

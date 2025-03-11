@@ -7,7 +7,7 @@
     schema,
     groups,
     electoratesByCode
-  } from '../../hashConfig';
+  } from '../../../lib/hashConfig.ts';
   import situations from '../../../../data/appdata-situation.json';
   import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
 

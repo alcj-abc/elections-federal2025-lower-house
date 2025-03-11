@@ -5,7 +5,7 @@
   import config from '../../../data/appdata-built.json';
   import layouts from '../../../data/appdata-layouts.json';
   import { decodeSchema } from 'hash-codec';
-  import { schema } from '../../builder/hashConfig';
+  import { schema } from '../../lib/hashConfig.ts';
 
   let { panels = [], onMarker = () => {} } = $props();
   let options = $state();
