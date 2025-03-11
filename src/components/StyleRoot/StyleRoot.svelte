@@ -54,7 +54,7 @@
     --a-null: var(--c-white);
     --a-Any: var(--c-white);
     --a-ALP: var(--c-ptyred);
-    --a-NXT: var(--c-pty-xxxxxx);
+    --a-CA: var(--c-ptyblack);
     --a-CLP: var(--c-ptygold);
     --a-GRN: var(--c-ptylightgreen);
     --a-IND: var(--c-ptyblack);

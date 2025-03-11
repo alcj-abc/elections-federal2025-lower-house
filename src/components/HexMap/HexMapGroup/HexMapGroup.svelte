@@ -105,7 +105,7 @@
   }
 
   // Party colours
-  $parties: Any, ALP, NXT, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal;
+  $parties: Any, ALP, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal, CA;
   @each $code in $parties {
     .group-hexes :global(.hex[data-allocation='#{""+$code}']) {
       fill: var(--a-#{$code});
