@@ -220,7 +220,7 @@
               onclick={e => {
                 e.preventDefault();
                 modal = { type: 'spreadsheetImport' };
-              }}>Spreadsheet import</button
+              }}>Spreadsheet import/export</button
             >
             <button
               onclick={e => {

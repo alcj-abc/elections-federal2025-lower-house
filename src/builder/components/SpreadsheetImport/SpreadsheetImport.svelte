@@ -164,7 +164,7 @@
 
 <Modal title="Spreadsheet import" {onClose} {footerChildren}>
   {#if status === 'editing'}
-    <p>Paste spreadsheet rows below to import them.</p>
+    <p>Copy or paste spreadsheet rows below to import them.</p>
     <textarea bind:value={csv} placeholder={['ADEL  Labor true true', 'ASTO Coalition false false'].join('\n')}
     ></textarea>
   {/if}
