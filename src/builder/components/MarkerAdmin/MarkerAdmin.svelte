@@ -222,7 +222,6 @@
   >
     {@render copyIcon()}
   </button>
-  <div class="divider"></div>
   <button
     title="Paste marker from clipboard"
     class:success={successIndicator === 'paste'}
@@ -260,6 +259,7 @@
   >
     {@render pasteIcon()}
   </button>
+  <div class="divider"></div>
   <button
     title="Save marker snapshot"
     onclick={e => {
