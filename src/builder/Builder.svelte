@@ -72,7 +72,6 @@
 
         {#if modal?.type === 'spreadsheetImport'}
           <SpreadsheetImport
-            {electorates}
             onClose={() => {
               modal = undefined;
             }}

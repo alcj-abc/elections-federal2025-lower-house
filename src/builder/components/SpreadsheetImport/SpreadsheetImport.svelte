@@ -2,10 +2,27 @@
   import Modal from '../Modal/Modal.svelte';
   import parties from '../../../../data/parties.json';
   import Circle from '../Circle/Circle.svelte';
-  import { hashConfig } from '../../hashConfig';
-  let { electorates, onClose = () => {} } = $props();
+  import { electorates, hashConfig } from '../../hashConfig';
+  let { onClose = () => {} } = $props();
 
-  let csv = $state('');
+  let status = $state('editing');
+
+  function generateCsv() {
+    const rows = electorates
+      .toSorted()
+      .map(electorate =>
+        [
+          electorate.name,
+          $hashConfig.allocations[electorate.id] || 'None',
+          $hashConfig.certainties[electorate.id],
+          $hashConfig.focuses[electorate.id]
+        ].join('\t')
+      );
+
+    return [['Name', 'Allocation', 'Certainty', 'Focus'].join('\t'), ...rows].join('\n');
+  }
+
+  let csv = $state(generateCsv());
 
   /** Match electorate name to electorate */
   function matchElectorate(electorateName = '') {
@@ -69,6 +86,9 @@
         const [electorate, allocation, certainty = 'unset', focus = 'unset'] = rows.split('\t');
         const matchedElectorate = matchElectorate(electorate);
         const matchedAllocation = matchAllocation(allocation);
+        if (electorate === 'Name') {
+          return null;
+        }
         return {
           electorate,
           allocation,
@@ -81,7 +101,7 @@
           isOk: matchedElectorate && matchedAllocation
         };
       })
-      .filter(row => row.electorate);
+      .filter(row => row?.electorate);
 
     const hasFocuses = cells.some(cell => cell.matchedFocus);
     const hasCertainties = cells.some(cell => cell.matchedCertainty);
@@ -102,13 +122,13 @@
     const focuses = { ...$hashConfig.focuses };
     const certainties = { ...$hashConfig.certainties };
     rows.forEach(({ isOk, matchedElectorate, matchedAllocation, matchedCertainty, matchedFocus }) => {
-      if (!isOk) {
+      if (!isOk || !matchedElectorate) {
         return;
       }
       const electorateId = matchedElectorate.id;
-      allocations[electorateId] = matchedAllocation;
-      certainties[electorateId] = matchedCertainty;
-      focuses[electorateId] = matchedFocus;
+      allocations[electorateId] = (matchedAllocation === 'None' ? null : matchedAllocation) || null;
+      certainties[electorateId] = matchedCertainty || null;
+      focuses[electorateId] = matchedFocus || null;
     });
 
     $hashConfig = {
@@ -123,26 +143,32 @@
 </script>
 
 {#snippet footerChildren()}
-  {#if badRows}<small>{badRows} rows will be skipped</small>{/if}
-  <button onclick={onApply} disabled={rows.length == 0}>Apply changes</button>
+  {#if status === 'editing'}
+    <button
+      onclick={() => {
+        status = 'previewing';
+      }}
+      disabled={rows.length == 0}>Continue to preview</button
+    >
+  {/if}
+  {#if status === 'previewing'}
+    {#if badRows}<small>{badRows} rows will be skipped</small>{/if}
+    <button
+      onclick={() => {
+        status = 'editing';
+      }}>Back</button
+    >
+    <button onclick={onApply} disabled={rows.length == 0}>Apply changes</button>
+  {/if}
 {/snippet}
 
 <Modal title="Spreadsheet import" {onClose} {footerChildren}>
-  <p>Paste spreadsheet rows below to import them. Rows are:</p>
-  <table class="demo">
-    <tbody>
-      <tr
-        ><td><code>Name</code></td><td><code>Allocation</code></td>
-        <td><code>Certainty</code> <small>(optional true/false)</small></td><td
-          ><code>Focus</code> <small>(optional true/false)</small></td
-        ></tr
-      >
-    </tbody>
-  </table>
-  <textarea bind:value={csv} placeholder={['ADEL  Labor true true', 'ASTO Coalition false false'].join('\n')}
-  ></textarea>
-  {#if rows.length}
-    <hr />
+  {#if status === 'editing'}
+    <p>Paste spreadsheet rows below to import them.</p>
+    <textarea bind:value={csv} placeholder={['ADEL  Labor true true', 'ASTO Coalition false false'].join('\n')}
+    ></textarea>
+  {/if}
+  {#if status === 'previewing'}
     <table>
       <thead>
         <tr>
@@ -223,8 +249,9 @@
     color: var(--c-grey);
   }
   textarea {
-    width: max(100%, min(450px, 90vw));
-    height: 6rem;
+    width: 30rem;
+    height: 12rem;
+    tab-size: 10em;
   }
   tbody tr.badrow {
     outline: 1px solid red;
@@ -233,13 +260,5 @@
   td,
   th {
     vertical-align: top;
-  }
-
-  table.demo {
-    margin-bottom: 0.5rem;
-  }
-  table.demo td {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 0.25rem;
   }
 </style>
