@@ -9,7 +9,7 @@
     electoratesByCode
   } from '../../hashConfig';
   import situations from '../../../../data/appdata-situation.json';
-  import MultiselectBox from '../MultiselectBox/MultiselectBox.svelte';
+  import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
 
   const historicalByCode = Object.values(historical19).reduce((obj, electorate) => {
     obj[electorate.id] = electorate;
@@ -91,14 +91,32 @@
     <span>Focuses <small>{Object.values($hashConfig.focuses).filter(Boolean).length} focused</small></span>
   </legend>
 
-  <MultiselectBox
+  <!-- <Typeahead
+    values={electorates.map(electorate => ({
+      value: electorate.id,
+      label: `${electorate.id} - ${electorate.name}`
+    }))}
+    value={Object.entries($hashConfig.focuses)
+      .filter(([code, isFocused]) => isFocused)
+      .map(([code]) => code)}
+    onChange={value => {
+      const newFocuses = { ...$hashConfig.focuses };
+      Object.keys(newFocuses).forEach(code => {
+        newFocuses[code] = value.includes(code);
+      });
+      $hashConfig.focuses = newFocuses;
+    }}
+  /> -->
+
+  <TypeaheadElectorate
     values={electorates.map(electorate => ({
       value: electorate.id,
       label: `${electorate.id} - ${electorate.name}`
     }))}
     value={$hashConfig.focuses}
-    onChange={value => {
-      $hashConfig.focuses = value;
+    onChange={newFocuses => {
+      console.log('new focuses', newFocuses);
+      $hashConfig.focuses = newFocuses;
     }}
   />
 

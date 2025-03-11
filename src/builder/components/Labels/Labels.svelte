@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { hashConfig, electorates } from '../../hashConfig';
-  import MultiselectBox from '../MultiselectBox/MultiselectBox.svelte';
+  import { hashConfig, electorates, defaultNullElectorates } from '../../hashConfig';
+  import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
 </script>
 
 <fieldset>
@@ -11,7 +11,7 @@
       disabled={$hashConfig.labelsToShow === 0}
       onclick={e => {
         e.preventDefault();
-        $hashConfig.labelsToShow = [];
+        $hashConfig.labelsToShow = defaultNullElectorates;
         $hashConfig.showElectorateLabels = false;
         $hashConfig.showFocusedElectorateLabels = false;
       }}
@@ -38,16 +38,15 @@
     <small>{Object.values($hashConfig.labelsToShow).filter(Boolean).length} shown</small>
   </legend>
 
-  <MultiselectBox
-    name="labels-picker"
+  <TypeaheadElectorate
     disabled={$hashConfig.showElectorateLabels || $hashConfig.showFocusedElectorateLabels}
     values={electorates.map(electorate => ({
       value: electorate.id,
       label: `${electorate.id} - ${electorate.name}`
     }))}
     value={$hashConfig.labelsToShow}
-    onChange={value => {
-      $hashConfig.labelsToShow = value;
+    onChange={newValues => {
+      $hashConfig.labelsToShow = newValues;
     }}
   />
 </fieldset>
@@ -66,7 +65,7 @@
       type="checkbox"
       bind:checked={$hashConfig.showElectorateLabels}
       onchange={() => {
-        $hashConfig.labelsToShow = [];
+        $hashConfig.labelsToShow = defaultNullElectorates;
       }}
     />
     Label all electorates
@@ -76,7 +75,7 @@
       type="checkbox"
       bind:checked={$hashConfig.showFocusedElectorateLabels}
       onchange={() => {
-        $hashConfig.labelsToShow = [];
+        $hashConfig.labelsToShow = defaultNullElectorates;
       }}
     />
     Label focused electorates

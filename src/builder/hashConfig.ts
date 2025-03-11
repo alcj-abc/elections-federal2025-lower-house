@@ -56,7 +56,7 @@ const binaryElectorateCodec = {
   }
 };
 
-const defaultNullElectorates = Object.freeze(
+export const defaultNullElectorates = Object.freeze(
   electorates.reduce((obj, current) => {
     obj[current.id] = null;
     return obj;
