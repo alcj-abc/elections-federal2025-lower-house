@@ -49,9 +49,6 @@
       $hashConfig.labelsToShow = newValues;
     }}
   />
-</fieldset>
-<fieldset>
-  <legend>Label options</legend>
   <label>
     {#if $hashConfig.vizType === 'geo'}
       <input type="checkbox" disabled />
