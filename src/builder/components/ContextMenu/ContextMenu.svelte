@@ -4,13 +4,13 @@
   let { position = [0, 0], children, onClose = () => {} } = $props();
   let dialogEl = $state<HTMLDialogElement | undefined>();
   let rect = $state<DOMRect>();
-  $effect(() => {
-    if (dialogEl) {
-      rect = dialogEl.getBoundingClientRect();
-    }
-  });
   onMount(() => {
+    if (!dialogEl) {
+      // the dialog will always exist, but Typescript doesn't know that.
+      return;
+    }
     dialogEl?.showModal();
+    rect = dialogEl.getBoundingClientRect();
     return () => {
       dialogEl?.close();
     };
@@ -31,7 +31,7 @@
     ? (rect.width + position[0] > window.innerWidth ? window.innerWidth - rect.width : position[0]) + 'px'
     : ''}
   style:top={rect
-    ? (rect.height + position[1] > window.innerHeight ? window.innerHeight - rect.height : position[1]) + 'px'
+    ? (rect.height + position[1] > window.innerHeight ? window.innerHeight - rect.height - 10 : position[1]) + 'px'
     : ''}
   onclick={onCloseTypescriptProxy}
   onclose={onCloseTypescriptProxy}
