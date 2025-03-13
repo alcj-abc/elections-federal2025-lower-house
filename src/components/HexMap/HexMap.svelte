@@ -78,6 +78,8 @@
       hex.dataset.certain = newCertainty;
     });
   });
+
+  console.log('eeee hexMap', { layout, allocations, certainties });
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->

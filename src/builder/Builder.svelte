@@ -212,7 +212,7 @@
               prefixes={{
                 'Scrolly mark': '#mark',
                 'Scrolly opener': '#scrollytellerNAMEelectionmap1',
-                'Standalone graphic': '#graphic'
+                'Inline graphic': '#electioninline'
               }}
               defaultName={() =>
                 [
