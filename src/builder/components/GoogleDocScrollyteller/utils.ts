@@ -38,7 +38,6 @@ export async function loadData({
   const body = dom.querySelector('#contents > div');
 
   const title = dom.querySelector('title')?.textContent;
-  console.log({ title, html: body.innerHTML });
 
   if (!body) {
     throw new Error('Body not found');
