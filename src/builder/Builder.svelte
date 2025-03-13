@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { electorates, hashConfig, historical19, historical22, schema, mapConfig } from '../lib/hashConfig.ts';
+  import { electorates, hashConfig, historical19, historical22, schema, mapConfig, parties } from '../lib/hashConfig';
   import HexagonContextMenu from './components/HexagonContextMenu/HexagonContextMenu.svelte';
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
   import Focuses from './components/Focuses/Focuses.svelte';
@@ -51,6 +51,7 @@
       <div class="container">
         <div class="container-viz">
           <MapRoot
+            totals={parties.totals}
             {config}
             {...$hashConfig}
             layout={layouts[$hashConfig.layout]}
@@ -252,6 +253,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
+    padding: 1.69rem;
   }
   .container-controls {
     width: 22rem;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { hashConfig, electorates, defaultNullElectorates } from '../../../lib/hashConfig.ts';
+  import { hashConfig, electorates, defaultNullElectorates } from '../../../lib/hashConfig';
   import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
 </script>
 

@@ -19,7 +19,7 @@ export const electoratesByCode = Object.values(electorates).reduce((obj, elector
 }, {});
 
 const groups = data.groups;
-export { historical19, historical22, groups, mapConfig };
+export { historical19, historical22, groups, mapConfig, parties };
 
 const rleDelineator = 'q';
 const nullAllocationDelineator = 'x';

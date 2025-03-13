@@ -5,7 +5,7 @@
    *
    * Use this in conjunction with _snippet-redistribute.js to rewrite config.json
    */
-  import { electorates } from '../../../../lib/hashConfig.ts';
+  import { electorates } from '../../../../lib/hashConfig';
   let { electorate } = $props();
   function onChange(e) {
     const swapsies = JSON.parse(localStorage.swapsies || '{}');

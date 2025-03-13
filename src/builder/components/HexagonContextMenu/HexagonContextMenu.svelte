@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { allocationMap, electorates, hashConfig } from '../../../lib/hashConfig.ts';
+  import { allocationMap, electorates, hashConfig } from '../../../lib/hashConfig';
   import Circle from '../Circle/Circle.svelte';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
   import HexagonRedistribute from './HexagonRedistribute/HexagonRedistribute.svelte';

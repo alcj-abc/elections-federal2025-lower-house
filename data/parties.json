@@ -1,5 +1,6 @@
 {
   "hashCodes": {
+    "__usage": "Maps between url hash & internal values.",
     "None": "a",
     "Any": "z",
     "ALP": "b",
@@ -16,5 +17,17 @@
     "UAP": "m",
     "Teal": "t",
     "PUP": "m"
+  },
+  "totals": {
+    "__usage": "These values control the totals bar",
+    "groups": {
+      "LIB": "LNP",
+      "LNP": "LNP",
+      "CLP": "LNP",
+      "NAT": "LNP",
+      "ALP": "ALP"
+    },
+    "barMax": 90,
+    "partyOrder": ["ALP", "LNP", "OTH"]
   }
 }
