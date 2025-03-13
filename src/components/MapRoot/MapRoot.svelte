@@ -13,13 +13,15 @@
 <StyleRoot>
   <div class="interactive">
     <div class="interactive__map">
-      {#if vizType === 'geo'}
-        <GeoMap {allocations} {certainties} {...componentProps} />
-      {/if}
+      <div class="interactive__map-inner">
+        {#if vizType === 'geo'}
+          <GeoMap {allocations} {certainties} {...componentProps} />
+        {/if}
 
-      {#if vizType === 'hex'}
-        <HexMap {allocations} {certainties} {...componentProps} />
-      {/if}
+        {#if vizType === 'hex'}
+          <HexMap {allocations} {certainties} {...componentProps} />
+        {/if}
+      </div>
     </div>
     <div class="interactive__totals">
       <Totals {allocations} {certainties} {totals} {showTotals} {...componentProps} />
@@ -31,6 +33,7 @@
   .interactive {
     position: relative;
     height: 100%;
+    max-height: min(100%, 100vh);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,5 +43,13 @@
   .interactive__map {
     flex: 1;
     position: relative;
+  }
+  .interactive__map-inner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 </style>
