@@ -199,6 +199,14 @@
           <Focuses />
           <Labels />
           <fieldset>
+            <legend>Totals bar</legend>
+
+            <label>
+              <input type="checkbox" bind:checked={$hashConfig.showTotals} />
+              Show totals
+            </label>
+          </fieldset>
+          <fieldset>
             <legend>Markers</legend>
             <MarkerAdmin
               prefixes={{

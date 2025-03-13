@@ -159,6 +159,11 @@ export const schema = {
     type: 'boolean',
     key: 'lf',
     defaultValue: false
+  },
+  showTotals: {
+    type: 'boolean',
+    key: 't',
+    defaultValue: false
   }
 };
 
@@ -174,6 +179,7 @@ export const hashConfig = makeSvelteStore<{
   showStateLabels: boolean;
   showElectorateLabels: boolean;
   showFocusedElectorateLabels: boolean;
+  showTotals: boolean;
 }>(schema);
 
 // Version our hash. This way we can introduce/deprecate/upgrade features as needed.

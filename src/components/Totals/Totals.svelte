@@ -1,9 +1,10 @@
 <script lang="ts">
   import AccesibleHide from '../AccessibleHide/AccesibleHide.svelte';
 
-  let { totals, allocations, certainties } = $props();
+  let { totals, allocations, certainties, showTotals } = $props();
 
-  let barRefs = $state({});
+  /** Width of the chart. Used to caculate whether the totals text will fit inside or outside*/
+  let chartWidth = $state(0);
 
   /**
    * Normalise parties into two party + other
@@ -49,6 +50,7 @@
     return allocatedTotals;
   });
 
+  /** How wide is a seat (decimal percent) */
   let seatWidth = $derived.by(() => {
     const { ALP, LNP, OTH } = resultTotals;
     const maxCount = Math.max(totals.barMax, ALP.total + 5, LNP.total + 5, OTH.total + 5);
@@ -56,18 +58,23 @@
     return seatWidth / 100;
   });
 
+  /** Iterable array of the chart */
   let allocationsArray = $derived.by(() =>
     totals.partyOrder.map(code => ({
       code,
       ...resultTotals[code],
+      // Calculate whether the number should be shown inside or outside the bars
       isNumberOutside: seatWidth * resultTotals[code].total * (chartWidth - 40) < 24
     }))
   );
-
-  let chartWidth = $state(0);
 </script>
 
-<div class="totals" style:--seatWidth={seatWidth}>
+<div
+  class="totals"
+  style:--seatWidth={seatWidth}
+  style:opacity={showTotals ? 1 : 0}
+  style:pointer-events={showTotals ? undefined : 'none'}
+>
   <div class="totals__win-marker">76 to win</div>
   <dl class="totals__chart" bind:clientWidth={chartWidth}>
     {#each allocationsArray as party}
@@ -108,6 +115,7 @@
     --gap: 0.38rem;
     line-height: var(--barHeight);
     margin-right: 20px;
+    transition: opacity 0.5s;
   }
   .totals__win-marker {
     text-align: right;
