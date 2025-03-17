@@ -2,7 +2,7 @@ import parties from '../../../../data/parties.json';
 import { electorates } from '../../../lib/hashConfig';
 
 /** Match electorate name to electorate */
-function matchElectorate(electorateName = '') {
+export function matchElectorate(electorateName = '') {
   const sanitisedElectorateName = electorateName.trim().toLowerCase();
   return electorates.find(electorate => {
     return (

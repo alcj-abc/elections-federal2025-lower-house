@@ -55,13 +55,6 @@
     })
   );
 
-  $effect(() => {
-    console.log({
-      showElectorateLabels,
-      electoratesRenderProps
-    });
-  });
-
   // Load the map, set up the layers, get everything started
   $effect(() => {
     if (!mapRootEl) {

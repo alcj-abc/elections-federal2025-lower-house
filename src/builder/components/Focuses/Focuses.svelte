@@ -1,7 +1,7 @@
 <script lang="ts">
   import { electorates, hashConfig, schema, groups, electoratesByCode } from '../../../lib/hashConfig';
-  import situations from '../../../../data/appdata-situation.json';
   import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
+  import { matchElectorate } from '../SpreadsheetImport/util';
 
   // const historicalByCode = Object.values(historical19).reduce((obj, electorate) => {
   //   obj[electorate.id] = electorate;
@@ -23,6 +23,22 @@
     }, {});
   }
 
+  // Load demographcis from tsv.
+  let demographics = $state({});
+  $effect(() => {
+    fetch('./data/demographics.tsv', { cache: 'force-cache' })
+      .then(res => res.text())
+      .then(tsv => {
+        return tsv
+          .split('---')[1]
+          .split('\n')
+          .map(line => line.split('\t'))
+          .forEach(([electorateName = '', demographic = '']) => {
+            demographics[matchElectorate(electorateName)?.id || ''] = demographic;
+          });
+      });
+  });
+
   /**
    * Buttons to show in the builder. Each item in the array is a button with a
    * name and onClick function.
@@ -35,7 +51,7 @@
       })),
       ...['Outer metro', 'Inner metro', 'Rural', 'Regional'].map(situation => ({
         name: situation,
-        focusCheck: code => situations[code] === situation.replace(' ', '_').toUpperCase()
+        focusCheck: code => demographics[code] === situation
       }))
       // {
       //   name: 'Key seats',
@@ -107,7 +123,6 @@
     }))}
     value={$hashConfig.focuses}
     onChange={newFocuses => {
-      console.log('new focuses', newFocuses);
       $hashConfig.focuses = newFocuses;
     }}
   />

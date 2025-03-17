@@ -58,14 +58,10 @@ async function mountInlineGraphics() {
     })
   );
 
-  console.log('eeee', { adjacentMounts });
-
   let accumulatedGraphics: Object[] = [];
   adjacentMounts.forEach(({ mountNode, adjacent, data }) => {
     accumulatedGraphics.push(data);
-    console.log('eeee', mountNode, adjacent);
     if (!adjacent) {
-      console.log('eeee', 'mounting', accumulatedGraphics, mountNode);
       try {
         mount(InlineGraphics, {
           target: mountNode,

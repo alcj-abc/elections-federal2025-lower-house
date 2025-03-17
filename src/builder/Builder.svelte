@@ -146,7 +146,7 @@
               <button
                 onclick={e => {
                   e.preventDefault();
-                  fetch('./historical/2019.tsv', { cache: 'force-cache' })
+                  fetch('./data/2019.tsv', { cache: 'force-cache' })
                     .then(res => res.text())
                     .then(tsv => {
                       $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
@@ -158,11 +158,10 @@
               <button
                 onclick={e => {
                   e.preventDefault();
-                  fetch('./historical/2022.tsv', { cache: 'force-cache' })
+                  fetch('./data/2022.tsv', { cache: 'force-cache' })
                     .then(res => res.text())
                     .then(tsv => {
                       const rows = parseSpreadsheet(tsv);
-                      console.log(rows);
                       $hashConfig = applyHashConfig(rows, $hashConfig);
                     });
                 }}
@@ -172,7 +171,7 @@
               <button
                 onclick={e => {
                   e.preventDefault();
-                  fetch('./historical/2022-redist.tsv', { cache: 'force-cache' })
+                  fetch('./data/2022-redist.tsv', { cache: 'force-cache' })
                     .then(res => res.text())
                     .then(tsv => {
                       $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
@@ -181,10 +180,10 @@
               >
                 2022 redistributed
               </button>
-              <!-- <button
+              <button
                 onclick={e => {
                   e.preventDefault();
-                  $hashConfig.certainties = historical19.reduce((obj, electorate) => {
+                  $hashConfig.certainties = electorates.reduce((obj, electorate) => {
                     obj[electorate.id] = null;
                     return obj;
                   }, {});
@@ -195,14 +194,14 @@
               <button
                 onclick={e => {
                   e.preventDefault();
-                  $hashConfig.certainties = historical19.reduce((obj, electorate) => {
+                  $hashConfig.certainties = electorates.reduce((obj, electorate) => {
                     obj[electorate.id] = true;
                     return obj;
                   }, {});
                 }}
               >
                 Full certainty
-              </button> -->
+              </button>
             </div>
           </fieldset>
           <Focuses />

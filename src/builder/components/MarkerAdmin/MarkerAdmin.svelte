@@ -74,7 +74,6 @@
     interval = setInterval(() => {
       const goodMarkers = marker => !marker.deleted || marker.deleted > Date.now() - 5000;
       if (!_markers.every(goodMarkers)) {
-        console.log('ilteringin markers');
         markers = _markers.filter(goodMarkers);
       }
     }, 3000);

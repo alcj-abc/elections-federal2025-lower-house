@@ -5,9 +5,6 @@
   import config from '../../../data/appdata-built.json';
 
   let { graphics } = $props();
-  $effect(() => {
-    console.log('eeee', graphics);
-  });
 </script>
 
 <div class={`inline-graphics inline-graphics--grid-${graphics.length % 3}`}>

@@ -112,9 +112,6 @@ export async function loadData({
 
   scrollytellingEls.forEach(scrollytellingEl => container.appendChild(scrollytellingEl));
   document.body.appendChild(container);
-
-  console.log(container.outerHTML);
-  console.log('markerName', markerName);
   let scrollytellerDefinition = loadScrollyteller(name, className, markerName);
 
   document.body.removeChild(container);
