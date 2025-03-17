@@ -5,12 +5,12 @@
 </script>
 
 <!-- These labels don't make sense on their own, need alternative content -->
-<div class="labels" aria-hidden="true">
+<div class="hex-map-labels" aria-hidden="true">
   {#each labels as label}
     {#key label}
       <div
         transition:fade={{ duration: 1000 }}
-        class="label"
+        class="hex-map-labels__label"
         style:left={label.left + '%'}
         style:top={label.top + '%'}
         style:width={label.width + '%'}
@@ -23,7 +23,7 @@
 </div>
 
 <style lang="scss">
-  .labels {
+  .hex-map-labels {
     position: absolute;
     left: 0;
     top: 0;
@@ -31,7 +31,7 @@
     width: 100%;
     height: 100%;
   }
-  .label {
+  .hex-map-labels__label {
     transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
     position: absolute;
     height: 2em;

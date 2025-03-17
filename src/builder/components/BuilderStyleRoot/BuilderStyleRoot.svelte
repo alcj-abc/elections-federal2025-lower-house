@@ -88,6 +88,11 @@
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         padding: 0.5rem 0;
       }
+      hr {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid var(--c-empty-border, rgba(136, 136, 136, 0.5333333333));
+      }
     }
   }
 </style>

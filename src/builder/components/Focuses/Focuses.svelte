@@ -23,7 +23,7 @@
     }, {});
   }
 
-  // Load demographcis from tsv.
+  // Load demographics from tsv.
   let demographics = $state({});
   $effect(() => {
     fetch('./data/demographics.tsv', { cache: 'force-cache' })

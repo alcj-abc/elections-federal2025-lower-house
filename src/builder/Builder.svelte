@@ -12,6 +12,9 @@
   import MarkerAdmin from './components/MarkerAdmin/MarkerAdmin.svelte';
   import BuilderStyleRoot from './components/BuilderStyleRoot/BuilderStyleRoot.svelte';
   import { applyHashConfig, parseSpreadsheet } from './components/SpreadsheetImport/util';
+  import LabelDragger from './components/LabelDragger/LabelDragger.svelte';
+  import { onMount } from 'svelte';
+  import { offsets } from './components/LabelDragger/utils';
   let modal = $state<{
     type: string;
     props?: {};
@@ -32,6 +35,30 @@
       }
     };
   }
+  onMount(() => {
+    // fix webpack glitches
+    if (location.pathname === '/builder') {
+      location.pathname = '/builder/';
+    }
+  });
+
+  // modify the layout with offsets from LabelDragger
+  let isDraggingEnabled = $state(false);
+  const layout = $derived.by(() => {
+    const newLayout = JSON.parse(JSON.stringify(layouts[$hashConfig.layout]));
+    const overrides = Object.entries($offsets);
+    if (overrides.length) {
+      overrides.forEach(([labelName, offset]) => {
+        const matchingLabel = newLayout.labels.find(label => label.name === labelName);
+        const offsetX = offset?.[0] || 0;
+        const offsetY = offset?.[1] || 0;
+        matchingLabel.left += offsetX;
+        matchingLabel.top += offsetY;
+      });
+      console.log('New layout', newLayout.labels);
+    }
+    return newLayout;
+  });
 </script>
 
 <svelte:head>
@@ -50,15 +77,18 @@
   <BuilderStyleRoot>
     {#if $hashConfig}
       <div class="container">
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
         <div class="container-viz">
-          <MapRoot
-            totals={parties.totals}
-            {config}
-            {...$hashConfig}
-            layout={layouts[$hashConfig.layout]}
-            onClick={onVizClick}
-            isInteractive={true}
-          />
+          <LabelDragger enabled={isDraggingEnabled}>
+            <MapRoot
+              totals={parties.totals}
+              {config}
+              {...$hashConfig}
+              {layout}
+              onClick={onVizClick}
+              isInteractive={true}
+            />
+          </LabelDragger>
         </div>
 
         <UpdateChecker />
@@ -246,6 +276,11 @@
                 window.location = String(window.location.pathname).replace('/builder', '/google-doc-preview');
               }}>Google Doc preview</button
             >
+            <hr />
+            <label>
+              <input type="checkbox" bind:checked={isDraggingEnabled} />
+              Dev: Enable dragging labels
+            </label>
           </fieldset>
         </form>
       </div>
