@@ -161,11 +161,25 @@
                   fetch('./historical/2022.tsv', { cache: 'force-cache' })
                     .then(res => res.text())
                     .then(tsv => {
+                      const rows = parseSpreadsheet(tsv);
+                      console.log(rows);
+                      $hashConfig = applyHashConfig(rows, $hashConfig);
+                    });
+                }}
+              >
+                2022 (before redist)
+              </button>
+              <button
+                onclick={e => {
+                  e.preventDefault();
+                  fetch('./historical/2022-redist.tsv', { cache: 'force-cache' })
+                    .then(res => res.text())
+                    .then(tsv => {
                       $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
                     });
                 }}
               >
-                2022 results
+                2022 redistributed
               </button>
               <!-- <button
                 onclick={e => {

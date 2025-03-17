@@ -1,6 +1,5 @@
 {
   "hashCodes": {
-    "__usage": "Maps between url hash & internal values.",
     "None": "a",
     "Any": "z",
     "ALP": "b",

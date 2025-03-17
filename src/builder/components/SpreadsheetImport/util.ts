@@ -5,7 +5,10 @@ import { electorates } from '../../../lib/hashConfig';
 function matchElectorate(electorateName = '') {
   const sanitisedElectorateName = electorateName.trim().toLowerCase();
   return electorates.find(electorate => {
-    return electorate.name.toLowerCase() === sanitisedElectorateName;
+    return (
+      electorate.name.toLowerCase() === sanitisedElectorateName ||
+      electorate.id.toLocaleLowerCase() === sanitisedElectorateName
+    );
   });
 }
 

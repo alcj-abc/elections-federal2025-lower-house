@@ -62,7 +62,7 @@
   <hr />
   <div class="section">
     <ul class="menu menu--double">
-      {#each Object.values(allocationMap) as allocationOption}
+      {#each Object.values(allocationMap).filter(item => item !== 'Any') as allocationOption}
         <li>
           <button
             class="item"
