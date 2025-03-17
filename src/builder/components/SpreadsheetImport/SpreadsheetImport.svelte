@@ -1,13 +1,13 @@
 <script>
   import Modal from '../Modal/Modal.svelte';
-  import parties from '../../../../data/parties.json';
   import Circle from '../Circle/Circle.svelte';
   import { electorates, hashConfig } from '../../../lib/hashConfig';
+  import { parseSpreadsheet, applyHashConfig } from './util';
   let { onClose = () => {} } = $props();
 
   let status = $state('editing');
 
-  function generateCsv() {
+  function generateTsv() {
     const rows = electorates
       .toSorted()
       .map(electorate =>
@@ -22,122 +22,27 @@
     return [['Name', 'Allocation', 'Certainty', 'Focus'].join('\t'), ...rows].join('\n');
   }
 
-  let csv = $state(generateCsv());
-
-  /** Match electorate name to electorate */
-  function matchElectorate(electorateName = '') {
-    const sanitisedElectorateName = electorateName.trim().toLowerCase();
-    return electorates.find(electorate => {
-      return electorate.name.toLowerCase() === sanitisedElectorateName;
-    });
-  }
-
-  /** Sanitise allocations */
-  function matchAllocation(allocationName = '') {
-    const sanitisedAllocationName = allocationName.trim().toLowerCase();
-
-    // Keyword match
-    const matches = [
-      {
-        keywords: ['labor', 'alp'],
-        code: 'ALP'
-      },
-      {
-        keywords: ['lnp', 'clp', 'nat', 'lib', 'coalition', 'national'],
-        code: 'LNP'
-      },
-      {
-        keywords: ['grn', 'green'],
-        code: 'GRN'
-      },
-
-      // matches on party codes like 'onp', 'ind'(ependent), 'oth'(er)
-      ...Object.keys(parties.hashCodes).map(code => ({
-        keywords: [code.toLowerCase()],
-        code
-      }))
-    ];
-
-    const matched = matches.find(match => match.keywords.some(keyword => sanitisedAllocationName.includes(keyword)));
-
-    if (!matched) {
-      return null;
-    }
-
-    return matched.code;
-  }
+  let tsv = $state(generateTsv());
 
   /**
    * Tidy up the CSV, if you copy rows from a spreadsheet you get a bunch of
    * blank ones on the end
    */
   $effect(() => {
-    const newCsv = csv.trim();
-    if (csv !== newCsv) {
-      csv = newCsv;
+    const newTsv = tsv.trim();
+    if (tsv !== newTsv) {
+      tsv = newTsv;
     }
   });
 
-  let rows = $derived.by(() => {
-    const cells = csv
-      .split('\n')
-      .filter(Boolean)
-      .map(rows => {
-        const [electorate, allocation, certainty = 'unset', focus = 'unset'] = rows.split('\t');
-        const matchedElectorate = matchElectorate(electorate);
-        const matchedAllocation = matchAllocation(allocation);
-        if (electorate === 'Name') {
-          return null;
-        }
-        return {
-          electorate,
-          allocation,
-          certainty,
-          matchedCertainty: certainty.toLowerCase() === 'true',
-          focus,
-          matchedFocus: focus.toLowerCase() === 'true',
-          matchedElectorate,
-          matchedAllocation,
-          isOk: matchedElectorate && matchedAllocation
-        };
-      })
-      .filter(row => row?.electorate);
-
-    const hasFocuses = cells.some(cell => cell.matchedFocus);
-    const hasCertainties = cells.some(cell => cell.matchedCertainty);
-
-    return cells.map(cell => ({
-      ...cell,
-      matchedFocus: hasFocuses ? cell.matchedFocus : null,
-      matchedCertainty: hasCertainties ? cell.matchedCertainty : true
-    }));
-  });
+  let rows = $derived.by(() => parseSpreadsheet(tsv));
 
   let badRows = $derived.by(() => {
     return rows.filter(row => !row.isOk).length;
   });
 
   function onApply() {
-    const allocations = { ...$hashConfig.allocations };
-    const focuses = { ...$hashConfig.focuses };
-    const certainties = { ...$hashConfig.certainties };
-    rows.forEach(({ isOk, matchedElectorate, matchedAllocation, matchedCertainty, matchedFocus }) => {
-      if (!isOk || !matchedElectorate) {
-        return;
-      }
-      const electorateId = matchedElectorate.id;
-      allocations[electorateId] = (matchedAllocation === 'None' ? null : matchedAllocation) || null;
-      certainties[electorateId] = matchedCertainty || null;
-      focuses[electorateId] = matchedFocus || null;
-    });
-
-    $hashConfig = {
-      ...$hashConfig,
-      allocations,
-      focuses,
-      certainties
-    };
-
+    $hashConfig = applyHashConfig(rows, $hashConfig);
     onClose();
   }
 </script>
@@ -165,7 +70,7 @@
 <Modal title="Spreadsheet import" {onClose} {footerChildren}>
   {#if status === 'editing'}
     <p>Copy or paste spreadsheet rows below to import them.</p>
-    <textarea bind:value={csv} placeholder={['ADEL  Labor true true', 'ASTO Coalition false false'].join('\n')}
+    <textarea bind:value={tsv} placeholder={['ADEL  Labor true true', 'ASTO Coalition false false'].join('\n')}
     ></textarea>
   {/if}
   {#if status === 'previewing'}

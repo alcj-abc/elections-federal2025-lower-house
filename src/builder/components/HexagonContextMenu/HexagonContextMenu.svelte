@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { allocationMap, electorates, hashConfig } from '../../../lib/hashConfig';
+  import { allocationMap, hashConfig } from '../../../lib/hashConfig';
   import Circle from '../Circle/Circle.svelte';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
   import HexagonRedistribute from './HexagonRedistribute/HexagonRedistribute.svelte';
@@ -83,6 +83,21 @@
       {/each}
     </ul>
   </div>
+  <hr />
+  <a
+    class="item section"
+    href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id.toLowerCase()}`}
+    target="_blank"
+  >
+    2022 guide
+  </a>
+  <a
+    class="item section"
+    href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id.toLowerCase()}`}
+    target="_blank"
+  >
+    2019 guide
+  </a>
 </ContextMenu>
 
 <style lang="scss">

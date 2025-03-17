@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { electorates, hashConfig, historical19, historical22, schema, mapConfig, parties } from '../lib/hashConfig';
+  import { electorates, hashConfig, schema, mapConfig, parties } from '../lib/hashConfig';
   import HexagonContextMenu from './components/HexagonContextMenu/HexagonContextMenu.svelte';
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
   import Focuses from './components/Focuses/Focuses.svelte';
@@ -11,6 +11,7 @@
   import UpdateChecker from './components/UpdateChecker/UpdateChecker.svelte';
   import MarkerAdmin from './components/MarkerAdmin/MarkerAdmin.svelte';
   import BuilderStyleRoot from './components/BuilderStyleRoot/BuilderStyleRoot.svelte';
+  import { applyHashConfig, parseSpreadsheet } from './components/SpreadsheetImport/util';
   let modal = $state<{
     type: string;
     props?: {};
@@ -145,14 +146,11 @@
               <button
                 onclick={e => {
                   e.preventDefault();
-                  $hashConfig.allocations = historical19.reduce((obj, electorate) => {
-                    obj[electorate.id] = electorate.holder;
-                    return obj;
-                  }, {});
-                  $hashConfig.certainties = historical19.reduce((obj, electorate) => {
-                    obj[electorate.id] = true;
-                    return obj;
-                  }, {});
+                  fetch('./historical/2019.tsv', { cache: 'force-cache' })
+                    .then(res => res.text())
+                    .then(tsv => {
+                      $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
+                    });
                 }}
               >
                 2019 results
@@ -160,19 +158,16 @@
               <button
                 onclick={e => {
                   e.preventDefault();
-                  $hashConfig.allocations = historical22.reduce((obj, electorate) => {
-                    obj[electorate.id] = electorate.holder;
-                    return obj;
-                  }, {});
-                  $hashConfig.certainties = historical19.reduce((obj, electorate) => {
-                    obj[electorate.id] = true;
-                    return obj;
-                  }, {});
+                  fetch('./historical/2022.tsv', { cache: 'force-cache' })
+                    .then(res => res.text())
+                    .then(tsv => {
+                      $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
+                    });
                 }}
               >
                 2022 results
               </button>
-              <button
+              <!-- <button
                 onclick={e => {
                   e.preventDefault();
                   $hashConfig.certainties = historical19.reduce((obj, electorate) => {
@@ -193,7 +188,7 @@
                 }}
               >
                 Full certainty
-              </button>
+              </button> -->
             </div>
           </fieldset>
           <Focuses />

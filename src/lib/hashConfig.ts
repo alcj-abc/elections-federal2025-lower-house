@@ -1,8 +1,6 @@
 import { getRleCodec, makeSvelteStore, getBinaryCodec } from 'hash-codec';
 import layouts from '../../data/appdata-layouts.json';
 import data from '../../data/appdata-built.json';
-import historical19 from '../../data/appdata-historical-2019.json';
-import historical22 from '../../data/appdata-historical-2022.json';
 import mapConfig from '../../data/appdata-mapconfig.json';
 import parties from '../../data/parties.json';
 
@@ -19,7 +17,7 @@ export const electoratesByCode = Object.values(electorates).reduce((obj, elector
 }, {});
 
 const groups = data.groups;
-export { historical19, historical22, groups, mapConfig, parties };
+export { groups, mapConfig, parties };
 
 const rleDelineator = 'q';
 const nullAllocationDelineator = 'x';

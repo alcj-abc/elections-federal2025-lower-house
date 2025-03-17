@@ -1,20 +1,12 @@
 <script lang="ts">
-  import {
-    electorates,
-    hashConfig,
-    historical19,
-    historical22,
-    schema,
-    groups,
-    electoratesByCode
-  } from '../../../lib/hashConfig';
+  import { electorates, hashConfig, schema, groups, electoratesByCode } from '../../../lib/hashConfig';
   import situations from '../../../../data/appdata-situation.json';
   import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
 
-  const historicalByCode = Object.values(historical19).reduce((obj, electorate) => {
-    obj[electorate.id] = electorate;
-    return obj;
-  }, {});
+  // const historicalByCode = Object.values(historical19).reduce((obj, electorate) => {
+  //   obj[electorate.id] = electorate;
+  //   return obj;
+  // }, {});
 
   /**
    * Shorthand method to set focuses, each electorate is passed to the function
@@ -44,19 +36,19 @@
       ...['Outer metro', 'Inner metro', 'Rural', 'Regional'].map(situation => ({
         name: situation,
         focusCheck: code => situations[code] === situation.replace(' ', '_').toUpperCase()
-      })),
-      {
-        name: 'Key seats',
-        focusCheck: code => {
-          return !!historicalByCode[code]?.isKeySeat;
-        }
-      },
-      ...['Marginal', 'Safe', 'Very safe'].map(security => ({
-        name: security,
-        focusCheck: code => {
-          return historicalByCode[code]?.security === security.replace(' ', '_').toUpperCase();
-        }
       }))
+      // {
+      //   name: 'Key seats',
+      //   focusCheck: code => {
+      //     return !!historicalByCode[code]?.isKeySeat;
+      //   }
+      // },
+      // ...['Marginal', 'Safe', 'Very safe'].map(security => ({
+      //   name: security,
+      //   focusCheck: code => {
+      //     return historicalByCode[code]?.security === security.replace(' ', '_').toUpperCase();
+      //   }
+      // }))
     ];
   });
 </script>
