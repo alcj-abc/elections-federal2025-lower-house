@@ -1,7 +1,7 @@
 <script lang="ts">
   import { electorates, hashConfig, schema, groups, electoratesByCode } from '../../../lib/hashConfig';
   import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
-  import { matchElectorate } from '../SpreadsheetImport/util';
+  import { matchElectorate, parseTsv } from '../SpreadsheetImport/util';
 
   // const historicalByCode = Object.values(historical19).reduce((obj, electorate) => {
   //   obj[electorate.id] = electorate;
@@ -29,13 +29,11 @@
     fetch('./data/demographics.tsv', { cache: 'force-cache' })
       .then(res => res.text())
       .then(tsv => {
-        return tsv
-          .split('---')[1]
-          .split('\n')
-          .map(line => line.split('\t'))
-          .forEach(([electorateName = '', demographic = '']) => {
-            demographics[matchElectorate(electorateName)?.id || ''] = demographic;
-          });
+        // remove the comments before the --- line
+        const sanitisedTsv = tsv.replace(/^(.*?)---/s, '');
+        return parseTsv(sanitisedTsv).forEach(([electorateName = '', demographic = '']) => {
+          demographics[matchElectorate(electorateName)?.id || 'eeee'] = demographic;
+        });
       });
   });
 

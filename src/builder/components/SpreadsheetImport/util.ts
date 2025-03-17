@@ -1,6 +1,13 @@
 import parties from '../../../../data/parties.json';
 import { electorates } from '../../../lib/hashConfig';
 
+export function parseTsv(tsv) {
+  return tsv
+    .split('\n')
+    .filter(Boolean)
+    .map(row => row.split('\t'));
+}
+
 /** Match electorate name to electorate */
 export function matchElectorate(electorateName = '') {
   const sanitisedElectorateName = electorateName.trim().toLowerCase();
@@ -52,11 +59,8 @@ function matchAllocation(allocationName = '') {
 
 /** Given a spreadsheet, match electorates and allocations and parse it into rows */
 export function parseSpreadsheet(tsv) {
-  const cells = tsv
-    .split('\n')
-    .filter(Boolean)
-    .map(rows => {
-      const [electorate, allocation, certainty = 'unset', focus = 'unset'] = rows.split('\t');
+  const cells = parseTsv(tsv)
+    .map(([electorate, allocation, certainty = 'unset', focus = 'unset']) => {
       const matchedElectorate = matchElectorate(electorate);
       const matchedAllocation = matchAllocation(allocation);
       if (electorate === 'Name') {
