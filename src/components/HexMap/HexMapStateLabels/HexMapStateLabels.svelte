@@ -47,6 +47,8 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    -webkit-text-stroke: 2px transparent;
+    paint-order: stroke fill;
 
     @container (min-width: 30rem) {
       font-size: 1.125rem;
