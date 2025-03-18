@@ -1,16 +1,15 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
-
-  let { labels } = $props();
+  let { labels, overlayLabels = false } = $props();
 </script>
 
 <!-- These labels don't make sense on their own, need alternative content -->
-<div class="hex-map-labels" aria-hidden="true">
+<div class="state-labels" aria-hidden="true" class:state-labels--overlaid={overlayLabels}>
   {#each labels as label}
-    {#key label}
+    {#key label.name}
       <div
         transition:fade={{ duration: 1000 }}
-        class="hex-map-labels__label"
+        class="state-labels__label"
         style:left={label.left + '%'}
         style:top={label.top + '%'}
         style:width={label.width + '%'}
@@ -23,15 +22,16 @@
 </div>
 
 <style lang="scss">
-  .hex-map-labels {
+  .state-labels {
     position: absolute;
     left: 0;
     top: 0;
     pointer-events: none;
     width: 100%;
     height: 100%;
+    container-type: inline-size;
   }
-  .hex-map-labels__label {
+  .state-labels__label {
     transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
     position: absolute;
     height: 2em;
@@ -48,7 +48,17 @@
     font-weight: 700;
     line-height: normal;
 
-    -webkit-text-stroke: 2px white;
+    @container (min-width: 30rem) {
+      font-size: 1.125rem;
+    }
+
+    @container (min-width: 38rem) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .state-labels--overlaid .state-labels__label {
+    -webkit-text-stroke: 2px #f1f1f1;
     paint-order: stroke fill;
   }
 </style>

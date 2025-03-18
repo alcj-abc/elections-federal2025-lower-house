@@ -7,7 +7,6 @@
     hexes = [],
     svgOutline = '',
     offset = [Infinity, Infinity],
-    isFilled = false,
     hasAllocations,
     allocations,
     focuses,
@@ -49,7 +48,6 @@
   style:transform
   class:group--never-rendered={!hasBeenVisible}
   class:group--hidden={!isVisible}
-  class:group--map-is-filled={isFilled}
   class:group--map-is-static={isStatic}
   class:group--map-is-empty={!hasAllocations}
   class:group--has-focuses={hasAnyFocuses}
@@ -106,11 +104,6 @@
     stroke: var(--c-empty-state-outline);
   }
 
-  :global(.hex) {
-    fill: transparent;
-    stroke: transaparent;
-  }
-
   // Party colours
   $parties: Any, ALP, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal, CA;
   @each $code in $parties {
@@ -133,12 +126,12 @@
 
   // Strokes
   .group-hex-strokes :global(.hex) {
-    fill: none;
-    stroke: none;
+    fill: transparent;
+    stroke: transparent;
     stroke-width: 1px;
   }
   .group-hex-strokes :global(.hex:not([data-allocation='null'])) {
-    fill: none;
+    fill: transparent;
     stroke: var(--c-filled-border);
     stroke-width: 1px;
   }
@@ -171,10 +164,14 @@
 
     // allocated but unfocused hexes fade out
     .group-hexes :global(.hex:not([data-allocation='null'])[data-focused='false']) {
-      opacity: 0.2; // FIXME: needs design
+      opacity: 0.1;
     }
     .group-hex-strokes :global(.hex:not([data-allocation='null'])[data-focused='false']) {
       stroke: var(--c-white);
+    }
+
+    &:not(.group--map-is-empty) .group-outline :global(.hex-outline) {
+      stroke: #60646c;
     }
   }
 </style>

@@ -2,8 +2,7 @@
   import { Tween } from 'svelte/motion';
   import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
   import { cubicInOut } from 'svelte/easing';
-  import HexMapLabels from './HexMapLabels/HexMapLabels.svelte';
-  import { untrack } from 'svelte';
+  import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
   let {
     config = {},
     layout = {},
@@ -28,12 +27,6 @@
 
   /** Are any of the electorates focused? If so, we use different styles for unallocated */
   let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
-
-  /** Are all of the electorates allocated? If so, turn off state borders. */
-  let isFilled = $derived.by(() => {
-    const allocationValues = Object.values(allocations);
-    return allocationValues.length !== 0 && allocationValues.every(Boolean);
-  });
 
   /** Are all of the electorates allocated? If so, turn off state borders. */
   let hasAllocations = $derived.by(() => {
@@ -126,7 +119,6 @@
         {isStatic}
         {layout}
         offset={layout.positions[group.name]}
-        {isFilled}
         {hasAllocations}
         {allocations}
         {focuses}
@@ -146,7 +138,7 @@
       style:margin-left={`${0 - svgWidth / 2}px`}
       style:margin-top={`${0 - svgHeight / 2}px`}
     >
-      <HexMapLabels labels={layout.labels} />
+      <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
     </div>
   {/if}
 </div>

@@ -20,7 +20,8 @@
       { "left": 59.25, "top": 86.75, "width": 8, "name": "TAS" },
       { "left": 30.75, "top": 49, "width": 8, "name": "SA" },
       { "left": 19.25, "top": 53.5, "width": 8, "name": "WA" }
-    ]
+    ],
+    "overlayLabels": true
   },
   "EXPLODED": {
     "viewbox": [-1, -1, 480, 526],
@@ -43,7 +44,8 @@
       { "left": 62.25, "top": 94.75, "width": 8, "name": "TAS" },
       { "left": 26, "top": 52.25, "width": 8, "name": "SA" },
       { "left": 8.75, "top": 52.5, "width": 8, "name": "WA" }
-    ]
+    ],
+    "overlayLabels": true
   },
   "EXPLODED_STATES_ONLY": {
     "viewbox": [-1, -1, 480, 526],
@@ -62,7 +64,8 @@
       { "left": 62.25, "top": 94.75, "width": 8, "name": "TAS" },
       { "left": 26, "top": 52.25, "width": 8, "name": "SA" },
       { "left": 8.75, "top": 52.5, "width": 8, "name": "WA" }
-    ]
+    ],
+    "overlayLabels": true
   },
   "GRID": {
     "viewbox": [-40, -40, 650, 595],

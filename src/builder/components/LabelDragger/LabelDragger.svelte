@@ -6,7 +6,7 @@
   let originalCoords = $state([0, 0]);
 
   function mouseDown(e) {
-    if (e.target.classList.contains('hex-map-labels__label')) {
+    if (e.target.classList.contains('state-labels__label')) {
       currentLabel = e.target.textContent.trim();
       originalCoords = [e.screenX, e.screenY];
     }
@@ -50,7 +50,7 @@
     width: 100%;
     height: 100%;
   }
-  .label-dragger :global(.hex-map-labels__label) {
+  .label-dragger :global(.state-labels__label) {
     pointer-events: auto !important;
     cursor: grab;
   }
