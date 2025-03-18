@@ -35,6 +35,12 @@
     return allocationValues.length !== 0 && allocationValues.every(Boolean);
   });
 
+  /** Are all of the electorates allocated? If so, turn off state borders. */
+  let hasAllocations = $derived.by(() => {
+    const allocationValues = Object.values(allocations);
+    return allocationValues.length !== 0 && allocationValues.some(Boolean);
+  });
+
   const initial = layout.viewbox;
   const tweenOptions = {
     easing: cubicInOut,
@@ -121,6 +127,7 @@
         {layout}
         offset={layout.positions[group.name]}
         {isFilled}
+        {hasAllocations}
         {allocations}
         {focuses}
         {hasAnyFocuses}

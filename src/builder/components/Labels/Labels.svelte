@@ -1,5 +1,6 @@
 <script lang="ts">
   import { hashConfig, electorates, defaultNullElectorates } from '../../../lib/hashConfig';
+  import { isDraggingEnabled } from '../LabelDragger/utils';
   import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
 </script>
 
@@ -77,4 +78,11 @@
     />
     Label focused electorates
   </label>
+  {#if $hashConfig.vizType === 'hex' && $hashConfig.showStateLabels}
+    <hr />
+    <label>
+      <input type="checkbox" bind:checked={$isDraggingEnabled} />
+      Dev: Enable dragging labels
+    </label>
+  {/if}
 </fieldset>

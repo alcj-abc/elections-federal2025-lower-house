@@ -5,6 +5,8 @@ import path from 'path';
 import polygonClipping from 'polygon-clipping';
 const config = JSON.parse(fs.readFileSync('data/config.json', 'utf8'));
 
+console.time('build');
+
 /** Round number to 1 decimal place */
 const round = number => Math.round(number * 10) / 10;
 

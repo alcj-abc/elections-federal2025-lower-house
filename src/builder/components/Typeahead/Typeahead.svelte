@@ -83,8 +83,9 @@
 <style lang="scss">
   .typeahead {
     padding: 0.25rem 0.5rem;
-    background: var(--c-white);
-    border: 1px solid var(--c-grey);
+    background: var(--background);
+    color: var(--text);
+    border: 1px solid var(--border);
     border-radius: 0.2rem;
   }
   .typeahead--focused {
@@ -121,8 +122,9 @@
     overflow: auto;
   }
   .typeahead__selected-item {
-    background: var(--c-white);
-    border: 1px solid var(--c-grey);
+    background: var(--background);
+    color: var(--text);
+    border: 1px solid var(--border);
     border-radius: 0.2rem;
     position: relative;
     padding: 0.25rem;

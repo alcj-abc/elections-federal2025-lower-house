@@ -14,7 +14,7 @@
   import { applyHashConfig, parseSpreadsheet } from './components/SpreadsheetImport/util';
   import LabelDragger from './components/LabelDragger/LabelDragger.svelte';
   import { onMount } from 'svelte';
-  import { offsets } from './components/LabelDragger/utils';
+  import { isDraggingEnabled, offsets } from './components/LabelDragger/utils';
   let modal = $state<{
     type: string;
     props?: {};
@@ -43,7 +43,6 @@
   });
 
   // modify the layout with offsets from LabelDragger
-  let isDraggingEnabled = $state(false);
   const layout = $derived.by(() => {
     const newLayout = JSON.parse(JSON.stringify(layouts[$hashConfig.layout]));
     const overrides = Object.entries($offsets);
@@ -79,7 +78,7 @@
       <div class="container">
         <!-- svelte-ignore a11y_no_static_element_interactions -->
         <div class="container-viz">
-          <LabelDragger enabled={isDraggingEnabled}>
+          <LabelDragger>
             <MapRoot
               totals={parties.totals}
               {config}
@@ -276,11 +275,6 @@
                 window.location = String(window.location.pathname).replace('/builder', '/google-doc-preview');
               }}>Google Doc preview</button
             >
-            <hr />
-            <label>
-              <input type="checkbox" bind:checked={isDraggingEnabled} />
-              Dev: Enable dragging labels
-            </label>
           </fieldset>
         </form>
       </div>
@@ -305,6 +299,8 @@
     position: relative;
     overflow: hidden;
     padding: 1.69rem;
+    background: white;
+    color: black;
   }
   .container-controls {
     width: 22rem;
@@ -313,7 +309,7 @@
     }
     padding: 2rem 1rem;
     background: rgba(0, 0, 0, 0.04);
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid var(--border);
     height: 100vh;
     overflow: auto;
   }

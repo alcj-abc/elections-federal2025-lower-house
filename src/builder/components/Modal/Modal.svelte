@@ -66,7 +66,9 @@
     transform: translate(-50%, -50%);
     margin: 0;
     padding: 0;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: var(--background);
+    color: var(--text);
+    border: 1px solid var(--border);
     border-radius: 0.5rem;
     animation: fadein 0.2s;
     &::backdrop {
@@ -81,7 +83,7 @@
     justify-content: center;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
     gap: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border);
   }
   .modal-title h1 {
     font-size: 1rem;
@@ -104,7 +106,7 @@
   }
   .modal-footer {
     text-align: right;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border);
     padding: 0.5rem 1rem;
   }
   @keyframes fadein {

@@ -80,6 +80,7 @@
           <th>Electorate</th>
           <th class="centre">Allocation</th>
           <th class="centre">Certainty</th>
+          <th class="centre">Focus</th>
         </tr>
       </thead>
       <tbody>
@@ -143,7 +144,7 @@
     padding-right: 0.5rem;
   }
   tbody tr:not(:last-child) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border);
   }
   .centre {
     text-align: center;
@@ -151,7 +152,7 @@
 
   .input {
     display: inline;
-    color: var(--c-grey);
+    color: var(--border);
   }
   textarea {
     width: 30rem;

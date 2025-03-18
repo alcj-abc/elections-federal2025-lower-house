@@ -2,7 +2,7 @@
   import { allocationMap, hashConfig } from '../../../lib/hashConfig';
   import Circle from '../Circle/Circle.svelte';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
-  import HexagonRedistribute from './HexagonRedistribute/HexagonRedistribute.svelte';
+  // import HexagonRedistribute from './HexagonRedistribute/HexagonRedistribute.svelte';
   let { position = [0, 0], electorate = {}, onClose = () => {} } = $props();
   let allocation = $derived.by(() => $hashConfig.allocations[electorate.id]);
 </script>
@@ -10,7 +10,7 @@
 <ContextMenu {position} {onClose}>
   <h1 class="section">
     <strong>{electorate.name}</strong>
-    <small style="color: var(--c-grey)">{electorate.id}</small>
+    <small style="opacity:0.5">{electorate.id}</small>
   </h1>
   <hr />
   <!-- <HexagonRedistribute {electorate} />
@@ -144,6 +144,6 @@
     border: none;
     margin: 0;
     padding: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border);
   }
 </style>

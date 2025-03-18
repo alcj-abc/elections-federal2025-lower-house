@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { offsets } from './utils';
+  import { isDraggingEnabled, offsets } from './utils';
 
-  let { children, enabled = false } = $props();
+  let { children } = $props();
   let currentLabel = $state('');
   let originalCoords = $state([0, 0]);
 
@@ -36,7 +36,7 @@
   }
 </script>
 
-{#if enabled}
+{#if $isDraggingEnabled}
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="label-dragger" onmousedown={mouseDown} onmouseup={mouseUp} onblur={blur} onmousemove={mouseMove}>
     {@render children?.()}

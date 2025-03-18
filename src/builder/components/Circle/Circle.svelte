@@ -13,6 +13,6 @@
     height: 0.75em;
   }
   .circle[data-allocation='None'] {
-    border: 1px solid var(--c-grey);
+    border: 1px solid var(--border);
   }
 </style>

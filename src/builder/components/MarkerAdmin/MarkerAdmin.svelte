@@ -345,10 +345,10 @@
     gap: 0.5rem;
 
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--c-empty-border, #88888888);
+    border-bottom: 1px solid var(--border);
 
     .divider {
-      border-right: 1px solid var(--c-empty-border, #88888888);
+      border-right: 1px solid var(--border);
     }
 
     button.success {
@@ -380,7 +380,7 @@
     .row {
       display: flex;
       width: 100%;
-      border-bottom: 1px solid var(--c-empty-border, #88888888);
+      border-bottom: 1px solid var(--border);
       width: calc(100% + 1rem);
       margin-left: -0.5rem;
       border-radius: 1px;

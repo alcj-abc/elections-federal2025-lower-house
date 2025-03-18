@@ -74,7 +74,7 @@
 
 {#if doc}
   <!-- A tall div reserves space so when we press "back" we return ot the same spot in the scrolly -->
-  <div style:min-height={'10000vh'}>
+  <div style:min-height={'10000vh'} class="scrolly-root">
     {#if scrollytellerDefinition}
       <ScrollytellerRoot
         panels={scrollytellerDefinition.panels}
@@ -179,5 +179,11 @@
     top: 0.5rem;
     right: 0.5rem;
     z-index: 10;
+  }
+
+  .scrolly-root {
+    background: white;
+    color: black;
+    border-radius: 0.2rem;
   }
 </style>

@@ -8,6 +8,7 @@
     svgOutline = '',
     offset = [Infinity, Infinity],
     isFilled = false,
+    hasAllocations,
     allocations,
     focuses,
     hasAnyFocuses = false,
@@ -50,18 +51,22 @@
   class:group--hidden={!isVisible}
   class:group--map-is-filled={isFilled}
   class:group--map-is-static={isStatic}
+  class:group--map-is-empty={!hasAllocations}
   class:group--has-focuses={hasAnyFocuses}
 >
   <g class="group-hexes">
     {@html svgHexes}
   </g>
+  <g class="group-outline group-outline__under">{@html svgOutline}</g>
   <g class="group-hex-strokes">
     {@html svgHexes}
   </g>
   {#if isVisible}
     <HexLabels {hexes} {allocations} labelsToShow={labels} {showElectorateLabels} />
   {/if}
-  <g class="group-outline">{@html svgOutline}</g>
+  <g class="group-outline group-outline__over" style:opacity={hasAnyFocuses && !hasAllocations ? 0 : 1}
+    >{@html svgOutline}</g
+  >
 </g>
 
 <style lang="scss">
@@ -90,18 +95,20 @@
   // Group/state outlines
   .group-outline :global(.hex-outline) {
     fill: none;
-    stroke: var(--c-black);
-    stroke-width: 2px;
+    stroke: var(--c-state-outline);
+    stroke-width: 1px;
     transition:
       opacity 0.5s,
-      stroke 0.2s;
+      stroke 0.5s;
     vector-effect: non-scaling-stroke;
   }
-  .group--map-is-filled :global(.hex-outline) {
-    opacity: 0;
-    // transition to white because it's the same colour as the hex outlines and
-    // black looks weird.
-    stroke: white;
+  .group--map-is-empty:not(.group--has-focuses) .group-outline :global(.hex-outline) {
+    stroke: var(--c-empty-state-outline);
+  }
+
+  :global(.hex) {
+    fill: transparent;
+    stroke: transaparent;
   }
 
   // Party colours
@@ -111,9 +118,17 @@
       fill: var(--a-#{$code});
     }
   }
+
   .group-hexes :global(.hex[data-allocation='null']) {
     fill: var(--a-null);
-    stroke: var(--c-empty-border);
+    stroke: var(--a-null-border);
+    stroke-width: 1;
+  }
+
+  .group--map-is-empty .group-hexes :global(.hex) {
+    fill: var(--a-empty);
+    stroke: var(--a-empty-border);
+    stroke-width: 0.5;
   }
 
   // Strokes
@@ -134,12 +149,9 @@
   }
 
   .group--has-focuses {
-    // remove state borders
-    :global(.hex-outline) {
-      opacity: 0;
-      stroke: white;
+    .group-hexes :global(.hex) {
+      stroke-width: 1;
     }
-
     // Focused null hexes turn white w black border
     .group-hexes :global(.hex[data-allocation='null'][data-focused='true']) {
       fill: var(--c-white);

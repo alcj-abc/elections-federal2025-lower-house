@@ -51,7 +51,14 @@
     --c-supp-ptyorange: #bd5800;
     --c-supp-ptyteal: #007e8a;
 
-    --a-null: var(--c-white);
+    --a-empty: #f1f1f1;
+    --a-empty-border: black;
+
+    --c-empty-state-outline: black;
+    --c-state-outline: #949494;
+
+    --a-null: #f1f1f1;
+    --a-null-border: #fff;
     --a-Any: var(--c-white);
     --a-ALP: var(--c-ptyred);
     --a-CA: var(--c-ptyblack);
@@ -67,7 +74,6 @@
     --a-PUP: var(--c-ptygold);
     --a-Teal: var(--c-ptyteal);
 
-    --c-empty-border: #cdcbcb;
     --c-filled-border: #fff;
   }
 </style>

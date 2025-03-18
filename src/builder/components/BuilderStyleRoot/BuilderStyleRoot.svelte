@@ -8,90 +8,157 @@
 
 <style lang="scss">
   .style-root {
-    :global {
-      fieldset {
-        margin-bottom: 1rem;
-        padding: var(--padding);
-        border: 1px solid var(--c-grey);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-      .fieldset {
-        padding: 0 var(--padding);
-        border: 1px solid transparent;
-      }
-      .fieldset,
-      fieldset {
-        --padding: 0.75rem;
-        margin-bottom: 1rem;
-        border-radius: 0.2rem;
-        &.builder__spacious {
-          --padding: 1rem;
-          legend {
-            font-weight: bold;
-          }
-        }
-      }
+    --text: #222;
+    --background: #fff;
+    --border: rgba(122, 123, 135, 0.5);
+    --background-alt: #f2f4f5;
 
-      .buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2px;
-      }
+    color: var(--text);
+    background-color: var(--background);
 
-      label {
-        & > span {
-          display: block;
-          margin-bottom: 0.3rem;
-        }
-        margin-bottom: 0.5rem;
-      }
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 
-      select,
-      button,
-      input {
+    color-scheme: dark light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .style-root {
+      --text: #ccc;
+      --background: #1a1a1a;
+      --background-alt: #2c2c2f;
+      --border: rgba(122, 123, 135, 0.5);
+    }
+  }
+
+  /* // style-root */
+
+  /*
+	--c-grey => --border
+	--c-white => --background
+	--c-black => --text
+*/
+  .style-root :global {
+    fieldset {
+      margin-bottom: 1rem;
+      padding: var(--padding);
+      border: 1px solid var(--border);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .fieldset {
+      padding: 0 var(--padding);
+      border: 1px solid transparent;
+    }
+    .fieldset,
+    fieldset {
+      --padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 0.2rem;
+    }
+    fieldset.builder__spacious,
+    .fieldset.builder__spacious {
+      --padding: 1rem;
+      legend {
+        font-weight: bold;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    label span {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    select,
+    button,
+    input {
+      padding: 0.25rem 0.5rem;
+      background: var(--background);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 0.2rem;
+    }
+    select:not([multiple]),
+    button:not(:disabled) {
+      cursor: pointer;
+      &:hover,
+      &:focus-visible {
+        border-color: var(--text);
+        background: Highlight;
+        color: HighlightText;
+      }
+    }
+
+    select,
+    input[type='text'],
+    input[type='password'] {
+      width: 100%;
+    }
+
+    .btn-icon {
+      padding: 0;
+      display: inline-flex;
+      height: 1.5rem;
+      width: 1.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .builder__submit-row {
+      text-align: right;
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 0;
+    }
+    hr {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.builder__table {
+      border-collapse: separate;
+      border: solid var(--border) 1px;
+      border-radius: 0.2rem;
+      border-spacing: 0;
+
+      td,
+      th {
+        border-left: solid var(--border) 1px;
+        border-top: solid var(--border) 1px;
         padding: 0.25rem 0.5rem;
-        background: var(--c-white);
-        border: 1px solid var(--c-grey);
-        border-radius: 0.2rem;
-      }
-      select:not([multiple]),
-      button:not(:disabled) {
-        cursor: pointer;
-        &:hover,
-        &:focus-visible {
-          border-color: var(--c-black);
-          background: Highlight;
-          color: HighlightText;
-        }
       }
 
-      select,
-      input[type='text'] {
-        width: 100%;
+      th {
+        background-color: var(--background-alt);
       }
 
-      .btn-icon {
-        padding: 0;
-        display: inline-flex;
-        height: 1.5rem;
-        width: 1.5rem;
-        justify-content: center;
-        align-items: center;
+      th {
+        border-top: none;
       }
 
-      .builder__submit-row {
-        text-align: right;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        padding: 0.5rem 0;
-      }
-      hr {
-        width: 100%;
-        border: none;
-        border-bottom: 1px solid var(--c-empty-border, rgba(136, 136, 136, 0.5333333333));
+      td:first-child,
+      th:first-child {
+        border-left: none;
       }
     }
   }
