@@ -3,6 +3,7 @@
   import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
   import { cubicInOut } from 'svelte/easing';
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
+  import { onMount } from 'svelte';
   let {
     config = {},
     layout = {},
@@ -22,8 +23,7 @@
     onClick = () => {}
   } = $props();
   let svgEl = $state<SVGElement>();
-  let svgWidth = $state(0);
-  let svgHeight = $state(0);
+  let svgRatio = $state(0);
 
   /** Are any of the electorates focused? If so, we use different styles for unallocated */
   let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
@@ -77,6 +77,15 @@
       hex.dataset.certain = newCertainty;
     });
   });
+
+  onMount(() => {
+    if (!svgEl) {
+      return;
+    }
+    // calculate the ratio of the SVG on first render. This shouldn't change.
+    const style = svgEl.getBoundingClientRect();
+    svgRatio = style.height / style.width;
+  });
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -91,75 +100,80 @@
     onClick({ code, clientX, clientY });
   }}
 >
-  <svg
-    bind:this={svgEl}
-    bind:clientWidth={svgWidth}
-    bind:clientHeight={svgHeight}
-    viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
+  <div
+    class="hexmap__viz"
+    class:hexmap__viz--vertical={svgRatio <= 1}
+    style:aspect-ratio={svgRatio ? svgRatio.toFixed(3) : null}
   >
-    <defs id="defs1">
-      <pattern
-        id="uncertainty-hash"
-        patternUnits="userSpaceOnUse"
-        width="5.2070173"
-        height="2.9824252"
-        patternTransform="translate(393.99999,558.99999)"
-        preserveAspectRatio="xMidYMid"
-      >
-        <path
-          clip-path="none"
-          style="opacity:0.8;fill:#ffffff;fill-opacity:0.8;stroke:none;stroke-width:0.00999999;stroke-dasharray:none"
-          d="M 2.0117291,0 0,1.1523402 v 1.830085 L 5.2050898,0 Z M 5.2070173,1.1503748 2.0117291,2.9824252 h 3.1952882 z"
-        />
-      </pattern>
-    </defs>
-    {#each config.groups as group}
-      <HexMapGroup
-        {...group}
-        {isStatic}
-        {layout}
-        offset={layout.positions[group.name]}
-        {hasAllocations}
-        {allocations}
-        {focuses}
-        {hasAnyFocuses}
-        {showElectorateLabels}
-        {showFocusedElectorateLabels}
-        {labelsToShow}
-      />
-    {/each}
-  </svg>
-
-  {#if showStateLabels}
-    <div
-      class="hexmap__labels"
-      style:width={`${svgWidth}px`}
-      style:height={`${svgHeight}px`}
-      style:margin-left={`${0 - svgWidth / 2}px`}
-      style:margin-top={`${0 - svgHeight / 2}px`}
+    <svg
+      bind:this={svgEl}
+      viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
     >
-      <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
-    </div>
-  {/if}
+      <defs id="defs1">
+        <pattern
+          id="uncertainty-hash"
+          patternUnits="userSpaceOnUse"
+          width="5.2070173"
+          height="2.9824252"
+          patternTransform="translate(393.99999,558.99999)"
+          preserveAspectRatio="xMidYMid"
+        >
+          <path
+            clip-path="none"
+            style="opacity:0.8;fill:#ffffff;fill-opacity:0.8;stroke:none;stroke-width:0.00999999;stroke-dasharray:none"
+            d="M 2.0117291,0 0,1.1523402 v 1.830085 L 5.2050898,0 Z M 5.2070173,1.1503748 2.0117291,2.9824252 h 3.1952882 z"
+          />
+        </pattern>
+      </defs>
+      {#each config.groups as group}
+        <HexMapGroup
+          {...group}
+          {isStatic}
+          {layout}
+          offset={layout.positions[group.name]}
+          {hasAllocations}
+          {allocations}
+          {focuses}
+          {hasAnyFocuses}
+          {showElectorateLabels}
+          {showFocusedElectorateLabels}
+          {labelsToShow}
+        />
+      {/each}
+    </svg>
+
+    {#if showStateLabels}
+      <div class="hexmap__labels">
+        <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
+      </div>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   .hexmap {
     position: relative;
+    width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
   }
   .hexmap__labels {
     position: absolute;
+    left: 0;
     top: 0;
-    left: 50%;
-    top: 50%;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
   }
   .hexmap svg {
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .hexmap__viz {
+    position: relative;
+    margin: 0 auto;
     max-height: 100%;
   }
 </style>
