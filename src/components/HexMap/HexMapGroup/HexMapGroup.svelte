@@ -14,7 +14,7 @@
     labelsToShow = {},
     showElectorateLabels,
     showFocusedElectorateLabels,
-    isStatic
+    isStaticLayout
   } = $props();
 
   const radius = 16;
@@ -48,7 +48,7 @@
   style:transform
   class:group--never-rendered={!hasBeenVisible}
   class:group--hidden={!isVisible}
-  class:group--map-is-static={isStatic}
+  class:group--map-is-static={isStaticLayout}
   class:group--map-is-empty={!hasAllocations}
   class:group--has-focuses={hasAnyFocuses}
 >
@@ -116,6 +116,9 @@
     fill: var(--a-null);
     stroke: var(--a-null-border);
     stroke-width: 1;
+  }
+  .group-hexes :global(.hex[data-userfocused='true']) {
+    fill: limegreen !important;
   }
 
   .group--map-is-empty .group-hexes :global(.hex) {

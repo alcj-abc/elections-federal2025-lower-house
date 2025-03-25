@@ -4,6 +4,7 @@
   import { cubicInOut } from 'svelte/easing';
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
   import { onMount } from 'svelte';
+  import HexMapKeyboardNav from './HexMapKeyboardNav/HexMapKeyboardNav.svelte';
   let {
     config = {},
     layout = {},
@@ -19,11 +20,14 @@
     /** When an electorate is focused, show the hex label */
     showFocusedElectorateLabels = false,
     /** Should the map transition between layouts - no for the web component*/
-    isStatic = false,
-    onClick = () => {}
+    isStaticLayout = false,
+    onClick = () => {},
+    /** Is the map intended to be clicked on? If so, we include HexMapKeyboardNav for accessibility porpoises*/
+    isInteractive = false
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgRatio = $state(0);
+  let userFocusedElectorate = $state<null | string>(null);
 
   /** Are any of the electorates focused? If so, we use different styles for unallocated */
   let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
@@ -58,9 +62,10 @@
     Array.from(svgEl?.querySelectorAll('polygon.hex') || []).filter(hex => hex instanceof SVGPolygonElement)
   );
   $effect(() => {
-    const _allocations = allocations;
+    const _allocations = { ...allocations };
     const _focuses = focuses;
     const _certainties = certainties;
+    const _userFocusedElectorate = userFocusedElectorate;
 
     hexes.forEach(hex => {
       const electorateCode = hex.dataset.id;
@@ -75,6 +80,12 @@
       hex.dataset.focused = newFocus;
       const newCertainty = _certainties[electorateCode] || null;
       hex.dataset.certain = newCertainty;
+
+      if (electorateCode === _userFocusedElectorate) {
+        hex.dataset.userfocused = 'true';
+      } else {
+        delete hex.dataset.userfocused;
+      }
     });
   });
 
@@ -128,7 +139,7 @@
       {#each config.groups as group}
         <HexMapGroup
           {...group}
-          {isStatic}
+          {isStaticLayout}
           {layout}
           offset={layout.positions[group.name]}
           {hasAllocations}
@@ -148,6 +159,16 @@
       </div>
     {/if}
   </div>
+
+  {#if isInteractive}
+    <HexMapKeyboardNav
+      groups={config.groups}
+      onChange={newValue => {
+        userFocusedElectorate = newValue;
+      }}
+      {onClick}
+    />
+  {/if}
 </div>
 
 <style lang="scss">

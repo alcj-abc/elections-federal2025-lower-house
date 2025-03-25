@@ -29,6 +29,7 @@
     {showStateLabels}
     {showElectorateLabels}
     {onClick}
-    isStatic={true}
+    isStaticLayout={true}
+    isInteractive={true}
   />
 </StyleRoot>
