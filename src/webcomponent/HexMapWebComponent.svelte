@@ -15,21 +15,25 @@
     certainties = {},
     showStateLabels = false,
     showElectorateLabels = false,
-    onClick = () => {}
+    onClick = () => {},
+    layout = "COUNTRY",
+    focuses = {},
+    isStaticLayout = true,
+    isInteractive = true
   } = $props();
 </script>
 
 <StyleRoot>
   <HexMap
     {config}
-    layout={layouts.COUNTRY}
+    layout={layouts[layout]}
     {allocations}
     {certainties}
-    focuses={{}}
+    {focuses}
     {showStateLabels}
     {showElectorateLabels}
     {onClick}
-    isStaticLayout={true}
-    isInteractive={true}
+    {isStaticLayout}
+    {isInteractive}
   />
 </StyleRoot>
