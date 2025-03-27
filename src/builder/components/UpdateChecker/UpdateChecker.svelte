@@ -76,7 +76,7 @@
 
   function onClick() {
     // @ts-ignore
-    window.location = newVersion.url + window.location.hash;
+    window.location = `${newVersion.url}/builder/${window.location.hash}`;
   }
 
   function onClose() {
