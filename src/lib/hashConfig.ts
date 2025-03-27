@@ -162,6 +162,12 @@ export const schema = {
     type: 'boolean',
     key: 't',
     defaultValue: false
+  },
+  firstPreferenceArrows: {
+    type: 'enum',
+    key: 'fpa',
+    defaultValue: 'None',
+    values: ['None', 'ALP', 'LNP', 'GRN', 'Independent', 'Informal']
   }
 };
 
@@ -178,6 +184,7 @@ export const hashConfig = makeSvelteStore<{
   showElectorateLabels: boolean;
   showFocusedElectorateLabels: boolean;
   showTotals: boolean;
+  firstPreferenceArrows: string;
 }>(schema);
 
 // Version our hash. This way we can introduce/deprecate/upgrade features as needed.

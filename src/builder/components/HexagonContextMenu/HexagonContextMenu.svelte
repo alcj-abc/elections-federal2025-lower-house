@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { arrowData } from '../../../components/HexMap/HexMapGroup/HexMapArrows/utils';
   import { allocationMap, hashConfig } from '../../../lib/hashConfig';
   import Circle from '../Circle/Circle.svelte';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
@@ -15,6 +16,16 @@
   <hr />
   <!-- <HexagonRedistribute {electorate} />
   <hr /> -->
+  {#if Object.values($arrowData).length > 0}
+    <div class="section">
+      Change in first preference
+      <br />
+      vote for {$hashConfig.firstPreferenceArrows}: {$arrowData[electorate.id]
+        ? $arrowData[electorate.id].toFixed(3) + '%'
+        : 'not applicable'}
+    </div>
+    <hr />
+  {/if}
 
   <label class="item">
     <div class="section">

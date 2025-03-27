@@ -5,6 +5,7 @@
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
   import { onMount } from 'svelte';
   import HexMapKeyboardNav from './HexMapKeyboardNav/HexMapKeyboardNav.svelte';
+  import HexMapArrows from './HexMapGroup/HexMapArrows/HexMapArrows.svelte';
   let {
     config = {},
     layout = {},
@@ -23,7 +24,9 @@
     isStaticLayout = false,
     onClick = () => {},
     /** Is the map intended to be clicked on? If so, we include HexMapKeyboardNav for accessibility porpoises*/
-    isInteractive = false
+    isInteractive = false,
+    /** Party for whom to show first preference arrows */
+    firstPreferenceArrows = 'None'
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgRatio = $state(0);
@@ -151,6 +154,12 @@
           {labelsToShow}
         />
       {/each}
+
+      {#if firstPreferenceArrows !== 'None'}
+        {#each config.groups as group}
+          <HexMapArrows hexes={group.hexes} offset={layout.positions[group.name]} {firstPreferenceArrows} />
+        {/each}
+      {/if}
     </svg>
 
     {#if showStateLabels}

@@ -244,6 +244,17 @@
             </label>
           </fieldset>
           <fieldset>
+            <legend>Change arrows</legend>
+            <label>
+              Show change in first preference for:
+              <select bind:value={$hashConfig.firstPreferenceArrows}>
+                {#each schema.firstPreferenceArrows.values as value}
+                  <option>{value}</option>
+                {/each}
+              </select>
+            </label>
+          </fieldset>
+          <fieldset>
             <legend>Markers</legend>
             <MarkerAdmin
               prefixes={{
