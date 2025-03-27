@@ -6,7 +6,7 @@
     focused = e.target.dataset.id;
   }
   function onClickProxy(e) {
-    const id = e.tardet.dataset.id;
+    const id = e.target.dataset.id;
     // TODO: do we need clientX and clientY
     // const hex = groups.flatMap(group => group.hexes).find(hex => hex.id === id);
 
@@ -36,7 +36,7 @@
 <AccessibleHide>
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-  <ul onclick={onClickProxy} onfocusin={onFocus} onfocusout={onBlur}>
+  <ul class="hexmapkeyboardnav" onclick={onClickProxy} onfocusin={onFocus} onfocusout={onBlur}>
     {#each sortedGroups as group}
       <li>
         {group.name}
@@ -53,4 +53,8 @@
 </AccessibleHide>
 
 <style lang="scss">
+  .hexmapkeyboardnav {
+    max-height: 300px;
+    overflow: auto;
+  }
 </style>
