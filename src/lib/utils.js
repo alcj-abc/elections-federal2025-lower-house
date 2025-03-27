@@ -9,3 +9,14 @@ export function invertMap(map) {
     return obj;
   }, {});
 }
+
+const radius = 16;
+/**
+ * Given a hexagon coordinate, return the pixel coords
+ * @returns
+ */
+export function hexToPx(coord = [0, 0], units = 'px') {
+  const newX = coord[0] * (radius * Math.sqrt(3));
+  const newY = coord[1] * 1.5 * radius;
+  return [newX, newY].map(px => `${Math.round(px)}${units}`);
+}
