@@ -15,19 +15,22 @@
   let {
     allocations = {},
     certainties = {},
+    focuses = {},
     showStateLabels = false,
     showElectorateLabels = false,
-    layoutName = 'COUNTRY',
+    layout = 'COUNTRY',
     selectedElectorate = null,
     customViewbox = null,
     onClick = () => {},
     onHover = () => {},
-    onApi = () => {}
+    onApi = () => {},
+    isStaticLayout = true,
+    isInteractive = true
   } = $props();
 
-  let rootEl = $state<HTMLDivElement | null>(null);
+  let rootEl = $state();
 
-  let layout = $derived.by(() => layouts[layoutName]);
+  let layoutDefinition = $derived.by(() => layouts[layout]);
 
   /**
    * Get a screen coordinate from the given SVG coordinate
@@ -46,8 +49,11 @@
    */
   function getHex(id: string) {
     const hex = electoratesByCode[id];
-    const groupOffset = layout.positions[hex?.group];
-    const svg = rootEl?.querySelector('svg');
+    const groupOffset = layoutDefinition.positions[hex?.group];
+    if (!(rootEl instanceof HTMLDivElement)) {
+      return;
+    }
+    const svg = rootEl.querySelector('svg');
     if (!hex || !groupOffset || !svg) {
       throw new Error(`Could not find hexagon with id ${id}`);
     }
@@ -75,22 +81,20 @@
   });
 </script>
 
-<div bind:this={rootEl}>
-  <StyleRoot>
-    <HexMap
-      {config}
-      {layout}
-      {allocations}
-      {certainties}
-      focuses={{}}
-      {showStateLabels}
-      {showElectorateLabels}
-      {onClick}
-      {onHover}
-      {selectedElectorate}
-      {customViewbox}
-      isStaticLayout={true}
-      isInteractive={true}
-    />
-  </StyleRoot>
-</div>
+<StyleRoot bind:this={rootEl}>
+  <HexMap
+    {config}
+    layout={layoutDefinition}
+    {allocations}
+    {certainties}
+    {focuses}
+    {showStateLabels}
+    {showElectorateLabels}
+    {onClick}
+    {onHover}
+    {selectedElectorate}
+    {customViewbox}
+    {isStaticLayout}
+    {isInteractive}
+  />
+</StyleRoot>

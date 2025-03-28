@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   import parties from '../../../data/parties.json';
   import { partyColours } from './store';
 
-  let { children } = $props();
-  let rootEl = $state<HTMLDivElement>();
+  let { children, rootEl = $bindable() } = $props();
+
   onMount(() => {
     if (!rootEl) {
       return;
