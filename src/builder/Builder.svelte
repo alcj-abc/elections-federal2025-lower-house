@@ -19,6 +19,8 @@
     type: string;
     props?: {};
   }>();
+  // @ts-ignore
+  let selectedElectorate = $derived.by(() => modal?.props?.electorate?.id);
 
   function onVizClick({ code, clientX, clientY }) {
     if (!code) {
@@ -86,6 +88,7 @@
               {layout}
               onClick={onVizClick}
               isInteractive={true}
+              {selectedElectorate}
             />
           </LabelDragger>
         </div>
@@ -241,6 +244,17 @@
             <label>
               <input type="checkbox" bind:checked={$hashConfig.showTotals} />
               Show totals
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Change arrows</legend>
+            <label>
+              Show change in first preference for:
+              <select bind:value={$hashConfig.firstPreferenceArrows}>
+                {#each schema.firstPreferenceArrows.values as value}
+                  <option>{value}</option>
+                {/each}
+              </select>
             </label>
           </fieldset>
           <fieldset>

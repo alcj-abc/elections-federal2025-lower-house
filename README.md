@@ -20,8 +20,34 @@ The properties are:
   certainties = { ADEL: true }
   showStateLabels = false,
   showElectorateLabels = false,
-  onClick = () => {}
+  layoutName = "COUNTRY",
+  onClick = ({code, clientX, clientY}) => {},
+  onHover = ({code, clientX, clientY}) => {},
+  onApi = (api) => { global.api = api },
+  selectedElectorate='ADEL',
+  customViewbox = null | [x, y, w, h],
+  onViewboxChange = ({newViewbox}) => {}
 }
+```
+
+Once onApi returns, you can use the API to query hexagon dimensions. `screenCoord` gives you the hexagon coordinate on-screen so you can tie popups to the hexagon. `svgCoord` gives you the coordinate inside the SVG, so you can set the viewbox based on a hexagon position.
+
+```
+  const el = document.querySelector('abcnews-hexmap');
+  el.onApi = function (api) {
+    console.log(api.getHex('BRIS'));
+    // {
+    //   "code": "BRIS",
+    //   "screenCoord": [
+    //     772.380615234375,
+    //     271.9005126953125
+    //   ],
+    //   "svgCoord": [
+    //     277.3,
+    //     112
+    //   ]
+    // }
+  };
 ```
 
 You should set all electorate codes at once. Codes should align with Antony Green's database. Supported codes are listed in [./data/parties.json]()

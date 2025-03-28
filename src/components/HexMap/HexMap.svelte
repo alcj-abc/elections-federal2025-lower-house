@@ -5,6 +5,9 @@
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
   import { onMount } from 'svelte';
   import HexMapKeyboardNav from './HexMapKeyboardNav/HexMapKeyboardNav.svelte';
+  import HexMapArrows from './HexMapGroup/HexMapArrows/HexMapArrows.svelte';
+  import HexMapInteractionHandlers from './HexMapInteractionHandlers/HexMapInteractionHandlers.svelte';
+  import HexMapFocusIndicator from './HexMapFocusIndicator/HexMapFocusIndicator.svelte';
   let {
     config = {},
     layout = {},
@@ -21,9 +24,20 @@
     showFocusedElectorateLabels = false,
     /** Should the map transition between layouts - no for the web component*/
     isStaticLayout = false,
-    onClick = () => {},
+    /** Call back to this function when someone clicks the map*/
+    onClick = ({ code }) => {},
+    /** Call back to this function when someone hovers a hexagon*/
+    onHover = ({ code }) => {},
+    /** Override the viewbox with your own */
+    customViewbox = null,
+    /** Receive the current value of the viewbox (excluding animation frames) */
+    onViewboxChange = ({ newViewbox }) => {},
     /** Is the map intended to be clicked on? If so, we include HexMapKeyboardNav for accessibility porpoises*/
-    isInteractive = false
+    isInteractive = false,
+    /** Party for whom to show first preference arrows */
+    firstPreferenceArrows = 'None',
+    /** which electorate is currently focused */
+    selectedElectorate = null
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgRatio = $state(0);
@@ -49,11 +63,15 @@
   let viewboxHeight = new Tween(initial[3], tweenOptions);
 
   $effect(() => {
-    const [newX, newY, newW, newH] = layout.viewbox;
+    const [newX, newY, newW, newH] = customViewbox || layout.viewbox;
     viewboxX.set(newX);
     viewboxY.set(newY);
     viewboxWidth.set(newW);
     viewboxHeight.set(newH);
+  });
+
+  $effect(() => {
+    onViewboxChange(layout.viewbox);
   });
 
   // Set properties manually on hexes. Svelte is slow, and I don't trust it to
@@ -65,7 +83,6 @@
     const _allocations = { ...allocations };
     const _focuses = focuses;
     const _certainties = certainties;
-    const _userFocusedElectorate = userFocusedElectorate;
 
     hexes.forEach(hex => {
       const electorateCode = hex.dataset.id;
@@ -80,12 +97,6 @@
       hex.dataset.focused = newFocus;
       const newCertainty = _certainties[electorateCode] || null;
       hex.dataset.certain = newCertainty;
-
-      if (electorateCode === _userFocusedElectorate) {
-        hex.dataset.userfocused = 'true';
-      } else {
-        delete hex.dataset.userfocused;
-      }
     });
   });
 
@@ -99,76 +110,78 @@
   });
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-<div
-  class="hexmap"
-  onclick={({ target, clientX, clientY }) => {
-    const code = (target as SVGPolygonElement)?.dataset?.id;
-    if (!code || !onClick) {
-      return;
-    }
-    onClick({ code, clientX, clientY });
-  }}
->
-  <div
-    class="hexmap__viz"
-    class:hexmap__viz--vertical={svgRatio <= 1}
-    style:aspect-ratio={svgRatio ? svgRatio.toFixed(3) : null}
-  >
-    <svg
-      bind:this={svgEl}
-      viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
+<div class="hexmap">
+  <HexMapInteractionHandlers {isInteractive} {onClick} {onHover}>
+    <div
+      class="hexmap__viz"
+      class:hexmap__viz--vertical={svgRatio <= 1}
+      style:aspect-ratio={svgRatio ? svgRatio.toFixed(3) : null}
     >
-      <defs id="defs1">
-        <pattern
-          id="uncertainty-hash"
-          patternUnits="userSpaceOnUse"
-          width="5.2070173"
-          height="2.9824252"
-          patternTransform="translate(393.99999,558.99999)"
-          preserveAspectRatio="xMidYMid"
-        >
-          <path
-            clip-path="none"
-            style="opacity:0.8;fill:#ffffff;fill-opacity:0.8;stroke:none;stroke-width:0.00999999;stroke-dasharray:none"
-            d="M 2.0117291,0 0,1.1523402 v 1.830085 L 5.2050898,0 Z M 5.2070173,1.1503748 2.0117291,2.9824252 h 3.1952882 z"
+      <svg
+        bind:this={svgEl}
+        viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
+      >
+        <defs id="defs1">
+          <pattern
+            id="uncertainty-hash"
+            patternUnits="userSpaceOnUse"
+            width="5.2070173"
+            height="2.9824252"
+            patternTransform="translate(393.99999,558.99999)"
+            preserveAspectRatio="xMidYMid"
+          >
+            <path
+              clip-path="none"
+              style="opacity:0.8;fill:#ffffff;fill-opacity:0.8;stroke:none;stroke-width:0.00999999;stroke-dasharray:none"
+              d="M 2.0117291,0 0,1.1523402 v 1.830085 L 5.2050898,0 Z M 5.2070173,1.1503748 2.0117291,2.9824252 h 3.1952882 z"
+            />
+          </pattern>
+        </defs>
+        {#each config.groups as group}
+          <HexMapGroup
+            {...group}
+            {isStaticLayout}
+            {layout}
+            offset={layout.positions[group.name]}
+            {hasAllocations}
+            {allocations}
+            {focuses}
+            {hasAnyFocuses}
+            {showElectorateLabels}
+            {showFocusedElectorateLabels}
+            {labelsToShow}
           />
-        </pattern>
-      </defs>
-      {#each config.groups as group}
-        <HexMapGroup
-          {...group}
-          {isStaticLayout}
-          {layout}
-          offset={layout.positions[group.name]}
-          {hasAllocations}
-          {allocations}
-          {focuses}
-          {hasAnyFocuses}
-          {showElectorateLabels}
-          {showFocusedElectorateLabels}
-          {labelsToShow}
-        />
-      {/each}
-    </svg>
+        {/each}
 
-    {#if showStateLabels}
-      <div class="hexmap__labels">
-        <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
-      </div>
+        <HexMapFocusIndicator groups={config.groups} id={userFocusedElectorate} {layout} />
+
+        <HexMapFocusIndicator groups={config.groups} id={selectedElectorate} {layout} />
+
+        {#if firstPreferenceArrows !== 'None'}
+          {#each config.groups as group}
+            <HexMapArrows hexes={group.hexes} offset={layout.positions[group.name]} {firstPreferenceArrows} />
+          {/each}
+        {/if}
+
+        {#if showStateLabels}
+          <div class="hexmap__labels">
+            <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
+          </div>
+        {/if}
+      </svg>
+    </div>
+
+    {#if isInteractive}
+      <HexMapKeyboardNav
+        groups={config.groups}
+        {layout}
+        onChange={newValue => {
+          userFocusedElectorate = newValue;
+        }}
+        {onClick}
+      />
     {/if}
-  </div>
-
-  {#if isInteractive}
-    <HexMapKeyboardNav
-      groups={config.groups}
-      onChange={newValue => {
-        userFocusedElectorate = newValue;
-      }}
-      {onClick}
-    />
-  {/if}
+  </HexMapInteractionHandlers>
 </div>
 
 <style lang="scss">

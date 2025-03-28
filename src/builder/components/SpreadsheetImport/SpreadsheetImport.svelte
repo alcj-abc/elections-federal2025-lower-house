@@ -8,8 +8,8 @@
   let status = $state('editing');
 
   function generateTsv() {
-    const rows = electorates
-      .toSorted()
+    const rows = [...electorates]
+      .sort()
       .map(electorate =>
         [
           electorate.name,

@@ -9,7 +9,7 @@ import { invertMap } from '../lib/utils';
 /** Array containing all the individual electorate hexes */
 export const electorates = data.groups
   .flatMap(group => group.hexes.map(hex => ({ ...hex, group: group.name })))
-  .toSorted((a, b) => a.index - b.index);
+  .sort((a, b) => a.index - b.index);
 
 export const electoratesByCode = Object.values(electorates).reduce((obj, electorate) => {
   obj[electorate.id] = electorate;
@@ -162,6 +162,12 @@ export const schema = {
     type: 'boolean',
     key: 't',
     defaultValue: false
+  },
+  firstPreferenceArrows: {
+    type: 'enum',
+    key: 'fpa',
+    defaultValue: 'None',
+    values: ['None', 'ALP', 'LNP', 'GRN', 'Independent', 'Informal']
   }
 };
 
@@ -178,6 +184,7 @@ export const hashConfig = makeSvelteStore<{
   showElectorateLabels: boolean;
   showFocusedElectorateLabels: boolean;
   showTotals: boolean;
+  firstPreferenceArrows: string;
 }>(schema);
 
 // Version our hash. This way we can introduce/deprecate/upgrade features as needed.

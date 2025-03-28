@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { hexToPx } from '../../../lib/utils';
   import HexLabels from './HexLabels/HexLabels.svelte';
+  // import HexMapArrows from './HexMapArrows/HexMapArrows.svelte';
 
   let {
     name = '',
@@ -16,13 +18,6 @@
     showFocusedElectorateLabels,
     isStaticLayout
   } = $props();
-
-  const radius = 16;
-  function hexToPx(coord = [0, 0]) {
-    const newX = coord[0] * (radius * Math.sqrt(3));
-    const newY = coord[1] * 1.5 * radius;
-    return [newX, newY].map(px => `${Math.round(px)}px`);
-  }
 
   let transform = $state(`translate(${hexToPx(offset).join(',')})`);
   let hasBeenVisible = $state(false);
@@ -62,9 +57,9 @@
   {#if isVisible}
     <HexLabels {hexes} {allocations} labelsToShow={labels} {showElectorateLabels} />
   {/if}
-  <g class="group-outline group-outline__over" style:opacity={hasAnyFocuses && !hasAllocations ? 0 : 1}
-    >{@html svgOutline}</g
-  >
+  <g class="group-outline group-outline__over" style:opacity={hasAnyFocuses && !hasAllocations ? 0 : 1}>
+    {@html svgOutline}
+  </g>
 </g>
 
 <style lang="scss">
@@ -116,9 +111,6 @@
     fill: var(--a-null);
     stroke: var(--a-null-border);
     stroke-width: 1;
-  }
-  .group-hexes :global(.hex[data-userfocused='true']) {
-    fill: limegreen !important;
   }
 
   .group--map-is-empty .group-hexes :global(.hex) {
