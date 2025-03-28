@@ -6,16 +6,29 @@
     <title>elections-federal2025-hex</title>
     <!-- If you add `extractCSS:true` to your build config, add the <link> below -->
     <!-- <link rel="stylesheet" href="index.css" /> -->
-    <script src="index.js"></script>
+    <script src="elections-federal2025-lower-house.js" type="module"></script>
     <!-- If you add `addModernJS:true` to your build config, replace the <script> above with the ones below -->
     <!-- <script type="module" src="index_modern.js"></script> -->
     <!-- <script nomodule src="index.js"></script> -->
   </head>
   <body>
-    <div data-mount id="electionsfederal2025hex"></div>
-    <!-- Mock Odyssey's loaded event so the `whenOdysseyLoaded` promise resolves -->
-    <script>
-      window.dispatchEvent(new CustomEvent('odyssey:api'));
+    <abcnews-hexmap showStateLabels="showStateLabels" />
+    <script type="text/javascript">
+      const el = document.querySelector('abcnews-hexmap');
+      el.onApi = function (api) {
+        console.log(api.getHex('BRIS'));
+        // {
+        //   "code": "BRIS",
+        //   "screenCoord": [
+        //     772.380615234375,
+        //     271.9005126953125
+        //   ],
+        //   "svgCoord": [
+        //     277.3,
+        //     112
+        //   ]
+        // }
+      };
     </script>
   </body>
 </html>

@@ -9,7 +9,7 @@ import { invertMap } from '../lib/utils';
 /** Array containing all the individual electorate hexes */
 export const electorates = data.groups
   .flatMap(group => group.hexes.map(hex => ({ ...hex, group: group.name })))
-  .toSorted((a, b) => a.index - b.index);
+  .sort((a, b) => a.index - b.index);
 
 export const electoratesByCode = Object.values(electorates).reduce((obj, electorate) => {
   obj[electorate.id] = electorate;

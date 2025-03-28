@@ -22,7 +22,7 @@
 <label>
   Redistribute:
   <select onchange={onChange} value={redist}>
-    {#each electorates.toSorted((a, b) => a.name.localeCompare(b.name)) as electorate}
+    {#each [...electorates].sort((a, b) => a.name.localeCompare(b.name)) as electorate}
       <option value={electorate.id}>{electorate.id} - {electorate.name}</option>
     {/each}
   </select>

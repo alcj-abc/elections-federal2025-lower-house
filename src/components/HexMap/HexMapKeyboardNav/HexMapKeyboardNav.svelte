@@ -28,7 +28,7 @@
   let sortedGroups = $derived.by(() =>
     groups.map(group => ({
       ...group,
-      hexes: group.hexes.toSorted((a, b) => a.coord[0] + a.coord[1] * 1000 - (b.coord[0] + b.coord[1] * 1000))
+      hexes: [...group.hexes].sort((a, b) => a.coord[0] + a.coord[1] * 1000 - (b.coord[0] + b.coord[1] * 1000))
     }))
   );
 </script>

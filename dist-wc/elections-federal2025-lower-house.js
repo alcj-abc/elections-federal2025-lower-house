@@ -1,138 +1,141 @@
-var Mn = Object.defineProperty;
-var Eo = (e) => {
-  throw TypeError(e);
+var vn = Object.defineProperty;
+var Ya = (t) => {
+  throw TypeError(t);
 };
-var kn = (e, t, o) => t in e ? Mn(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o;
-var j = (e, t, o) => kn(e, typeof t != "symbol" ? t + "" : t, o), Kt = (e, t, o) => t.has(e) || Eo("Cannot " + o);
-var A = (e, t, o) => (Kt(e, t, "read from private field"), o ? o.call(e) : t.get(e)), ee = (e, t, o) => t.has(e) ? Eo("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, o), Te = (e, t, o, n) => (Kt(e, t, "write to private field"), n ? n.call(e, o) : t.set(e, o), o), Lo = (e, t, o) => (Kt(e, t, "access private method"), o);
-const In = "5";
-typeof window < "u" && (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(In);
-const ro = 1, ao = 2, Ho = 4, Bn = 8, Fn = 16, Hn = 1, Dn = 4, Wn = 8, Gn = 16, Kn = 4, Un = 2, Do = "[", so = "[!", io = "]", qe = {}, B = Symbol(), jt = !1, oe = 2, Wo = 4, Mt = 8, kt = 16, Pe = 32, et = 64, Pt = 128, z = 256, At = 512, H = 1024, Ae = 2048, tt = 4096, _e = 8192, It = 16384, Go = 32768, ft = 65536, Yn = 1 << 19, Ko = 1 << 20, Ve = Symbol("$state"), lo = Symbol("legacy props"), jn = Symbol("");
-var co = Array.isArray, qn = Array.prototype.indexOf, uo = Array.from, Et = Object.keys, at = Object.defineProperty, Ne = Object.getOwnPropertyDescriptor, Vn = Object.getOwnPropertyDescriptors, zn = Object.prototype, Xn = Array.prototype, Uo = Object.getPrototypeOf;
-function Ue(e) {
-  return typeof e == "function";
+var Rn = (t, e, a) => e in t ? vn(t, e, { enumerable: !0, configurable: !0, writable: !0, value: a }) : t[e] = a;
+var nt = (t, e, a) => Rn(t, typeof e != "symbol" ? e + "" : e, a), $a = (t, e, a) => e.has(t) || Ya("Cannot " + a);
+var U = (t, e, a) => ($a(t, e, "read from private field"), a ? a.call(t) : e.get(t)), Wt = (t, e, a) => e.has(t) ? Ya("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, a), ye = (t, e, a, r) => ($a(t, e, "write to private field"), r ? r.call(t, a) : e.set(t, a), a);
+const Sn = "5";
+typeof window < "u" && (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(Sn);
+const ba = 1, Ta = 2, Vr = 4, On = 8, Gn = 16, xn = 1, En = 4, Cn = 8, Un = 16, wn = 4, Hn = 1, _n = 2, Ir = "[", va = "[!", Ra = "]", re = {}, J = Symbol(), Ba = !1, lt = 2, Ar = 4, We = 8, Ye = 16, Ot = 32, ce = 64, Ge = 128, tt = 256, xe = 512, Y = 1024, Gt = 2048, pe = 4096, vt = 8192, $e = 16384, gr = 32768, ge = 65536, Fn = 1 << 19, fr = 1 << 20, ne = Symbol("$state"), Sa = Symbol("legacy props"), Dn = Symbol("");
+var Oa = Array.isArray, kn = Array.prototype.indexOf, Ga = Array.from, Ee = Object.keys, he = Object.defineProperty, Rt = Object.getOwnPropertyDescriptor, Mn = Object.getOwnPropertyDescriptors, Jn = Object.prototype, Wn = Array.prototype, Nr = Object.getPrototypeOf;
+function ee(t) {
+  return typeof t == "function";
 }
-const K = () => {
+const M = () => {
 };
-function Jn(e) {
-  for (var t = 0; t < e.length; t++)
-    e[t]();
+function mr(t) {
+  for (var e = 0; e < t.length; e++)
+    t[e]();
 }
-let Lt = !1, qt = [];
-function Yo() {
-  Lt = !1;
-  const e = qt.slice();
-  qt = [], Jn(e);
+let Ve = [], ca = [];
+function Lr() {
+  var t = Ve;
+  Ve = [], mr(t);
 }
-function Bt(e) {
-  Lt || (Lt = !0, queueMicrotask(Yo)), qt.push(e);
+function Yn() {
+  var t = ca;
+  ca = [], mr(t);
 }
-function Qn() {
-  Lt && Yo();
+function fe(t) {
+  Ve.length === 0 && queueMicrotask(Lr), Ve.push(t);
 }
-function jo(e) {
-  return e === this.v;
+function ja() {
+  Ve.length > 0 && Lr(), ca.length > 0 && Yn();
 }
-function qo(e, t) {
-  return e != e ? t == t : e !== t || e !== null && typeof e == "object" || typeof e == "function";
+function br(t) {
+  return t === this.v;
 }
-function Zn(e, t) {
-  return e !== t;
+function Tr(t, e) {
+  return t != t ? e == e : t !== e || t !== null && typeof t == "object" || typeof t == "function";
 }
-function fo(e) {
-  return !qo(e, this.v);
+function $n(t, e) {
+  return t !== e;
 }
-function er(e) {
+function xa(t) {
+  return !Tr(t, this.v);
+}
+function Bn(t) {
   throw new Error("https://svelte.dev/e/effect_in_teardown");
 }
-function tr() {
+function jn() {
   throw new Error("https://svelte.dev/e/effect_in_unowned_derived");
 }
-function or(e) {
+function Qn(t) {
   throw new Error("https://svelte.dev/e/effect_orphan");
 }
-function nr() {
+function Kn() {
   throw new Error("https://svelte.dev/e/effect_update_depth_exceeded");
 }
-function rr() {
+function zn() {
   throw new Error("https://svelte.dev/e/hydration_failed");
 }
-function ar(e) {
+function qn(t) {
   throw new Error("https://svelte.dev/e/props_invalid_value");
 }
-function sr() {
+function Xn() {
   throw new Error("https://svelte.dev/e/state_descriptors_fixed");
 }
-function ir() {
+function Zn() {
   throw new Error("https://svelte.dev/e/state_prototype_fixed");
 }
-function lr() {
+function t2() {
   throw new Error("https://svelte.dev/e/state_unsafe_local_read");
 }
-function dr() {
+function e2() {
   throw new Error("https://svelte.dev/e/state_unsafe_mutation");
 }
-let cr = !1;
-function D(e, t) {
-  var o = {
+let a2 = !1;
+function B(t, e) {
+  var a = {
     f: 0,
     // TODO ideally we could skip this altogether, but it causes type errors
-    v: e,
+    v: t,
     reactions: null,
-    equals: jo,
+    equals: br,
     rv: 0,
     wv: 0
   };
-  return o;
+  return a;
 }
-function he(e) {
-  return /* @__PURE__ */ ur(D(e));
-}
-// @__NO_SIDE_EFFECTS__
-function Ft(e, t = !1) {
-  const o = D(e);
-  return t || (o.equals = fo), o;
+function Ft(t) {
+  return /* @__PURE__ */ r2(B(t));
 }
 // @__NO_SIDE_EFFECTS__
-function ur(e) {
-  return S !== null && !se && S.f & oe && (ie === null ? gr([e]) : ie.push(e)), e;
+function Be(t, e = !1) {
+  const a = B(t);
+  return e || (a.equals = xa), a;
 }
-function $(e, t) {
-  return S !== null && !se && vn() && S.f & (oe | kt) && // If the source was created locally within the current derived, then
+// @__NO_SIDE_EFFECTS__
+function r2(t) {
+  return C !== null && !ot && C.f & lt && (Pt === null ? s2([t]) : Pt.push(t)), t;
+}
+function _(t, e) {
+  return C !== null && !ot && Yr() && C.f & (lt | Ye) && // If the source was created locally within the current derived, then
   // we allow the mutation.
-  (ie === null || !ie.includes(e)) && dr(), Vt(e, t);
+  (Pt === null || !Pt.includes(t)) && e2(), pa(t, e);
 }
-function Vt(e, t) {
-  return e.equals(t) || (e.v, e.v = t, e.wv = nn(), Vo(e, Ae), O !== null && O.f & H && !(O.f & (Pe | et)) && (ve === null ? mr([e]) : ve.push(e))), t;
+function pa(t, e) {
+  return t.equals(e) || (t.v, t.v = e, t.wv = Ur(), vr(t, Gt), E !== null && E.f & Y && !(E.f & (Ot | ce)) && (mt === null ? c2([t]) : mt.push(t))), e;
 }
-function Vo(e, t) {
-  var o = e.reactions;
-  if (o !== null)
-    for (var n = o.length, r = 0; r < n; r++) {
-      var a = o[r], s = a.f;
-      s & Ae || (ue(a, t), s & (H | z) && (s & oe ? Vo(
+function vr(t, e) {
+  var a = t.reactions;
+  if (a !== null)
+    for (var r = a.length, n = 0; n < r; n++) {
+      var o = a[n], l = o.f;
+      l & Gt || (It(o, e), l & (Y | tt) && (l & lt ? vr(
         /** @type {Derived} */
-        a,
-        tt
-      ) : Wt(
+        o,
+        pe
+      ) : Ke(
         /** @type {Effect} */
-        a
+        o
       )));
     }
 }
 // @__NO_SIDE_EFFECTS__
-function we(e) {
-  var t = oe | Ae, o = S !== null && S.f & oe ? (
+function et(t) {
+  var e = lt | Gt, a = C !== null && C.f & lt ? (
     /** @type {Derived} */
-    S
+    C
   ) : null;
-  return O === null || o !== null && o.f & z ? t |= z : O.f |= Ko, {
-    ctx: W,
+  return E === null || a !== null && a.f & tt ? e |= tt : E.f |= fr, {
+    ctx: j,
     deps: null,
     effects: null,
-    equals: jo,
-    f: t,
-    fn: e,
+    equals: br,
+    f: e,
+    fn: t,
     reactions: null,
     rv: 0,
     v: (
@@ -140,2033 +143,2013 @@ function we(e) {
       null
     ),
     wv: 0,
-    parent: o ?? O
+    parent: a ?? E
   };
 }
 // @__NO_SIDE_EFFECTS__
-function fr(e) {
-  const t = /* @__PURE__ */ we(e);
-  return t.equals = fo, t;
+function n2(t) {
+  const e = /* @__PURE__ */ et(t);
+  return e.equals = xa, e;
 }
-function zo(e) {
-  var t = e.effects;
-  if (t !== null) {
-    e.effects = null;
-    for (var o = 0; o < t.length; o += 1)
-      ne(
+function Rr(t) {
+  var e = t.effects;
+  if (e !== null) {
+    t.effects = null;
+    for (var a = 0; a < e.length; a += 1)
+      st(
         /** @type {Effect} */
-        t[o]
+        e[a]
       );
   }
 }
-function hr(e) {
-  for (var t = e.parent; t !== null; ) {
-    if (!(t.f & oe))
+function o2(t) {
+  for (var e = t.parent; e !== null; ) {
+    if (!(e.f & lt))
       return (
         /** @type {Effect} */
-        t
+        e
       );
-    t = t.parent;
+    e = e.parent;
   }
   return null;
 }
-function vr(e) {
-  var t, o = O;
-  ce(hr(e));
+function l2(t) {
+  var e, a = E;
+  Vt(o2(t));
   try {
-    zo(e), t = an(e);
+    Rr(t), e = Hr(t);
   } finally {
-    ce(o);
+    Vt(a);
   }
-  return t;
+  return e;
 }
-function Xo(e) {
-  var t = vr(e), o = (Oe || e.f & z) && e.deps !== null ? tt : H;
-  ue(e, o), e.equals(t) || (e.v = t, e.wv = nn());
+function Sr(t) {
+  var e = l2(t), a = (Ht || t.f & tt) && t.deps !== null ? pe : Y;
+  It(t, a), t.equals(e) || (t.v = e, t.wv = Ur());
 }
-function Ht(e) {
+function je(t) {
   console.warn("https://svelte.dev/e/hydration_mismatch");
 }
-let R = !1;
-function me(e) {
-  R = e;
+let G = !1;
+function Tt(t) {
+  G = t;
 }
-let C;
-function X(e) {
-  if (e === null)
-    throw Ht(), qe;
-  return C = e;
+let x;
+function at(t) {
+  if (t === null)
+    throw je(), re;
+  return x = t;
 }
-function ke() {
-  return X(
+function jt() {
+  return at(
     /** @type {TemplateNode} */
-    /* @__PURE__ */ Ee(C)
+    /* @__PURE__ */ xt(x)
   );
 }
-function U(e) {
-  if (R) {
-    if (/* @__PURE__ */ Ee(C) !== null)
-      throw Ht(), qe;
-    C = e;
+function w(t) {
+  if (G) {
+    if (/* @__PURE__ */ xt(x) !== null)
+      throw je(), re;
+    x = t;
   }
 }
-function zt() {
-  for (var e = 0, t = C; ; ) {
-    if (t.nodeType === 8) {
-      var o = (
+function ia() {
+  for (var t = 0, e = x; ; ) {
+    if (e.nodeType === 8) {
+      var a = (
         /** @type {Comment} */
-        t.data
+        e.data
       );
-      if (o === io) {
-        if (e === 0) return t;
-        e -= 1;
-      } else (o === Do || o === so) && (e += 1);
+      if (a === Ra) {
+        if (t === 0) return e;
+        t -= 1;
+      } else (a === Ir || a === va) && (t += 1);
     }
-    var n = (
+    var r = (
       /** @type {TemplateNode} */
-      /* @__PURE__ */ Ee(t)
+      /* @__PURE__ */ xt(e)
     );
-    t.remove(), t = n;
+    e.remove(), e = r;
   }
 }
-function ge(e, t = null, o) {
-  if (typeof e != "object" || e === null || Ve in e)
-    return e;
-  const n = Uo(e);
-  if (n !== zn && n !== Xn)
-    return e;
-  var r = /* @__PURE__ */ new Map(), a = co(e), s = D(0);
-  a && r.set("length", D(
+function wt(t, e = null, a) {
+  if (typeof t != "object" || t === null || ne in t)
+    return t;
+  const r = Nr(t);
+  if (r !== Jn && r !== Wn)
+    return t;
+  var n = /* @__PURE__ */ new Map(), o = Oa(t), l = B(0);
+  o && n.set("length", B(
     /** @type {any[]} */
-    e.length
+    t.length
   ));
-  var l;
+  var s;
   return new Proxy(
     /** @type {any} */
-    e,
+    t,
     {
-      defineProperty(c, i, d) {
-        (!("value" in d) || d.configurable === !1 || d.enumerable === !1 || d.writable === !1) && sr();
-        var f = r.get(i);
-        return f === void 0 ? (f = D(d.value), r.set(i, f)) : $(f, ge(d.value, l)), !0;
+      defineProperty(i, p, y) {
+        (!("value" in y) || y.configurable === !1 || y.enumerable === !1 || y.writable === !1) && Xn();
+        var u = n.get(p);
+        return u === void 0 ? (u = B(y.value), n.set(p, u)) : _(u, wt(y.value, s)), !0;
       },
-      deleteProperty(c, i) {
-        var d = r.get(i);
-        if (d === void 0)
-          i in c && r.set(i, D(B));
+      deleteProperty(i, p) {
+        var y = n.get(p);
+        if (y === void 0)
+          p in i && n.set(p, B(J));
         else {
-          if (a && typeof i == "string") {
-            var f = (
+          if (o && typeof p == "string") {
+            var u = (
               /** @type {Source<number>} */
-              r.get("length")
-            ), u = Number(i);
-            Number.isInteger(u) && u < f.v && $(f, u);
+              n.get("length")
+            ), c = Number(p);
+            Number.isInteger(c) && c < u.v && _(u, c);
           }
-          $(d, B), Co(s);
+          _(y, J), Qa(l);
         }
         return !0;
       },
-      get(c, i, d) {
-        var h;
-        if (i === Ve)
-          return e;
-        var f = r.get(i), u = i in c;
-        if (f === void 0 && (!u || (h = Ne(c, i)) != null && h.writable) && (f = D(ge(u ? c[i] : B, l)), r.set(i, f)), f !== void 0) {
-          var v = g(f);
-          return v === B ? void 0 : v;
+      get(i, p, y) {
+        var P;
+        if (p === ne)
+          return t;
+        var u = n.get(p), c = p in i;
+        if (u === void 0 && (!c || (P = Rt(i, p)) != null && P.writable) && (u = B(wt(c ? i[p] : J, s)), n.set(p, u)), u !== void 0) {
+          var d = f(u);
+          return d === J ? void 0 : d;
         }
-        return Reflect.get(c, i, d);
+        return Reflect.get(i, p, y);
       },
-      getOwnPropertyDescriptor(c, i) {
-        var d = Reflect.getOwnPropertyDescriptor(c, i);
-        if (d && "value" in d) {
-          var f = r.get(i);
-          f && (d.value = g(f));
-        } else if (d === void 0) {
-          var u = r.get(i), v = u == null ? void 0 : u.v;
-          if (u !== void 0 && v !== B)
+      getOwnPropertyDescriptor(i, p) {
+        var y = Reflect.getOwnPropertyDescriptor(i, p);
+        if (y && "value" in y) {
+          var u = n.get(p);
+          u && (y.value = f(u));
+        } else if (y === void 0) {
+          var c = n.get(p), d = c == null ? void 0 : c.v;
+          if (c !== void 0 && d !== J)
             return {
               enumerable: !0,
               configurable: !0,
-              value: v,
+              value: d,
               writable: !0
             };
         }
-        return d;
+        return y;
       },
-      has(c, i) {
-        var v;
-        if (i === Ve)
+      has(i, p) {
+        var d;
+        if (p === ne)
           return !0;
-        var d = r.get(i), f = d !== void 0 && d.v !== B || Reflect.has(c, i);
-        if (d !== void 0 || O !== null && (!f || (v = Ne(c, i)) != null && v.writable)) {
-          d === void 0 && (d = D(f ? ge(c[i], l) : B), r.set(i, d));
-          var u = g(d);
-          if (u === B)
+        var y = n.get(p), u = y !== void 0 && y.v !== J || Reflect.has(i, p);
+        if (y !== void 0 || E !== null && (!u || (d = Rt(i, p)) != null && d.writable)) {
+          y === void 0 && (y = B(u ? wt(i[p], s) : J), n.set(p, y));
+          var c = f(y);
+          if (c === J)
             return !1;
         }
-        return f;
+        return u;
       },
-      set(c, i, d, f) {
-        var w;
-        var u = r.get(i), v = i in c;
-        if (a && i === "length")
-          for (var h = d; h < /** @type {Source<number>} */
-          u.v; h += 1) {
-            var p = r.get(h + "");
-            p !== void 0 ? $(p, B) : h in c && (p = D(B), r.set(h + "", p));
+      set(i, p, y, u) {
+        var g;
+        var c = n.get(p), d = p in i;
+        if (o && p === "length")
+          for (var P = y; P < /** @type {Source<number>} */
+          c.v; P += 1) {
+            var V = n.get(P + "");
+            V !== void 0 ? _(V, J) : P in i && (V = B(J), n.set(P + "", V));
           }
-        u === void 0 ? (!v || (w = Ne(c, i)) != null && w.writable) && (u = D(void 0), $(u, ge(d, l)), r.set(i, u)) : (v = u.v !== B, $(u, ge(d, l)));
-        var m = Reflect.getOwnPropertyDescriptor(c, i);
-        if (m != null && m.set && m.set.call(f, d), !v) {
-          if (a && typeof i == "string") {
-            var L = (
+        c === void 0 ? (!d || (g = Rt(i, p)) != null && g.writable) && (c = B(void 0), _(c, wt(y, s)), n.set(p, c)) : (d = c.v !== J, _(c, wt(y, s)));
+        var h = Reflect.getOwnPropertyDescriptor(i, p);
+        if (h != null && h.set && h.set.call(u, y), !d) {
+          if (o && typeof p == "string") {
+            var I = (
               /** @type {Source<number>} */
-              r.get("length")
-            ), E = Number(i);
-            Number.isInteger(E) && E >= L.v && $(L, E + 1);
+              n.get("length")
+            ), N = Number(p);
+            Number.isInteger(N) && N >= I.v && _(I, N + 1);
           }
-          Co(s);
+          Qa(l);
         }
         return !0;
       },
-      ownKeys(c) {
-        g(s);
-        var i = Reflect.ownKeys(c).filter((u) => {
-          var v = r.get(u);
-          return v === void 0 || v.v !== B;
+      ownKeys(i) {
+        f(l);
+        var p = Reflect.ownKeys(i).filter((c) => {
+          var d = n.get(c);
+          return d === void 0 || d.v !== J;
         });
-        for (var [d, f] of r)
-          f.v !== B && !(d in c) && i.push(d);
-        return i;
+        for (var [y, u] of n)
+          u.v !== J && !(y in i) && p.push(y);
+        return p;
       },
       setPrototypeOf() {
-        ir();
+        Zn();
       }
     }
   );
 }
-function Co(e, t = 1) {
-  $(e, e.v + t);
+function Qa(t, e = 1) {
+  _(t, t.v + e);
 }
-var Oo, Jo, Qo, Zo;
-function Xt() {
-  if (Oo === void 0) {
-    Oo = window, Jo = /Firefox/.test(navigator.userAgent);
-    var e = Element.prototype, t = Node.prototype;
-    Qo = Ne(t, "firstChild").get, Zo = Ne(t, "nextSibling").get, e.__click = void 0, e.__className = "", e.__attributes = null, e.__styles = null, e.__e = void 0, Text.prototype.__t = void 0;
+var Ka, Or, Gr, xr;
+function ya() {
+  if (Ka === void 0) {
+    Ka = window, Or = /Firefox/.test(navigator.userAgent);
+    var t = Element.prototype, e = Node.prototype;
+    Gr = Rt(e, "firstChild").get, xr = Rt(e, "nextSibling").get, t.__click = void 0, t.__className = void 0, t.__attributes = null, t.__styles = null, t.__e = void 0, Text.prototype.__t = void 0;
   }
 }
-function Ze(e = "") {
-  return document.createTextNode(e);
+function le(t = "") {
+  return document.createTextNode(t);
 }
 // @__NO_SIDE_EFFECTS__
-function V(e) {
-  return Qo.call(e);
+function z(t) {
+  return Gr.call(t);
 }
 // @__NO_SIDE_EFFECTS__
-function Ee(e) {
-  return Zo.call(e);
+function xt(t) {
+  return xr.call(t);
 }
-function te(e, t) {
-  if (!R)
-    return /* @__PURE__ */ V(e);
-  var o = (
+function D(t, e) {
+  if (!G)
+    return /* @__PURE__ */ z(t);
+  var a = (
     /** @type {TemplateNode} */
-    /* @__PURE__ */ V(C)
+    /* @__PURE__ */ z(x)
   );
-  if (o === null)
-    o = C.appendChild(Ze());
-  else if (t && o.nodeType !== 3) {
-    var n = Ze();
-    return o == null || o.before(n), X(n), n;
+  if (a === null)
+    a = x.appendChild(le());
+  else if (e && a.nodeType !== 3) {
+    var r = le();
+    return a == null || a.before(r), at(r), r;
   }
-  return X(o), o;
+  return at(a), a;
 }
-function pr(e, t) {
-  if (!R) {
-    var o = (
+function se(t, e) {
+  if (!G) {
+    var a = (
       /** @type {DocumentFragment} */
-      /* @__PURE__ */ V(
+      /* @__PURE__ */ z(
         /** @type {Node} */
-        e
+        t
       )
     );
-    return o instanceof Comment && o.data === "" ? /* @__PURE__ */ Ee(o) : o;
+    return a instanceof Comment && a.data === "" ? /* @__PURE__ */ xt(a) : a;
   }
-  return C;
+  return x;
 }
-function rt(e, t = 1, o = !1) {
-  let n = R ? C : e;
-  for (var r; t--; )
-    r = n, n = /** @type {TemplateNode} */
-    /* @__PURE__ */ Ee(n);
-  if (!R)
-    return n;
-  var a = n == null ? void 0 : n.nodeType;
-  if (o && a !== 3) {
-    var s = Ze();
-    return n === null ? r == null || r.after(s) : n.before(s), X(s), s;
+function ut(t, e = 1, a = !1) {
+  let r = G ? x : t;
+  for (var n; e--; )
+    n = r, r = /** @type {TemplateNode} */
+    /* @__PURE__ */ xt(r);
+  if (!G)
+    return r;
+  var o = r == null ? void 0 : r.nodeType;
+  if (a && o !== 3) {
+    var l = le();
+    return r === null ? n == null || n.after(l) : r.before(l), at(l), l;
   }
-  return X(n), /** @type {TemplateNode} */
-  n;
+  return at(r), /** @type {TemplateNode} */
+  r;
 }
-function en(e) {
-  e.textContent = "";
+function Er(t) {
+  t.textContent = "";
 }
-const tn = 0, xr = 1;
-let Nt = !1, wt = tn, st = !1, it = null, ze = !1, ho = !1;
-function Ro(e) {
-  ze = e;
+let Re = !1, Ce = !1, Ue = null, Se = !1, Ea = !1;
+function za(t) {
+  Ea = t;
 }
-function So(e) {
-  ho = e;
+let de = [];
+let C = null, ot = !1;
+function ht(t) {
+  C = t;
 }
-let $e = [], Xe = 0;
-let S = null, se = !1;
-function de(e) {
-  S = e;
+let E = null;
+function Vt(t) {
+  E = t;
 }
-let O = null;
-function ce(e) {
-  O = e;
+let Pt = null;
+function s2(t) {
+  Pt = t;
 }
-let ie = null;
-function gr(e) {
-  ie = e;
+let W = null, K = 0, mt = null;
+function c2(t) {
+  mt = t;
 }
-let F = null, G = 0, ve = null;
-function mr(e) {
-  ve = e;
+let Cr = 1, we = 0, Ht = !1;
+function Ur() {
+  return ++Cr;
 }
-let on = 1, Ct = 0, Oe = !1;
-function nn() {
-  return ++on;
-}
-function ht(e) {
-  var f;
-  var t = e.f;
-  if (t & Ae)
+function Ne(t) {
+  var u;
+  var e = t.f;
+  if (e & Gt)
     return !0;
-  if (t & tt) {
-    var o = e.deps, n = (t & z) !== 0;
-    if (o !== null) {
-      var r, a, s = (t & At) !== 0, l = n && O !== null && !Oe, c = o.length;
-      if (s || l) {
-        var i = (
+  if (e & pe) {
+    var a = t.deps, r = (e & tt) !== 0;
+    if (a !== null) {
+      var n, o, l = (e & xe) !== 0, s = r && E !== null && !Ht, i = a.length;
+      if (l || s) {
+        var p = (
           /** @type {Derived} */
-          e
-        ), d = i.parent;
-        for (r = 0; r < c; r++)
-          a = o[r], (s || !((f = a == null ? void 0 : a.reactions) != null && f.includes(i))) && (a.reactions ?? (a.reactions = [])).push(i);
-        s && (i.f ^= At), l && d !== null && !(d.f & z) && (i.f ^= z);
+          t
+        ), y = p.parent;
+        for (n = 0; n < i; n++)
+          o = a[n], (l || !((u = o == null ? void 0 : o.reactions) != null && u.includes(p))) && (o.reactions ?? (o.reactions = [])).push(p);
+        l && (p.f ^= xe), s && y !== null && !(y.f & tt) && (p.f ^= tt);
       }
-      for (r = 0; r < c; r++)
-        if (a = o[r], ht(
+      for (n = 0; n < i; n++)
+        if (o = a[n], Ne(
           /** @type {Derived} */
-          a
-        ) && Xo(
+          o
+        ) && Sr(
           /** @type {Derived} */
-          a
-        ), a.wv > e.wv)
+          o
+        ), o.wv > t.wv)
           return !0;
     }
-    (!n || O !== null && !Oe) && ue(e, H);
+    (!r || E !== null && !Ht) && It(t, Y);
   }
   return !1;
 }
-function yr(e, t) {
-  for (var o = t; o !== null; ) {
-    if (o.f & Pt)
+function p2(t, e) {
+  for (var a = e; a !== null; ) {
+    if (a.f & Ge)
       try {
-        o.fn(e);
+        a.fn(t);
         return;
       } catch {
-        o.f ^= Pt;
+        a.f ^= Ge;
       }
-    o = o.parent;
+    a = a.parent;
   }
-  throw Nt = !1, e;
+  throw Re = !1, t;
 }
-function _r(e) {
-  return (e.f & It) === 0 && (e.parent === null || (e.parent.f & Pt) === 0);
+function i2(t) {
+  return (t.f & $e) === 0 && (t.parent === null || (t.parent.f & Ge) === 0);
 }
-function Dt(e, t, o, n) {
-  if (Nt) {
-    if (o === null && (Nt = !1), _r(t))
-      throw e;
+function Qe(t, e, a, r) {
+  if (Re) {
+    if (a === null && (Re = !1), i2(e))
+      throw t;
     return;
   }
-  o !== null && (Nt = !0);
+  a !== null && (Re = !0);
   {
-    yr(e, t);
+    p2(t, e);
     return;
   }
 }
-function rn(e, t, o = !0) {
-  var n = e.reactions;
-  if (n !== null)
-    for (var r = 0; r < n.length; r++) {
-      var a = n[r];
-      a.f & oe ? rn(
+function wr(t, e, a = !0) {
+  var r = t.reactions;
+  if (r !== null)
+    for (var n = 0; n < r.length; n++) {
+      var o = r[n];
+      o.f & lt ? wr(
         /** @type {Derived} */
-        a,
-        t,
+        o,
+        e,
         !1
-      ) : t === a && (o ? ue(a, Ae) : a.f & H && ue(a, tt), Wt(
+      ) : e === o && (a ? It(o, Gt) : o.f & Y && It(o, pe), Ke(
         /** @type {Effect} */
-        a
+        o
       ));
     }
 }
-function an(e) {
-  var v;
-  var t = F, o = G, n = ve, r = S, a = Oe, s = ie, l = W, c = se, i = e.f;
-  F = /** @type {null | Value[]} */
-  null, G = 0, ve = null, S = i & (Pe | et) ? null : e, Oe = (i & z) !== 0 && (!ze || r === null || c), ie = null, To(e.ctx), se = !1, Ct++;
+function Hr(t) {
+  var d;
+  var e = W, a = K, r = mt, n = C, o = Ht, l = Pt, s = j, i = ot, p = t.f;
+  W = /** @type {null | Value[]} */
+  null, K = 0, mt = null, Ht = (p & tt) !== 0 && (ot || !Se || C === null), C = p & (Ot | ce) ? null : t, Pt = null, qa(t.ctx), ot = !1, we++;
   try {
-    var d = (
+    var y = (
       /** @type {Function} */
-      (0, e.fn)()
-    ), f = e.deps;
-    if (F !== null) {
-      var u;
-      if (Ot(e, G), f !== null && G > 0)
-        for (f.length = G + F.length, u = 0; u < F.length; u++)
-          f[G + u] = F[u];
+      (0, t.fn)()
+    ), u = t.deps;
+    if (W !== null) {
+      var c;
+      if (He(t, K), u !== null && K > 0)
+        for (u.length = K + W.length, c = 0; c < W.length; c++)
+          u[K + c] = W[c];
       else
-        e.deps = f = F;
-      if (!Oe)
-        for (u = G; u < f.length; u++)
-          ((v = f[u]).reactions ?? (v.reactions = [])).push(e);
-    } else f !== null && G < f.length && (Ot(e, G), f.length = G);
-    if (vn() && ve !== null && !se && f !== null && !(e.f & (oe | tt | Ae)))
-      for (u = 0; u < /** @type {Source[]} */
-      ve.length; u++)
-        rn(
-          ve[u],
+        t.deps = u = W;
+      if (!Ht)
+        for (c = K; c < u.length; c++)
+          ((d = u[c]).reactions ?? (d.reactions = [])).push(t);
+    } else u !== null && K < u.length && (He(t, K), u.length = K);
+    if (Yr() && mt !== null && !ot && u !== null && !(t.f & (lt | pe | Gt)))
+      for (c = 0; c < /** @type {Source[]} */
+      mt.length; c++)
+        wr(
+          mt[c],
           /** @type {Effect} */
-          e
+          t
         );
-    return r !== null && Ct++, d;
+    return n !== null && we++, y;
   } finally {
-    F = t, G = o, ve = n, S = r, Oe = a, ie = s, To(l), se = c;
+    W = e, K = a, mt = r, C = n, Ht = o, Pt = l, qa(s), ot = i;
   }
 }
-function Nr(e, t) {
-  let o = t.reactions;
-  if (o !== null) {
-    var n = qn.call(o, e);
-    if (n !== -1) {
-      var r = o.length - 1;
-      r === 0 ? o = t.reactions = null : (o[n] = o[r], o.pop());
+function y2(t, e) {
+  let a = e.reactions;
+  if (a !== null) {
+    var r = kn.call(a, t);
+    if (r !== -1) {
+      var n = a.length - 1;
+      n === 0 ? a = e.reactions = null : (a[r] = a[n], a.pop());
     }
   }
-  o === null && t.f & oe && // Destroying a child effect while updating a parent effect can cause a dependency to appear
+  a === null && e.f & lt && // Destroying a child effect while updating a parent effect can cause a dependency to appear
   // to be unused, when in fact it is used by the currently-updating parent. Checking `new_deps`
   // allows us to skip the expensive work of disconnecting and immediately reconnecting it
-  (F === null || !F.includes(t)) && (ue(t, tt), t.f & (z | At) || (t.f ^= At), zo(
+  (W === null || !W.includes(e)) && (It(e, pe), e.f & (tt | xe) || (e.f ^= xe), Rr(
     /** @type {Derived} **/
-    t
-  ), Ot(
+    e
+  ), He(
     /** @type {Derived} **/
-    t,
+    e,
     0
   ));
 }
-function Ot(e, t) {
-  var o = e.deps;
-  if (o !== null)
-    for (var n = t; n < o.length; n++)
-      Nr(e, o[n]);
+function He(t, e) {
+  var a = t.deps;
+  if (a !== null)
+    for (var r = e; r < a.length; r++)
+      y2(t, a[r]);
 }
-function vo(e) {
-  var t = e.f;
-  if (!(t & It)) {
-    ue(e, H);
-    var o = O, n = W;
-    O = e;
+function Ca(t) {
+  var e = t.f;
+  if (!(e & $e)) {
+    It(t, Y);
+    var a = E, r = j, n = Se;
+    E = t, Se = !0;
     try {
-      t & kt ? Sr(e) : cn(e), dn(e);
-      var r = an(e);
-      e.teardown = typeof r == "function" ? r : null, e.wv = on;
-      var a = e.deps, s;
-      jt && cr && e.f & Ae;
-    } catch (l) {
-      Dt(l, e, o, n || e.ctx);
+      e & Ye ? f2(t) : kr(t), Dr(t);
+      var o = Hr(t);
+      t.teardown = typeof o == "function" ? o : null, t.wv = Cr;
+      var l = t.deps, s;
+      Ba && a2 && t.f & Gt;
+    } catch (i) {
+      Qe(i, t, a, r || t.ctx);
     } finally {
-      O = o;
+      Se = n, E = a;
     }
   }
 }
-function sn() {
-  if (Xe > 1e3) {
-    Xe = 0;
-    try {
-      nr();
-    } catch (e) {
-      if (it !== null)
-        Dt(e, it, null);
-      else
-        throw e;
-    }
+function u2() {
+  try {
+    Kn();
+  } catch (t) {
+    if (Ue !== null)
+      Qe(t, Ue, null);
+    else
+      throw t;
   }
-  Xe++;
 }
-function ln(e) {
-  var t = e.length;
-  if (t !== 0) {
-    sn();
-    var o = ze;
-    ze = !0;
-    try {
-      for (var n = 0; n < t; n++) {
-        var r = e[n];
-        r.f & H || (r.f ^= H);
-        var a = Pr(r);
-        wr(a);
+function _r() {
+  try {
+    for (var t = 0; de.length > 0; ) {
+      t++ > 1e3 && u2();
+      var e = de, a = e.length;
+      de = [];
+      for (var r = 0; r < a; r++) {
+        var n = e[r];
+        n.f & Y || (n.f ^= Y);
+        var o = d2(n);
+        P2(o);
       }
-    } finally {
-      ze = o;
     }
+  } finally {
+    Ce = !1, Ue = null;
   }
 }
-function wr(e) {
-  var t = e.length;
-  if (t !== 0)
-    for (var o = 0; o < t; o++) {
-      var n = e[o];
-      if (!(n.f & (It | _e)))
+function P2(t) {
+  var e = t.length;
+  if (e !== 0)
+    for (var a = 0; a < e; a++) {
+      var r = t[a];
+      if (!(r.f & ($e | vt)))
         try {
-          ht(n) && (vo(n), n.deps === null && n.first === null && n.nodes_start === null && (n.teardown === null ? un(n) : n.fn = null));
-        } catch (r) {
-          Dt(r, n, null, n.ctx);
+          Ne(r) && (Ca(r), r.deps === null && r.first === null && r.nodes_start === null && (r.teardown === null ? Mr(r) : r.fn = null));
+        } catch (n) {
+          Qe(n, r, null, r.ctx);
         }
     }
 }
-function br() {
-  if (st = !1, Xe > 1001)
-    return;
-  const e = $e;
-  $e = [], ln(e), st || (Xe = 0, it = null);
-}
-function Wt(e) {
-  wt === tn && (st || (st = !0, queueMicrotask(br))), it = e;
-  for (var t = e; t.parent !== null; ) {
-    t = t.parent;
-    var o = t.f;
-    if (o & (et | Pe)) {
-      if (!(o & H)) return;
-      t.f ^= H;
+function Ke(t) {
+  Ce || (Ce = !0, queueMicrotask(_r));
+  for (var e = Ue = t; e.parent !== null; ) {
+    e = e.parent;
+    var a = e.f;
+    if (a & (ce | Ot)) {
+      if (!(a & Y)) return;
+      e.f ^= Y;
     }
   }
-  $e.push(t);
+  de.push(e);
 }
-function Pr(e) {
-  var t = [], o = e.first;
-  e: for (; o !== null; ) {
-    var n = o.f, r = (n & Pe) !== 0, a = r && (n & H) !== 0, s = o.next;
-    if (!a && !(n & _e)) {
-      if (n & Wo)
-        t.push(o);
-      else if (r)
-        o.f ^= H;
+function d2(t) {
+  var e = [], a = t.first;
+  t: for (; a !== null; ) {
+    var r = a.f, n = (r & Ot) !== 0, o = n && (r & Y) !== 0, l = a.next;
+    if (!o && !(r & vt)) {
+      if (r & Ar)
+        e.push(a);
+      else if (n)
+        a.f ^= Y;
       else {
-        var l = S;
+        var s = C;
         try {
-          S = o, ht(o) && vo(o);
-        } catch (d) {
-          Dt(d, o, null, o.ctx);
+          C = a, Ne(a) && Ca(a);
+        } catch (y) {
+          Qe(y, a, null, a.ctx);
         } finally {
-          S = l;
+          C = s;
         }
       }
-      var c = o.first;
-      if (c !== null) {
-        o = c;
+      var i = a.first;
+      if (i !== null) {
+        a = i;
         continue;
       }
     }
-    if (s === null) {
-      let d = o.parent;
-      for (; d !== null; ) {
-        if (e === d)
-          break e;
-        var i = d.next;
-        if (i !== null) {
-          o = i;
-          continue e;
+    if (l === null) {
+      let y = a.parent;
+      for (; y !== null; ) {
+        if (t === y)
+          break t;
+        var p = y.next;
+        if (p !== null) {
+          a = p;
+          continue t;
         }
-        d = d.parent;
+        y = y.parent;
       }
     }
-    o = s;
+    a = l;
   }
-  return t;
+  return e;
 }
-function N(e) {
-  var t = wt, o = $e;
-  try {
-    sn();
-    const r = [];
-    wt = xr, $e = r, st = !1, ln(o);
-    var n = e == null ? void 0 : e();
-    return Qn(), ($e.length > 0 || r.length > 0) && N(), Xe = 0, it = null, n;
-  } finally {
-    wt = t, $e = o;
-  }
+function L(t) {
+  var e;
+  for (ja(); de.length > 0; )
+    Ce = !0, _r(), ja();
+  return (
+    /** @type {T} */
+    e
+  );
 }
-function g(e) {
-  var t = e.f, o = (t & oe) !== 0;
-  if (S !== null && !se) {
-    ie !== null && ie.includes(e) && lr();
-    var n = S.deps;
-    e.rv < Ct && (e.rv = Ct, F === null && n !== null && n[G] === e ? G++ : F === null ? F = [e] : (!Oe || !F.includes(e)) && F.push(e));
-  } else if (o && /** @type {Derived} */
-  e.deps === null && /** @type {Derived} */
-  e.effects === null) {
-    var r = (
+function f(t) {
+  var e = t.f, a = (e & lt) !== 0;
+  if (C !== null && !ot) {
+    Pt !== null && Pt.includes(t) && t2();
+    var r = C.deps;
+    t.rv < we && (t.rv = we, W === null && r !== null && r[K] === t ? K++ : W === null ? W = [t] : (!Ht || !W.includes(t)) && W.push(t));
+  } else if (a && /** @type {Derived} */
+  t.deps === null && /** @type {Derived} */
+  t.effects === null) {
+    var n = (
       /** @type {Derived} */
-      e
-    ), a = r.parent;
-    a !== null && !(a.f & z) && (r.f ^= z);
+      t
+    ), o = n.parent;
+    o !== null && !(o.f & tt) && (n.f ^= tt);
   }
-  return o && (r = /** @type {Derived} */
-  e, ht(r) && Xo(r)), e.v;
+  return a && (n = /** @type {Derived} */
+  t, Ne(n) && Sr(n)), t.v;
 }
-function J(e) {
-  var t = se;
+function kt(t) {
+  var e = ot;
   try {
-    return se = !0, e();
+    return ot = !0, t();
   } finally {
-    se = t;
+    ot = e;
   }
 }
-const Ar = -7169;
-function ue(e, t) {
-  e.f = e.f & Ar | t;
+const h2 = -7169;
+function It(t, e) {
+  t.f = t.f & h2 | e;
 }
-function Er(e) {
-  O === null && S === null && or(), S !== null && S.f & z && O === null && tr(), ho && er();
+function V2(t) {
+  E === null && C === null && Qn(), C !== null && C.f & tt && E === null && jn(), Ea && Bn();
 }
-function Lr(e, t) {
-  var o = t.last;
-  o === null ? t.last = t.first = e : (o.next = e, e.prev = o, t.last = e);
+function I2(t, e) {
+  var a = e.last;
+  a === null ? e.last = e.first = t : (a.next = t, t.prev = a, e.last = t);
 }
-function Ie(e, t, o, n = !0) {
-  var r = (e & et) !== 0, a = O, s = {
-    ctx: W,
+function qt(t, e, a, r = !0) {
+  var n = (t & ce) !== 0, o = E, l = {
+    ctx: j,
     deps: null,
     nodes_start: null,
     nodes_end: null,
-    f: e | Ae,
+    f: t | Gt,
     first: null,
-    fn: t,
+    fn: e,
     last: null,
     next: null,
-    parent: r ? null : a,
+    parent: n ? null : o,
     prev: null,
     teardown: null,
     transitions: null,
     wv: 0
   };
-  if (o) {
-    var l = ze;
+  if (a)
     try {
-      Ro(!0), vo(s), s.f |= Go;
-    } catch (d) {
-      throw ne(s), d;
-    } finally {
-      Ro(l);
+      Ca(l), l.f |= gr;
+    } catch (p) {
+      throw st(l), p;
     }
-  } else t !== null && Wt(s);
-  var c = o && s.deps === null && s.first === null && s.nodes_start === null && s.teardown === null && (s.f & (Ko | Pt)) === 0;
-  if (!c && !r && n && (a !== null && Lr(s, a), S !== null && S.f & oe)) {
+  else e !== null && Ke(l);
+  var s = a && l.deps === null && l.first === null && l.nodes_start === null && l.teardown === null && (l.f & (fr | Ge)) === 0;
+  if (!s && !n && r && (o !== null && I2(l, o), C !== null && C.f & lt)) {
     var i = (
       /** @type {Derived} */
-      S
+      C
     );
-    (i.effects ?? (i.effects = [])).push(s);
+    (i.effects ?? (i.effects = [])).push(l);
   }
-  return s;
+  return l;
 }
-function Cr(e) {
-  const t = Ie(Mt, null, !1);
-  return ue(t, H), t.teardown = e, t;
+function Fr(t) {
+  const e = qt(We, null, !1);
+  return It(e, Y), e.teardown = t, e;
 }
-function Rt(e) {
-  Er();
-  var t = O !== null && (O.f & Pe) !== 0 && W !== null && !W.m;
-  if (t) {
-    var o = (
+function Dt(t) {
+  V2();
+  var e = E !== null && (E.f & Ot) !== 0 && j !== null && !j.m;
+  if (e) {
+    var a = (
       /** @type {ComponentContext} */
-      W
+      j
     );
-    (o.e ?? (o.e = [])).push({
-      fn: e,
-      effect: O,
-      reaction: S
+    (a.e ?? (a.e = [])).push({
+      fn: t,
+      effect: E,
+      reaction: C
     });
   } else {
-    var n = vt(e);
-    return n;
+    var r = ze(t);
+    return r;
   }
 }
-function Or(e) {
-  const t = Ie(et, e, !0);
+function A2(t) {
+  const e = qt(ce, t, !0);
   return () => {
-    ne(t);
+    st(e);
   };
 }
-function Rr(e) {
-  const t = Ie(et, e, !0);
-  return (o = {}) => new Promise((n) => {
-    o.outro ? dt(t, () => {
-      ne(t), n(void 0);
-    }) : (ne(t), n(void 0));
+function g2(t) {
+  const e = qt(ce, t, !0);
+  return (a = {}) => new Promise((r) => {
+    a.outro ? Ie(e, () => {
+      st(e), r(void 0);
+    }) : (st(e), r(void 0));
   });
 }
-function vt(e) {
-  return Ie(Wo, e, !1);
+function ze(t) {
+  return qt(Ar, t, !1);
 }
-function po(e) {
-  return Ie(Mt, e, !0);
+function Ua(t) {
+  return qt(We, t, !0);
 }
-function lt(e, t = [], o = we) {
-  const n = t.map(o);
-  return ot(() => e(...n.map(g)));
+function St(t, e = [], a = et) {
+  const r = e.map(a);
+  return ie(() => t(...r.map(f)));
 }
-function ot(e, t = 0) {
-  return Ie(Mt | kt | t, e, !0);
+function ie(t, e = 0) {
+  return qt(We | Ye | e, t, !0);
 }
-function Re(e, t = !0) {
-  return Ie(Mt | Pe, e, !0, t);
+function Mt(t, e = !0) {
+  return qt(We | Ot, t, !0, e);
 }
-function dn(e) {
-  var t = e.teardown;
-  if (t !== null) {
-    const o = ho, n = S;
-    So(!0), de(null);
+function Dr(t) {
+  var e = t.teardown;
+  if (e !== null) {
+    const a = Ea, r = C;
+    za(!0), ht(null);
     try {
-      t.call(null);
+      e.call(null);
     } finally {
-      So(o), de(n);
+      za(a), ht(r);
     }
   }
 }
-function cn(e, t = !1) {
-  var o = e.first;
-  for (e.first = e.last = null; o !== null; ) {
-    var n = o.next;
-    ne(o, t), o = n;
+function kr(t, e = !1) {
+  var a = t.first;
+  for (t.first = t.last = null; a !== null; ) {
+    var r = a.next;
+    st(a, e), a = r;
   }
 }
-function Sr(e) {
-  for (var t = e.first; t !== null; ) {
-    var o = t.next;
-    t.f & Pe || ne(t), t = o;
+function f2(t) {
+  for (var e = t.first; e !== null; ) {
+    var a = e.next;
+    e.f & Ot || st(e), e = a;
   }
 }
-function ne(e, t = !0) {
-  var o = !1;
-  if ((t || e.f & Yn) && e.nodes_start !== null) {
-    for (var n = e.nodes_start, r = e.nodes_end; n !== null; ) {
-      var a = n === r ? null : (
+function st(t, e = !0) {
+  var a = !1;
+  if ((e || t.f & Fn) && t.nodes_start !== null) {
+    for (var r = t.nodes_start, n = t.nodes_end; r !== null; ) {
+      var o = r === n ? null : (
         /** @type {TemplateNode} */
-        /* @__PURE__ */ Ee(n)
+        /* @__PURE__ */ xt(r)
       );
-      n.remove(), n = a;
+      r.remove(), r = o;
     }
-    o = !0;
+    a = !0;
   }
-  cn(e, t && !o), Ot(e, 0), ue(e, It);
-  var s = e.transitions;
-  if (s !== null)
-    for (const c of s)
-      c.stop();
-  dn(e);
-  var l = e.parent;
-  l !== null && l.first !== null && un(e), e.next = e.prev = e.teardown = e.ctx = e.deps = e.fn = e.nodes_start = e.nodes_end = null;
+  kr(t, e && !a), He(t, 0), It(t, $e);
+  var l = t.transitions;
+  if (l !== null)
+    for (const i of l)
+      i.stop();
+  Dr(t);
+  var s = t.parent;
+  s !== null && s.first !== null && Mr(t), t.next = t.prev = t.teardown = t.ctx = t.deps = t.fn = t.nodes_start = t.nodes_end = null;
 }
-function un(e) {
-  var t = e.parent, o = e.prev, n = e.next;
-  o !== null && (o.next = n), n !== null && (n.prev = o), t !== null && (t.first === e && (t.first = n), t.last === e && (t.last = o));
+function Mr(t) {
+  var e = t.parent, a = t.prev, r = t.next;
+  a !== null && (a.next = r), r !== null && (r.prev = a), e !== null && (e.first === t && (e.first = r), e.last === t && (e.last = a));
 }
-function dt(e, t) {
-  var o = [];
-  xo(e, o, !0), fn(o, () => {
-    ne(e), t && t();
+function Ie(t, e) {
+  var a = [];
+  wa(t, a, !0), Jr(a, () => {
+    st(t), e && e();
   });
 }
-function fn(e, t) {
-  var o = e.length;
-  if (o > 0) {
-    var n = () => --o || t();
-    for (var r of e)
-      r.out(n);
+function Jr(t, e) {
+  var a = t.length;
+  if (a > 0) {
+    var r = () => --a || e();
+    for (var n of t)
+      n.out(r);
   } else
-    t();
+    e();
 }
-function xo(e, t, o) {
-  if (!(e.f & _e)) {
-    if (e.f ^= _e, e.transitions !== null)
-      for (const s of e.transitions)
-        (s.is_global || o) && t.push(s);
-    for (var n = e.first; n !== null; ) {
-      var r = n.next, a = (n.f & ft) !== 0 || (n.f & Pe) !== 0;
-      xo(n, t, a ? o : !1), n = r;
+function wa(t, e, a) {
+  if (!(t.f & vt)) {
+    if (t.f ^= vt, t.transitions !== null)
+      for (const l of t.transitions)
+        (l.is_global || a) && e.push(l);
+    for (var r = t.first; r !== null; ) {
+      var n = r.next, o = (r.f & ge) !== 0 || (r.f & Ot) !== 0;
+      wa(r, e, o ? a : !1), r = n;
     }
   }
 }
-function St(e) {
-  hn(e, !0);
+function _e(t) {
+  Wr(t, !0);
 }
-function hn(e, t) {
-  if (e.f & _e) {
-    e.f ^= _e, e.f & H || (e.f ^= H), ht(e) && (ue(e, Ae), Wt(e));
-    for (var o = e.first; o !== null; ) {
-      var n = o.next, r = (o.f & ft) !== 0 || (o.f & Pe) !== 0;
-      hn(o, r ? t : !1), o = n;
+function Wr(t, e) {
+  if (t.f & vt) {
+    t.f ^= vt, t.f & Y || (t.f ^= Y), Ne(t) && (It(t, Gt), Ke(t));
+    for (var a = t.first; a !== null; ) {
+      var r = a.next, n = (a.f & ge) !== 0 || (a.f & Ot) !== 0;
+      Wr(a, n ? e : !1), a = r;
     }
-    if (e.transitions !== null)
-      for (const a of e.transitions)
-        (a.is_global || t) && a.in();
+    if (t.transitions !== null)
+      for (const o of t.transitions)
+        (o.is_global || e) && o.in();
   }
 }
-function Tr(e) {
+function N2(t) {
   throw new Error("https://svelte.dev/e/lifecycle_outside_component");
 }
-let W = null;
-function To(e) {
-  W = e;
+let j = null;
+function qa(t) {
+  j = t;
 }
-function Be(e, t = !1, o) {
-  W = {
-    p: W,
+function ct(t, e = !1, a) {
+  j = {
+    p: j,
     c: null,
     e: null,
     m: !1,
-    s: e,
+    s: t,
     x: null,
     l: null
   };
 }
-function Fe(e) {
-  const t = W;
-  if (t !== null) {
-    e !== void 0 && (t.x = e);
-    const s = t.e;
-    if (s !== null) {
-      var o = O, n = S;
-      t.e = null;
+function pt(t) {
+  const e = j;
+  if (e !== null) {
+    t !== void 0 && (e.x = t);
+    const l = e.e;
+    if (l !== null) {
+      var a = E, r = C;
+      e.e = null;
       try {
-        for (var r = 0; r < s.length; r++) {
-          var a = s[r];
-          ce(a.effect), de(a.reaction), vt(a.fn);
+        for (var n = 0; n < l.length; n++) {
+          var o = l[n];
+          Vt(o.effect), ht(o.reaction), ze(o.fn);
         }
       } finally {
-        ce(o), de(n);
+        Vt(a), ht(r);
       }
     }
-    W = t.p, t.m = !0;
+    j = e.p, e.m = !0;
   }
-  return e || /** @type {T} */
+  return t || /** @type {T} */
   {};
 }
-function vn() {
+function Yr() {
   return !0;
 }
-const $r = ["touchstart", "touchmove"];
-function Mr(e) {
-  return $r.includes(e);
+const m2 = ["touchstart", "touchmove"];
+function L2(t) {
+  return m2.includes(t);
 }
-function kr(e) {
-  var t = S, o = O;
-  de(null), ce(null);
+function $r(t) {
+  var e = C, a = E;
+  ht(null), Vt(null);
   try {
-    return e();
+    return t();
   } finally {
-    de(t), ce(o);
+    ht(e), Vt(a);
   }
 }
-const pn = /* @__PURE__ */ new Set(), Jt = /* @__PURE__ */ new Set();
-function Ir(e) {
-  for (var t = 0; t < e.length; t++)
-    pn.add(e[t]);
-  for (var o of Jt)
-    o(e);
+const Br = /* @__PURE__ */ new Set(), ua = /* @__PURE__ */ new Set();
+function b2(t, e, a, r = {}) {
+  function n(o) {
+    if (r.capture || Pe.call(e, o), !o.cancelBubble)
+      return $r(() => a == null ? void 0 : a.call(this, o));
+  }
+  return t.startsWith("pointer") || t.startsWith("touch") || t === "wheel" ? fe(() => {
+    e.addEventListener(t, n, r);
+  }) : e.addEventListener(t, n, r), n;
 }
-function mt(e) {
-  var E;
-  var t = this, o = (
+function T2(t, e, a, r, n) {
+  var o = { capture: r, passive: n }, l = b2(t, e, a, o);
+  (e === document.body || e === window || e === document) && Fr(() => {
+    e.removeEventListener(t, l, o);
+  });
+}
+function jr(t) {
+  for (var e = 0; e < t.length; e++)
+    Br.add(t[e]);
+  for (var a of ua)
+    a(t);
+}
+function Pe(t) {
+  var N;
+  var e = this, a = (
     /** @type {Node} */
-    t.ownerDocument
-  ), n = e.type, r = ((E = e.composedPath) == null ? void 0 : E.call(e)) || [], a = (
+    e.ownerDocument
+  ), r = t.type, n = ((N = t.composedPath) == null ? void 0 : N.call(t)) || [], o = (
     /** @type {null | Element} */
-    r[0] || e.target
-  ), s = 0, l = e.__root;
-  if (l) {
-    var c = r.indexOf(l);
-    if (c !== -1 && (t === document || t === /** @type {any} */
+    n[0] || t.target
+  ), l = 0, s = t.__root;
+  if (s) {
+    var i = n.indexOf(s);
+    if (i !== -1 && (e === document || e === /** @type {any} */
     window)) {
-      e.__root = t;
+      t.__root = e;
       return;
     }
-    var i = r.indexOf(t);
-    if (i === -1)
+    var p = n.indexOf(e);
+    if (p === -1)
       return;
-    c <= i && (s = c);
+    i <= p && (l = i);
   }
-  if (a = /** @type {Element} */
-  r[s] || e.target, a !== t) {
-    at(e, "currentTarget", {
+  if (o = /** @type {Element} */
+  n[l] || t.target, o !== e) {
+    he(t, "currentTarget", {
       configurable: !0,
       get() {
-        return a || o;
+        return o || a;
       }
     });
-    var d = S, f = O;
-    de(null), ce(null);
+    var y = C, u = E;
+    ht(null), Vt(null);
     try {
-      for (var u, v = []; a !== null; ) {
-        var h = a.assignedSlot || a.parentNode || /** @type {any} */
-        a.host || null;
+      for (var c, d = []; o !== null; ) {
+        var P = o.assignedSlot || o.parentNode || /** @type {any} */
+        o.host || null;
         try {
-          var p = a["__" + n];
-          if (p !== void 0 && (!/** @type {any} */
-          a.disabled || // DOM could've been updated already by the time this is reached, so we check this as well
+          var V = o["__" + r];
+          if (V !== void 0 && (!/** @type {any} */
+          o.disabled || // DOM could've been updated already by the time this is reached, so we check this as well
           // -> the target could not have been disabled because it emits the event in the first place
-          e.target === a))
-            if (co(p)) {
-              var [m, ...L] = p;
-              m.apply(a, [e, ...L]);
+          t.target === o))
+            if (Oa(V)) {
+              var [h, ...I] = V;
+              h.apply(o, [t, ...I]);
             } else
-              p.call(a, e);
-        } catch (w) {
-          u ? v.push(w) : u = w;
+              V.call(o, t);
+        } catch (g) {
+          c ? d.push(g) : c = g;
         }
-        if (e.cancelBubble || h === t || h === null)
+        if (t.cancelBubble || P === e || P === null)
           break;
-        a = h;
+        o = P;
       }
-      if (u) {
-        for (let w of v)
+      if (c) {
+        for (let g of d)
           queueMicrotask(() => {
-            throw w;
+            throw g;
           });
-        throw u;
+        throw c;
       }
     } finally {
-      e.__root = t, delete e.currentTarget, de(d), ce(f);
+      t.__root = e, delete t.currentTarget, ht(y), Vt(u);
     }
   }
 }
-function go(e) {
-  var t = document.createElement("template");
-  return t.innerHTML = e, t.content;
+function Ha(t) {
+  var e = document.createElement("template");
+  return e.innerHTML = t, e.content;
 }
-function be(e, t) {
-  var o = (
+function dt(t, e) {
+  var a = (
     /** @type {Effect} */
-    O
+    E
   );
-  o.nodes_start === null && (o.nodes_start = e, o.nodes_end = t);
+  a.nodes_start === null && (a.nodes_start = t, a.nodes_end = e);
 }
 // @__NO_SIDE_EFFECTS__
-function pt(e, t) {
-  var o = (t & Un) !== 0, n, r = !e.startsWith("<!>");
+function q(t, e) {
+  var a = (e & Hn) !== 0, r = (e & _n) !== 0, n, o = !t.startsWith("<!>");
   return () => {
-    if (R)
-      return be(C, null), C;
-    n === void 0 && (n = go(r ? e : "<!>" + e), n = /** @type {Node} */
-    /* @__PURE__ */ V(n));
-    var a = (
+    if (G)
+      return dt(x, null), x;
+    n === void 0 && (n = Ha(o ? t : "<!>" + t), a || (n = /** @type {Node} */
+    /* @__PURE__ */ z(n)));
+    var l = (
       /** @type {TemplateNode} */
-      o || Jo ? document.importNode(n, !0) : n.cloneNode(!0)
+      r || Or ? document.importNode(n, !0) : n.cloneNode(!0)
     );
-    return be(a, a), a;
-  };
-}
-// @__NO_SIDE_EFFECTS__
-function mo(e, t, o = "svg") {
-  var n = !e.startsWith("<!>"), r = `<${o}>${n ? e : "<!>" + e}</${o}>`, a;
-  return () => {
-    if (R)
-      return be(C, null), C;
-    if (!a) {
+    if (a) {
       var s = (
-        /** @type {DocumentFragment} */
-        go(r)
-      ), l = (
-        /** @type {Element} */
-        /* @__PURE__ */ V(s)
+        /** @type {TemplateNode} */
+        /* @__PURE__ */ z(l)
+      ), i = (
+        /** @type {TemplateNode} */
+        l.lastChild
       );
-      a = /** @type {Element} */
-      /* @__PURE__ */ V(l);
-    }
-    var c = (
-      /** @type {TemplateNode} */
-      a.cloneNode(!0)
-    );
-    return be(c, c), c;
+      dt(s, i);
+    } else
+      dt(l, l);
+    return l;
   };
 }
-function Br() {
-  if (R)
-    return be(C, null), C;
-  var e = document.createDocumentFragment(), t = document.createComment(""), o = Ze();
-  return e.append(t, o), be(t, o), e;
+// @__NO_SIDE_EFFECTS__
+function me(t, e, a = "svg") {
+  var r = !t.startsWith("<!>"), n = `<${a}>${r ? t : "<!>" + t}</${a}>`, o;
+  return () => {
+    if (G)
+      return dt(x, null), x;
+    if (!o) {
+      var l = (
+        /** @type {DocumentFragment} */
+        Ha(n)
+      ), s = (
+        /** @type {Element} */
+        /* @__PURE__ */ z(l)
+      );
+      o = /** @type {Element} */
+      /* @__PURE__ */ z(s);
+    }
+    var i = (
+      /** @type {TemplateNode} */
+      o.cloneNode(!0)
+    );
+    return dt(i, i), i;
+  };
 }
-function le(e, t) {
-  if (R) {
-    O.nodes_end = C, ke();
+function qe() {
+  if (G)
+    return dt(x, null), x;
+  var t = document.createDocumentFragment(), e = document.createComment(""), a = le();
+  return t.append(e, a), dt(e, a), t;
+}
+function F(t, e) {
+  if (G) {
+    E.nodes_end = x, jt();
     return;
   }
-  e !== null && e.before(
+  t !== null && t.before(
     /** @type {Node} */
-    t
+    e
   );
 }
-let Qt = !0;
-function xn(e, t) {
-  var o = t == null ? "" : typeof t == "object" ? t + "" : t;
-  o !== (e.__t ?? (e.__t = e.nodeValue)) && (e.__t = o, e.nodeValue = o + "");
+let Pa = !0;
+function Fe(t, e) {
+  var a = e == null ? "" : typeof e == "object" ? e + "" : e;
+  a !== (t.__t ?? (t.__t = t.nodeValue)) && (t.__t = a, t.nodeValue = a + "");
 }
-function gn(e, t) {
-  return mn(e, t);
+function Qr(t, e) {
+  return Kr(t, e);
 }
-function Fr(e, t) {
-  Xt(), t.intro = t.intro ?? !1;
-  const o = t.target, n = R, r = C;
+function v2(t, e) {
+  ya(), e.intro = e.intro ?? !1;
+  const a = e.target, r = G, n = x;
   try {
-    for (var a = (
+    for (var o = (
       /** @type {TemplateNode} */
-      /* @__PURE__ */ V(o)
-    ); a && (a.nodeType !== 8 || /** @type {Comment} */
-    a.data !== Do); )
-      a = /** @type {TemplateNode} */
-      /* @__PURE__ */ Ee(a);
-    if (!a)
-      throw qe;
-    me(!0), X(
+      /* @__PURE__ */ z(a)
+    ); o && (o.nodeType !== 8 || /** @type {Comment} */
+    o.data !== Ir); )
+      o = /** @type {TemplateNode} */
+      /* @__PURE__ */ xt(o);
+    if (!o)
+      throw re;
+    Tt(!0), at(
       /** @type {Comment} */
-      a
-    ), ke();
-    const s = mn(e, { ...t, anchor: a });
-    if (C === null || C.nodeType !== 8 || /** @type {Comment} */
-    C.data !== io)
-      throw Ht(), qe;
-    return me(!1), /**  @type {Exports} */
-    s;
-  } catch (s) {
-    if (s === qe)
-      return t.recover === !1 && rr(), Xt(), en(o), me(!1), gn(e, t);
-    throw s;
+      o
+    ), jt();
+    const l = Kr(t, { ...e, anchor: o });
+    if (x === null || x.nodeType !== 8 || /** @type {Comment} */
+    x.data !== Ra)
+      throw je(), re;
+    return Tt(!1), /**  @type {Exports} */
+    l;
+  } catch (l) {
+    if (l === re)
+      return e.recover === !1 && zn(), ya(), Er(a), Tt(!1), Qr(t, e);
+    throw l;
   } finally {
-    me(n), X(r);
+    Tt(r), at(n);
   }
 }
-const Ge = /* @__PURE__ */ new Map();
-function mn(e, { target: t, anchor: o, props: n = {}, events: r, context: a, intro: s = !0 }) {
-  Xt();
-  var l = /* @__PURE__ */ new Set(), c = (f) => {
-    for (var u = 0; u < f.length; u++) {
-      var v = f[u];
-      if (!l.has(v)) {
-        l.add(v);
-        var h = Mr(v);
-        t.addEventListener(v, mt, { passive: h });
-        var p = Ge.get(v);
-        p === void 0 ? (document.addEventListener(v, mt, { passive: h }), Ge.set(v, 1)) : Ge.set(v, p + 1);
+const Zt = /* @__PURE__ */ new Map();
+function Kr(t, { target: e, anchor: a, props: r = {}, events: n, context: o, intro: l = !0 }) {
+  ya();
+  var s = /* @__PURE__ */ new Set(), i = (u) => {
+    for (var c = 0; c < u.length; c++) {
+      var d = u[c];
+      if (!s.has(d)) {
+        s.add(d);
+        var P = L2(d);
+        e.addEventListener(d, Pe, { passive: P });
+        var V = Zt.get(d);
+        V === void 0 ? (document.addEventListener(d, Pe, { passive: P }), Zt.set(d, 1)) : Zt.set(d, V + 1);
       }
     }
   };
-  c(uo(pn)), Jt.add(c);
-  var i = void 0, d = Rr(() => {
-    var f = o ?? t.appendChild(Ze());
-    return Re(() => {
-      if (a) {
-        Be({});
-        var u = (
+  i(Ga(Br)), ua.add(i);
+  var p = void 0, y = g2(() => {
+    var u = a ?? e.appendChild(le());
+    return Mt(() => {
+      if (o) {
+        ct({});
+        var c = (
           /** @type {ComponentContext} */
-          W
+          j
         );
-        u.c = a;
+        c.c = o;
       }
-      r && (n.$$events = r), R && be(
+      n && (r.$$events = n), G && dt(
         /** @type {TemplateNode} */
-        f,
+        u,
         null
-      ), Qt = s, i = e(f, n) || {}, Qt = !0, R && (O.nodes_end = C), a && Fe();
+      ), Pa = l, p = t(u, r) || {}, Pa = !0, G && (E.nodes_end = x), o && pt();
     }), () => {
-      var h;
-      for (var u of l) {
-        t.removeEventListener(u, mt);
-        var v = (
+      var P;
+      for (var c of s) {
+        e.removeEventListener(c, Pe);
+        var d = (
           /** @type {number} */
-          Ge.get(u)
+          Zt.get(c)
         );
-        --v === 0 ? (document.removeEventListener(u, mt), Ge.delete(u)) : Ge.set(u, v);
+        --d === 0 ? (document.removeEventListener(c, Pe), Zt.delete(c)) : Zt.set(c, d);
       }
-      Jt.delete(c), f !== o && ((h = f.parentNode) == null || h.removeChild(f));
+      ua.delete(i), u !== a && ((P = u.parentNode) == null || P.removeChild(u));
     };
   });
-  return Zt.set(i, d), i;
+  return da.set(p, y), p;
 }
-let Zt = /* @__PURE__ */ new WeakMap();
-function Hr(e, t) {
-  const o = Zt.get(e);
-  return o ? (Zt.delete(e), o(t)) : Promise.resolve();
+let da = /* @__PURE__ */ new WeakMap();
+function R2(t, e) {
+  const a = da.get(t);
+  return a ? (da.delete(t), a(e)) : Promise.resolve();
 }
-function yn(e, t, o = !1) {
-  R && ke();
-  var n = e, r = null, a = null, s = B, l = o ? ft : 0, c = !1;
-  const i = (f, u = !0) => {
-    c = !0, d(u, f);
-  }, d = (f, u) => {
-    if (s === (s = f)) return;
-    let v = !1;
-    if (R) {
-      const h = (
+function $t(t, e, a = !1) {
+  G && jt();
+  var r = t, n = null, o = null, l = J, s = a ? ge : 0, i = !1;
+  const p = (u, c = !0) => {
+    i = !0, y(c, u);
+  }, y = (u, c) => {
+    if (l === (l = u)) return;
+    let d = !1;
+    if (G) {
+      const P = (
         /** @type {Comment} */
-        n.data === so
+        r.data === va
       );
-      !!s === h && (n = zt(), X(n), me(!1), v = !0);
+      !!l === P && (r = ia(), at(r), Tt(!1), d = !0);
     }
-    s ? (r ? St(r) : u && (r = Re(() => u(n))), a && dt(a, () => {
-      a = null;
-    })) : (a ? St(a) : u && (a = Re(() => u(n))), r && dt(r, () => {
-      r = null;
-    })), v && me(!0);
+    l ? (n ? _e(n) : c && (n = Mt(() => c(r))), o && Ie(o, () => {
+      o = null;
+    })) : (o ? _e(o) : c && (o = Mt(() => c(r))), n && Ie(n, () => {
+      n = null;
+    })), d && Tt(!0);
   };
-  ot(() => {
-    c = !1, t(i), c || d(null, null);
-  }, l), R && (n = C);
+  ie(() => {
+    i = !1, e(p), i || y(null, null);
+  }, s), G && (r = x);
 }
-function Dr(e, t, o) {
-  R && ke();
-  var n = e, r = B, a, s = Zn;
-  ot(() => {
-    s(r, r = t()) && (a && dt(a), a = Re(() => o(n)));
-  }), R && (n = C);
+function S2(t, e, a) {
+  G && jt();
+  var r = t, n = J, o, l = $n;
+  ie(() => {
+    l(n, n = e()) && (o && Ie(o), o = Mt(() => a(r)));
+  }), G && (r = x);
 }
-function yo(e, t) {
-  return t;
+function Qt(t, e) {
+  return e;
 }
-function Wr(e, t, o, n) {
-  for (var r = [], a = t.length, s = 0; s < a; s++)
-    xo(t[s].e, r, !0);
-  var l = a > 0 && r.length === 0 && o !== null;
-  if (l) {
-    var c = (
-      /** @type {Element} */
-      /** @type {Element} */
-      o.parentNode
-    );
-    en(c), c.append(
-      /** @type {Element} */
-      o
-    ), n.clear(), Le(e, t[0].prev, t[a - 1].next);
-  }
-  fn(r, () => {
-    for (var i = 0; i < a; i++) {
-      var d = t[i];
-      l || (n.delete(d.k), Le(e, d.prev, d.next)), ne(d.e, !l);
-    }
-  });
-}
-function _o(e, t, o, n, r, a = null) {
-  var s = e, l = { flags: t, items: /* @__PURE__ */ new Map(), first: null }, c = (t & Ho) !== 0;
-  if (c) {
+function O2(t, e, a, r) {
+  for (var n = [], o = e.length, l = 0; l < o; l++)
+    wa(e[l].e, n, !0);
+  var s = o > 0 && n.length === 0 && a !== null;
+  if (s) {
     var i = (
       /** @type {Element} */
-      e
+      /** @type {Element} */
+      a.parentNode
     );
-    s = R ? X(
-      /** @type {Comment | Text} */
-      /* @__PURE__ */ V(i)
-    ) : i.appendChild(Ze());
+    Er(i), i.append(
+      /** @type {Element} */
+      a
+    ), r.clear(), Ut(t, e[0].prev, e[o - 1].next);
   }
-  R && ke();
-  var d = null, f = !1, u = /* @__PURE__ */ fr(() => {
-    var v = o();
-    return co(v) ? v : v == null ? [] : uo(v);
-  });
-  ot(() => {
-    var v = g(u), h = v.length;
-    if (f && h === 0)
-      return;
-    f = h === 0;
-    let p = !1;
-    if (R) {
-      var m = (
-        /** @type {Comment} */
-        s.data === so
-      );
-      m !== (h === 0) && (s = zt(), X(s), me(!1), p = !0);
+  Jr(n, () => {
+    for (var p = 0; p < o; p++) {
+      var y = e[p];
+      s || (r.delete(y.k), Ut(t, y.prev, y.next)), st(y.e, !s);
     }
-    if (R) {
-      for (var L = null, E, w = 0; w < h; w++) {
-        if (C.nodeType === 8 && /** @type {Comment} */
-        C.data === io) {
-          s = /** @type {Comment} */
-          C, p = !0, me(!1);
+  });
+}
+function Kt(t, e, a, r, n, o = null) {
+  var l = t, s = { flags: e, items: /* @__PURE__ */ new Map(), first: null }, i = (e & Vr) !== 0;
+  if (i) {
+    var p = (
+      /** @type {Element} */
+      t
+    );
+    l = G ? at(
+      /** @type {Comment | Text} */
+      /* @__PURE__ */ z(p)
+    ) : p.appendChild(le());
+  }
+  G && jt();
+  var y = null, u = !1, c = /* @__PURE__ */ n2(() => {
+    var d = a();
+    return Oa(d) ? d : d == null ? [] : Ga(d);
+  });
+  ie(() => {
+    var d = f(c), P = d.length;
+    if (u && P === 0)
+      return;
+    u = P === 0;
+    let V = !1;
+    if (G) {
+      var h = (
+        /** @type {Comment} */
+        l.data === va
+      );
+      h !== (P === 0) && (l = ia(), at(l), Tt(!1), V = !0);
+    }
+    if (G) {
+      for (var I = null, N, g = 0; g < P; g++) {
+        if (x.nodeType === 8 && /** @type {Comment} */
+        x.data === Ra) {
+          l = /** @type {Comment} */
+          x, V = !0, Tt(!1);
           break;
         }
-        var _ = v[w], y = n(_, w);
-        E = _n(
-          C,
-          l,
-          L,
+        var A = d[g], m = r(A, g);
+        N = zr(
+          x,
+          s,
+          I,
           null,
-          _,
-          y,
-          w,
-          r,
-          t,
-          o
-        ), l.items.set(y, E), L = E;
+          A,
+          m,
+          g,
+          n,
+          e,
+          a
+        ), s.items.set(m, N), I = N;
       }
-      h > 0 && X(zt());
+      P > 0 && at(ia());
     }
-    R || Gr(v, l, s, r, t, n, o), a !== null && (h === 0 ? d ? St(d) : d = Re(() => a(s)) : d !== null && dt(d, () => {
-      d = null;
-    })), p && me(!0), g(u);
-  }), R && (s = C);
+    G || G2(d, s, l, n, e, r, a), o !== null && (P === 0 ? y ? _e(y) : y = Mt(() => o(l)) : y !== null && Ie(y, () => {
+      y = null;
+    })), V && Tt(!0), f(c);
+  }), G && (l = x);
 }
-function Gr(e, t, o, n, r, a, s) {
-  var b, He, De, x;
-  var l = (r & Bn) !== 0, c = (r & (ro | ao)) !== 0, i = e.length, d = t.items, f = t.first, u = f, v, h = null, p, m = [], L = [], E, w, _, y;
-  if (l)
-    for (y = 0; y < i; y += 1)
-      E = e[y], w = a(E, y), _ = d.get(w), _ !== void 0 && ((b = _.a) == null || b.measure(), (p ?? (p = /* @__PURE__ */ new Set())).add(_));
-  for (y = 0; y < i; y += 1) {
-    if (E = e[y], w = a(E, y), _ = d.get(w), _ === void 0) {
-      var T = u ? (
+function G2(t, e, a, r, n, o, l) {
+  var Ct, O, v, X;
+  var s = (n & On) !== 0, i = (n & (ba | Ta)) !== 0, p = t.length, y = e.items, u = e.first, c = u, d, P = null, V, h = [], I = [], N, g, A, m;
+  if (s)
+    for (m = 0; m < p; m += 1)
+      N = t[m], g = o(N, m), A = y.get(g), A !== void 0 && ((Ct = A.a) == null || Ct.measure(), (V ?? (V = /* @__PURE__ */ new Set())).add(A));
+  for (m = 0; m < p; m += 1) {
+    if (N = t[m], g = o(N, m), A = y.get(g), A === void 0) {
+      var T = c ? (
         /** @type {TemplateNode} */
-        u.e.nodes_start
-      ) : o;
-      h = _n(
+        c.e.nodes_start
+      ) : a;
+      P = zr(
         T,
-        t,
-        h,
-        h === null ? t.first : h.next,
-        E,
-        w,
-        y,
-        n,
+        e,
+        P,
+        P === null ? e.first : P.next,
+        N,
+        g,
+        m,
         r,
-        s
-      ), d.set(w, h), m = [], L = [], u = h.next;
+        n,
+        l
+      ), y.set(g, P), h = [], I = [], c = P.next;
       continue;
     }
-    if (c && Kr(_, E, y, r), _.e.f & _e && (St(_.e), l && ((He = _.a) == null || He.unfix(), (p ?? (p = /* @__PURE__ */ new Set())).delete(_))), _ !== u) {
-      if (v !== void 0 && v.has(_)) {
-        if (m.length < L.length) {
-          var I = L[0], M;
-          h = I.prev;
-          var Y = m[0], fe = m[m.length - 1];
-          for (M = 0; M < m.length; M += 1)
-            $o(m[M], I, o);
-          for (M = 0; M < L.length; M += 1)
-            v.delete(L[M]);
-          Le(t, Y.prev, fe.next), Le(t, h, Y), Le(t, fe, I), u = I, h = fe, y -= 1, m = [], L = [];
+    if (i && x2(A, N, m, n), A.e.f & vt && (_e(A.e), s && ((O = A.a) == null || O.unfix(), (V ?? (V = /* @__PURE__ */ new Set())).delete(A))), A !== c) {
+      if (d !== void 0 && d.has(A)) {
+        if (h.length < I.length) {
+          var R = I[0], S;
+          P = R.prev;
+          var H = h[0], it = h[h.length - 1];
+          for (S = 0; S < h.length; S += 1)
+            Xa(h[S], R, a);
+          for (S = 0; S < I.length; S += 1)
+            d.delete(I[S]);
+          Ut(e, H.prev, it.next), Ut(e, P, H), Ut(e, it, R), c = R, P = it, m -= 1, h = [], I = [];
         } else
-          v.delete(_), $o(_, u, o), Le(t, _.prev, _.next), Le(t, _, h === null ? t.first : h.next), Le(t, h, _), h = _;
+          d.delete(A), Xa(A, c, a), Ut(e, A.prev, A.next), Ut(e, A, P === null ? e.first : P.next), Ut(e, P, A), P = A;
         continue;
       }
-      for (m = [], L = []; u !== null && u.k !== w; )
-        u.e.f & _e || (v ?? (v = /* @__PURE__ */ new Set())).add(u), L.push(u), u = u.next;
-      if (u === null)
+      for (h = [], I = []; c !== null && c.k !== g; )
+        c.e.f & vt || (d ?? (d = /* @__PURE__ */ new Set())).add(c), I.push(c), c = c.next;
+      if (c === null)
         continue;
-      _ = u;
+      A = c;
     }
-    m.push(_), h = _, u = _.next;
+    h.push(A), P = A, c = A.next;
   }
-  if (u !== null || v !== void 0) {
-    for (var re = v === void 0 ? [] : uo(v); u !== null; )
-      u.e.f & _e || re.push(u), u = u.next;
-    var Q = re.length;
-    if (Q > 0) {
-      var Z = r & Ho && i === 0 ? o : null;
-      if (l) {
-        for (y = 0; y < Q; y += 1)
-          (De = re[y].a) == null || De.measure();
-        for (y = 0; y < Q; y += 1)
-          (x = re[y].a) == null || x.fix();
+  if (c !== null || d !== void 0) {
+    for (var $ = d === void 0 ? [] : Ga(d); c !== null; )
+      c.e.f & vt || $.push(c), c = c.next;
+    var Et = $.length;
+    if (Et > 0) {
+      var Jt = n & Vr && p === 0 ? a : null;
+      if (s) {
+        for (m = 0; m < Et; m += 1)
+          (v = $[m].a) == null || v.measure();
+        for (m = 0; m < Et; m += 1)
+          (X = $[m].a) == null || X.fix();
       }
-      Wr(t, re, Z, d);
+      O2(e, $, Jt, y);
     }
   }
-  l && Bt(() => {
-    var k;
-    if (p !== void 0)
-      for (_ of p)
-        (k = _.a) == null || k.apply();
-  }), O.first = t.first && t.first.e, O.last = h && h.e;
+  s && fe(() => {
+    var gt;
+    if (V !== void 0)
+      for (A of V)
+        (gt = A.a) == null || gt.apply();
+  }), E.first = e.first && e.first.e, E.last = P && P.e;
 }
-function Kr(e, t, o, n) {
-  n & ro && Vt(e.v, t), n & ao ? Vt(
+function x2(t, e, a, r) {
+  r & ba && pa(t.v, e), r & Ta ? pa(
     /** @type {Value<number>} */
-    e.i,
-    o
-  ) : e.i = o;
+    t.i,
+    a
+  ) : t.i = a;
 }
-function _n(e, t, o, n, r, a, s, l, c, i) {
-  var d = (c & ro) !== 0, f = (c & Fn) === 0, u = d ? f ? /* @__PURE__ */ Ft(r) : D(r) : r, v = c & ao ? D(s) : s, h = {
-    i: v,
-    v: u,
-    k: a,
+function zr(t, e, a, r, n, o, l, s, i, p) {
+  var y = (i & ba) !== 0, u = (i & Gn) === 0, c = y ? u ? /* @__PURE__ */ Be(n) : B(n) : n, d = i & Ta ? B(l) : l, P = {
+    i: d,
+    v: c,
+    k: o,
     a: null,
     // @ts-expect-error
     e: null,
-    prev: o,
-    next: n
+    prev: a,
+    next: r
   };
   try {
-    return h.e = Re(() => l(e, u, v, i), R), h.e.prev = o && o.e, h.e.next = n && n.e, o === null ? t.first = h : (o.next = h, o.e.next = h.e), n !== null && (n.prev = h, n.e.prev = h.e), h;
+    return P.e = Mt(() => s(t, c, d, p), G), P.e.prev = a && a.e, P.e.next = r && r.e, a === null ? e.first = P : (a.next = P, a.e.next = P.e), r !== null && (r.prev = P, r.e.prev = P.e), P;
   } finally {
   }
 }
-function $o(e, t, o) {
-  for (var n = e.next ? (
+function Xa(t, e, a) {
+  for (var r = t.next ? (
     /** @type {TemplateNode} */
-    e.next.e.nodes_start
-  ) : o, r = t ? (
-    /** @type {TemplateNode} */
-    t.e.nodes_start
-  ) : o, a = (
+    t.next.e.nodes_start
+  ) : a, n = e ? (
     /** @type {TemplateNode} */
     e.e.nodes_start
-  ); a !== n; ) {
-    var s = (
+  ) : a, o = (
+    /** @type {TemplateNode} */
+    t.e.nodes_start
+  ); o !== r; ) {
+    var l = (
       /** @type {TemplateNode} */
-      /* @__PURE__ */ Ee(a)
+      /* @__PURE__ */ xt(o)
     );
-    r.before(a), a = s;
+    n.before(o), o = l;
   }
 }
-function Le(e, t, o) {
-  t === null ? e.first = o : (t.next = o, t.e.next = o && o.e), o !== null && (o.prev = t, o.e.prev = t && t.e);
+function Ut(t, e, a) {
+  e === null ? t.first = a : (e.next = a, e.e.next = a && a.e), a !== null && (a.prev = e, a.e.prev = e && e.e);
 }
-function Ut(e, t, o, n, r) {
-  var a = e, s = "", l;
-  ot(() => {
-    if (s === (s = t() ?? "")) {
-      R && ke();
+function be(t, e, a, r, n) {
+  var o = t, l = "", s;
+  ie(() => {
+    if (l === (l = e() ?? "")) {
+      G && jt();
       return;
     }
-    l !== void 0 && (ne(l), l = void 0), s !== "" && (l = Re(() => {
-      if (R) {
-        C.data;
-        for (var c = ke(), i = c; c !== null && (c.nodeType !== 8 || /** @type {Comment} */
-        c.data !== ""); )
-          i = c, c = /** @type {TemplateNode} */
-          /* @__PURE__ */ Ee(c);
-        if (c === null)
-          throw Ht(), qe;
-        be(C, i), a = X(c);
+    s !== void 0 && (st(s), s = void 0), l !== "" && (s = Mt(() => {
+      if (G) {
+        x.data;
+        for (var i = jt(), p = i; i !== null && (i.nodeType !== 8 || /** @type {Comment} */
+        i.data !== ""); )
+          p = i, i = /** @type {TemplateNode} */
+          /* @__PURE__ */ xt(i);
+        if (i === null)
+          throw je(), re;
+        dt(x, p), o = at(i);
         return;
       }
-      var d = s + "";
-      d = `<svg>${d}</svg>`;
-      var f = go(d);
-      for (f = /** @type {Element} */
-      /* @__PURE__ */ V(f), be(
+      var y = l + "";
+      y = `<svg>${y}</svg>`;
+      var u = Ha(y);
+      for (u = /** @type {Element} */
+      /* @__PURE__ */ z(u), dt(
         /** @type {TemplateNode} */
-        /* @__PURE__ */ V(f),
+        /* @__PURE__ */ z(u),
         /** @type {TemplateNode} */
-        f.lastChild
-      ); /* @__PURE__ */ V(f); )
-        a.before(
+        u.lastChild
+      ); /* @__PURE__ */ z(u); )
+        o.before(
           /** @type {Node} */
-          /* @__PURE__ */ V(f)
+          /* @__PURE__ */ z(u)
         );
     }));
   });
 }
-function Ur(e, t, ...o) {
-  var n = e, r = K, a;
-  ot(() => {
-    r !== (r = t()) && (a && (ne(a), a = null), a = Re(() => (
+function De(t, e, ...a) {
+  var r = t, n = M, o;
+  ie(() => {
+    n !== (n = e()) && (o && (st(o), o = null), o = Mt(() => (
       /** @type {SnippetFn} */
-      r(n, ...o)
+      n(r, ...a)
     )));
-  }, ft), R && (n = C);
+  }, ge), G && (r = x);
 }
-function xt(e, t) {
-  Bt(() => {
-    var o = e.getRootNode(), n = (
+function Xt(t, e) {
+  fe(() => {
+    var a = t.getRootNode(), r = (
       /** @type {ShadowRoot} */
-      o.host ? (
+      a.host ? (
         /** @type {ShadowRoot} */
-        o
+        a
       ) : (
         /** @type {Document} */
-        o.head ?? /** @type {Document} */
-        o.ownerDocument.head
+        a.head ?? /** @type {Document} */
+        a.ownerDocument.head
       )
     );
-    if (!n.querySelector("#" + t.hash)) {
-      const r = document.createElement("style");
-      r.id = t.hash, r.textContent = t.code, n.appendChild(r);
+    if (!r.querySelector("#" + e.hash)) {
+      const n = document.createElement("style");
+      n.id = e.hash, n.textContent = e.code, r.appendChild(n);
     }
   });
 }
-function No(e, t, o, n) {
-  var r = e.__attributes ?? (e.__attributes = {});
-  R && (r[t] = e.getAttribute(t), t === "src" || t === "srcset" || t === "href" && e.nodeName === "LINK") || r[t] !== (r[t] = o) && (t === "style" && "__styles" in e && (e.__styles = {}), t === "loading" && (e[jn] = o), o == null ? e.removeAttribute(t) : typeof o != "string" && Yr(e).includes(t) ? e[t] = o : e.setAttribute(t, o));
-}
-var Mo = /* @__PURE__ */ new Map();
-function Yr(e) {
-  var t = Mo.get(e.nodeName);
-  if (t) return t;
-  Mo.set(e.nodeName, t = []);
-  for (var o, n = e, r = Element.prototype; r !== n; ) {
-    o = Vn(n);
-    for (var a in o)
-      o[a].set && t.push(a);
-    n = Uo(n);
+const Za = [...` 	
+\r\f \v\uFEFF`];
+function E2(t, e, a) {
+  var r = t == null ? "" : "" + t;
+  if (a) {
+    for (var n in a)
+      if (a[n])
+        r = r ? r + " " + n : n;
+      else if (r.length)
+        for (var o = n.length, l = 0; (l = r.indexOf(n, l)) >= 0; ) {
+          var s = l + o;
+          (l === 0 || Za.includes(r[l - 1])) && (s === r.length || Za.includes(r[s])) ? r = (l === 0 ? "" : r.substring(0, l)) + r.substring(s + 1) : l = s;
+        }
   }
-  return t;
+  return r === "" ? null : r;
 }
-function Ye(e, t, o) {
-  if (o) {
-    if (e.classList.contains(t)) return;
-    e.classList.add(t);
-  } else {
-    if (!e.classList.contains(t)) return;
-    e.classList.remove(t);
+function Xe(t, e, a, r, n, o) {
+  var l = t.__className;
+  if (G || l !== a) {
+    var s = E2(a, r, o);
+    (!G || s !== t.getAttribute("class")) && (s == null ? t.removeAttribute("class") : e ? t.className = s : t.setAttribute("class", s)), t.__className = a;
+  } else if (o) {
+    n ?? (n = {});
+    for (var i in o) {
+      var p = !!o[i];
+      p !== !!n[i] && t.classList.toggle(i, p);
+    }
   }
+  return o;
 }
-function ye(e, t, o, n) {
-  var r = e.__styles ?? (e.__styles = {});
-  r[t] !== o && (r[t] = o, o == null ? e.style.removeProperty(t) : e.style.setProperty(t, o, ""));
+function Bt(t, e, a, r) {
+  var n = t.__attributes ?? (t.__attributes = {});
+  G && (n[e] = t.getAttribute(e), e === "src" || e === "srcset" || e === "href" && t.nodeName === "LINK") || n[e] !== (n[e] = a) && (e === "style" && "__styles" in t && (t.__styles = {}), e === "loading" && (t[Dn] = a), a == null ? t.removeAttribute(e) : typeof a != "string" && C2(t).includes(e) ? t[e] = a : t.setAttribute(e, a));
 }
-const jr = () => performance.now(), ae = {
+var tr = /* @__PURE__ */ new Map();
+function C2(t) {
+  var e = tr.get(t.nodeName);
+  if (e) return e;
+  tr.set(t.nodeName, e = []);
+  for (var a, r = t, n = Element.prototype; n !== r; ) {
+    a = Mn(r);
+    for (var o in a)
+      a[o].set && e.push(o);
+    r = Nr(r);
+  }
+  return e;
+}
+function _t(t, e, a, r) {
+  var n = t.__styles ?? (t.__styles = {});
+  n[e] !== a && (n[e] = a, a == null ? t.style.removeProperty(e) : t.style.setProperty(e, a, ""));
+}
+const U2 = () => performance.now(), yt = {
   // don't access requestAnimationFrame eagerly outside method
   // this allows basic testing of user code without JSDOM
   // bunder will eval and remove ternary when the user's app is built
   tick: (
     /** @param {any} _ */
-    (e) => requestAnimationFrame(e)
+    (t) => requestAnimationFrame(t)
   ),
-  now: () => jr(),
+  now: () => U2(),
   tasks: /* @__PURE__ */ new Set()
 };
-function Nn() {
-  const e = ae.now();
-  ae.tasks.forEach((t) => {
-    t.c(e) || (ae.tasks.delete(t), t.f());
-  }), ae.tasks.size !== 0 && ae.tick(Nn);
+function qr() {
+  const t = yt.now();
+  yt.tasks.forEach((e) => {
+    e.c(t) || (yt.tasks.delete(e), e.f());
+  }), yt.tasks.size !== 0 && yt.tick(qr);
 }
-function wn(e) {
-  let t;
-  return ae.tasks.size === 0 && ae.tick(Nn), {
-    promise: new Promise((o) => {
-      ae.tasks.add(t = { c: e, f: o });
+function Xr(t) {
+  let e;
+  return yt.tasks.size === 0 && yt.tick(qr), {
+    promise: new Promise((a) => {
+      yt.tasks.add(e = { c: t, f: a });
     }),
     abort() {
-      ae.tasks.delete(t);
+      yt.tasks.delete(e);
     }
   };
 }
-function yt(e, t) {
-  kr(() => {
-    e.dispatchEvent(new CustomEvent(t));
+function Te(t, e) {
+  $r(() => {
+    t.dispatchEvent(new CustomEvent(e));
   });
 }
-function qr(e) {
-  if (e === "float") return "cssFloat";
-  if (e === "offset") return "cssOffset";
-  if (e.startsWith("--")) return e;
-  const t = e.split("-");
-  return t.length === 1 ? t[0] : t[0] + t.slice(1).map(
+function w2(t) {
+  if (t === "float") return "cssFloat";
+  if (t === "offset") return "cssOffset";
+  if (t.startsWith("--")) return t;
+  const e = t.split("-");
+  return e.length === 1 ? e[0] : e[0] + e.slice(1).map(
     /** @param {any} word */
-    (o) => o[0].toUpperCase() + o.slice(1)
+    (a) => a[0].toUpperCase() + a.slice(1)
   ).join("");
 }
-function ko(e) {
-  const t = {}, o = e.split(";");
-  for (const n of o) {
-    const [r, a] = n.split(":");
-    if (!r || a === void 0) break;
-    const s = qr(r.trim());
-    t[s] = a.trim();
+function er(t) {
+  const e = {}, a = t.split(";");
+  for (const r of a) {
+    const [n, o] = r.split(":");
+    if (!n || o === void 0) break;
+    const l = w2(n.trim());
+    e[l] = o.trim();
   }
-  return t;
+  return e;
 }
-const Vr = (e) => e;
-function zr(e, t, o, n) {
-  var r = (e & Kn) !== 0, a = "both", s, l = t.inert, c = t.style.overflow, i, d;
-  function f() {
-    var m = S, L = O;
-    de(null), ce(null);
+const H2 = (t) => t;
+function _2(t, e, a, r) {
+  var n = (t & wn) !== 0, o = "both", l, s = e.inert, i = e.style.overflow, p, y;
+  function u() {
+    var h = C, I = E;
+    ht(null), Vt(null);
     try {
-      return s ?? (s = o()(t, (n == null ? void 0 : n()) ?? /** @type {P} */
+      return l ?? (l = a()(e, (r == null ? void 0 : r()) ?? /** @type {P} */
       {}, {
-        direction: a
+        direction: o
       }));
     } finally {
-      de(m), ce(L);
+      ht(h), Vt(I);
     }
   }
-  var u = {
-    is_global: r,
+  var c = {
+    is_global: n,
     in() {
-      t.inert = l, yt(t, "introstart"), i = eo(t, f(), d, 1, () => {
-        yt(t, "introend"), i == null || i.abort(), i = s = void 0, t.style.overflow = c;
+      e.inert = s, Te(e, "introstart"), p = ha(e, u(), y, 1, () => {
+        Te(e, "introend"), p == null || p.abort(), p = l = void 0, e.style.overflow = i;
       });
     },
-    out(m) {
-      t.inert = !0, yt(t, "outrostart"), d = eo(t, f(), i, 0, () => {
-        yt(t, "outroend"), m == null || m();
+    out(h) {
+      e.inert = !0, Te(e, "outrostart"), y = ha(e, u(), p, 0, () => {
+        Te(e, "outroend"), h == null || h();
       });
     },
     stop: () => {
-      i == null || i.abort(), d == null || d.abort();
+      p == null || p.abort(), y == null || y.abort();
     }
-  }, v = (
+  }, d = (
     /** @type {Effect} */
-    O
+    E
   );
-  if ((v.transitions ?? (v.transitions = [])).push(u), Qt) {
-    var h = r;
-    if (!h) {
-      for (var p = (
+  if ((d.transitions ?? (d.transitions = [])).push(c), Pa) {
+    var P = n;
+    if (!P) {
+      for (var V = (
         /** @type {Effect | null} */
-        v.parent
-      ); p && p.f & ft; )
-        for (; (p = p.parent) && !(p.f & kt); )
+        d.parent
+      ); V && V.f & ge; )
+        for (; (V = V.parent) && !(V.f & Ye); )
           ;
-      h = !p || (p.f & Go) !== 0;
+      P = !V || (V.f & gr) !== 0;
     }
-    h && vt(() => {
-      J(() => u.in());
+    P && ze(() => {
+      kt(() => c.in());
     });
   }
 }
-function eo(e, t, o, n, r) {
-  var a = n === 1;
-  if (Ue(t)) {
-    var s, l = !1;
-    return Bt(() => {
-      if (!l) {
-        var m = t({ direction: a ? "in" : "out" });
-        s = eo(e, m, o, n, r);
+function ha(t, e, a, r, n) {
+  var o = r === 1;
+  if (ee(e)) {
+    var l, s = !1;
+    return fe(() => {
+      if (!s) {
+        var h = e({ direction: o ? "in" : "out" });
+        l = ha(t, h, a, r, n);
       }
     }), {
       abort: () => {
-        l = !0, s == null || s.abort();
+        s = !0, l == null || l.abort();
       },
-      deactivate: () => s.deactivate(),
-      reset: () => s.reset(),
-      t: () => s.t()
+      deactivate: () => l.deactivate(),
+      reset: () => l.reset(),
+      t: () => l.t()
     };
   }
-  if (o == null || o.deactivate(), !(t != null && t.duration))
-    return r(), {
-      abort: K,
-      deactivate: K,
-      reset: K,
-      t: () => n
+  if (a == null || a.deactivate(), !(e != null && e.duration))
+    return n(), {
+      abort: M,
+      deactivate: M,
+      reset: M,
+      t: () => r
     };
-  const { delay: c = 0, css: i, tick: d, easing: f = Vr } = t;
-  var u = [];
-  if (a && o === void 0 && (d && d(0, 1), i)) {
-    var v = ko(i(0, 1));
-    u.push(v, v);
+  const { delay: i = 0, css: p, tick: y, easing: u = H2 } = e;
+  var c = [];
+  if (o && a === void 0 && (y && y(0, 1), p)) {
+    var d = er(p(0, 1));
+    c.push(d, d);
   }
-  var h = () => 1 - n, p = e.animate(u, { duration: c });
-  return p.onfinish = () => {
-    var m = (o == null ? void 0 : o.t()) ?? 1 - n;
-    o == null || o.abort();
-    var L = n - m, E = (
+  var P = () => 1 - r, V = t.animate(c, { duration: i });
+  return V.onfinish = () => {
+    var h = (a == null ? void 0 : a.t()) ?? 1 - r;
+    a == null || a.abort();
+    var I = r - h, N = (
       /** @type {number} */
-      t.duration * Math.abs(L)
-    ), w = [];
-    if (E > 0) {
-      var _ = !1;
-      if (i)
-        for (var y = Math.ceil(E / 16.666666666666668), T = 0; T <= y; T += 1) {
-          var I = m + L * f(T / y), M = ko(i(I, 1 - I));
-          w.push(M), _ || (_ = M.overflow === "hidden");
+      e.duration * Math.abs(I)
+    ), g = [];
+    if (N > 0) {
+      var A = !1;
+      if (p)
+        for (var m = Math.ceil(N / 16.666666666666668), T = 0; T <= m; T += 1) {
+          var R = h + I * u(T / m), S = er(p(R, 1 - R));
+          g.push(S), A || (A = S.overflow === "hidden");
         }
-      _ && (e.style.overflow = "hidden"), h = () => {
-        var Y = (
+      A && (t.style.overflow = "hidden"), P = () => {
+        var H = (
           /** @type {number} */
           /** @type {globalThis.Animation} */
-          p.currentTime
+          V.currentTime
         );
-        return m + L * f(Y / E);
-      }, d && wn(() => {
-        if (p.playState !== "running") return !1;
-        var Y = h();
-        return d(Y, 1 - Y), !0;
+        return h + I * u(H / N);
+      }, y && Xr(() => {
+        if (V.playState !== "running") return !1;
+        var H = P();
+        return y(H, 1 - H), !0;
       });
     }
-    p = e.animate(w, { duration: E, fill: "forwards" }), p.onfinish = () => {
-      h = () => n, d == null || d(n, 1 - n), r();
+    V = t.animate(g, { duration: N, fill: "forwards" }), V.onfinish = () => {
+      P = () => r, y == null || y(r, 1 - r), n();
     };
   }, {
     abort: () => {
-      p && (p.cancel(), p.effect = null, p.onfinish = K);
+      V && (V.cancel(), V.effect = null, V.onfinish = M);
     },
     deactivate: () => {
-      r = K;
+      n = M;
     },
     reset: () => {
-      n === 0 && (d == null || d(1, 0));
+      r === 0 && (y == null || y(1, 0));
     },
-    t: () => h()
+    t: () => P()
   };
 }
-var Ce, Je, ct, Tt, bn;
-const $t = class $t {
-  /** @param {ResizeObserverOptions} options */
-  constructor(t) {
-    ee(this, Tt);
-    /** */
-    ee(this, Ce, /* @__PURE__ */ new WeakMap());
-    /** @type {ResizeObserver | undefined} */
-    ee(this, Je);
-    /** @type {ResizeObserverOptions} */
-    ee(this, ct);
-    Te(this, ct, t);
-  }
-  /**
-   * @param {Element} element
-   * @param {(entry: ResizeObserverEntry) => any} listener
-   */
-  observe(t, o) {
-    var n = A(this, Ce).get(t) || /* @__PURE__ */ new Set();
-    return n.add(o), A(this, Ce).set(t, n), Lo(this, Tt, bn).call(this).observe(t, A(this, ct)), () => {
-      var r = A(this, Ce).get(t);
-      r.delete(o), r.size === 0 && (A(this, Ce).delete(t), A(this, Je).unobserve(t));
-    };
-  }
-};
-Ce = new WeakMap(), Je = new WeakMap(), ct = new WeakMap(), Tt = new WeakSet(), bn = function() {
-  return A(this, Je) ?? Te(this, Je, new ResizeObserver(
-    /** @param {any} entries */
-    (t) => {
-      for (var o of t) {
-        $t.entries.set(o.target, o);
-        for (var n of A(this, Ce).get(o.target) || [])
-          n(o);
-      }
-    }
-  ));
-}, /** @static */
-j($t, "entries", /* @__PURE__ */ new WeakMap());
-let to = $t;
-var Xr = /* @__PURE__ */ new to({
-  box: "border-box"
-});
-function Io(e, t, o) {
-  var n = Xr.observe(e, () => o(e[t]));
-  vt(() => (J(() => o(e[t])), n));
+function ar(t, e) {
+  return t === e || (t == null ? void 0 : t[ne]) === e;
 }
-function Bo(e, t) {
-  return e === t || (e == null ? void 0 : e[Ve]) === t;
-}
-function Pn(e = {}, t, o, n) {
-  return vt(() => {
-    var r, a;
-    return po(() => {
-      r = a, a = [], J(() => {
-        e !== o(...a) && (t(e, ...a), r && Bo(o(...r), e) && t(null, ...r));
+function _a(t = {}, e, a, r) {
+  return ze(() => {
+    var n, o;
+    return Ua(() => {
+      n = o, o = [], kt(() => {
+        t !== a(...o) && (e(t, ...o), n && ar(a(...n), t) && e(null, ...n));
       });
     }), () => {
-      Bt(() => {
-        a && Bo(o(...a), e) && t(null, ...a);
+      fe(() => {
+        o && ar(a(...o), t) && e(null, ...o);
       });
     };
-  }), e;
+  }), t;
 }
-function Jr(e) {
-  W === null && Tr(), Rt(() => {
-    const t = J(e);
-    if (typeof t == "function") return (
+function Fa(t) {
+  j === null && N2(), Dt(() => {
+    const e = kt(t);
+    if (typeof e == "function") return (
       /** @type {() => void} */
-      t
+      e
     );
   });
 }
-function An(e, t, o) {
-  if (e == null)
-    return t(void 0), K;
-  const n = J(
-    () => e.subscribe(
-      t,
+function Zr(t, e, a) {
+  if (t == null)
+    return e(void 0), M;
+  const r = kt(
+    () => t.subscribe(
+      e,
       // @ts-expect-error
-      o
+      a
     )
   );
-  return n.unsubscribe ? () => n.unsubscribe() : n;
+  return r.unsubscribe ? () => r.unsubscribe() : r;
 }
-const Ke = [];
-function Qr(e, t = K) {
-  let o = null;
-  const n = /* @__PURE__ */ new Set();
-  function r(l) {
-    if (qo(e, l) && (e = l, o)) {
-      const c = !Ke.length;
-      for (const i of n)
-        i[1](), Ke.push(i, e);
-      if (c) {
-        for (let i = 0; i < Ke.length; i += 2)
-          Ke[i][0](Ke[i + 1]);
-        Ke.length = 0;
+const te = [];
+function Da(t, e = M) {
+  let a = null;
+  const r = /* @__PURE__ */ new Set();
+  function n(s) {
+    if (Tr(t, s) && (t = s, a)) {
+      const i = !te.length;
+      for (const p of r)
+        p[1](), te.push(p, t);
+      if (i) {
+        for (let p = 0; p < te.length; p += 2)
+          te[p][0](te[p + 1]);
+        te.length = 0;
       }
     }
   }
-  function a(l) {
-    r(l(
+  function o(s) {
+    n(s(
       /** @type {T} */
-      e
+      t
     ));
   }
-  function s(l, c = K) {
-    const i = [l, c];
-    return n.add(i), n.size === 1 && (o = t(r, a) || K), l(
+  function l(s, i = M) {
+    const p = [s, i];
+    return r.add(p), r.size === 1 && (a = e(n, o) || M), s(
       /** @type {T} */
-      e
+      t
     ), () => {
-      n.delete(i), n.size === 0 && o && (o(), o = null);
+      r.delete(p), r.size === 0 && a && (a(), a = null);
     };
   }
-  return { set: r, update: a, subscribe: s };
+  return { set: n, update: o, subscribe: l };
 }
-function Zr(e) {
-  let t;
-  return An(e, (o) => t = o)(), t;
+function F2(t) {
+  let e;
+  return Zr(t, (a) => e = a)(), e;
 }
-let _t = !1, oo = Symbol();
-function ea(e, t, o) {
-  const n = o[t] ?? (o[t] = {
+let ve = !1, Va = Symbol();
+function tn(t, e, a) {
+  const r = a[e] ?? (a[e] = {
     store: null,
-    source: /* @__PURE__ */ Ft(void 0),
-    unsubscribe: K
+    source: /* @__PURE__ */ Be(void 0),
+    unsubscribe: M
   });
-  if (n.store !== e && !(oo in o))
-    if (n.unsubscribe(), n.store = e ?? null, e == null)
-      n.source.v = void 0, n.unsubscribe = K;
+  if (r.store !== t && !(Va in a))
+    if (r.unsubscribe(), r.store = t ?? null, t == null)
+      r.source.v = void 0, r.unsubscribe = M;
     else {
-      var r = !0;
-      n.unsubscribe = An(e, (a) => {
-        r ? n.source.v = a : $(n.source, a);
-      }), r = !1;
+      var n = !0;
+      r.unsubscribe = Zr(t, (o) => {
+        n ? r.source.v = o : _(r.source, o);
+      }), n = !1;
     }
-  return e && oo in o ? Zr(e) : g(n.source);
+  return t && Va in a ? F2(t) : f(r.source);
 }
-function ta(e, t) {
-  return e.set(t), t;
+function Ia(t, e) {
+  return t.set(e), e;
 }
-function oa() {
-  const e = {};
-  function t() {
-    Cr(() => {
-      for (var o in e)
-        e[o].unsubscribe();
-      at(e, oo, {
+function en() {
+  const t = {};
+  function e() {
+    Fr(() => {
+      for (var a in t)
+        t[a].unsubscribe();
+      he(t, Va, {
         enumerable: !1,
         value: !0
       });
     });
   }
-  return [e, t];
+  return [t, e];
 }
-function na(e, t, o) {
-  return e.set(o), t;
+function D2(t, e, a) {
+  return t.set(a), e;
 }
-function ra(e) {
-  var t = _t;
+function k2(t) {
+  var e = ve;
   try {
-    return _t = !1, [e(), _t];
+    return ve = !1, [t(), ve];
   } finally {
-    _t = t;
+    ve = e;
   }
 }
-const aa = {
-  get(e, t) {
-    let o = e.props.length;
-    for (; o--; ) {
-      let n = e.props[o];
-      if (Ue(n) && (n = n()), typeof n == "object" && n !== null && t in n) return n[t];
+const M2 = {
+  get(t, e) {
+    let a = t.props.length;
+    for (; a--; ) {
+      let r = t.props[a];
+      if (ee(r) && (r = r()), typeof r == "object" && r !== null && e in r) return r[e];
     }
   },
-  set(e, t, o) {
-    let n = e.props.length;
-    for (; n--; ) {
-      let r = e.props[n];
-      Ue(r) && (r = r());
-      const a = Ne(r, t);
-      if (a && a.set)
-        return a.set(o), !0;
+  set(t, e, a) {
+    let r = t.props.length;
+    for (; r--; ) {
+      let n = t.props[r];
+      ee(n) && (n = n());
+      const o = Rt(n, e);
+      if (o && o.set)
+        return o.set(a), !0;
     }
     return !1;
   },
-  getOwnPropertyDescriptor(e, t) {
-    let o = e.props.length;
-    for (; o--; ) {
-      let n = e.props[o];
-      if (Ue(n) && (n = n()), typeof n == "object" && n !== null && t in n) {
-        const r = Ne(n, t);
-        return r && !r.configurable && (r.configurable = !0), r;
+  getOwnPropertyDescriptor(t, e) {
+    let a = t.props.length;
+    for (; a--; ) {
+      let r = t.props[a];
+      if (ee(r) && (r = r()), typeof r == "object" && r !== null && e in r) {
+        const n = Rt(r, e);
+        return n && !n.configurable && (n.configurable = !0), n;
       }
     }
   },
-  has(e, t) {
-    if (t === Ve || t === lo) return !1;
-    for (let o of e.props)
-      if (Ue(o) && (o = o()), o != null && t in o) return !0;
+  has(t, e) {
+    if (e === ne || e === Sa) return !1;
+    for (let a of t.props)
+      if (ee(a) && (a = a()), a != null && e in a) return !0;
     return !1;
   },
-  ownKeys(e) {
-    const t = [];
-    for (let o of e.props) {
-      Ue(o) && (o = o());
-      for (const n in o)
-        t.includes(n) || t.push(n);
+  ownKeys(t) {
+    const e = [];
+    for (let a of t.props) {
+      ee(a) && (a = a());
+      for (const r in a)
+        e.includes(r) || e.push(r);
     }
-    return t;
+    return e;
   }
 };
-function sa(...e) {
-  return new Proxy({ props: e }, aa);
+function J2(...t) {
+  return new Proxy({ props: t }, M2);
 }
-function P(e, t, o, n) {
-  var y;
-  var r = (o & Hn) !== 0, a = !0, s = (o & Wn) !== 0, l = (o & Gn) !== 0, c = !1, i;
-  s ? [i, c] = ra(() => (
-    /** @type {V} */
-    e[t]
-  )) : i = /** @type {V} */
-  e[t];
-  var d = Ve in e || lo in e, f = s && (((y = Ne(e, t)) == null ? void 0 : y.set) ?? (d && t in e && ((T) => e[t] = T))) || void 0, u = (
-    /** @type {V} */
-    n
-  ), v = !0, h = !1, p = () => (h = !0, v && (v = !1, l ? u = J(
-    /** @type {() => V} */
-    n
-  ) : u = /** @type {V} */
-  n), u);
-  i === void 0 && n !== void 0 && (f && a && ar(), i = p(), f && f(i));
+function b(t, e, a, r) {
   var m;
-  if (m = () => {
+  var n = (a & xn) !== 0, o = !0, l = (a & Cn) !== 0, s = (a & Un) !== 0, i = !1, p;
+  l ? [p, i] = k2(() => (
+    /** @type {V} */
+    t[e]
+  )) : p = /** @type {V} */
+  t[e];
+  var y = ne in t || Sa in t, u = l && (((m = Rt(t, e)) == null ? void 0 : m.set) ?? (y && e in t && ((T) => t[e] = T))) || void 0, c = (
+    /** @type {V} */
+    r
+  ), d = !0, P = !1, V = () => (P = !0, d && (d = !1, s ? c = kt(
+    /** @type {() => V} */
+    r
+  ) : c = /** @type {V} */
+  r), c);
+  p === void 0 && r !== void 0 && (u && o && qn(), p = V(), u && u(p));
+  var h;
+  if (h = () => {
     var T = (
       /** @type {V} */
-      e[t]
+      t[e]
     );
-    return T === void 0 ? p() : (v = !0, h = !1, T);
-  }, !(o & Dn))
-    return m;
-  if (f) {
-    var L = e.$$legacy;
-    return function(T, I) {
-      return arguments.length > 0 ? ((!I || L || c) && f(I ? m() : T), T) : m();
+    return T === void 0 ? V() : (d = !0, P = !1, T);
+  }, !(a & En))
+    return h;
+  if (u) {
+    var I = t.$$legacy;
+    return function(T, R) {
+      return arguments.length > 0 ? ((!R || I || i) && u(R ? h() : T), T) : h();
     };
   }
-  var E = !1, w = /* @__PURE__ */ Ft(i), _ = /* @__PURE__ */ we(() => {
-    var T = m(), I = g(w);
-    return E ? (E = !1, I) : w.v = T;
+  var N = !1, g = /* @__PURE__ */ Be(p), A = /* @__PURE__ */ et(() => {
+    var T = h(), R = f(g);
+    return N ? (N = !1, R) : g.v = T;
   });
-  return r || (_.equals = fo), function(T, I) {
+  return n || (A.equals = xa), function(T, R) {
     if (arguments.length > 0) {
-      const M = I ? g(_) : s ? ge(T) : T;
-      return _.equals(M) || (E = !0, $(w, M), h && u !== void 0 && (u = M), J(() => g(_))), T;
+      const S = R ? f(A) : l ? wt(T) : T;
+      return A.equals(S) || (N = !0, _(g, S), P && c !== void 0 && (c = S), kt(() => f(A))), T;
     }
-    return g(_);
+    return f(A);
   };
 }
-function ia(e) {
-  return new la(e);
+function W2(t) {
+  return new Y2(t);
 }
-var pe, q;
-class la {
+var Lt, Z;
+class Y2 {
   /**
    * @param {ComponentConstructorOptions & {
    *  component: any;
    * }} options
    */
-  constructor(t) {
+  constructor(e) {
     /** @type {any} */
-    ee(this, pe);
+    Wt(this, Lt);
     /** @type {Record<string, any>} */
-    ee(this, q);
-    var a;
-    var o = /* @__PURE__ */ new Map(), n = (s, l) => {
-      var c = /* @__PURE__ */ Ft(l);
-      return o.set(s, c), c;
+    Wt(this, Z);
+    var o;
+    var a = /* @__PURE__ */ new Map(), r = (l, s) => {
+      var i = /* @__PURE__ */ Be(s);
+      return a.set(l, i), i;
     };
-    const r = new Proxy(
-      { ...t.props || {}, $$events: {} },
+    const n = new Proxy(
+      { ...e.props || {}, $$events: {} },
       {
-        get(s, l) {
-          return g(o.get(l) ?? n(l, Reflect.get(s, l)));
+        get(l, s) {
+          return f(a.get(s) ?? r(s, Reflect.get(l, s)));
         },
-        has(s, l) {
-          return l === lo ? !0 : (g(o.get(l) ?? n(l, Reflect.get(s, l))), Reflect.has(s, l));
+        has(l, s) {
+          return s === Sa ? !0 : (f(a.get(s) ?? r(s, Reflect.get(l, s))), Reflect.has(l, s));
         },
-        set(s, l, c) {
-          return $(o.get(l) ?? n(l, c), c), Reflect.set(s, l, c);
+        set(l, s, i) {
+          return _(a.get(s) ?? r(s, i), i), Reflect.set(l, s, i);
         }
       }
     );
-    Te(this, q, (t.hydrate ? Fr : gn)(t.component, {
-      target: t.target,
-      anchor: t.anchor,
-      props: r,
-      context: t.context,
-      intro: t.intro ?? !1,
-      recover: t.recover
-    })), (!((a = t == null ? void 0 : t.props) != null && a.$$host) || t.sync === !1) && N(), Te(this, pe, r.$$events);
-    for (const s of Object.keys(A(this, q)))
-      s === "$set" || s === "$destroy" || s === "$on" || at(this, s, {
+    ye(this, Z, (e.hydrate ? v2 : Qr)(e.component, {
+      target: e.target,
+      anchor: e.anchor,
+      props: n,
+      context: e.context,
+      intro: e.intro ?? !1,
+      recover: e.recover
+    })), (!((o = e == null ? void 0 : e.props) != null && o.$$host) || e.sync === !1) && L(), ye(this, Lt, n.$$events);
+    for (const l of Object.keys(U(this, Z)))
+      l === "$set" || l === "$destroy" || l === "$on" || he(this, l, {
         get() {
-          return A(this, q)[s];
+          return U(this, Z)[l];
         },
         /** @param {any} value */
-        set(l) {
-          A(this, q)[s] = l;
+        set(s) {
+          U(this, Z)[l] = s;
         },
         enumerable: !0
       });
-    A(this, q).$set = /** @param {Record<string, any>} next */
-    (s) => {
-      Object.assign(r, s);
-    }, A(this, q).$destroy = () => {
-      Hr(A(this, q));
+    U(this, Z).$set = /** @param {Record<string, any>} next */
+    (l) => {
+      Object.assign(n, l);
+    }, U(this, Z).$destroy = () => {
+      R2(U(this, Z));
     };
   }
   /** @param {Record<string, any>} props */
-  $set(t) {
-    A(this, q).$set(t);
+  $set(e) {
+    U(this, Z).$set(e);
   }
   /**
    * @param {string} event
    * @param {(...args: any[]) => any} callback
    * @returns {any}
    */
-  $on(t, o) {
-    A(this, pe)[t] = A(this, pe)[t] || [];
-    const n = (...r) => o.call(this, ...r);
-    return A(this, pe)[t].push(n), () => {
-      A(this, pe)[t] = A(this, pe)[t].filter(
+  $on(e, a) {
+    U(this, Lt)[e] = U(this, Lt)[e] || [];
+    const r = (...n) => a.call(this, ...n);
+    return U(this, Lt)[e].push(r), () => {
+      U(this, Lt)[e] = U(this, Lt)[e].filter(
         /** @param {any} fn */
-        (r) => r !== n
+        (n) => n !== r
       );
     };
   }
   $destroy() {
-    A(this, q).$destroy();
+    U(this, Z).$destroy();
   }
 }
-pe = new WeakMap(), q = new WeakMap();
-let En;
-typeof HTMLElement == "function" && (En = class extends HTMLElement {
+Lt = new WeakMap(), Z = new WeakMap();
+let an;
+typeof HTMLElement == "function" && (an = class extends HTMLElement {
   /**
    * @param {*} $$componentCtor
    * @param {*} $$slots
    * @param {*} use_shadow_dom
    */
-  constructor(t, o, n) {
+  constructor(e, a, r) {
     super();
     /** The Svelte component constructor */
-    j(this, "$$ctor");
+    nt(this, "$$ctor");
     /** Slots */
-    j(this, "$$s");
+    nt(this, "$$s");
     /** @type {any} The Svelte component instance */
-    j(this, "$$c");
+    nt(this, "$$c");
     /** Whether or not the custom element is connected */
-    j(this, "$$cn", !1);
+    nt(this, "$$cn", !1);
     /** @type {Record<string, any>} Component props data */
-    j(this, "$$d", {});
+    nt(this, "$$d", {});
     /** `true` if currently in the process of reflecting component props back to attributes */
-    j(this, "$$r", !1);
+    nt(this, "$$r", !1);
     /** @type {Record<string, CustomElementPropDefinition>} Props definition (name, reflected, type etc) */
-    j(this, "$$p_d", {});
+    nt(this, "$$p_d", {});
     /** @type {Record<string, EventListenerOrEventListenerObject[]>} Event listeners */
-    j(this, "$$l", {});
+    nt(this, "$$l", {});
     /** @type {Map<EventListenerOrEventListenerObject, Function>} Event listener unsubscribe functions */
-    j(this, "$$l_u", /* @__PURE__ */ new Map());
+    nt(this, "$$l_u", /* @__PURE__ */ new Map());
     /** @type {any} The managed render effect for reflecting attributes */
-    j(this, "$$me");
-    this.$$ctor = t, this.$$s = o, n && this.attachShadow({ mode: "open" });
+    nt(this, "$$me");
+    this.$$ctor = e, this.$$s = a, r && this.attachShadow({ mode: "open" });
   }
   /**
    * @param {string} type
    * @param {EventListenerOrEventListenerObject} listener
    * @param {boolean | AddEventListenerOptions} [options]
    */
-  addEventListener(t, o, n) {
-    if (this.$$l[t] = this.$$l[t] || [], this.$$l[t].push(o), this.$$c) {
-      const r = this.$$c.$on(t, o);
-      this.$$l_u.set(o, r);
+  addEventListener(e, a, r) {
+    if (this.$$l[e] = this.$$l[e] || [], this.$$l[e].push(a), this.$$c) {
+      const n = this.$$c.$on(e, a);
+      this.$$l_u.set(a, n);
     }
-    super.addEventListener(t, o, n);
+    super.addEventListener(e, a, r);
   }
   /**
    * @param {string} type
    * @param {EventListenerOrEventListenerObject} listener
    * @param {boolean | AddEventListenerOptions} [options]
    */
-  removeEventListener(t, o, n) {
-    if (super.removeEventListener(t, o, n), this.$$c) {
-      const r = this.$$l_u.get(o);
-      r && (r(), this.$$l_u.delete(o));
+  removeEventListener(e, a, r) {
+    if (super.removeEventListener(e, a, r), this.$$c) {
+      const n = this.$$l_u.get(a);
+      n && (n(), this.$$l_u.delete(a));
     }
   }
   async connectedCallback() {
     if (this.$$cn = !0, !this.$$c) {
-      let t = function(r) {
-        return (a) => {
-          const s = document.createElement("slot");
-          r !== "default" && (s.name = r), le(a, s);
+      let e = function(n) {
+        return (o) => {
+          const l = document.createElement("slot");
+          n !== "default" && (l.name = n), F(o, l);
         };
       };
       if (await Promise.resolve(), !this.$$cn || this.$$c)
         return;
-      const o = {}, n = da(this);
-      for (const r of this.$$s)
-        r in n && (r === "default" && !this.$$d.children ? (this.$$d.children = t(r), o.default = !0) : o[r] = t(r));
-      for (const r of this.attributes) {
-        const a = this.$$g_p(r.name);
-        a in this.$$d || (this.$$d[a] = bt(a, r.value, this.$$p_d, "toProp"));
+      const a = {}, r = $2(this);
+      for (const n of this.$$s)
+        n in r && (n === "default" && !this.$$d.children ? (this.$$d.children = e(n), a.default = !0) : a[n] = e(n));
+      for (const n of this.attributes) {
+        const o = this.$$g_p(n.name);
+        o in this.$$d || (this.$$d[o] = Oe(o, n.value, this.$$p_d, "toProp"));
       }
-      for (const r in this.$$p_d)
-        !(r in this.$$d) && this[r] !== void 0 && (this.$$d[r] = this[r], delete this[r]);
-      this.$$c = ia({
+      for (const n in this.$$p_d)
+        !(n in this.$$d) && this[n] !== void 0 && (this.$$d[n] = this[n], delete this[n]);
+      this.$$c = W2({
         component: this.$$ctor,
         target: this.shadowRoot || this,
         props: {
           ...this.$$d,
-          $$slots: o,
+          $$slots: a,
           $$host: this
         }
-      }), this.$$me = Or(() => {
-        po(() => {
-          var r;
+      }), this.$$me = A2(() => {
+        Ua(() => {
+          var n;
           this.$$r = !0;
-          for (const a of Et(this.$$c)) {
-            if (!((r = this.$$p_d[a]) != null && r.reflect)) continue;
-            this.$$d[a] = this.$$c[a];
-            const s = bt(
-              a,
-              this.$$d[a],
+          for (const o of Ee(this.$$c)) {
+            if (!((n = this.$$p_d[o]) != null && n.reflect)) continue;
+            this.$$d[o] = this.$$c[o];
+            const l = Oe(
+              o,
+              this.$$d[o],
               this.$$p_d,
               "toAttribute"
             );
-            s == null ? this.removeAttribute(this.$$p_d[a].attribute || a) : this.setAttribute(this.$$p_d[a].attribute || a, s);
+            l == null ? this.removeAttribute(this.$$p_d[o].attribute || o) : this.setAttribute(this.$$p_d[o].attribute || o, l);
           }
           this.$$r = !1;
         });
       });
-      for (const r in this.$$l)
-        for (const a of this.$$l[r]) {
-          const s = this.$$c.$on(r, a);
-          this.$$l_u.set(a, s);
+      for (const n in this.$$l)
+        for (const o of this.$$l[n]) {
+          const l = this.$$c.$on(n, o);
+          this.$$l_u.set(o, l);
         }
       this.$$l = {};
     }
@@ -2178,9 +2161,9 @@ typeof HTMLElement == "function" && (En = class extends HTMLElement {
    * @param {string} _oldValue
    * @param {string} newValue
    */
-  attributeChangedCallback(t, o, n) {
-    var r;
-    this.$$r || (t = this.$$g_p(t), this.$$d[t] = bt(t, n, this.$$p_d, "toProp"), (r = this.$$c) == null || r.$set({ [t]: this.$$d[t] }));
+  attributeChangedCallback(e, a, r) {
+    var n;
+    this.$$r || (e = this.$$g_p(e), this.$$d[e] = Oe(e, r, this.$$p_d, "toProp"), (n = this.$$c) == null || n.$set({ [e]: this.$$d[e] }));
   }
   disconnectedCallback() {
     this.$$cn = !1, Promise.resolve().then(() => {
@@ -2190,160 +2173,160 @@ typeof HTMLElement == "function" && (En = class extends HTMLElement {
   /**
    * @param {string} attribute_name
    */
-  $$g_p(t) {
-    return Et(this.$$p_d).find(
-      (o) => this.$$p_d[o].attribute === t || !this.$$p_d[o].attribute && o.toLowerCase() === t
-    ) || t;
+  $$g_p(e) {
+    return Ee(this.$$p_d).find(
+      (a) => this.$$p_d[a].attribute === e || !this.$$p_d[a].attribute && a.toLowerCase() === e
+    ) || e;
   }
 });
-function bt(e, t, o, n) {
-  var a;
-  const r = (a = o[e]) == null ? void 0 : a.type;
-  if (t = r === "Boolean" && typeof t != "boolean" ? t != null : t, !n || !o[e])
-    return t;
-  if (n === "toAttribute")
-    switch (r) {
+function Oe(t, e, a, r) {
+  var o;
+  const n = (o = a[t]) == null ? void 0 : o.type;
+  if (e = n === "Boolean" && typeof e != "boolean" ? e != null : e, !r || !a[t])
+    return e;
+  if (r === "toAttribute")
+    switch (n) {
       case "Object":
       case "Array":
-        return t == null ? null : JSON.stringify(t);
+        return e == null ? null : JSON.stringify(e);
       case "Boolean":
-        return t ? "" : null;
+        return e ? "" : null;
       case "Number":
-        return t ?? null;
+        return e ?? null;
       default:
-        return t;
+        return e;
     }
   else
-    switch (r) {
+    switch (n) {
       case "Object":
       case "Array":
-        return t && JSON.parse(t);
+        return e && JSON.parse(e);
       case "Boolean":
-        return t;
+        return e;
       // conversion already handled above
       case "Number":
-        return t != null ? +t : t;
+        return e != null ? +e : e;
       default:
-        return t;
+        return e;
     }
 }
-function da(e) {
-  const t = {};
-  return e.childNodes.forEach((o) => {
-    t[
+function $2(t) {
+  const e = {};
+  return t.childNodes.forEach((a) => {
+    e[
       /** @type {Element} node */
-      o.slot || "default"
+      a.slot || "default"
     ] = !0;
-  }), t;
+  }), e;
 }
-function nt(e, t, o, n, r, a) {
-  let s = class extends En {
+function At(t, e, a, r, n, o) {
+  let l = class extends an {
     constructor() {
-      super(e, o, r), this.$$p_d = t;
+      super(t, a, n), this.$$p_d = e;
     }
     static get observedAttributes() {
-      return Et(t).map(
-        (l) => (t[l].attribute || l).toLowerCase()
+      return Ee(e).map(
+        (s) => (e[s].attribute || s).toLowerCase()
       );
     }
   };
-  return Et(t).forEach((l) => {
-    at(s.prototype, l, {
+  return Ee(e).forEach((s) => {
+    he(l.prototype, s, {
       get() {
-        return this.$$c && l in this.$$c ? this.$$c[l] : this.$$d[l];
+        return this.$$c && s in this.$$c ? this.$$c[s] : this.$$d[s];
       },
-      set(c) {
-        var f;
-        c = bt(l, c, t), this.$$d[l] = c;
-        var i = this.$$c;
-        if (i) {
-          var d = (f = Ne(i, l)) == null ? void 0 : f.get;
-          d ? i[l] = c : i.$set({ [l]: c });
+      set(i) {
+        var u;
+        i = Oe(s, i, e), this.$$d[s] = i;
+        var p = this.$$c;
+        if (p) {
+          var y = (u = Rt(p, s)) == null ? void 0 : u.get;
+          y ? p[s] = i : p.$set({ [s]: i });
         }
       }
     });
-  }), n.forEach((l) => {
-    at(s.prototype, l, {
+  }), r.forEach((s) => {
+    he(l.prototype, s, {
       get() {
-        var c;
-        return (c = this.$$c) == null ? void 0 : c[l];
+        var i;
+        return (i = this.$$c) == null ? void 0 : i[s];
       }
     });
-  }), e.element = /** @type {any} */
-  s, s;
+  }), t.element = /** @type {any} */
+  l, l;
 }
-function Fo(e) {
-  return Object.prototype.toString.call(e) === "[object Date]";
+function rr(t) {
+  return Object.prototype.toString.call(t) === "[object Date]";
 }
-function ca(e) {
-  return e;
+function B2(t) {
+  return t;
 }
-function ua(e) {
-  return e < 0.5 ? 4 * e * e * e : 0.5 * Math.pow(2 * e - 2, 3) + 1;
+function j2(t) {
+  return t < 0.5 ? 4 * t * t * t : 0.5 * Math.pow(2 * t - 2, 3) + 1;
 }
-function no(e, t) {
-  if (e === t || e !== e) return () => e;
-  const o = typeof e;
-  if (o !== typeof t || Array.isArray(e) !== Array.isArray(t))
+function Aa(t, e) {
+  if (t === e || t !== t) return () => t;
+  const a = typeof t;
+  if (a !== typeof e || Array.isArray(t) !== Array.isArray(e))
     throw new Error("Cannot interpolate values of different type");
-  if (Array.isArray(e)) {
-    const n = (
+  if (Array.isArray(t)) {
+    const r = (
       /** @type {Array<any>} */
-      t.map((r, a) => no(
+      e.map((n, o) => Aa(
         /** @type {Array<any>} */
-        e[a],
-        r
+        t[o],
+        n
       ))
     );
-    return (r) => n.map((a) => a(r));
+    return (n) => r.map((o) => o(n));
   }
-  if (o === "object") {
-    if (!e || !t)
+  if (a === "object") {
+    if (!t || !e)
       throw new Error("Object cannot be null");
-    if (Fo(e) && Fo(t)) {
-      const a = e.getTime(), l = t.getTime() - a;
-      return (c) => new Date(a + c * l);
+    if (rr(t) && rr(e)) {
+      const o = t.getTime(), s = e.getTime() - o;
+      return (i) => new Date(o + i * s);
     }
-    const n = Object.keys(t), r = {};
-    return n.forEach((a) => {
-      r[a] = no(e[a], t[a]);
-    }), (a) => {
-      const s = {};
-      return n.forEach((l) => {
-        s[l] = r[l](a);
-      }), s;
+    const r = Object.keys(e), n = {};
+    return r.forEach((o) => {
+      n[o] = Aa(t[o], e[o]);
+    }), (o) => {
+      const l = {};
+      return r.forEach((s) => {
+        l[s] = n[s](o);
+      }), l;
     };
   }
-  if (o === "number") {
-    const n = (
+  if (a === "number") {
+    const r = (
       /** @type {number} */
-      t - /** @type {number} */
-      e
+      e - /** @type {number} */
+      t
     );
-    return (r) => e + r * n;
+    return (n) => t + n * r;
   }
-  return () => t;
+  return () => e;
 }
-var xe, Qe, ut, Me;
-const wo = class wo {
+var bt, oe, Ae, Yt;
+const Ja = class Ja {
   /**
    * @param {T} value
    * @param {TweenedOptions<T>} options
    */
-  constructor(t, o = {}) {
-    ee(this, xe, D(
+  constructor(e, a = {}) {
+    Wt(this, bt, B(
       /** @type {T} */
       void 0
     ));
-    ee(this, Qe, D(
+    Wt(this, oe, B(
       /** @type {T} */
       void 0
     ));
     /** @type {TweenedOptions<T>} */
-    ee(this, ut);
+    Wt(this, Ae);
     /** @type {import('../internal/client/types').Task | null} */
-    ee(this, Me, null);
-    A(this, xe).v = A(this, Qe).v = t, Te(this, ut, o);
+    Wt(this, Yt, null);
+    U(this, bt).v = U(this, oe).v = e, ye(this, Ae, a);
   }
   /**
    * Create a tween whose value is bound to the return value of `fn`. This must be called
@@ -2362,11 +2345,11 @@ const wo = class wo {
    * @param {() => U} fn
    * @param {TweenedOptions<U>} [options]
    */
-  static of(t, o) {
-    const n = new wo(t(), o);
-    return po(() => {
-      n.set(t());
-    }), n;
+  static of(e, a) {
+    const r = new Ja(e(), a);
+    return Ua(() => {
+      r.set(e());
+    }), r;
   }
   /**
    * Sets `tween.target` to `value` and returns a `Promise` that resolves if and when `tween.current` catches up to it.
@@ -2376,476 +2359,1427 @@ const wo = class wo {
    * @param {TweenedOptions<T>} [options]
    * @returns
    */
-  set(t, o) {
-    var f;
-    $(A(this, Qe), t);
+  set(e, a) {
+    var u;
+    _(U(this, oe), e);
     let {
-      delay: n = 0,
-      duration: r = 400,
-      easing: a = ca,
-      interpolate: s = no
-    } = { ...A(this, ut), ...o };
-    if (r === 0)
-      return (f = A(this, Me)) == null || f.abort(), $(A(this, xe), t), Promise.resolve();
-    const l = ae.now() + n;
-    let c, i = !1, d = A(this, Me);
-    return Te(this, Me, wn((u) => {
-      if (u < l)
+      delay: r = 0,
+      duration: n = 400,
+      easing: o = B2,
+      interpolate: l = Aa
+    } = { ...U(this, Ae), ...a };
+    if (n === 0)
+      return (u = U(this, Yt)) == null || u.abort(), _(U(this, bt), e), Promise.resolve();
+    const s = yt.now() + r;
+    let i, p = !1, y = U(this, Yt);
+    return ye(this, Yt, Xr((c) => {
+      if (c < s)
         return !0;
-      if (!i) {
-        i = !0;
-        const h = A(this, xe).v;
-        c = s(h, t), typeof r == "function" && (r = r(h, t)), d == null || d.abort();
+      if (!p) {
+        p = !0;
+        const P = U(this, bt).v;
+        i = l(P, e), typeof n == "function" && (n = n(P, e)), y == null || y.abort();
       }
-      const v = u - l;
-      return v > /** @type {number} */
-      r ? ($(A(this, xe), t), !1) : ($(A(this, xe), c(a(v / /** @type {number} */
-      r))), !0);
-    })), A(this, Me).promise;
+      const d = c - s;
+      return d > /** @type {number} */
+      n ? (_(U(this, bt), e), !1) : (_(U(this, bt), i(o(d / /** @type {number} */
+      n))), !0);
+    })), U(this, Yt).promise;
   }
   get current() {
-    return g(A(this, xe));
+    return f(U(this, bt));
   }
   get target() {
-    return g(A(this, Qe));
+    return f(U(this, oe));
   }
-  set target(t) {
-    this.set(t);
+  set target(e) {
+    this.set(e);
   }
 };
-xe = new WeakMap(), Qe = new WeakMap(), ut = new WeakMap(), Me = new WeakMap();
-let je = wo;
-var fa = /* @__PURE__ */ mo('<g><text class="hexlabels__text svelte-ejrww9"> </text></g>'), ha = /* @__PURE__ */ mo('<g class="hexlabels svelte-ejrww9"></g>');
-const va = {
+bt = new WeakMap(), oe = new WeakMap(), Ae = new WeakMap(), Yt = new WeakMap();
+let ae = Ja;
+function Q2(t) {
+  return Object.entries(t).reduce((e, [a, r]) => (e[r] = a, e), {});
+}
+const nr = 16;
+function ke(t = [0, 0], e = "px") {
+  const a = t[0] * (nr * Math.sqrt(3)), r = t[1] * 1.5 * nr;
+  return [a, r].map((n) => `${Math.round(n)}${e}`);
+}
+var K2 = /* @__PURE__ */ me("<g><text> </text></g>"), z2 = /* @__PURE__ */ me('<g class="hexlabels svelte-ejrww9"></g>');
+const q2 = {
   hash: "svelte-ejrww9",
   code: ".hexlabels.svelte-ejrww9 {pointer-events:none;}.hexlabels__text.svelte-ejrww9 {transform:rotate(30deg) translate(0, 0.3em);fill:black;font-size:9px;font-family:sans-serif;text-anchor:middle;}.hexlabels__text--allocation.svelte-ejrww9 {fill:white;}"
 };
-function Ln(e, t) {
-  Be(t, !0), xt(e, va);
-  let o = P(t, "hexes", 7), n = P(t, "allocations", 7), r = P(t, "labelsToShow", 23, () => ({})), a = P(t, "showAll", 7, !1), s = P(t, "showElectorateLabels", 7, !1), l = /* @__PURE__ */ we(() => s() ? o() : o().filter(({ code: i }) => r()[i]));
-  var c = ha();
-  return _o(c, 21, () => g(l), yo, (i, d) => {
-    let f = () => g(d).id, u = () => g(d).coordPx, v = () => g(d).shortName;
-    var h = fa(), p = te(h), m = te(p, !0);
-    U(p), U(h), lt(
-      (L) => {
-        No(h, "transform", L), Ye(p, "hexlabels__text--allocation", n()[f()]), xn(m, v());
+function rn(t, e) {
+  ct(e, !0), Xt(t, q2);
+  let a = b(e, "hexes", 7), r = b(e, "allocations", 7), n = b(e, "labelsToShow", 23, () => ({})), o = b(e, "showElectorateLabels", 7, !1), l = /* @__PURE__ */ et(() => o() ? a() : a().filter(({ id: i }) => n()[i]));
+  var s = z2();
+  return Kt(s, 21, () => f(l), Qt, (i, p) => {
+    let y = () => f(p).id, u = () => f(p).coordPx, c = () => f(p).shortName;
+    var d = K2(), P = D(d);
+    let V;
+    var h = D(P, !0);
+    w(P), w(d), St(
+      (I) => {
+        Bt(d, "transform", I), V = Xe(P, 0, "hexlabels__text svelte-ejrww9", null, V, {
+          "hexlabels__text--allocation": r()[y()]
+        }), Fe(h, c());
       },
       [
         () => `translate(${u().join(" ")})`
       ]
-    ), le(i, h);
-  }), U(c), le(e, c), Fe({
+    ), F(i, d);
+  }), w(s), F(t, s), pt({
     get hexes() {
-      return o();
-    },
-    set hexes(i) {
-      o(i), N();
-    },
-    get allocations() {
-      return n();
-    },
-    set allocations(i) {
-      n(i), N();
-    },
-    get labelsToShow() {
-      return r();
-    },
-    set labelsToShow(i = {}) {
-      r(i), N();
-    },
-    get showAll() {
       return a();
     },
-    set showAll(i = !1) {
-      a(i), N();
+    set hexes(i) {
+      a(i), L();
+    },
+    get allocations() {
+      return r();
+    },
+    set allocations(i) {
+      r(i), L();
+    },
+    get labelsToShow() {
+      return n();
+    },
+    set labelsToShow(i = {}) {
+      n(i), L();
     },
     get showElectorateLabels() {
-      return s();
+      return o();
     },
     set showElectorateLabels(i = !1) {
-      s(i), N();
+      o(i), L();
     }
   });
 }
-nt(
-  Ln,
+At(
+  rn,
   {
     hexes: {},
     allocations: {},
     labelsToShow: {},
-    showAll: {},
     showElectorateLabels: {}
   },
   [],
   [],
   !0
 );
-var pa = /* @__PURE__ */ mo('<g class="group svelte-1du0cyi"><g class="group-hexes svelte-1du0cyi"><!></g><g class="group-hex-strokes svelte-1du0cyi"><!></g><!><g class="group-outline svelte-1du0cyi"><!></g></g>');
-const xa = {
-  hash: "svelte-1du0cyi",
-  code: `.group.svelte-1du0cyi:not(.group--map-is-static) {transition:all 1s cubic-bezier(0.42, 0, 0.58, 1);}.group--never-rendered.svelte-1du0cyi {display:none;}.group--hidden.svelte-1du0cyi {opacity:0;}.group-hex-strokes.svelte-1du0cyi,
-.group-outline.svelte-1du0cyi {pointer-events:none;}.group.svelte-1du0cyi .hex {transition:all 0.5s;vector-effect:non-scaling-stroke;}.group-outline.svelte-1du0cyi .hex-outline {fill:none;stroke:var(--c-black);stroke-width:2px;transition:opacity 0.5s, stroke 0.2s;vector-effect:non-scaling-stroke;}.group--map-is-filled.svelte-1du0cyi .hex-outline {opacity:0;stroke:white;}.group-hexes.svelte-1du0cyi .hex[data-allocation="Any"] {fill:var(--a-Any);}.group-hexes.svelte-1du0cyi .hex[data-allocation="ALP"] {fill:var(--a-ALP);}.group-hexes.svelte-1du0cyi .hex[data-allocation="NXT"] {fill:var(--a-NXT);}.group-hexes.svelte-1du0cyi .hex[data-allocation="CLP"] {fill:var(--a-CLP);}.group-hexes.svelte-1du0cyi .hex[data-allocation="GRN"] {fill:var(--a-GRN);}.group-hexes.svelte-1du0cyi .hex[data-allocation="IND"] {fill:var(--a-IND);}.group-hexes.svelte-1du0cyi .hex[data-allocation="KAP"] {fill:var(--a-KAP);}.group-hexes.svelte-1du0cyi .hex[data-allocation="LIB"] {fill:var(--a-LIB);}.group-hexes.svelte-1du0cyi .hex[data-allocation="LNP"] {fill:var(--a-LNP);}.group-hexes.svelte-1du0cyi .hex[data-allocation="NAT"] {fill:var(--a-NAT);}.group-hexes.svelte-1du0cyi .hex[data-allocation="ONP"] {fill:var(--a-ONP);}.group-hexes.svelte-1du0cyi .hex[data-allocation="OTH"] {fill:var(--a-OTH);}.group-hexes.svelte-1du0cyi .hex[data-allocation="PUP"] {fill:var(--a-PUP);}.group-hexes.svelte-1du0cyi .hex[data-allocation="Teal"] {fill:var(--a-Teal);}.group-hexes.svelte-1du0cyi .hex[data-allocation="null"] {fill:var(--a-null);stroke:var(--c-empty-border);}.group-hex-strokes.svelte-1du0cyi .hex {fill:none;stroke:none;stroke-width:1px;}.group-hex-strokes.svelte-1du0cyi .hex:not([data-allocation="null"]) {fill:none;stroke:var(--c-filled-border);stroke-width:1px;}.group-hex-strokes.svelte-1du0cyi .hex[data-certain="null"]:not([data-allocation="null"]) {fill:url(#uncertainty-hash);}.group--has-focuses.svelte-1du0cyi .hex-outline {opacity:0;stroke:white;}.group--has-focuses.svelte-1du0cyi .group-hexes:where(.svelte-1du0cyi) .hex[data-allocation="null"][data-focused="true"] {fill:var(--c-white);}.group--has-focuses.svelte-1du0cyi .group-hex-strokes:where(.svelte-1du0cyi) .hex[data-allocation="null"][data-focused="true"] {stroke:var(--c-black);}.group--has-focuses.svelte-1du0cyi .group-hexes:where(.svelte-1du0cyi) .hex[data-allocation="null"][data-focused="false"] {fill:#ebebeb;stroke:#fff;}.group--has-focuses.svelte-1du0cyi .group-hex-strokes:where(.svelte-1du0cyi) .hex[data-allocation="null"][data-focused="false"] {stroke:transparent;}.group--has-focuses.svelte-1du0cyi .group-hexes:where(.svelte-1du0cyi) .hex:not([data-allocation="null"])[data-focused="false"] {opacity:0.2;}.group--has-focuses.svelte-1du0cyi .group-hex-strokes:where(.svelte-1du0cyi) .hex:not([data-allocation="null"])[data-focused="false"] {stroke:var(--c-white);}`
+const X2 = /* @__PURE__ */ JSON.parse(`[{"electorate":"Bean","totalVotes":97982,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"2227","percent":2.2728664448572187},"2022":{"party":"United Australia Party","totalVotes":"2831","percent":2.7944210287338738},"party":"United Australia Party","changeInPercent":0.5215545838766551},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2680","percent":2.645372079479612},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"35447","percent":36.177052928088834},"2022":{"party":"Australian Labor Party","totalVotes":"41060","percent":40.52946924754958},"party":"ALP","changeInPercent":4.352416319460744},{"2019":{"party":"Independent","totalVotes":"7683","percent":7.841236145414464},"2022":{"party":"Independent","totalVotes":"8023","percent":7.919335893158555},"party":"Independent","changeInPercent":0.07809974774409145},{"2019":{"party":"The Greens","totalVotes":"12168","percent":12.418607499336613},"2022":{"party":"The Greens","totalVotes":"14559","percent":14.370885113859577},"party":"GRN","changeInPercent":1.9522776145229646},{"2019":{"party":"Liberal","totalVotes":"29223","percent":29.824865791676018},"2022":{"party":"Liberal","totalVotes":"29241","percent":28.86318096121766},"party":"LNP","changeInPercent":-0.9616848304583563},{"2019":{"party":"Informal","totalVotes":"5043","percent":5.146863709660958},"2022":{"party":"Informal","totalVotes":"2915","percent":2.877335676001145},"party":"Informal","changeInPercent":-2.2695280336598134},{"2019":{"party":"Australian Progressives","totalVotes":"2722","percent":2.778061276561001},"party":"Australian Progressives","changeInPercent":null},{"2019":{"party":"The Great Australian Party","totalVotes":"929","percent":0.9481333306117451},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Liberal Democrats","totalVotes":"2540","percent":2.5923128737931456},"party":"Liberal Democrats","changeInPercent":null}]},{"electorate":"Canberra","totalVotes":88307,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"1361","percent":1.5412141732818463},"2022":{"party":"United Australia Party","totalVotes":"1687","percent":1.7948717948717947},"party":"United Australia Party","changeInPercent":0.2536576215899484},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1531","percent":1.6288966911373552},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"4062","percent":4.599861845606804},"2022":{"party":"Independent","totalVotes":"4772","percent":5.077135865517608},"party":"Independent","changeInPercent":0.4772740199108041},{"2019":{"party":"Liberal","totalVotes":"24063","percent":27.249255438413716},"2022":{"party":"Liberal","totalVotes":"20102","percent":21.38738163634429},"party":"LNP","changeInPercent":-5.861873802069425},{"2019":{"party":"The Greens","totalVotes":"20144","percent":22.81132866024211},"2022":{"party":"The Greens","totalVotes":"22795","percent":24.25258006170869},"party":"GRN","changeInPercent":1.4412514014665803},{"2019":{"party":"Australian Labor Party","totalVotes":"34989","percent":39.62200052091001},"2022":{"party":"Australian Labor Party","totalVotes":"41435","percent":44.08447707202894},"party":"ALP","changeInPercent":4.462476551118932},{"2019":{"party":"Informal","totalVotes":"1904","percent":2.1561144643120023},"2022":{"party":"Informal","totalVotes":"1668","percent":1.7746568783913181},"party":"Informal","changeInPercent":-0.38145758592068413},{"2019":{"party":"Australian Progressives","totalVotes":"1784","percent":2.020224897233515},"party":"Australian Progressives","changeInPercent":null}]},{"electorate":"Fenner","totalVotes":89302,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"38864","percent":43.51974199905937},"2022":{"party":"Australian Labor Party","totalVotes":"44100","percent":47.00790926727354},"party":"ALP","changeInPercent":3.48816726821417},{"2019":{"party":"Liberal","totalVotes":"30025","percent":33.62186737139146},"2022":{"party":"Liberal","totalVotes":"25416","percent":27.09190525934296},"party":"LNP","changeInPercent":-6.529962112048501},{"2019":{"party":"United Australia Party","totalVotes":"3529","percent":3.9517591991220806},"2022":{"party":"United Australia Party","totalVotes":"2346","percent":2.500692860340674},"party":"United Australia Party","changeInPercent":-1.4510663387814065},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2419","percent":2.578506406293304},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"12492","percent":13.988488499697654},"2022":{"party":"The Greens","totalVotes":"15294","percent":16.302470846568742},"party":"GRN","changeInPercent":2.3139823468710876},{"2022":{"party":"Liberal Democrats","totalVotes":"1706","percent":1.8184919095230991},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"2669","percent":2.988734854762491},"2022":{"party":"Informal","totalVotes":"2533","percent":2.7000234506576843},"party":"Informal","changeInPercent":-0.28871140410480667},{"2019":{"party":"Australian Progressives","totalVotes":"1723","percent":1.9294080759669436},"party":"Australian Progressives","changeInPercent":null}]},{"electorate":"Banks","totalVotes":98845,"candidates":[{"2019":{"party":"Liberal","totalVotes":"46709","percent":47.25479285750417},"2022":{"party":"Liberal","totalVotes":"41622","percent":42.215122470713524},"party":"LNP","changeInPercent":-5.039670386790647},{"2022":{"party":"Liberal Democrats","totalVotes":"1264","percent":1.2820122724276077},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2029","percent":2.052708786483889},"2022":{"party":"United Australia Party","totalVotes":"5048","percent":5.119935087986207},"party":"United Australia Party","changeInPercent":3.0672263015023176},{"2019":{"party":"The Greens","totalVotes":"5339","percent":5.401386008396985},"2022":{"party":"The Greens","totalVotes":"8063","percent":8.177899487803641},"party":"GRN","changeInPercent":2.776513479406656},{"2022":{"party":"","totalVotes":"961","percent":0.9746944571225722},"party":"no party","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2628","percent":2.665449566408033},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"33341","percent":33.730588294804996},"2022":{"party":"Labor","totalVotes":"32459","percent":32.921547745828896},"party":"ALP","changeInPercent":-0.8090405489760997},{"2019":{"party":"Informal","totalVotes":"7115","percent":7.198138499671202},"2022":{"party":"Informal","totalVotes":"6550","percent":6.643338911709519},"party":"Informal","changeInPercent":-0.5547995879616829},{"2019":{"party":"Animal Justice Party","totalVotes":"1688","percent":1.7077242146795488},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2624","percent":2.6546613384592037},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Barton","totalVotes":99380,"candidates":[{"2019":{"party":"Labor","totalVotes":"44227","percent":44.50291809217146},"2022":{"party":"Labor","totalVotes":"46206","percent":46.65953063779941},"party":"ALP","changeInPercent":2.156612545627951},{"2019":{"party":"United Australia Party","totalVotes":"2057","percent":2.0698329643791507},"2022":{"party":"United Australia Party","totalVotes":"5611","percent":5.66607424162863},"party":"United Australia Party","changeInPercent":3.5962412772494794},{"2019":{"party":"The Greens","totalVotes":"8123","percent":8.173676796136045},"2022":{"party":"The Greens","totalVotes":"11441","percent":11.553298057115159},"party":"GRN","changeInPercent":3.379621260979114},{"2019":{"party":"Liberal","totalVotes":"30109","percent":30.296840410545382},"2022":{"party":"Liberal","totalVotes":"23992","percent":24.22749121460597},"party":"LNP","changeInPercent":-6.069349195939413},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"3288","percent":3.308512779231234},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4373","percent":4.415922769317769},"party":"Pauline Hanson's One Nation","changeInPercent":1.1074099900865346},{"2019":{"party":"Informal","totalVotes":"9473","percent":9.532099013886093},"2022":{"party":"Informal","totalVotes":"7405","percent":7.477683079533061},"party":"Informal","changeInPercent":-2.054415934353032},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2103","percent":2.116119943650634},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Bennelong","totalVotes":101542,"candidates":[{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"2125","percent":2.008924350999263},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"9116","percent":8.977565933308384},"2022":{"party":"The Greens","totalVotes":"11395","percent":10.772561402181928},"party":"GRN","changeInPercent":1.7949954688735446},{"2022":{"party":"Liberal Democrats","totalVotes":"1539","percent":1.454933918206054},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"48942","percent":48.19877489117804},"2022":{"party":"Liberal","totalVotes":"41206","percent":38.95517026224734},"party":"LNP","changeInPercent":-9.243604628930697},{"2019":{"party":"United Australia Party","totalVotes":"1890","percent":1.8612987729215498},"2022":{"party":"United Australia Party","totalVotes":"2915","percent":2.7557715214884},"party":"United Australia Party","changeInPercent":0.8944727485668504},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1664","percent":1.5731059388530695},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"32769","percent":32.27137539146363},"2022":{"party":"Labor","totalVotes":"37596","percent":35.54236230596155},"party":"ALP","changeInPercent":3.270986914497918},{"2022":{"party":"Democratic Alliance","totalVotes":"1208","percent":1.1420144075327572},"party":"Democratic Alliance","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"5237","percent":5.157471785074157},"2022":{"party":"Informal","totalVotes":"6130","percent":5.795155892529637},"party":"Informal","changeInPercent":0.6376841074554802},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"3588","percent":3.5335132260542435},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Berowra","totalVotes":100370,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"2307","percent":2.321182424614394},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"11157","percent":11.115871276277772},"2022":{"party":"The Greens","totalVotes":"14536","percent":14.625360955437724},"party":"GRN","changeInPercent":3.5094896791599517},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2972","percent":2.9902705530793146},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"53741","percent":53.54289130218193},"2022":{"party":"Liberal","totalVotes":"45797","percent":46.0785398786586},"party":"LNP","changeInPercent":-7.4643514235233255},{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"1418","percent":1.4267172423507632},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"19821","percent":19.747932649197967},"2022":{"party":"Labor","totalVotes":"20746","percent":20.87353731298232},"party":"ALP","changeInPercent":1.1256046637843546},{"2022":{"party":"Australian Federation Party","totalVotes":"509","percent":0.5121291088551047},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"495","percent":0.493175251569194},"2022":{"party":"Independent","totalVotes":"904","percent":0.9095573956876515},"party":"Independent","changeInPercent":0.4163821441184575},{"2019":{"party":"United Australia Party","totalVotes":"1576","percent":1.5701902959051508},"2022":{"party":"United Australia Party","totalVotes":"2315","percent":2.329231605107205},"party":"United Australia Party","changeInPercent":0.759041309202054},{"2019":{"party":"Informal","totalVotes":"6423","percent":6.399322506725117},"2022":{"party":"Informal","totalVotes":"6083","percent":6.120395617221221},"party":"Informal","changeInPercent":-0.27892688950389566},{"2019":{"party":"Science Party","totalVotes":"1465","percent":1.4595994819169074},"party":"Science Party","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2163","percent":2.1550264023114476},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Sustainable Australia","totalVotes":"1425","percent":1.4197469363355584},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Blaxland","totalVotes":93209,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4421","percent":4.828475005733882},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"23289","percent":24.985784634531},"2022":{"party":"Liberal","totalVotes":"22059","percent":24.09213529777962},"party":"LNP","changeInPercent":-0.8936493367513805},{"2019":{"party":"The Greens","totalVotes":"4329","percent":4.644401291720756},"2022":{"party":"The Greens","totalVotes":"5187","percent":5.665075741855157},"party":"GRN","changeInPercent":1.0206744501344005},{"2019":{"party":"Labor","totalVotes":"46689","percent":50.09065648167022},"2022":{"party":"Labor","totalVotes":"44905","percent":49.04380686099977},"party":"ALP","changeInPercent":-1.04684962067045},{"2019":{"party":"United Australia Party","totalVotes":"2328","percent":2.4976128914589792},"2022":{"party":"United Australia Party","totalVotes":"5105","percent":5.575517960703793},"party":"United Australia Party","changeInPercent":3.0779050692448133},{"2019":{"party":"Informal","totalVotes":"12401","percent":13.304509221212543},"2022":{"party":"Informal","totalVotes":"9884","percent":10.794989132927775},"party":"Informal","changeInPercent":-2.509520088284768},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"4173","percent":4.477035479406495},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Bradfield","totalVotes":100199,"candidates":[{"2022":{"party":"Independent","totalVotes":"20198","percent":20.133572567783094},"party":"Independent","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"20361","percent":20.3205620814579},"2022":{"party":"Labor","totalVotes":"16902","percent":16.848086124401913},"party":"ALP","changeInPercent":-3.4724759570559875},{"2019":{"party":"The Greens","totalVotes":"13177","percent":13.150829848601283},"2022":{"party":"The Greens","totalVotes":"8960","percent":8.931419457735247},"party":"GRN","changeInPercent":-4.219410390866036},{"2019":{"party":"United Australia Party","totalVotes":"1772","percent":1.7684807233605124},"2022":{"party":"United Australia Party","totalVotes":"2496","percent":2.488038277511962},"party":"United Australia Party","changeInPercent":0.7195575541514494},{"2019":{"party":"Liberal","totalVotes":"58007","percent":57.89179532729868},"2022":{"party":"Liberal","totalVotes":"43562","percent":43.42304625199362},"party":"LNP","changeInPercent":-14.468749075305062},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1568","percent":1.562998405103668},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4056","percent":4.047944590265372},"2022":{"party":"Informal","totalVotes":"3616","percent":3.604465709728868},"party":"Informal","changeInPercent":-0.44347888053650397},{"2019":{"party":"Sustainable Australia","totalVotes":"2826","percent":2.8203874290162574},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Calare","totalVotes":110539,"candidates":[{"2022":{"party":"Independent","totalVotes":"21891","percent":19.585055558537764},"party":"Independent","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"9057","percent":8.102957754039402},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"6315","percent":5.712915803472077},"2022":{"party":"The Greens","totalVotes":"4891","percent":4.3757940129189254},"party":"GRN","changeInPercent":-1.3371217905531516},{"2019":{"party":"Labor","totalVotes":"23074","percent":20.874080641221653},"2022":{"party":"Labor","totalVotes":"16252","percent":14.540054037611611},"party":"ALP","changeInPercent":-6.334026603610042},{"2019":{"party":"The Nationals","totalVotes":"46632","percent":42.18601579533016},"2022":{"party":"The Nationals","totalVotes":"51161","percent":45.77182529031796},"party":"LNP","changeInPercent":3.5858094949878065},{"2019":{"party":"United Australia Party","totalVotes":"3371","percent":3.0496024027718724},"2022":{"party":"United Australia Party","totalVotes":"4067","percent":3.638592159178342},"party":"United Australia Party","changeInPercent":0.5889897564064697},{"2019":{"party":"Informal","totalVotes":"6251","percent":5.655017686065551},"2022":{"party":"Informal","totalVotes":"4455","percent":3.9857211873959955},"party":"Informal","changeInPercent":-1.6692964986695555},{"2019":{"party":"Shooters, Fishers and Farmers","totalVotes":"18129","percent":16.400546413483024},"party":"Shooters, Fishers and Farmers","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1992","percent":1.802078904278128},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Liberal Democrats","totalVotes":"4775","percent":4.319742353377541},"party":"Liberal Democrats","changeInPercent":null}]},{"electorate":"Chifley","totalVotes":100734,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6034","percent":5.657228576786049},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4133","percent":4.1028848253816985},"2022":{"party":"United Australia Party","totalVotes":"5149","percent":4.8274892180761295},"party":"United Australia Party","changeInPercent":0.724604392694431},{"2019":{"party":"Independent","totalVotes":"1581","percent":1.5694800166775866},"2022":{"party":"Independent","totalVotes":"1839","percent":1.72417026064129},"party":"Independent","changeInPercent":0.15469024396370346},{"2022":{"party":"Liberal Democrats","totalVotes":"3263","percent":3.0592537033564597},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"4604","percent":4.57045287589096},"2022":{"party":"The Greens","totalVotes":"5622","percent":5.2709544346521655},"party":"GRN","changeInPercent":0.7005015587612053},{"2019":{"party":"Liberal","totalVotes":"25411","percent":25.225842317390356},"2022":{"party":"Liberal","totalVotes":"24046","percent":22.544534033377087},"party":"LNP","changeInPercent":-2.6813082840132694},{"2019":{"party":"Labor","totalVotes":"49418","percent":49.05791490460024},"2022":{"party":"Labor","totalVotes":"51236","percent":48.036752297018566},"party":"ALP","changeInPercent":-1.0211626075816724},{"2019":{"party":"Informal","totalVotes":"9728","percent":9.657116762959875},"2022":{"party":"Informal","totalVotes":"9471","percent":8.879617476092255},"party":"Informal","changeInPercent":-0.77749928686762},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"5859","percent":5.816308297099291},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Cook","totalVotes":100164,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"3277","percent":3.2716345193882037},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4985","percent":4.872208376093437},"party":"Pauline Hanson's One Nation","changeInPercent":1.6005738567052332},{"2019":{"party":"The Greens","totalVotes":"6406","percent":6.395511361367358},"2022":{"party":"The Greens","totalVotes":"9685","percent":9.465865220153448},"party":"GRN","changeInPercent":3.07035385878609},{"2019":{"party":"Liberal","totalVotes":"59895","percent":59.79693302983108},"2022":{"party":"Liberal","totalVotes":"54322","percent":53.092899379367644},"party":"LNP","changeInPercent":-6.704033650463437},{"2019":{"party":"United Australia Party","totalVotes":"1135","percent":1.1331416476977756},"2022":{"party":"United Australia Party","totalVotes":"4381","percent":4.281874602941895},"party":"United Australia Party","changeInPercent":3.1487329552441192},{"2019":{"party":"Labor","totalVotes":"21718","percent":21.682440797092767},"2022":{"party":"Labor","totalVotes":"24444","percent":23.89092508429849},"party":"ALP","changeInPercent":2.2084842872057244},{"2019":{"party":"Informal","totalVotes":"6141","percent":6.1309452497903445},"2022":{"party":"Informal","totalVotes":"4498","percent":4.396227337145091},"party":"Informal","changeInPercent":-1.7347179126452534},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"551","percent":0.5500978395431493},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1041","percent":1.0392955552893255},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Cowper","totalVotes":114426,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"9047","percent":7.732082115447072},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"14551","percent":12.716515477251674},"2022":{"party":"Labor","totalVotes":"15566","percent":13.303591268823823},"party":"ALP","changeInPercent":0.5870757915721487},{"2019":{"party":"The Nationals","totalVotes":"49668","percent":43.40621886634157},"2022":{"party":"The Nationals","totalVotes":"43909","percent":37.5271353605798},"party":"LNP","changeInPercent":-5.87908350576177},{"2019":{"party":"Independent","totalVotes":"25847","percent":22.588397741771978},"2022":{"party":"Independent","totalVotes":"29206","percent":24.96111310531084},"party":"Independent","changeInPercent":2.3727153635388625},{"2022":{"party":"Liberal Democrats","totalVotes":"4316","percent":3.688699724800438},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3188","percent":2.7860800866935835},"2022":{"party":"United Australia Party","totalVotes":"2674","percent":2.2853528878860914},"party":"United Australia Party","changeInPercent":-0.5007271988074922},{"2019":{"party":"The Greens","totalVotes":"6264","percent":5.474280320906088},"2022":{"party":"The Greens","totalVotes":"6518","percent":5.570654496350615},"party":"GRN","changeInPercent":0.09637417544452731},{"2019":{"party":"Informal","totalVotes":"8898","percent":7.776204708720045},"2022":{"party":"Informal","totalVotes":"5770","percent":4.931371040801326},"party":"Informal","changeInPercent":-2.844833667918719},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2383","percent":2.082568646985825},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"2176","percent":1.901665705346687},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Cunningham","totalVotes":106757,"candidates":[{"2019":{"party":"Liberal","totalVotes":"31177","percent":29.203705611809998},"2022":{"party":"Liberal","totalVotes":"25418","percent":23.714139105285252},"party":"LNP","changeInPercent":-5.489566506524746},{"2019":{"party":"United Australia Party","totalVotes":"3828","percent":3.585713349007559},"2022":{"party":"United Australia Party","totalVotes":"4936","percent":4.605121985352429},"party":"United Australia Party","changeInPercent":1.0194086363448696},{"2019":{"party":"Labor","totalVotes":"46923","percent":43.95308972713733},"2022":{"party":"Labor","totalVotes":"40783","percent":38.04916732751784},"party":"ALP","changeInPercent":-5.903922399619489},{"2022":{"party":"Citizens Party","totalVotes":"1098","percent":1.024397070485609},"party":"Citizens Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"15196","percent":14.23419541575728},"2022":{"party":"The Greens","totalVotes":"22011","percent":20.535522694406865},"party":"GRN","changeInPercent":6.301327278649584},{"2022":{"party":"Liberal Democrats","totalVotes":"2207","percent":2.059056771003405},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5218","percent":4.868218500723049},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"6080","percent":5.6951768970652985},"2022":{"party":"Informal","totalVotes":"5514","percent":5.144376545225544},"party":"Informal","changeInPercent":-0.5508003518397544},{"2019":{"party":"Non-Custodial Parents Party (Equal Parenting)","totalVotes":"1213","percent":1.1362252592335866},"party":"Non-Custodial Parents Party (Equal Parenting)","changeInPercent":null},{"2019":{"party":"Sustainable Australia","totalVotes":"2340","percent":2.191893739988947},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Dobell","totalVotes":107892,"candidates":[{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"2202","percent":2.0647556893302204},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"5411","percent":5.015200385570756},"2022":{"party":"United Australia Party","totalVotes":"3818","percent":3.5800350689658407},"party":"United Australia Party","changeInPercent":-1.4351653166049152},{"2019":{"party":"Liberal","totalVotes":"41326","percent":38.30311793274756},"2022":{"party":"Liberal","totalVotes":"34276","percent":32.139675752716904},"party":"LNP","changeInPercent":-6.163442180030657},{"2019":{"party":"The Greens","totalVotes":"7579","percent":7.024617209802394},"2022":{"party":"The Greens","totalVotes":"8700","percent":8.15775408590959},"party":"GRN","changeInPercent":1.1331368761071952},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"7583","percent":7.110373475109473},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1543","percent":1.4468292591446548},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"42093","percent":39.014014014014016},"2022":{"party":"Labor","totalVotes":"43595","percent":40.87784935347455},"party":"ALP","changeInPercent":1.863835339460536},{"2019":{"party":"Informal","totalVotes":"6439","percent":5.968005042079117},"2022":{"party":"Informal","totalVotes":"4930","percent":4.622727315348767},"party":"Informal","changeInPercent":-1.34527772673035},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1868","percent":1.7313609906202498},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"3176","percent":2.9436844251659067},"party":"Independent","changeInPercent":null}]},{"electorate":"Eden-Monaro","totalVotes":106505,"candidates":[{"2022":{"party":"Sustainable Australia Party - Stop Overdevelopment / Corruption","totalVotes":"2260","percent":2.0810313075506444},"party":"Sustainable Australia Party - Stop Overdevelopment / Corruption","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"2625","percent":2.4171270718232045},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"38878","percent":36.503450542228066},"2022":{"party":"Labor","totalVotes":"43215","percent":39.79281767955801},"party":"ALP","changeInPercent":3.289367137329947},{"2022":{"party":"Australian Democrats","totalVotes":"651","percent":0.5994475138121547},"party":"Australian Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2748","percent":2.5801605558424487},"2022":{"party":"United Australia Party","totalVotes":"2566","percent":2.3627992633517496},"party":"United Australia Party","changeInPercent":-0.21736129249069913},{"2019":{"party":"Liberal","totalVotes":"36732","percent":34.4885216656495},"2022":{"party":"Liberal","totalVotes":"33520","percent":30.865561694290978},"party":"LNP","changeInPercent":-3.6229599713585223},{"2019":{"party":"The Greens","totalVotes":"8715","percent":8.182714426552744},"2022":{"party":"The Greens","totalVotes":"9376","percent":8.633517495395948},"party":"GRN","changeInPercent":0.45080306884320365},{"2022":{"party":"Informed Medical Options Party","totalVotes":"909","percent":0.8370165745856353},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2247","percent":2.109760105159382},"2022":{"party":"Independent","totalVotes":"2044","percent":1.882136279926335},"party":"Independent","changeInPercent":-0.22762382523304714},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4351","percent":4.0064456721915285},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"7246","percent":6.803436458382235},"2022":{"party":"Informal","totalVotes":"7083","percent":6.5220994475138125},"party":"Informal","changeInPercent":-0.28133701086842233},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1157","percent":1.0863339749307543},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Farrer","totalVotes":107017,"candidates":[{"2019":{"party":"The Greens","totalVotes":"4529","percent":4.232037900520478},"2022":{"party":"The Greens","totalVotes":"9163","percent":8.418934563295908},"party":"GRN","changeInPercent":4.18689666277543},{"2019":{"party":"Liberal","totalVotes":"49316","percent":46.08239812366259},"2022":{"party":"Liberal","totalVotes":"52566","percent":48.29746963376762},"party":"LNP","changeInPercent":2.2150715101050267},{"2019":{"party":"Independent","totalVotes":"19926","percent":18.619471672724895},"2022":{"party":"Independent","totalVotes":"3189","percent":2.9300428159282603},"party":"Independent","changeInPercent":-15.689428856796635},{"2022":{"party":"Shooters, Fishers and Farmers Party","totalVotes":"5339","percent":4.905455815064592},"party":"Shooters, Fishers and Farmers Party","changeInPercent":null},{"2019":{"party":"Liberal Democrats","totalVotes":"1084","percent":1.0129231804292775},"2022":{"party":"Liberal Democrats","totalVotes":"1595","percent":1.4654808063360223},"party":"Liberal Democrats","changeInPercent":0.45255762590674475},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6363","percent":5.846303680699756},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4147","percent":3.875085266826766},"2022":{"party":"United Australia Party","totalVotes":"3270","percent":3.004465352174792},"party":"United Australia Party","changeInPercent":-0.8706199146519737},{"2019":{"party":"Labor","totalVotes":"14236","percent":13.302559406449443},"2022":{"party":"Labor","totalVotes":"19097","percent":17.546261416049543},"party":"ALP","changeInPercent":4.243702009600099},{"2019":{"party":"Informal","totalVotes":"9768","percent":9.127521795602568},"2022":{"party":"Informal","totalVotes":"8256","percent":7.585585916683511},"party":"Informal","changeInPercent":-1.5419358789190571},{"2019":{"party":"Sustainable Australia","totalVotes":"1429","percent":1.3353018679275255},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1327","percent":1.2399899081454349},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Fowler","totalVotes":96288,"candidates":[{"2019":{"party":"Labor","totalVotes":"45627","percent":47.385967098703894},"2022":{"party":"Labor","totalVotes":"30973","percent":32.26320559160842},"party":"ALP","changeInPercent":-15.122761507095476},{"2019":{"party":"United Australia Party","totalVotes":"3624","percent":3.7637088733798603},"2022":{"party":"United Australia Party","totalVotes":"5512","percent":5.7416068582618935},"party":"United Australia Party","changeInPercent":1.9778979848820333},{"2022":{"party":"Liberal Democrats","totalVotes":"2094","percent":2.1812272788825116},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Independent","totalVotes":"25346","percent":26.401808314496723},"party":"Independent","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"25137","percent":26.106056829511466},"2022":{"party":"Liberal","totalVotes":"14740","percent":15.354006729096573},"party":"LNP","changeInPercent":-10.752050100414893},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3047","percent":3.173925271611754},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"4633","percent":4.8116068461282815},"2022":{"party":"The Greens","totalVotes":"4191","percent":4.365579525213279},"party":"GRN","changeInPercent":-0.4460273209150021},{"2019":{"party":"Informal","totalVotes":"12624","percent":13.110667996011966},"2022":{"party":"Informal","totalVotes":"10098","percent":10.518640430828846},"party":"Informal","changeInPercent":-2.5920275651831197},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"4643","percent":4.82199235626454},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Gilmore","totalVotes":113647,"candidates":[{"2019":{"party":"The Nationals","totalVotes":"13462","percent":11.845451265761525},"2022":{"party":"Liberal","totalVotes":"46941","percent":40.16342245989305},"party":"LNP","changeInPercent":28.317971194131523},{"2019":{"party":"Independent","totalVotes":"7585","percent":6.674175297192182},"2022":{"party":"Independent","totalVotes":"4721","percent":4.039358288770053},"party":"Independent","changeInPercent":-2.6348170084221287},{"2019":{"party":"The Greens","totalVotes":"10740","percent":9.450315450473836},"2022":{"party":"The Greens","totalVotes":"11417","percent":9.76855614973262},"party":"GRN","changeInPercent":0.3182406992587836},{"2019":{"party":"United Australia Party","totalVotes":"3638","percent":3.2011403732610626},"2022":{"party":"United Australia Party","totalVotes":"3108","percent":2.6592513368983957},"party":"United Australia Party","changeInPercent":-0.5418890363626669},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4453","percent":3.810053475935829},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"890","percent":0.7614973262032085},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"38972","percent":34.29215025473616},"2022":{"party":"Labor","totalVotes":"40175","percent":34.37433155080214},"party":"ALP","changeInPercent":0.08218129606598268},{"2019":{"party":"Informal","totalVotes":"5970","percent":5.253108309062272},"2022":{"party":"Informal","totalVotes":"5170","percent":4.423529411764706},"party":"Informal","changeInPercent":-0.8295788972975657},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1853","percent":1.6304873863806346},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Grayndler","totalVotes":100072,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"1155","percent":1.1541689983212087},"2022":{"party":"United Australia Party","totalVotes":"2101","percent":2.121022451946374},"party":"United Australia Party","changeInPercent":0.9668534536251654},{"2019":{"party":"Labor","totalVotes":"48728","percent":48.69294108242066},"2022":{"party":"Labor","totalVotes":"50723","percent":51.20638830560491},"party":"ALP","changeInPercent":2.513447223184251},{"2019":{"party":"Liberal","totalVotes":"20846","percent":20.83100167879127},"2022":{"party":"Liberal","totalVotes":"15111","percent":15.255007268615733},"party":"LNP","changeInPercent":-5.575994410175538},{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"1222","percent":1.2336456146018413},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2022":{"party":"Independent","totalVotes":"1973","percent":1.9918026167016638},"party":"Independent","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1449","percent":1.462808916168632},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Animal Justice Party","totalVotes":"1148","percent":1.1589403973509933},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"21607","percent":21.591454153009835},"2022":{"party":"The Greens","totalVotes":"20846","percent":21.044661605556453},"party":"GRN","changeInPercent":-0.5467925474533821},{"2019":{"party":"Informal","totalVotes":"4258","percent":4.2549364457590535},"2022":{"party":"Informal","totalVotes":"4483","percent":4.5257228234534},"party":"Informal","changeInPercent":0.2707863776943462},{"2019":{"party":"Science Party","totalVotes":"2613","percent":2.611119993604605},"party":"Science Party","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"865","percent":0.8643776480933727},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Greenway","totalVotes":102432,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"2853","percent":2.785262417994377},"2022":{"party":"United Australia Party","totalVotes":"4359","percent":3.9794409246106373},"party":"United Australia Party","changeInPercent":1.1941785066162605},{"2019":{"party":"Labor","totalVotes":"43901","percent":42.858676975945016},"2022":{"party":"Labor","totalVotes":"48551","percent":44.32343113805255},"party":"ALP","changeInPercent":1.464754162107532},{"2022":{"party":"Liberal Democrats","totalVotes":"3014","percent":2.7515565374573208},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Independent","totalVotes":"3272","percent":2.9870912377439796},"party":"Independent","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2710","percent":2.474027278204824},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"38759","percent":37.838761324586066},"2022":{"party":"Liberal","totalVotes":"29932","percent":27.32567693403202},"party":"LNP","changeInPercent":-10.513084390554045},{"2019":{"party":"The Greens","totalVotes":"5256","percent":5.131208997188379},"2022":{"party":"The Greens","totalVotes":"7086","percent":6.468987931128924},"party":"GRN","changeInPercent":1.3377789339405446},{"2019":{"party":"Informal","totalVotes":"6925","percent":6.760582630427992},"2022":{"party":"Informal","totalVotes":"8999","percent":8.215413828990853},"party":"Informal","changeInPercent":1.4548311985628608},{"2019":{"party":"Australian Better Families","totalVotes":"2072","percent":2.0228053733208373},"party":"Australian Better Families","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2666","percent":2.602702280537332},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Hughes","totalVotes":100699,"candidates":[{"2019":{"party":"Liberal","totalVotes":"50763","percent":50.41062969840813},"2022":{"party":"Liberal","totalVotes":"42148","percent":41.60875059232349},"party":"LNP","changeInPercent":-8.801879106084641},{"2019":{"party":"The Greens","totalVotes":"6631","percent":6.584971052344114},"2022":{"party":"The Greens","totalVotes":"6118","percent":6.039725161901753},"party":"GRN","changeInPercent":-0.5452458904423612},{"2019":{"party":"Independent","totalVotes":"1988","percent":1.974200339626014},"2022":{"party":"Independent","totalVotes":"13891","percent":13.713275943768757},"party":"Independent","changeInPercent":11.739075604142743},{"2019":{"party":"United Australia Party","totalVotes":"2366","percent":2.3495764605408196},"2022":{"party":"United Australia Party","totalVotes":"7186","percent":7.0940609698309895},"party":"United Australia Party","changeInPercent":4.74448450929017},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2600","percent":2.5667351129363447},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"29088","percent":28.886086257063127},"2022":{"party":"Labor","totalVotes":"21828","percent":21.548728478913283},"party":"ALP","changeInPercent":-7.337357778149844},{"2019":{"party":"Informal","totalVotes":"5208","percent":5.171848777048432},"2022":{"party":"Informal","totalVotes":"4387","percent":4.330871900173748},"party":"Informal","changeInPercent":-0.8409768768746835},{"2019":{"party":"Animal Justice Party","totalVotes":"2439","percent":2.4220697325693403},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2216","percent":2.200617682400024},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Hume","totalVotes":109522,"candidates":[{"2019":{"party":"Labor","totalVotes":"27223","percent":24.856193276236738},"2022":{"party":"Labor","totalVotes":"20864","percent":18.49612595521356},"party":"ALP","changeInPercent":-6.360067321023177},{"2019":{"party":"United Australia Party","totalVotes":"4939","percent":4.509596245503186},"2022":{"party":"United Australia Party","totalVotes":"4780","percent":4.2375135192638425},"party":"United Australia Party","changeInPercent":-0.2720827262393435},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"7700","percent":6.82612010425347},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"6068","percent":5.540439363780793},"2022":{"party":"Independent","totalVotes":"1124","percent":0.996436233400117},"party":"Independent","changeInPercent":-4.544003130380676},{"2022":{"party":"Shooters, Fishers and Farmers Party","totalVotes":"3108","percent":2.7552702966259464},"party":"Shooters, Fishers and Farmers Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"5224","percent":4.769817936122423},"2022":{"party":"The Greens","totalVotes":"5194","percent":4.604528288505523},"party":"GRN","changeInPercent":-0.16528964761690013},{"2019":{"party":"Liberal","totalVotes":"54589","percent":49.84295392706488},"2022":{"party":"Liberal","totalVotes":"45177","percent":40.04982181167001},"party":"LNP","changeInPercent":-9.793132115394876},{"2022":{"party":"Liberal Democrats","totalVotes":"770","percent":0.6826120104253471},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"7080","percent":6.464454630119976},"2022":{"party":"Informal","totalVotes":"8040","percent":7.127533199765962},"party":"Informal","changeInPercent":0.663078569645986},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2493","percent":2.2762549989956358},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1906","percent":1.7402896221763664},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Hunter","totalVotes":112075,"candidates":[{"2019":{"party":"The Greens","totalVotes":"7007","percent":6.252063350434976},"2022":{"party":"The Greens","totalVotes":"9562","percent":8.198717289158692},"party":"GRN","changeInPercent":1.946653938723716},{"2019":{"party":"Labor","totalVotes":"38331","percent":34.2012045505242},"2022":{"party":"Labor","totalVotes":"41514","percent":35.595225846280485},"party":"ALP","changeInPercent":1.394021295756282},{"2019":{"party":"Animal Justice Party","totalVotes":"3267","percent":2.9150122685701536},"2022":{"party":"Animal Justice Party","totalVotes":"2469","percent":2.1169873443769935},"party":"Animal Justice Party","changeInPercent":-0.7980249241931601},{"2022":{"party":"Independent","totalVotes":"6126","percent":5.252598003909868},"party":"Independent","changeInPercent":null},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1458","percent":1.250128614054944},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4407","percent":3.932188266785635},"2022":{"party":"United Australia Party","totalVotes":"4370","percent":3.7469561340329935},"party":"United Australia Party","changeInPercent":-0.1852321327526414},{"2019":{"party":"The Nationals","totalVotes":"23942","percent":21.36248048182021},"2022":{"party":"The Nationals","totalVotes":"29540","percent":25.328394553623486},"party":"LNP","changeInPercent":3.965914071803276},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"22029","percent":19.65558777604283},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"10759","percent":9.225057447611208},"party":"Pauline Hanson's One Nation","changeInPercent":-10.43053032843162},{"2019":{"party":"Informal","totalVotes":"10049","percent":8.966317198304706},"2022":{"party":"Informal","totalVotes":"8901","percent":7.631958020372466},"party":"Informal","changeInPercent":-1.3343591779322397},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2356","percent":2.102163729645327},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Socialist Equality Party","totalVotes":"687","percent":0.6129823778719607},"party":"Socialist Equality Party","changeInPercent":null}]},{"electorate":"Kingsford Smith","totalVotes":100181,"candidates":[{"2019":{"party":"The Greens","totalVotes":"11418","percent":11.397370758926344},"2022":{"party":"The Greens","totalVotes":"16401","percent":16.073423626492094},"party":"GRN","changeInPercent":4.676052867565749},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3051","percent":2.99006252572571},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1649","percent":1.6460207025284235},"2022":{"party":"United Australia Party","totalVotes":"3388","percent":3.3203316411532957},"party":"United Australia Party","changeInPercent":1.6743109386248722},{"2019":{"party":"Liberal","totalVotes":"34380","percent":34.31788462882183},"2022":{"party":"Liberal","totalVotes":"27929","percent":27.371175444442265},"party":"LNP","changeInPercent":-6.946709184379564},{"2019":{"party":"Labor","totalVotes":"42629","percent":42.55198091454467},"2022":{"party":"Labor","totalVotes":"46697","percent":45.76432309531743},"party":"ALP","changeInPercent":3.212342180772758},{"2019":{"party":"Informal","totalVotes":"5805","percent":5.794511933400545},"2022":{"party":"Informal","totalVotes":"4572","percent":4.480683666869205},"party":"Informal","changeInPercent":-1.31382826653134},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1359","percent":1.3565446541759416},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Sustainable Australia","totalVotes":"1346","percent":1.343568141663589},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Science Party","totalVotes":"1595","percent":1.592118265938651},"party":"Science Party","changeInPercent":null}]},{"electorate":"Lindsay","totalVotes":109538,"candidates":[{"2019":{"party":"Labor","totalVotes":"34690","percent":31.669375011411567},"2022":{"party":"Labor","totalVotes":"33206","percent":29.521692745376953},"party":"ALP","changeInPercent":-2.1476822660346144},{"2019":{"party":"The Greens","totalVotes":"4781","percent":4.364695356862459},"2022":{"party":"The Greens","totalVotes":"8404","percent":7.471550497866287},"party":"GRN","changeInPercent":3.1068551410038285},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6203","percent":5.514758179231864},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2831","percent":2.584491226788877},"2022":{"party":"United Australia Party","totalVotes":"4272","percent":3.79800853485064},"party":"United Australia Party","changeInPercent":1.2135173080617632},{"2019":{"party":"Liberal","totalVotes":"45247","percent":41.30712629407146},"2022":{"party":"Liberal","totalVotes":"48939","percent":43.50906827880512},"party":"LNP","changeInPercent":2.201941984733658},{"2022":{"party":"Liberal Democrats","totalVotes":"1627","percent":1.446479374110953},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Informed Medical Options Party","totalVotes":"2075","percent":1.84477240398293},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"12135","percent":11.078347240227137},"2022":{"party":"Informal","totalVotes":"7754","percent":6.893669985775248},"party":"Informal","changeInPercent":-4.184677254451889},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2374","percent":2.167284412715222},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2785","percent":2.5424966678230385},"party":"Independent","changeInPercent":null},{"2019":{"party":"Sustainable Australia","totalVotes":"1326","percent":1.2105388084500357},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1997","percent":1.8231116142343295},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Australia First Party","totalVotes":"1372","percent":1.2525333674158738},"party":"Australia First Party","changeInPercent":null}]},{"electorate":"Lyne","totalVotes":111276,"candidates":[{"2019":{"party":"Independent","totalVotes":"5169","percent":4.645206513533916},"2022":{"party":"Independent","totalVotes":"3820","percent":3.327207323340098},"party":"Independent","changeInPercent":-1.317999190193818},{"2019":{"party":"United Australia Party","totalVotes":"4098","percent":3.682734821524857},"2022":{"party":"United Australia Party","totalVotes":"4421","percent":3.850676328923187},"party":"United Australia Party","changeInPercent":0.16794150739832991},{"2019":{"party":"The Nationals","totalVotes":"49934","percent":44.874006973651106},"2022":{"party":"The Nationals","totalVotes":"46661","percent":40.64157615559485},"party":"LNP","changeInPercent":-4.232430818056258},{"2019":{"party":"Labor","totalVotes":"24371","percent":21.90139832488587},"2022":{"party":"Labor","totalVotes":"23024","percent":20.05382759491686},"party":"ALP","changeInPercent":-1.8475707299690107},{"2019":{"party":"Liberal Democrats","totalVotes":"5864","percent":5.269779647003847},"2022":{"party":"Liberal Democrats","totalVotes":"6824","percent":5.943681354574039},"party":"Liberal Democrats","changeInPercent":0.6739017075701925},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"8502","percent":7.405213786135474},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"6589","percent":5.92131277184658},"2022":{"party":"The Greens","totalVotes":"8422","percent":7.335534051615264},"party":"GRN","changeInPercent":1.4142212797686842},{"2019":{"party":"Informal","totalVotes":"10096","percent":9.072935763327223},"2022":{"party":"Informal","totalVotes":"7563","percent":6.587347902204492},"party":"Informal","changeInPercent":-2.485587861122731},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1986","percent":1.7847514288795427},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Australian Workers Party","totalVotes":"1676","percent":1.506164851360581},"party":"Australian Workers Party","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1493","percent":1.341708903986484},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Macarthur","totalVotes":109167,"candidates":[{"2019":{"party":"The Greens","totalVotes":"4397","percent":4.027773960995539},"2022":{"party":"The Greens","totalVotes":"8584","percent":7.16689070157715},"party":"GRN","changeInPercent":3.1391167405816107},{"2019":{"party":"Liberal","totalVotes":"30696","percent":28.118387424771225},"2022":{"party":"Liberal","totalVotes":"33867","percent":28.275988745376672},"party":"LNP","changeInPercent":0.15760132060544763},{"2019":{"party":"Labor","totalVotes":"47539","percent":43.54704260445006},"2022":{"party":"Labor","totalVotes":"51001","percent":42.58138311639518},"party":"ALP","changeInPercent":-0.9656594880548823},{"2019":{"party":"United Australia Party","totalVotes":"2506","percent":2.2955655097236347},"2022":{"party":"United Australia Party","totalVotes":"6602","percent":5.5120937106025565},"party":"United Australia Party","changeInPercent":3.2165282008789218},{"2022":{"party":"Liberal Democrats","totalVotes":"2197","percent":1.8343032235979728},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"8555","percent":7.836617292771625},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"8876","percent":7.4106852128609955},"party":"Pauline Hanson's One Nation","changeInPercent":-0.42593207991062965},{"2019":{"party":"Informal","totalVotes":"9663","percent":8.851576025722059},"2022":{"party":"Informal","totalVotes":"8646","percent":7.218655289589473},"party":"Informal","changeInPercent":-1.6329207361325855},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"3705","percent":3.393882766770178},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"2106","percent":1.92915441479568},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Mackellar","totalVotes":103119,"candidates":[{"2022":{"party":"TNL","totalVotes":"575","percent":0.5589307411907655},"party":"TNL","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2624","percent":2.5506682867557715},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"11975","percent":11.612796865757039},"2022":{"party":"Independent","totalVotes":"37724","percent":36.66974483596598},"party":"Independent","changeInPercent":25.056947970208938},{"2019":{"party":"Labor","totalVotes":"16648","percent":16.14445446522949},"2022":{"party":"Labor","totalVotes":"8162","percent":7.933900364520048},"party":"ALP","changeInPercent":-8.210554100709441},{"2019":{"party":"Liberal","totalVotes":"52088","percent":50.51251466752005},"2022":{"party":"Liberal","totalVotes":"40993","percent":39.84738760631835},"party":"LNP","changeInPercent":-10.665127061201702},{"2019":{"party":"United Australia Party","totalVotes":"2317","percent":2.2469186085978334},"2022":{"party":"United Australia Party","totalVotes":"2881","percent":2.80048602673147},"party":"United Australia Party","changeInPercent":0.5535674181336367},{"2019":{"party":"The Greens","totalVotes":"11283","percent":10.941727518691996},"2022":{"party":"The Greens","totalVotes":"6032","percent":5.863426488456866},"party":"GRN","changeInPercent":-5.078301030235131},{"2019":{"party":"Informal","totalVotes":"4857","percent":4.7100922235475515},"2022":{"party":"Informal","totalVotes":"3884","percent":3.7754556500607537},"party":"Informal","changeInPercent":-0.9346365734867979},{"2019":{"party":"Sustainable Australia","totalVotes":"2550","percent":2.4728711488668433},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1401","percent":1.3586245017891951},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Macquarie","totalVotes":101289,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4955","percent":4.9280436014997955},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"37106","percent":36.63379044121277},"2022":{"party":"Labor","totalVotes":"41025","percent":40.80181407699882},"party":"ALP","changeInPercent":4.168023635786049},{"2019":{"party":"United Australia Party","totalVotes":"3877","percent":3.827661443987007},"2022":{"party":"United Australia Party","totalVotes":"2774","percent":2.7589087690333876},"party":"United Australia Party","changeInPercent":-1.0687526749536196},{"2022":{"party":"Liberal Democrats","totalVotes":"1272","percent":1.265080012332541},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"3611","percent":3.5650465499708752},"2022":{"party":"Animal Justice Party","totalVotes":"2013","percent":2.0020487931017334},"party":"Animal Justice Party","changeInPercent":-1.5629977568691418},{"2019":{"party":"The Greens","totalVotes":"8870","percent":8.757120713996585},"2022":{"party":"The Greens","totalVotes":"9115","percent":9.065412195291755},"party":"GRN","changeInPercent":0.3082914812951696},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1318","percent":1.310829761206202},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"43487","percent":42.93358607548697},"2022":{"party":"Liberal","totalVotes":"32980","percent":32.800580822898745},"party":"LNP","changeInPercent":-10.133005252588227},{"2019":{"party":"Informal","totalVotes":"4338","percent":4.282794775345793},"2022":{"party":"Informal","totalVotes":"5095","percent":5.067281967637025},"party":"Informal","changeInPercent":0.7844871922912322}]},{"electorate":"McMahon","totalVotes":97124,"candidates":[{"2019":{"party":"Labor","totalVotes":"39351","percent":40.516247271529174},"2022":{"party":"Labor","totalVotes":"40657","percent":42.887583202354456},"party":"ALP","changeInPercent":2.371335930825282},{"2019":{"party":"United Australia Party","totalVotes":"3329","percent":3.427577117911124},"2022":{"party":"United Australia Party","totalVotes":"7723","percent":8.14671040833764},"party":"United Australia Party","changeInPercent":4.719133290426516},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7046","percent":7.254643548453524},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4612","percent":4.865030221837783},"party":"Pauline Hanson's One Nation","changeInPercent":-2.3896133266157413},{"2019":{"party":"Liberal","totalVotes":"28441","percent":29.28318438285079},"2022":{"party":"Liberal","totalVotes":"24006","percent":25.32305193092754},"party":"LNP","changeInPercent":-3.9601324519232506},{"2019":{"party":"The Greens","totalVotes":"4218","percent":4.342901857419382},"2022":{"party":"The Greens","totalVotes":"4922","percent":5.192037890695049},"party":"GRN","changeInPercent":0.8491360332756672},{"2022":{"party":"Liberal Democrats","totalVotes":"2822","percent":2.976824650049051},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"11731","percent":12.078374037313125},"2022":{"party":"Informal","totalVotes":"10057","percent":10.608761695798478},"party":"Informal","changeInPercent":-1.4696123415146474},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"3008","percent":3.097071784522878},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Mitchell","totalVotes":103870,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"3708","percent":3.2812997769990444},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2705","percent":2.60421680947338},"2022":{"party":"United Australia Party","totalVotes":"3916","percent":3.4653640579094542},"party":"United Australia Party","changeInPercent":0.8611472484360743},{"2019":{"party":"The Greens","totalVotes":"7955","percent":7.658611726196208},"2022":{"party":"The Greens","totalVotes":"12796","percent":11.323492973700047},"party":"GRN","changeInPercent":3.664881247503839},{"2019":{"party":"Labor","totalVotes":"23618","percent":22.738037932030423},"2022":{"party":"Labor","totalVotes":"27597","percent":24.421259424445154},"party":"ALP","changeInPercent":1.6832214924147308},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3258","percent":2.8830837846447914},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"61202","percent":58.921729084432464},"2022":{"party":"Liberal","totalVotes":"56918","percent":50.368128561820825},"party":"LNP","changeInPercent":-8.553600522611639},{"2019":{"party":"Informal","totalVotes":"5234","percent":5.038991046500433},"2022":{"party":"Informal","totalVotes":"4811","percent":4.25737142048069},"party":"Informal","changeInPercent":-0.7816196260197428},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"3156","percent":3.0384134013670936},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"New England","totalVotes":104440,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"3174","percent":3.058805389048436},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4459","percent":4.269436997319035},"2022":{"party":"United Australia Party","totalVotes":"2545","percent":2.452633810689436},"party":"United Australia Party","changeInPercent":-1.816803186629599},{"2019":{"party":"Independent","totalVotes":"3071","percent":2.9404442742244354},"2022":{"party":"Independent","totalVotes":"2708","percent":2.609718019389781},"party":"Independent","changeInPercent":-0.33072625483465456},{"2019":{"party":"The Nationals","totalVotes":"53348","percent":51.08004595940253},"2022":{"party":"The Nationals","totalVotes":"51036","percent":49.18374033883931},"party":"LNP","changeInPercent":-1.8963056205632256},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4570","percent":4.404140084420716},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"4311","percent":4.127728839525086},"2022":{"party":"The Greens","totalVotes":"7524","percent":7.250929977063778},"party":"GRN","changeInPercent":3.1232011375386914},{"2019":{"party":"Labor","totalVotes":"12410","percent":11.882420528533128},"2022":{"party":"Labor","totalVotes":"18056","percent":17.40069001407012},"party":"ALP","changeInPercent":5.51826948553699},{"2019":{"party":"Informal","totalVotes":"7120","percent":6.8173113749521255},"2022":{"party":"Informal","totalVotes":"6494","percent":6.258311971165892},"party":"Informal","changeInPercent":-0.5589994037862338},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2215","percent":2.1208349291459214},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Newcastle","totalVotes":109081,"candidates":[{"2022":{"party":"Australian Federation Party","totalVotes":"1102","percent":0.9868804012000179},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"16038","percent":14.702835507558603},"2022":{"party":"The Greens","totalVotes":"21195","percent":18.98088031164644},"party":"GRN","changeInPercent":4.278044804087838},{"2019":{"party":"United Australia Party","totalVotes":"3471","percent":3.1820390352123655},"2022":{"party":"United Australia Party","totalVotes":"2517","percent":2.2540634934849773},"party":"United Australia Party","changeInPercent":-0.9279755417273883},{"2019":{"party":"Labor","totalVotes":"47137","percent":43.212841833133176},"2022":{"party":"Labor","totalVotes":"46551","percent":41.688084896789505},"party":"ALP","changeInPercent":-1.524756936343671},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1140","percent":1.0209107598620875},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"30107","percent":27.60059038696015},"2022":{"party":"Liberal","totalVotes":"25816","percent":23.119151032104956},"party":"LNP","changeInPercent":-4.481439354855194},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4757","percent":4.260063583038553},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"3300","percent":3.025274795793951},"2022":{"party":"Animal Justice Party","totalVotes":"2549","percent":2.282720637621457},"party":"Animal Justice Party","changeInPercent":-0.7425541581724944},{"2019":{"party":"Informal","totalVotes":"6014","percent":5.513334127849946},"2022":{"party":"Informal","totalVotes":"6038","percent":5.407244884252004},"party":"Informal","changeInPercent":-0.10608924359794258},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1928","percent":1.767493880694163},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"The Great Australian Party","totalVotes":"1086","percent":0.9955904327976458},"party":"The Great Australian Party","changeInPercent":null}]},{"electorate":"North Sydney","totalVotes":100913,"candidates":[{"2022":{"party":"Sustainable Australia Party - Stop Overdevelopment / Corruption","totalVotes":"1163","percent":1.137341574088562},"party":"Sustainable Australia Party - Stop Overdevelopment / Corruption","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1249","percent":1.237699800818527},"2022":{"party":"United Australia Party","totalVotes":"1730","percent":1.6918322641214205},"party":"United Australia Party","changeInPercent":0.4541324633028936},{"2019":{"party":"The Greens","totalVotes":"13193","percent":13.073637687909386},"2022":{"party":"The Greens","totalVotes":"8308","percent":8.124706618682524},"party":"GRN","changeInPercent":-4.948931069226862},{"2022":{"party":"TNL","totalVotes":"886","percent":0.8664528242841496},"party":"TNL","changeInPercent":null},{"2022":{"party":"Informed Medical Options Party","totalVotes":"491","percent":0.48016742293850734},"party":"Informed Medical Options Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1123","percent":1.098224065091535},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"50319","percent":49.863744017123665},"2022":{"party":"Liberal","totalVotes":"36956","percent":36.14066656235331},"party":"LNP","changeInPercent":-13.723077454770355},{"2019":{"party":"Independent","totalVotes":"4295","percent":4.256141428755463},"2022":{"party":"Independent","totalVotes":"24477","percent":23.93698169300579},"party":"Independent","changeInPercent":19.680840264250328},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1149","percent":1.1236504459396026},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"24289","percent":24.06924776787926},"2022":{"party":"Labor","totalVotes":"20835","percent":20.375332498826474},"party":"ALP","changeInPercent":-3.6939152690527877},{"2019":{"party":"Informal","totalVotes":"4077","percent":4.0401137613587945},"2022":{"party":"Informal","totalVotes":"5138","percent":5.024644030668127},"party":"Informal","changeInPercent":0.9845302693093325},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1660","percent":1.6449813205434385},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Sustainable Australia","totalVotes":"1831","percent":1.8144342156114674},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Page","totalVotes":113548,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"3896","percent":3.465945484307167},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5621","percent":5.000533769838446},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"12634","percent":11.126572022404622},"2022":{"party":"The Greens","totalVotes":"8863","percent":7.88467013023984},"party":"GRN","changeInPercent":-3.2419018921647815},{"2022":{"party":"Australian Federation Party","totalVotes":"816","percent":0.7259269802861007},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"28507","percent":25.105682178461976},"2022":{"party":"Labor","totalVotes":"19531","percent":17.375097857803716},"party":"ALP","changeInPercent":-7.730584320658259},{"2022":{"party":"Indigenous - Aboriginal Party of Australia","totalVotes":"1733","percent":1.5417052167105543},"party":"Indigenous - Aboriginal Party of Australia","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3460","percent":3.04716947898686},"2022":{"party":"United Australia Party","totalVotes":"2431","percent":2.1626574621023416},"party":"United Australia Party","changeInPercent":-0.8845120168845186},{"2019":{"party":"The Nationals","totalVotes":"53672","percent":47.26811568675802},"2022":{"party":"The Nationals","totalVotes":"47701","percent":42.43559177282756},"party":"LNP","changeInPercent":-4.832523913930466},{"2019":{"party":"Independent","totalVotes":"5240","percent":4.614788459506112},"2022":{"party":"Independent","totalVotes":"13734","percent":12.217991602021208},"party":"Independent","changeInPercent":7.603203142515095},{"2022":{"party":"TNL","totalVotes":"243","percent":0.21617678457049322},"party":"TNL","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"5397","percent":4.753055976327191},"2022":{"party":"Informal","totalVotes":"7839","percent":6.9737029392925765},"party":"Informal","changeInPercent":2.220646962965385},{"2019":{"party":"Animal Justice Party","totalVotes":"2646","percent":2.330292035086483},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1992","percent":1.7543241624687358},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Parkes","totalVotes":99799,"candidates":[{"2022":{"party":"Indigenous - Aboriginal Party of Australia","totalVotes":"4466","percent":4.627931316773919},"party":"Indigenous - Aboriginal Party of Australia","changeInPercent":null},{"2019":{"party":"Liberal Democrats","totalVotes":"7568","percent":7.583242317057286},"2022":{"party":"Liberal Democrats","totalVotes":"5723","percent":5.930508492139977},"party":"Liberal Democrats","changeInPercent":-1.6527338249173082},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6662","percent":6.903555403570947},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Nationals","totalVotes":"47692","percent":47.78805398851692},"2022":{"party":"The Nationals","totalVotes":"43931","percent":45.523880581548376},"party":"LNP","changeInPercent":-2.2641734069685455},{"2019":{"party":"United Australia Party","totalVotes":"5906","percent":5.917894968887464},"2022":{"party":"United Australia Party","totalVotes":"2372","percent":2.4580056165221085},"party":"United Australia Party","changeInPercent":-3.4598893523653556},{"2019":{"party":"Independent","totalVotes":"6730","percent":6.743554544634716},"2022":{"party":"Independent","totalVotes":"2191","percent":2.2704427933389293},"party":"Independent","changeInPercent":-4.473111751295786},{"2019":{"party":"Labor","totalVotes":"22135","percent":22.17958095772503},"2022":{"party":"Labor","totalVotes":"18009","percent":18.661982777380544},"party":"ALP","changeInPercent":-3.5175981803444856},{"2019":{"party":"The Greens","totalVotes":"3921","percent":3.9288970831371053},"2022":{"party":"The Greens","totalVotes":"4214","percent":4.366794126485736},"party":"GRN","changeInPercent":0.4378970433486309},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1512","percent":1.5668231417291012},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"5847","percent":5.858776140041484},"2022":{"party":"Informal","totalVotes":"7421","percent":7.690075750510357},"party":"Informal","changeInPercent":1.8312996104688732}]},{"electorate":"Parramatta","totalVotes":92409,"candidates":[{"2022":{"party":"Animal Justice Party","totalVotes":"2397","percent":2.5906791751329385},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"34954","percent":37.8253200445844},"2022":{"party":"Liberal","totalVotes":"29492","percent":31.874972979983575},"party":"LNP","changeInPercent":-5.950347064600827},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2011","percent":2.1734901214819935},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1310","percent":1.4158488608361073},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2186","percent":2.3655704530943957},"2022":{"party":"United Australia Party","totalVotes":"4269","percent":4.613938005274307},"party":"United Australia Party","changeInPercent":2.2483675521799116},{"2019":{"party":"The Greens","totalVotes":"6131","percent":6.63463515458451},"2022":{"party":"The Greens","totalVotes":"7546","percent":8.155721758678828},"party":"GRN","changeInPercent":1.521086604094318},{"2019":{"party":"Labor","totalVotes":"38171","percent":41.30658269216202},"2022":{"party":"Labor","totalVotes":"34258","percent":37.0260689118499},"party":"ALP","changeInPercent":-4.28051378031212},{"2022":{"party":"Independent","totalVotes":"2982","percent":3.222947559552116},"party":"Independent","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"7739","percent":8.374725405534093},"2022":{"party":"Informal","totalVotes":"8259","percent":8.926332627210238},"party":"Informal","changeInPercent":0.5516072216761447},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2526","percent":2.733499983767815},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Socialist Equality Party","totalVotes":"702","percent":0.7596662662727657},"party":"Socialist Equality Party","changeInPercent":null}]},{"electorate":"Paterson","totalVotes":114513,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"15269","percent":13.333857291311904},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"9363","percent":7.7362902492832175},"party":"Pauline Hanson's One Nation","changeInPercent":-5.597567042028687},{"2019":{"party":"Liberal","totalVotes":"35059","percent":30.61573795114965},"2022":{"party":"Liberal","totalVotes":"42142","percent":34.820329347996726},"party":"LNP","changeInPercent":4.204591396847075},{"2019":{"party":"Labor","totalVotes":"44288","percent":38.67508492485569},"2022":{"party":"Labor","totalVotes":"46725","percent":38.60708767465111},"party":"ALP","changeInPercent":-0.06799725020457714},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1883","percent":1.5558511737050411},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"7439","percent":6.496205670971856},"2022":{"party":"The Greens","totalVotes":"8677","percent":7.169474580052385},"party":"GRN","changeInPercent":0.6732689090805293},{"2022":{"party":"Liberal Democrats","totalVotes":"1621","percent":1.3393705536781049},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3888","percent":3.395247701134369},"2022":{"party":"United Australia Party","totalVotes":"4474","percent":3.6966957786279093},"party":"United Australia Party","changeInPercent":0.3014480774935402},{"2019":{"party":"Informal","totalVotes":"6694","percent":5.845624514247291},"2022":{"party":"Informal","totalVotes":"6142","percent":5.074900642005503},"party":"Informal","changeInPercent":-0.7707238722417875},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1876","percent":1.638241946329238},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Reid","totalVotes":99847,"candidates":[{"2019":{"party":"Labor","totalVotes":"34872","percent":34.92543591695294},"2022":{"party":"Labor","totalVotes":"40768","percent":38.90967397113843},"party":"ALP","changeInPercent":3.9842380541854894},{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"1553","percent":1.4822096663358022},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1997","percent":1.905970833015194},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Independent","totalVotes":"2994","percent":2.8575246239596854},"party":"Independent","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1824","percent":1.7408566847369626},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"45288","percent":45.35739681713021},"2022":{"party":"Liberal","totalVotes":"37126","percent":35.43368710391693},"party":"LNP","changeInPercent":-9.923709713213277},{"2019":{"party":"United Australia Party","totalVotes":"1797","percent":1.7997536230432563},"2022":{"party":"United Australia Party","totalVotes":"2530","percent":2.4146751164388793},"party":"United Australia Party","changeInPercent":0.6149214933956231},{"2019":{"party":"The Greens","totalVotes":"7575","percent":7.58660750948952},"2022":{"party":"The Greens","totalVotes":"9184","percent":8.76536611437734},"party":"GRN","changeInPercent":1.17875860488782},{"2019":{"party":"Informal","totalVotes":"6119","percent":6.128376415916352},"2022":{"party":"Informal","totalVotes":"6800","percent":6.490035886080782},"party":"Informal","changeInPercent":0.36165947016442956},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2335","percent":2.338578024377297},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"1861","percent":1.8638516930904285},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Richmond","totalVotes":108381,"candidates":[{"2019":{"party":"Independent","totalVotes":"1566","percent":1.4449027043485483},"2022":{"party":"Independent","totalVotes":"1274","percent":1.1883441534213863},"party":"Independent","changeInPercent":-0.25655855092716195},{"2022":{"party":"Informed Medical Options Party","totalVotes":"2271","percent":2.1183120662637114},"party":"Informed Medical Options Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"7681","percent":7.164577270352959},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"31807","percent":29.347394838578715},"2022":{"party":"Labor","totalVotes":"28733","percent":26.801171554361613},"party":"ALP","changeInPercent":-2.5462232842171026},{"2019":{"party":"The Nationals","totalVotes":"36979","percent":34.11944898090994},"2022":{"party":"The Nationals","totalVotes":"23299","percent":21.732519961196925},"party":"LNP","changeInPercent":-12.386929019713012},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4073","percent":3.7991567793448247},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"20384","percent":18.807724601175483},"2022":{"party":"The Greens","totalVotes":"25216","percent":23.52063278859787},"party":"GRN","changeInPercent":4.712908187422386},{"2019":{"party":"United Australia Party","totalVotes":"3913","percent":3.6104114189756507},"2022":{"party":"United Australia Party","totalVotes":"2922","percent":2.7255428699350794},"party":"United Australia Party","changeInPercent":-0.8848685490405712},{"2019":{"party":"Informal","totalVotes":"8061","percent":7.4376505106983695},"2022":{"party":"Informal","totalVotes":"7424","percent":6.924856354003432},"party":"Informal","changeInPercent":-0.5127941566949374},{"2019":{"party":"Sustainable Australia","totalVotes":"3154","percent":2.9101041695500136},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1338","percent":1.234533728236499},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Involuntary Medication Objectors (Vaccination/Fluoride) Party","totalVotes":"1179","percent":1.0878290475267804},"party":"Involuntary Medication Objectors (Vaccination/Fluoride) Party","changeInPercent":null}]},{"electorate":"Riverina","totalVotes":106430,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"8042","percent":7.554152811437374},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"23380","percent":21.96749036925679},"2022":{"party":"Labor","totalVotes":"20193","percent":18.968043735557686},"party":"ALP","changeInPercent":-2.9994466336991046},{"2019":{"party":"United Australia Party","totalVotes":"10814","percent":10.160668984308934},"2022":{"party":"United Australia Party","totalVotes":"2585","percent":2.428187642074809},"party":"United Australia Party","changeInPercent":-7.732481342234125},{"2022":{"party":"Shooters, Fishers and Farmers Party","totalVotes":"6280","percent":5.899039996994119},"party":"Shooters, Fishers and Farmers Party","changeInPercent":null},{"2019":{"party":"The Nationals","totalVotes":"60493","percent":56.838297472517155},"2022":{"party":"The Nationals","totalVotes":"45951","percent":43.16350109902497},"party":"LNP","changeInPercent":-13.674796373492185},{"2022":{"party":"Independent","totalVotes":"2701","percent":2.537150801254955},"party":"Independent","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"6563","percent":6.16487253189051},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"6254","percent":5.876162736070657},"2022":{"party":"The Greens","totalVotes":"6349","percent":5.963854289954724},"party":"GRN","changeInPercent":0.08769155388406702},{"2019":{"party":"Informal","totalVotes":"5489","percent":5.157380437846472},"2022":{"party":"Informal","totalVotes":"7794","percent":7.321197091810855},"party":"Informal","changeInPercent":2.163816653964383}]},{"electorate":"Robertson","totalVotes":103554,"candidates":[{"2019":{"party":"Animal Justice Party","totalVotes":"2000","percent":1.931359483940746},"2022":{"party":"Animal Justice Party","totalVotes":"1949","percent":1.9017602747745987},"party":"Animal Justice Party","changeInPercent":-0.029599209166147222},{"2019":{"party":"Labor","totalVotes":"32761","percent":31.63663402669139},"2022":{"party":"Labor","totalVotes":"36231","percent":35.35283556457593},"party":"ALP","changeInPercent":3.716201537884544},{"2022":{"party":"Citizens Party","totalVotes":"272","percent":0.2654072830880918},"party":"Citizens Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"45011","percent":43.46621086582846},"2022":{"party":"Liberal","totalVotes":"38448","percent":37.51610007415792},"party":"LNP","changeInPercent":-5.950110791670539},{"2019":{"party":"United Australia Party","totalVotes":"2702","percent":2.609266662803948},"2022":{"party":"United Australia Party","totalVotes":"2792","percent":2.724327699933648},"party":"United Australia Party","changeInPercent":0.11506103712970006},{"2022":{"party":"Liberal Democrats","totalVotes":"736","percent":0.7181608836501308},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Indigenous - Aboriginal Party of Australia","totalVotes":"1127","percent":1.0996838530892628},"party":"Indigenous - Aboriginal Party of Australia","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3679","percent":3.589828656180477},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1114","percent":1.0869989461769642},"party":"Informed Medical Options Party","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"220","percent":0.2146676554388978},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"7601","percent":7.340131718716806},"2022":{"party":"The Greens","totalVotes":"9642","percent":9.408297880644783},"party":"GRN","changeInPercent":2.0681661619279774},{"2019":{"party":"Informal","totalVotes":"7493","percent":7.235838306584004},"2022":{"party":"Informal","totalVotes":"6274","percent":6.121931228289293},"party":"Informal","changeInPercent":-1.1139070782947105},{"2019":{"party":"Sustainable Australia","totalVotes":"1719","percent":1.6600034764470712},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"1352","percent":1.3055990111439442},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2915","percent":2.8149564478436373},"party":"Independent","changeInPercent":null}]},{"electorate":"Shortland","totalVotes":106827,"candidates":[{"2019":{"party":"Animal Justice Party","totalVotes":"3596","percent":3.366190195362596},"2022":{"party":"Animal Justice Party","totalVotes":"2979","percent":2.790214113107169},"party":"Animal Justice Party","changeInPercent":-0.5759760822554267},{"2022":{"party":"Independent","totalVotes":"2554","percent":2.392147312814941},"party":"Independent","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"2984","percent":2.7948972519341364},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"37363","percent":34.97524034186114},"2022":{"party":"Liberal","totalVotes":"32215","percent":30.173463462150874},"party":"LNP","changeInPercent":-4.801776879710264},{"2019":{"party":"Labor","totalVotes":"41126","percent":38.49775805741994},"2022":{"party":"Labor","totalVotes":"40135","percent":37.59155536406721},"party":"ALP","changeInPercent":-0.906202693352725},{"2019":{"party":"United Australia Party","totalVotes":"4532","percent":4.242373182809589},"2022":{"party":"United Australia Party","totalVotes":"3125","percent":2.9269617668546166},"party":"United Australia Party","changeInPercent":-1.3154114159549728},{"2019":{"party":"The Greens","totalVotes":"8256","percent":7.728383273891431},"2022":{"party":"The Greens","totalVotes":"9910","percent":9.28198115504936},"party":"GRN","changeInPercent":1.5535978811579287},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6397","percent":5.991607815222075},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"6847","percent":6.409428328044409},"2022":{"party":"Informal","totalVotes":"6467","percent":6.057171758799617},"party":"Informal","changeInPercent":-0.35225656924479143},{"2019":{"party":"Sustainable Australia","totalVotes":"3097","percent":2.8990798206445936},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"2010","percent":1.8815467999663007},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Sydney","totalVotes":98569,"candidates":[{"2022":{"party":"Socialist Alliance","totalVotes":"1518","percent":1.4236944777911165},"party":"Socialist Alliance","changeInPercent":null},{"2019":{"party":"Labor","totalVotes":"46850","percent":47.53015654008867},"2022":{"party":"Labor","totalVotes":"52410","percent":49.15403661464586},"party":"ALP","changeInPercent":1.6238800745571922},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1889","percent":1.7716461584633854},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"17134","percent":17.38274711116071},"2022":{"party":"The Greens","totalVotes":"23732","percent":22.257653061224488},"party":"GRN","changeInPercent":4.874905950063777},{"2022":{"party":"Citizens Party","totalVotes":"1002","percent":0.9397509003601441},"party":"Citizens Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1366","percent":1.3858312451176333},"2022":{"party":"United Australia Party","totalVotes":"2298","percent":2.1552370948379354},"party":"United Australia Party","changeInPercent":0.769405849720302},{"2019":{"party":"Liberal","totalVotes":"25230","percent":25.596282806967707},"2022":{"party":"Liberal","totalVotes":"20276","percent":19.016356542617046},"party":"LNP","changeInPercent":-6.579926264350661},{"2019":{"party":"Informal","totalVotes":"3754","percent":3.808499629701022},"2022":{"party":"Informal","totalVotes":"3499","percent":3.281625150060024},"party":"Informal","changeInPercent":-0.5268744796409979},{"2019":{"party":"Science Party","totalVotes":"3240","percent":3.28703750672118},"party":"Science Party","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"995","percent":1.0094451602430785},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Warringah","totalVotes":97020,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1980","percent":2.0590039828208355},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1111","percent":1.145124716553288},"2022":{"party":"Independent","totalVotes":"41832","percent":43.50113869159656},"party":"Independent","changeInPercent":42.35601397504327},{"2019":{"party":"United Australia Party","totalVotes":"625","percent":0.6441970727685014},"2022":{"party":"United Australia Party","totalVotes":"2202","percent":2.289862005137111},"party":"United Australia Party","changeInPercent":1.6456649323686097},{"2019":{"party":"The Greens","totalVotes":"5647","percent":5.820449391877963},"2022":{"party":"The Greens","totalVotes":"6910","percent":7.185715919844431},"party":"GRN","changeInPercent":1.365266527966468},{"2019":{"party":"Liberal","totalVotes":"35935","percent":37.03875489589775},"2022":{"party":"Liberal","totalVotes":"31129","percent":32.371078273348374},"party":"LNP","changeInPercent":-4.667676622549379},{"2019":{"party":"Labor","totalVotes":"6091","percent":6.278086992372707},"2022":{"party":"Labor","totalVotes":"7806","percent":8.11746721712093},"party":"ALP","changeInPercent":1.8393802247482238},{"2019":{"party":"Animal Justice Party","totalVotes":"1291","percent":1.3306534735106164},"2022":{"party":"Animal Justice Party","totalVotes":"1475","percent":1.53385397710138},"party":"Animal Justice Party","changeInPercent":0.20320050359076358},{"2019":{"party":"Informal","totalVotes":"4897","percent":5.047412904555762},"2022":{"party":"Informal","totalVotes":"2829","percent":2.9418799330303758},"party":"Informal","changeInPercent":-2.1055329715253865},{"2019":{"party":"Sustainable Australia","totalVotes":"678","percent":0.6988249845392702},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"250","percent":0.25767882910740053},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"461","percent":0.4751597608740466},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Watson","totalVotes":96409,"candidates":[{"2019":{"party":"Liberal","totalVotes":"24769","percent":25.691584810546736},"2022":{"party":"Liberal","totalVotes":"22759","percent":23.96390515099187},"party":"LNP","changeInPercent":-1.727679659554866},{"2019":{"party":"United Australia Party","totalVotes":"3549","percent":3.6811915899967844},"2022":{"party":"United Australia Party","totalVotes":"6126","percent":6.450322200227436},"party":"United Australia Party","changeInPercent":2.769130610230652},{"2019":{"party":"Labor","totalVotes":"43550","percent":45.17213123256128},"2022":{"party":"Labor","totalVotes":"44464","percent":46.818009518594955},"party":"ALP","changeInPercent":1.6458782860336783},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4178","percent":4.399191340605652},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"5982","percent":6.20481490317294},"2022":{"party":"The Greens","totalVotes":"8200","percent":8.634123741734406},"party":"GRN","changeInPercent":2.4293088385614663},{"2019":{"party":"Informal","totalVotes":"12159","percent":12.611893080521527},"2022":{"party":"Informal","totalVotes":"9245","percent":9.734448047845682},"party":"Informal","changeInPercent":-2.877445032675846},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"4522","percent":4.690433465755272},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Science Party","totalVotes":"1878","percent":1.9479509174454668},"party":"Science Party","changeInPercent":null}]},{"electorate":"Wentworth","totalVotes":92525,"candidates":[{"2019":{"party":"Labor","totalVotes":"9824","percent":10.617670899756822},"2022":{"party":"Labor","totalVotes":"9654","percent":10.585526315789473},"party":"ALP","changeInPercent":-0.03214458396734976},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"895","percent":0.9813596491228069},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"6759","percent":7.305052688462578},"2022":{"party":"The Greens","totalVotes":"7410","percent":8.125},"party":"GRN","changeInPercent":0.8199473115374216},{"2019":{"party":"United Australia Party","totalVotes":"625","percent":0.6754931099702783},"2022":{"party":"United Australia Party","totalVotes":"1813","percent":1.9879385964912282},"party":"United Australia Party","changeInPercent":1.3124454865209498},{"2019":{"party":"Independent","totalVotes":"516","percent":0.5576871115914618},"2022":{"party":"Independent","totalVotes":"31810","percent":34.87938596491228},"party":"Independent","changeInPercent":34.32169885332082},{"2022":{"party":"Liberal Democrats","totalVotes":"1346","percent":1.4758771929824561},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"42575","percent":46.01459065117536},"2022":{"party":"Liberal","totalVotes":"35995","percent":39.468201754385966},"party":"LNP","changeInPercent":-6.546388896789395},{"2019":{"party":"Informal","totalVotes":"2771","percent":2.994866252364226},"2022":{"party":"Informal","totalVotes":"2277","percent":2.4967105263157894},"party":"Informal","changeInPercent":-0.4981557260484366},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"346","percent":0.37395298567954605},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null}]},{"electorate":"Werriwa","totalVotes":106553,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"8978","percent":8.045307501366574},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3957","percent":3.7136448527962616},"2022":{"party":"United Australia Party","totalVotes":"8813","percent":7.897448764707464},"party":"United Australia Party","changeInPercent":4.183803911911203},{"2019":{"party":"Labor","totalVotes":"45002","percent":42.2343810122662},"2022":{"party":"Labor","totalVotes":"40108","percent":35.94132248438522},"party":"ALP","changeInPercent":-6.29305852788098},{"2019":{"party":"The Greens","totalVotes":"5060","percent":4.748810451136993},"2022":{"party":"The Greens","totalVotes":"6772","percent":6.068480997912055},"party":"GRN","changeInPercent":1.319670546775062},{"2019":{"party":"Liberal","totalVotes":"33234","percent":31.190111963060634},"2022":{"party":"Liberal","totalVotes":"30864","percent":27.65764877725305},"party":"LNP","changeInPercent":-3.5324631858075826},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5096","percent":4.566594678877707},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"12324","percent":11.566075098777134},"2022":{"party":"Informal","totalVotes":"10962","percent":9.823196795497925},"party":"Informal","changeInPercent":-1.742878303279209},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"4841","percent":4.543278931611498},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2135","percent":2.0036976903512804},"party":"Independent","changeInPercent":null}]},{"electorate":"Whitlam","totalVotes":110691,"candidates":[{"2019":{"party":"Labor","totalVotes":"50102","percent":45.26293917301316},"2022":{"party":"Labor","totalVotes":"49218","percent":42.807939186250806},"party":"ALP","changeInPercent":-2.4549999867623526},{"2022":{"party":"Liberal Democrats","totalVotes":"4062","percent":3.5329726720823835},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"7543","percent":6.560613703967853},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Nationals","totalVotes":"26145","percent":23.619806488332383},"2022":{"party":"Liberal","totalVotes":"30849","percent":26.831283594551813},"party":"LNP","changeInPercent":3.21147710621943},{"2019":{"party":"United Australia Party","totalVotes":"9071","percent":8.194884859654353},"2022":{"party":"United Australia Party","totalVotes":"5886","percent":5.119418303268565},"party":"United Australia Party","changeInPercent":-3.0754665563857877},{"2019":{"party":"The Greens","totalVotes":"9461","percent":8.547217027581285},"2022":{"party":"The Greens","totalVotes":"11779","percent":10.24492493955155},"party":"GRN","changeInPercent":1.6977079119702658},{"2019":{"party":"Informal","totalVotes":"8020","percent":7.245394837882032},"2022":{"party":"Informal","totalVotes":"5637","percent":4.90284760032703},"party":"Informal","changeInPercent":-2.342547237555002},{"2019":{"party":"Christian Democratic Party (Fred Nile Group)","totalVotes":"4214","percent":3.8069942452412575},"party":"Christian Democratic Party (Fred Nile Group)","changeInPercent":null},{"2019":{"party":"Sustainable Australia","totalVotes":"3678","percent":3.3227633682955253},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Lingiari","totalVotes":51009,"candidates":[{"2019":{"party":"Country Liberals (NT)","totalVotes":"17875","percent":35.042835578035245},"2022":{"party":"NT CLP","totalVotes":"15893","percent":32.13368648779797},"party":"LNP","changeInPercent":-2.909149090237271},{"2019":{"party":"The Greens","totalVotes":"3991","percent":7.824109470877688},"2022":{"party":"The Greens","totalVotes":"5018","percent":10.145777310499605},"party":"GRN","changeInPercent":2.3216678396219175},{"2022":{"party":"Citizens Party","totalVotes":"497","percent":1.0048727228613599},"party":"Citizens Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1367","percent":2.6799192299398147},"2022":{"party":"United Australia Party","totalVotes":"1882","percent":3.8051719606138414},"party":"United Australia Party","changeInPercent":1.1252527306740268},{"2019":{"party":"Australian Labor Party (Northern Territory) Branch","totalVotes":"21698","percent":42.537591405438256},"2022":{"party":"A.L.P.","totalVotes":"16747","percent":33.860369194686506},"party":"ALP","changeInPercent":-8.67722221075175},{"2019":{"party":"Independent","totalVotes":"2123","percent":4.162010625575879},"2022":{"party":"Independent","totalVotes":"948","percent":1.91673911724863},"party":"Independent","changeInPercent":-2.2452715083272485},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2470","percent":4.994035463717422},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1948","percent":3.9386158232071007},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"2575","percent":5.048128761591092},"2022":{"party":"Informal","totalVotes":"3647","percent":7.373784346630543},"party":"Informal","changeInPercent":2.325655585039451},{"2019":{"party":"Rise Up Australia Party","totalVotes":"1380","percent":2.705404928542022},"party":"Rise Up Australia Party","changeInPercent":null}]},{"electorate":"Solomon","totalVotes":57602,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"5839","percent":10.219476337160458},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"6521","percent":11.3207874726572},"2022":{"party":"The Greens","totalVotes":"8164","percent":14.28871464575749},"party":"GRN","changeInPercent":2.967927173100291},{"2019":{"party":"Australian Labor Party (Northern Territory) Branch","totalVotes":"22057","percent":38.29207319190306},"2022":{"party":"A.L.P.","totalVotes":"21775","percent":38.11082329879586},"party":"ALP","changeInPercent":-0.18124989310719997},{"2019":{"party":"Country Liberals (NT)","totalVotes":"20962","percent":36.39109753133572},"2022":{"party":"NT CLP","totalVotes":"13771","percent":24.10214225707085},"party":"LNP","changeInPercent":-12.288955274264868},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2948","percent":5.1596191542985155},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1583","percent":2.7481684663726953},"2022":{"party":"United Australia Party","totalVotes":"2628","percent":4.599551946233548},"party":"United Australia Party","changeInPercent":1.851383479860853},{"2019":{"party":"Informal","totalVotes":"2518","percent":4.371375993889101},"2022":{"party":"Informal","totalVotes":"2011","percent":3.519672360683282},"party":"Informal","changeInPercent":-0.8517036332058194},{"2019":{"party":"Rise Up Australia Party","totalVotes":"1277","percent":2.216936911912781},"party":"Rise Up Australia Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2684","percent":4.659560431929447},"party":"Independent","changeInPercent":null}]},{"electorate":"Blair","totalVotes":103690,"candidates":[{"2019":{"party":"The Greens","totalVotes":"8325","percent":8.028739512006943},"2022":{"party":"Queensland Greens","totalVotes":"13113","percent":11.912353854958711},"party":"GRN","changeInPercent":3.883614342951768},{"2022":{"party":"Liberal Democrats","totalVotes":"3080","percent":2.7979905340709856},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3261","percent":3.144951297135693},"2022":{"party":"United Australia Party","totalVotes":"6353","percent":5.771309695763952},"party":"United Australia Party","changeInPercent":2.6263583986282586},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"16114","percent":15.540553573150737},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"10419","percent":9.465020576131687},"party":"Pauline Hanson's One Nation","changeInPercent":-6.0755329970190495},{"2019":{"party":"Australian Labor Party","totalVotes":"29987","percent":28.91985726685312},"2022":{"party":"Australian Labor Party","totalVotes":"36494","percent":33.152554074800825},"party":"ALP","changeInPercent":4.232696807947704},{"2022":{"party":"Australian Values Party","totalVotes":"2103","percent":1.9104461341400265},"party":"Australian Values Party","changeInPercent":null},{"2022":{"party":"Animal Justice Party","totalVotes":"2563","percent":2.3283278372804985},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"27844","percent":26.853119876555116},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"30122","percent":27.3639840478202},"party":"LNP","changeInPercent":0.5108641712650837},{"2019":{"party":"Informal","totalVotes":"7765","percent":7.488668145433504},"2022":{"party":"Informal","totalVotes":"5832","percent":5.298013245033113},"party":"Informal","changeInPercent":-2.190654900400391},{"2019":{"party":"Independent","totalVotes":"3849","percent":3.7120262320378052},"party":"Independent","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2009","percent":1.9375060275822162},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Labour DLP","totalVotes":"2418","percent":2.3319510078117465},"party":"Labour DLP","changeInPercent":null}]},{"electorate":"Bonner","totalVotes":97027,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"46616","percent":48.04435878672947},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"43191","percent":43.6974534859016},"party":"LNP","changeInPercent":-4.346905300827871},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"3771","percent":3.886547043606419},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5371","percent":5.43397982618549},"party":"Pauline Hanson's One Nation","changeInPercent":1.5474327825790706},{"2019":{"party":"United Australia Party","totalVotes":"2394","percent":2.467354447731044},"2022":{"party":"United Australia Party","totalVotes":"3177","percent":3.214253194524539},"party":"United Australia Party","changeInPercent":0.7468987467934949},{"2019":{"party":"Australian Labor Party","totalVotes":"29291","percent":30.18850423078112},"2022":{"party":"Australian Labor Party","totalVotes":"28491","percent":28.825082708592586},"party":"ALP","changeInPercent":-1.3634215221885349},{"2019":{"party":"The Greens","totalVotes":"11010","percent":11.347356921269338},"2022":{"party":"Queensland Greens","totalVotes":"16144","percent":16.333302981556237},"party":"GRN","changeInPercent":4.985946060286899},{"2019":{"party":"Informal","totalVotes":"2840","percent":2.927020313933235},"2022":{"party":"Informal","totalVotes":"2467","percent":2.4959278032395464},"party":"Informal","changeInPercent":-0.4310925106936887},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1105","percent":1.138858255949375},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Bowman","totalVotes":101804,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7175","percent":7.0478566657498725},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"7825","percent":7.471094264682013},"party":"Pauline Hanson's One Nation","changeInPercent":0.42323759893214064},{"2019":{"party":"United Australia Party","totalVotes":"3540","percent":3.47727004832816},"2022":{"party":"United Australia Party","totalVotes":"6601","percent":6.302452810372648},"party":"United Australia Party","changeInPercent":2.825182762044488},{"2019":{"party":"The Greens","totalVotes":"11795","percent":11.585988762720522},"2022":{"party":"Queensland Greens","totalVotes":"13241","percent":12.642141745514957},"party":"GRN","changeInPercent":1.0561529827944351},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"47866","percent":47.017798907705},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"43088","percent":41.139234463465634},"party":"LNP","changeInPercent":-5.878564444239366},{"2022":{"party":"TNL","totalVotes":"1243","percent":1.1867821304792003},"party":"TNL","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"26147","percent":25.683666653569603},"2022":{"party":"Australian Labor Party","totalVotes":"29694","percent":28.351012536162006},"party":"ALP","changeInPercent":2.6673458825924037},{"2019":{"party":"Informal","totalVotes":"3465","percent":3.403599072727987},"2022":{"party":"Informal","totalVotes":"3045","percent":2.907282049323544},"party":"Informal","changeInPercent":-0.49631702340444317},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1816","percent":1.7838198891988528},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Brisbane","totalVotes":104588,"candidates":[{"2022":{"party":"Animal Justice Party","totalVotes":"2135","percent":1.9215192151921519},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1420","percent":1.3577083413011053},"2022":{"party":"United Australia Party","totalVotes":"2102","percent":1.891818918189182},"party":"United Australia Party","changeInPercent":0.5341105768880767},{"2019":{"party":"The Greens","totalVotes":"22807","percent":21.806517000038244},"2022":{"party":"Queensland Greens","totalVotes":"29641","percent":26.677166771667714},"party":"GRN","changeInPercent":4.87064977162947},{"2019":{"party":"Australian Labor Party","totalVotes":"24970","percent":23.87463188893563},"2022":{"party":"Australian Labor Party","totalVotes":"29652","percent":26.68706687066871},"party":"ALP","changeInPercent":2.8124349817330767},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"48777","percent":46.63728152369297},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"41032","percent":36.929169291692915},"party":"LNP","changeInPercent":-9.708112232000055},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"2537","percent":2.425708494282327},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2429","percent":2.1861218612186124},"party":"Pauline Hanson's One Nation","changeInPercent":-0.23958663306371442},{"2022":{"party":"Liberal Democrats","totalVotes":"1807","percent":1.6263162631626316},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"2631","percent":2.515584961945921},"2022":{"party":"Informal","totalVotes":"2312","percent":2.080820808208082},"party":"Informal","changeInPercent":-0.4347641537378393},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"732","percent":0.6998890886143726},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Socialist Alliance","totalVotes":"714","percent":0.682678701189429},"party":"Socialist Alliance","changeInPercent":null}]},{"electorate":"Capricornia","totalVotes":94975,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"15105","percent":15.904185311924191},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"13179","percent":13.700153852551042},"party":"Pauline Hanson's One Nation","changeInPercent":-2.20403145937315},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1126","percent":1.170526841032891},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"4307","percent":4.534877599368254},"2022":{"party":"Queensland Greens","totalVotes":"5302","percent":5.511663686639777},"party":"GRN","changeInPercent":0.9767860872715222},{"2019":{"party":"Australian Labor Party","totalVotes":"21120","percent":22.237430902869175},"2022":{"party":"Australian Labor Party","totalVotes":"25330","percent":26.331656201921078},"party":"ALP","changeInPercent":4.094225299051903},{"2022":{"party":"Liberal Democrats","totalVotes":"1392","percent":1.4470456152022952},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2211","percent":2.327981047644117},"2022":{"party":"Independent","totalVotes":"3048","percent":3.1685309160464055},"party":"Independent","changeInPercent":0.8405498684022885},{"2019":{"party":"United Australia Party","totalVotes":"3250","percent":3.421953145564622},"2022":{"party":"United Australia Party","totalVotes":"3555","percent":3.6955798577903445},"party":"United Australia Party","changeInPercent":0.27362671222572255},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"36163","percent":38.0763358778626},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"35613","percent":37.021289866522515},"party":"LNP","changeInPercent":-1.0550460113400817},{"2022":{"party":"The Great Australian Party","totalVotes":"1747","percent":1.8160838288494325},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"6008","percent":6.32587523032377},"2022":{"party":"Informal","totalVotes":"5904","percent":6.137469333444218},"party":"Informal","changeInPercent":-0.18840589687955145},{"2019":{"party":"Katter's Australian Party (KAP)","totalVotes":"3269","percent":3.4419584101079232},"party":"Katter's Australian Party (KAP)","changeInPercent":null},{"2019":{"party":"Labour DLP","totalVotes":"1637","percent":1.723611476704396},"party":"Labour DLP","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1905","percent":2.005790997630956},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Dawson","totalVotes":95550,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"38164","percent":39.94139194139194},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"40109","percent":41.531882287158034},"party":"LNP","changeInPercent":1.5904903457660922},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"11628","percent":12.169544740973311},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"12289","percent":12.724957027771449},"party":"Pauline Hanson's One Nation","changeInPercent":0.5554122867981377},{"2019":{"party":"Australian Labor Party","totalVotes":"18022","percent":18.86132914704343},"2022":{"party":"Australian Labor Party","totalVotes":"22650","percent":23.45351750988879},"party":"ALP","changeInPercent":4.592188362845359},{"2022":{"party":"The Great Australian Party","totalVotes":"1948","percent":2.017106053389111},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4355","percent":4.557823129251701},"2022":{"party":"United Australia Party","totalVotes":"3713","percent":3.8447201110029616},"party":"United Australia Party","changeInPercent":-0.7131030182487392},{"2019":{"party":"Katter's Australian Party (KAP)","totalVotes":"5619","percent":5.8806907378335955},"2022":{"party":"Katter's Australian Party (KAP)","totalVotes":"5189","percent":5.373081781846045},"party":"Katter's Australian Party (KAP)","changeInPercent":-0.5076089559875507},{"2019":{"party":"The Greens","totalVotes":"4009","percent":4.19570905285191},"2022":{"party":"Queensland Greens","totalVotes":"6675","percent":6.91179820655663},"party":"GRN","changeInPercent":2.7160891537047194},{"2019":{"party":"Informal","totalVotes":"6699","percent":7.010989010989011},"2022":{"party":"Informal","totalVotes":"4001","percent":4.1429370223869775},"party":"Informal","changeInPercent":-2.8680519886020335},{"2019":{"party":"Labour DLP","totalVotes":"2835","percent":2.9670329670329667},"party":"Labour DLP","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1741","percent":1.8220826792255365},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2478","percent":2.5934065934065935},"party":"Independent","changeInPercent":null}]},{"electorate":"Dickson","totalVotes":101364,"candidates":[{"2019":{"party":"Independent","totalVotes":"2302","percent":2.2710232429659443},"2022":{"party":"Independent","totalVotes":"2222","percent":2.1567580684299927},"party":"Independent","changeInPercent":-0.11426517453595153},{"2022":{"party":"Liberal Democrats","totalVotes":"1236","percent":1.199708808541616},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"44528","percent":43.928811017718324},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"41657","percent":40.43387527299199},"party":"LNP","changeInPercent":-3.494935744726334},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5022","percent":4.954421688173316},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5312","percent":5.156030089784033},"party":"Pauline Hanson's One Nation","changeInPercent":0.20160840161071736},{"2019":{"party":"United Australia Party","totalVotes":"2176","percent":2.1467187561658974},"2022":{"party":"United Australia Party","totalVotes":"2717","percent":2.637223974763407},"party":"United Australia Party","changeInPercent":0.4905052185975096},{"2019":{"party":"Australian Labor Party","totalVotes":"30370","percent":29.961327492995544},"2022":{"party":"Australian Labor Party","totalVotes":"31396","percent":30.474156758068432},"party":"ALP","changeInPercent":0.5128292650728881},{"2019":{"party":"The Greens","totalVotes":"9675","percent":9.544808807860779},"2022":{"party":"Queensland Greens","totalVotes":"12871","percent":12.493084202863383},"party":"GRN","changeInPercent":2.9482753950026037},{"2019":{"party":"Informal","totalVotes":"4416","percent":4.35657629927785},"2022":{"party":"Informal","totalVotes":"3996","percent":3.87867022567338},"party":"Informal","changeInPercent":-0.47790607360447},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1044","percent":1.0299514620575352},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"1831","percent":1.806361232784815},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Fadden","totalVotes":102231,"candidates":[{"2022":{"party":"Independent","totalVotes":"4407","percent":3.987116736481168},"party":"Independent","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"21882","percent":21.404466355606424},"2022":{"party":"Australian Labor Party","totalVotes":"23638","percent":21.385855551836137},"party":"ALP","changeInPercent":-0.018610803770286566},{"2019":{"party":"United Australia Party","totalVotes":"4968","percent":4.859582709745576},"2022":{"party":"United Australia Party","totalVotes":"7014","percent":6.345731061874045},"party":"United Australia Party","changeInPercent":1.4861483521284695},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"8334","percent":8.152126067435514},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"9177","percent":8.302648125865142},"party":"Pauline Hanson's One Nation","changeInPercent":0.15052205842962785},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"47359","percent":46.325478573035575},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"47190","percent":42.693904877364716},"party":"LNP","changeInPercent":-3.631573695670859},{"2019":{"party":"The Greens","totalVotes":"8747","percent":8.556113116373702},"2022":{"party":"Queensland Greens","totalVotes":"11353","percent":10.271326596158543},"party":"GRN","changeInPercent":1.7152134797848415},{"2019":{"party":"Liberal Democrats","totalVotes":"4391","percent":4.295174653480842},"2022":{"party":"Liberal Democrats","totalVotes":"2992","percent":2.7069328966534276},"party":"Liberal Democrats","changeInPercent":-1.5882417568274145},{"2019":{"party":"Informal","totalVotes":"5019","percent":4.909469730316636},"2022":{"party":"Informal","totalVotes":"4760","percent":4.306484153766816},"party":"Informal","changeInPercent":-0.6029855765498198},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1531","percent":1.497588794005732},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Fairfax","totalVotes":104355,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"48451","percent":46.429016338460066},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"46551","percent":42.42515379357484},"party":"LNP","changeInPercent":-4.003862544885223},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1997","percent":1.8200045568466623},"party":"Informed Medical Options Party","changeInPercent":null},{"2022":{"party":"Animal Justice Party","totalVotes":"2182","percent":1.9886078833447254},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1318","percent":1.2629965023237986},"2022":{"party":"Independent","totalVotes":"1423","percent":1.2968785600364547},"party":"Independent","changeInPercent":0.03388205771265618},{"2019":{"party":"The Greens","totalVotes":"12291","percent":11.778065258013513},"2022":{"party":"Queensland Greens","totalVotes":"13862","percent":12.633401686033267},"party":"GRN","changeInPercent":0.8553364280197542},{"2019":{"party":"United Australia Party","totalVotes":"2987","percent":2.8623448804561353},"2022":{"party":"United Australia Party","totalVotes":"6132","percent":5.588516746411483},"party":"United Australia Party","changeInPercent":2.7261718659553478},{"2019":{"party":"Australian Labor Party","totalVotes":"20976","percent":20.100618082506827},"2022":{"party":"Australian Labor Party","totalVotes":"22662","percent":20.65345181134655},"party":"ALP","changeInPercent":0.5528337288397225},{"2022":{"party":"The Great Australian Party","totalVotes":"1319","percent":1.2020961494645706},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7661","percent":7.341286953188635},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6798","percent":6.195488721804511},"party":"Pauline Hanson's One Nation","changeInPercent":-1.1457982313841235},{"2019":{"party":"Informal","totalVotes":"6715","percent":6.434765943174741},"2022":{"party":"Informal","totalVotes":"6066","percent":5.528366370471634},"party":"Informal","changeInPercent":-0.9063995727031067},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1502","percent":1.4393177135738586},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Sustainable Australia","totalVotes":"1410","percent":1.3511571079488285},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Liberal Democrats","totalVotes":"1044","percent":1.0004312203536008},"party":"Liberal Democrats","changeInPercent":null}]},{"electorate":"Fisher","totalVotes":104040,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"8596","percent":8.262206843521723},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"10102","percent":9.017710490609156},"party":"Pauline Hanson's One Nation","changeInPercent":0.7555036470874334},{"2019":{"party":"Australian Labor Party","totalVotes":"22011","percent":21.156286043829297},"2022":{"party":"Australian Labor Party","totalVotes":"25313","percent":22.59605084624723},"party":"ALP","changeInPercent":1.4397648024179333},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"49567","percent":47.64225297962322},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"48013","percent":42.859565807327},"party":"LNP","changeInPercent":-4.782687172296221},{"2022":{"party":"Animal Justice Party","totalVotes":"2730","percent":2.43697779047347},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"12289","percent":11.811803152633603},"2022":{"party":"Queensland Greens","totalVotes":"14981","percent":13.373027208455332},"party":"GRN","changeInPercent":1.5612240558217287},{"2019":{"party":"United Australia Party","totalVotes":"3429","percent":3.2958477508650517},"2022":{"party":"United Australia Party","totalVotes":"7355","percent":6.565557380561309},"party":"United Australia Party","changeInPercent":3.269709629696257},{"2019":{"party":"Informal","totalVotes":"4992","percent":4.798154555940023},"2022":{"party":"Informal","totalVotes":"3530","percent":3.151110476326501},"party":"Informal","changeInPercent":-1.6470440796135222},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1592","percent":1.530180699730873},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Love Australia or Leave","totalVotes":"1564","percent":1.5032679738562091},"party":"Love Australia or Leave","changeInPercent":null}]},{"electorate":"Flynn","totalVotes":94974,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"25628","percent":26.984227262198075},"2022":{"party":"Australian Labor Party","totalVotes":"30948","percent":32.24320973505725},"party":"ALP","changeInPercent":5.258982472859174},{"2019":{"party":"The Greens","totalVotes":"2744","percent":2.8892117842778022},"2022":{"party":"Queensland Greens","totalVotes":"4007","percent":4.174697602700479},"party":"GRN","changeInPercent":1.2854858184226767},{"2022":{"party":"The Great Australian Party","totalVotes":"2012","percent":2.0962045362199557},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"17531","percent":18.458736075136354},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"11287","percent":11.759374055822386},"party":"Pauline Hanson's One Nation","changeInPercent":-6.699362019313968},{"2019":{"party":"Independent","totalVotes":"1994","percent":2.099521974435109},"2022":{"party":"Independent","totalVotes":"3745","percent":3.9017325984809808},"party":"Independent","changeInPercent":1.802210624045872},{"2019":{"party":"United Australia Party","totalVotes":"3798","percent":3.998989197043401},"2022":{"party":"United Australia Party","totalVotes":"6266","percent":6.528239375722785},"party":"United Australia Party","changeInPercent":2.5292501786793835},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"33894","percent":35.687661886411014},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"34046","percent":35.470864632278634},"party":"LNP","changeInPercent":-0.2167972541323806},{"2019":{"party":"Informal","totalVotes":"5517","percent":5.8089582412028555},"2022":{"party":"Informal","totalVotes":"3672","percent":3.8256774637175335},"party":"Informal","changeInPercent":-1.983280777485322},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2484","percent":2.615452650199002},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Forde","totalVotes":95983,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"3696","percent":3.850681891584968},"2022":{"party":"United Australia Party","totalVotes":"7485","percent":7.37467486403405},"party":"United Australia Party","changeInPercent":3.5239929724490824},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"39819","percent":41.48547138555786},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"34920","percent":34.405296760463465},"party":"LNP","changeInPercent":-7.0801746250943935},{"2019":{"party":"The Greens","totalVotes":"7987","percent":8.321265224050093},"2022":{"party":"Queensland Greens","totalVotes":"9319","percent":9.181642626310396},"party":"GRN","changeInPercent":0.860377402260303},{"2022":{"party":"TNL","totalVotes":"728","percent":0.7172696460944273},"party":"TNL","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"27008","percent":28.13831616015336},"2022":{"party":"Australian Labor Party","totalVotes":"26497","percent":26.106447544730827},"party":"ALP","changeInPercent":-2.031868615422532},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"10807","percent":11.259285498473687},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"7578","percent":7.466304090801608},"party":"Pauline Hanson's One Nation","changeInPercent":-3.7929814076720794},{"2022":{"party":"Liberal Democrats","totalVotes":"2668","percent":2.6286750216757313},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Independent","totalVotes":"2973","percent":2.9291794750532043},"party":"Independent","changeInPercent":null},{"2022":{"party":"Animal Justice Party","totalVotes":"2444","percent":2.4079766690312923},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4449","percent":4.635195815925737},"2022":{"party":"Informal","totalVotes":"6884","percent":6.782533301804997},"party":"Informal","changeInPercent":2.1473374858792598},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2217","percent":2.309784024254295},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Griffith","totalVotes":101919,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"2109","percent":2.0692903187825626},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3504","percent":3.2301182717392303},"party":"Pauline Hanson's One Nation","changeInPercent":1.1608279529566676},{"2019":{"party":"The Greens","totalVotes":"23562","percent":23.118358696612017},"2022":{"party":"Queensland Greens","totalVotes":"36771","percent":33.89688326772924},"party":"GRN","changeInPercent":10.77852457111722},{"2019":{"party":"Australian Labor Party","totalVotes":"30836","percent":30.25539889520109},"2022":{"party":"Australian Labor Party","totalVotes":"30769","percent":28.36401515500696},"party":"ALP","changeInPercent":-1.8913837401941294},{"2019":{"party":"United Australia Party","totalVotes":"1444","percent":1.4168113894367096},"2022":{"party":"United Australia Party","totalVotes":"2581","percent":2.379262345707464},"party":"United Australia Party","changeInPercent":0.9624509562707546},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"40816","percent":40.04748869200051},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"32685","percent":30.13025562551277},"party":"LNP","changeInPercent":-9.917233066487743},{"2019":{"party":"Informal","totalVotes":"2302","percent":2.258656383991209},"2022":{"party":"Informal","totalVotes":"2169","percent":1.9994653343043356},"party":"Informal","changeInPercent":-0.25919104968687323},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"850","percent":0.8339956239759024},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Groom","totalVotes":98608,"candidates":[{"2022":{"party":"Australian Federation Party","totalVotes":"1539","percent":1.52736150532939},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"12493","percent":12.669357455784521},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"9181","percent":9.111569837835692},"party":"Pauline Hanson's One Nation","changeInPercent":-3.5577876179488293},{"2019":{"party":"The Greens","totalVotes":"7598","percent":7.705257179944833},"2022":{"party":"Queensland Greens","totalVotes":"5616","percent":5.573529703658124},"party":"GRN","changeInPercent":-2.1317274762867084},{"2019":{"party":"United Australia Party","totalVotes":"3784","percent":3.8374168424468604},"2022":{"party":"United Australia Party","totalVotes":"4922","percent":4.8847779917032215},"party":"United Australia Party","changeInPercent":1.047361149256361},{"2022":{"party":"Independent","totalVotes":"6858","percent":6.806137234274826},"party":"Independent","changeInPercent":null},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"50908","percent":51.626642868732766},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"41971","percent":41.653599571266945},"party":"LNP","changeInPercent":-9.973043297465821},{"2019":{"party":"Australian Labor Party","totalVotes":"17811","percent":18.06242901184488},"2022":{"party":"Australian Labor Party","totalVotes":"17985","percent":17.848990690935075},"party":"ALP","changeInPercent":-0.2134383209098054},{"2019":{"party":"Informal","totalVotes":"3160","percent":3.204608145383742},"2022":{"party":"Informal","totalVotes":"4758","percent":4.7220182211548},"party":"Informal","changeInPercent":1.5174100757710578},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2854","percent":2.894288495862405},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Herbert","totalVotes":97676,"candidates":[{"2022":{"party":"Informed Medical Options Party","totalVotes":"1658","percent":1.6901465881057718},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"23393","percent":23.94958843523486},"2022":{"party":"Australian Labor Party","totalVotes":"19971","percent":20.358213215356074},"party":"ALP","changeInPercent":-3.5913752198787847},{"2019":{"party":"The Greens","totalVotes":"6721","percent":6.880912404275359},"2022":{"party":"Queensland Greens","totalVotes":"7596","percent":7.743277131032233},"party":"GRN","changeInPercent":0.8623647267568737},{"2022":{"party":"The Great Australian Party","totalVotes":"749","percent":0.7635221920936207},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"34112","percent":34.92362504607068},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"43453","percent":44.2955004179494},"party":"LNP","changeInPercent":9.371875371878716},{"2022":{"party":"Independent","totalVotes":"2983","percent":3.040836714306102},"party":"Independent","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"5239","percent":5.363651255170154},"2022":{"party":"United Australia Party","totalVotes":"2383","percent":2.4292034496116126},"party":"United Australia Party","changeInPercent":-2.9344478055585417},{"2019":{"party":"Katter's Australian Party (KAP)","totalVotes":"9007","percent":9.22130308366436},"2022":{"party":"Katter's Australian Party (KAP)","totalVotes":"6472","percent":6.597484148504557},"party":"Katter's Australian Party (KAP)","changeInPercent":-2.623818935159803},{"2019":{"party":"Animal Justice Party","totalVotes":"1585","percent":1.622711822760965},"2022":{"party":"Animal Justice Party","totalVotes":"1359","percent":1.385349344533018},"party":"Animal Justice Party","changeInPercent":-0.23736247822794687},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"10189","percent":10.431426348335313},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4874","percent":4.968500886868234},"party":"Pauline Hanson's One Nation","changeInPercent":-5.462925461467079},{"2019":{"party":"Informal","totalVotes":"5759","percent":5.896023588189524},"2022":{"party":"Informal","totalVotes":"5658","percent":5.767701686069033},"party":"Informal","changeInPercent":-0.12832190212049088},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1671","percent":1.7107580162987837},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Hinkler","totalVotes":99877,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"42374","percent":42.426184206574085},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"42720","percent":40.74897221400841},"party":"LNP","changeInPercent":-1.6772119925656739},{"2019":{"party":"United Australia Party","totalVotes":"4029","percent":4.033961772980766},"2022":{"party":"United Australia Party","totalVotes":"7417","percent":7.074792296612838},"party":"United Australia Party","changeInPercent":3.0408305236320716},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"13625","percent":13.641779388648038},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"8837","percent":8.4292759235766},"party":"Pauline Hanson's One Nation","changeInPercent":-5.212503465071437},{"2019":{"party":"Australian Labor Party","totalVotes":"21110","percent":21.13599727665028},"2022":{"party":"Australian Labor Party","totalVotes":"23634","percent":22.543567633564486},"party":"ALP","changeInPercent":1.4075703569142064},{"2019":{"party":"The Greens","totalVotes":"3422","percent":3.4262142435195293},"2022":{"party":"Queensland Greens","totalVotes":"5562","percent":5.305378826177781},"party":"GRN","changeInPercent":1.8791645826582513},{"2019":{"party":"Independent","totalVotes":"1327","percent":1.3286342200907115},"2022":{"party":"Independent","totalVotes":"13236","percent":12.625313582036876},"party":"Independent","changeInPercent":11.296679361946165},{"2019":{"party":"Informal","totalVotes":"7810","percent":7.819618130300269},"2022":{"party":"Informal","totalVotes":"3431","percent":3.2726995240230075},"party":"Informal","changeInPercent":-4.546918606277262},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1471","percent":1.4728115582166064},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"1391","percent":1.3927130370355538},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Kennedy","totalVotes":95944,"candidates":[{"2019":{"party":"Katter's Australian Party (KAP)","totalVotes":"37665","percent":39.25727507712832},"2022":{"party":"Katter's Australian Party (KAP)","totalVotes":"39036","percent":40.33686385946783},"party":"Katter's Australian Party (KAP)","changeInPercent":1.0795887823395134},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"25264","percent":26.33202701575919},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"26387","percent":27.266339447171273},"party":"LNP","changeInPercent":0.9343124314120814},{"2022":{"party":"Independent","totalVotes":"2981","percent":3.0803409971583573},"party":"Independent","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"4751","percent":4.951846910697907},"2022":{"party":"Queensland Greens","totalVotes":"6013","percent":6.213381555153707},"party":"GRN","changeInPercent":1.2615346444558},{"2019":{"party":"Australian Labor Party","totalVotes":"15612","percent":16.27199199533061},"2022":{"party":"Australian Labor Party","totalVotes":"15033","percent":15.533970550245416},"party":"ALP","changeInPercent":-0.7380214450851934},{"2019":{"party":"United Australia Party","totalVotes":"6124","percent":6.382890019177853},"2022":{"party":"United Australia Party","totalVotes":"4154","percent":4.292430896409197},"party":"United Australia Party","changeInPercent":-2.0904591227686558},{"2019":{"party":"Informal","totalVotes":"3996","percent":4.1649295422329695},"2022":{"party":"Informal","totalVotes":"3171","percent":3.2766726943942137},"party":"Informal","changeInPercent":-0.8882568478387558},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2532","percent":2.6390394396731427},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Leichhardt","totalVotes":95945,"candidates":[{"2022":{"party":"Socialist Alliance","totalVotes":"3729","percent":3.7887870598037026},"party":"Socialist Alliance","changeInPercent":null},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1641","percent":1.6673101542338093},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"33753","percent":35.17952993902757},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"33652","percent":34.191542541301736},"party":"LNP","changeInPercent":-0.9879873977258313},{"2019":{"party":"Katter's Australian Party (KAP)","totalVotes":"7318","percent":7.6272864662045965},"2022":{"party":"Katter's Australian Party (KAP)","totalVotes":"5166","percent":5.248826481884131},"party":"Katter's Australian Party (KAP)","changeInPercent":-2.3784599843204655},{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"930","percent":0.944910690699234},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2022":{"party":"Animal Justice Party","totalVotes":"1253","percent":1.2730893499420861},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"9340","percent":9.734743863671895},"2022":{"party":"Queensland Greens","totalVotes":"9143","percent":9.289589725874297},"party":"GRN","changeInPercent":-0.4451541377975978},{"2019":{"party":"United Australia Party","totalVotes":"3562","percent":3.712543644796498},"2022":{"party":"United Australia Party","totalVotes":"3593","percent":3.6506065717014486},"party":"United Australia Party","changeInPercent":-0.06193707309504948},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5428","percent":5.657407889936943},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6822","percent":6.93137713112922},"party":"Pauline Hanson's One Nation","changeInPercent":1.273969241192277},{"2022":{"party":"Australian Federation Party","totalVotes":"466","percent":0.4734713783503688},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"25846","percent":26.9383500964094},"2022":{"party":"Australian Labor Party","totalVotes":"25312","percent":25.717827315031194},"party":"ALP","changeInPercent":-1.2205227813782074},{"2019":{"party":"Informal","totalVotes":"6160","percent":6.4203449893167965},"2022":{"party":"Informal","totalVotes":"6715","percent":6.82266160004877},"party":"Informal","changeInPercent":0.40231661073197333},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1976","percent":2.0595132628068167},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2562","percent":2.6702798478294856},"party":"Independent","changeInPercent":null}]},{"electorate":"Lilley","totalVotes":100085,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"2177","percent":2.175151121546685},"2022":{"party":"United Australia Party","totalVotes":"3320","percent":3.2626748036990083},"party":"United Australia Party","changeInPercent":1.087523682152323},{"2019":{"party":"The Greens","totalVotes":"13539","percent":13.527501623619923},"2022":{"party":"Queensland Greens","totalVotes":"16916","percent":16.623917764871212},"party":"GRN","changeInPercent":3.0964161412512894},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"39392","percent":39.35854523654893},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"29530","percent":29.020116552178226},"party":"LNP","changeInPercent":-10.338428684370701},{"2022":{"party":"Informed Medical Options Party","totalVotes":"1378","percent":1.3542065902100102},"party":"Informed Medical Options Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"2412","percent":2.3703528995548218},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"34434","percent":34.40475595743618},"2022":{"party":"Australian Labor Party","totalVotes":"41424","percent":40.70874730976738},"party":"ALP","changeInPercent":6.303991352331202},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5165","percent":5.1606134785432385},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4027","percent":3.95746729954696},"party":"Pauline Hanson's One Nation","changeInPercent":-1.2031461789962785},{"2019":{"party":"Informal","totalVotes":"3480","percent":3.47704451216466},"2022":{"party":"Informal","totalVotes":"2750","percent":2.7025167801723713},"party":"Informal","changeInPercent":-0.7745277319922885},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1155","percent":1.154019083778788},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Socialist Alliance","totalVotes":"743","percent":0.7423689863615927},"party":"Socialist Alliance","changeInPercent":null}]},{"electorate":"Longman","totalVotes":105722,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"33949","percent":32.11157564177749},"2022":{"party":"Australian Labor Party","totalVotes":"34036","percent":29.923862777162352},"party":"ALP","changeInPercent":-2.18771286461514},{"2019":{"party":"United Australia Party","totalVotes":"3344","percent":3.163012428822762},"2022":{"party":"United Australia Party","totalVotes":"5949","percent":5.230257952207628},"party":"United Australia Party","changeInPercent":2.0672455233848663},{"2022":{"party":"Legalise Cannabis Australia","totalVotes":"6025","percent":5.2970758383007155},"party":"Legalise Cannabis Australia","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"6684","percent":6.3222413499555445},"2022":{"party":"Queensland Greens","totalVotes":"7814","percent":6.869933709623534},"party":"GRN","changeInPercent":0.5476923596679892},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"13160","percent":12.44774030003216},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"8917","percent":7.83967224068506},"party":"Pauline Hanson's One Nation","changeInPercent":-4.608068059347101},{"2022":{"party":"Liberal Democrats","totalVotes":"2011","percent":1.768036433331575},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Animal Justice Party","totalVotes":"2060","percent":1.8111163862073814},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"38411","percent":36.332078469949494},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"41253","percent":36.26892440787044},"party":"LNP","changeInPercent":-0.06315406207905028},{"2019":{"party":"Informal","totalVotes":"6173","percent":5.838898242560678},"2022":{"party":"Informal","totalVotes":"5677","percent":4.991120254611314},"party":"Informal","changeInPercent":-0.8477779879493639},{"2019":{"party":"Australian Progressives","totalVotes":"965","percent":0.9127712302075254},"party":"Australian Progressives","changeInPercent":null},{"2019":{"party":"Australia First Party","totalVotes":"1069","percent":1.0111424301469893},"party":"Australia First Party","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1967","percent":1.86053990654736},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Maranoa","totalVotes":96573,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"51950","percent":53.79350336015243},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"52382","percent":54.36693686493892},"party":"LNP","changeInPercent":0.5734335047864931},{"2022":{"party":"Shooters, Fishers and Farmers Party","totalVotes":"3695","percent":3.835016450611838},"party":"Shooters, Fishers and Farmers Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"14427","percent":14.938958093877169},"2022":{"party":"Australian Labor Party","totalVotes":"14236","percent":14.775451743142117},"party":"ALP","changeInPercent":-0.1635063507350516},{"2019":{"party":"United Australia Party","totalVotes":"3367","percent":3.4864817288476075},"2022":{"party":"United Australia Party","totalVotes":"6202","percent":6.437015433476216},"party":"United Australia Party","changeInPercent":2.950533704628609},{"2019":{"party":"The Greens","totalVotes":"3177","percent":3.2897393681463765},"2022":{"party":"Queensland Greens","totalVotes":"4533","percent":4.704771196379828},"party":"GRN","changeInPercent":1.4150318282334515},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"13564","percent":14.04533358185},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"11070","percent":11.489480949464966},"party":"Pauline Hanson's One Nation","changeInPercent":-2.555852632385035},{"2022":{"party":"Australian Federation Party","totalVotes":"997","percent":1.0347798108958057},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"3813","percent":3.9483085334410237},"2022":{"party":"Informal","totalVotes":"3234","percent":3.3565475510903076},"party":"Informal","changeInPercent":-0.5917609823507162},{"2019":{"party":"Katter's Australian Party (KAP)","totalVotes":"4245","percent":4.3956385325090865},"party":"Katter's Australian Party (KAP)","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2030","percent":2.1020368011763124},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"McPherson","totalVotes":98771,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"44634","percent":45.18937744884632},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"42288","percent":41.197100771568856},"party":"LNP","changeInPercent":-3.9922766772774665},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5421","percent":5.488453088457138},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"7013","percent":6.83208635336295},"party":"Pauline Hanson's One Nation","changeInPercent":1.3436332649058116},{"2022":{"party":"Australian Federation Party","totalVotes":"594","percent":0.5786766425064298},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"10167","percent":10.2935072035314},"2022":{"party":"Queensland Greens","totalVotes":"14971","percent":14.584794637986127},"party":"GRN","changeInPercent":4.291287434454727},{"2022":{"party":"Australian Values Party","totalVotes":"2310","percent":2.2504091653027825},"party":"Australian Values Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3078","percent":3.1162993186259125},"2022":{"party":"United Australia Party","totalVotes":"6490","percent":6.32257813108877},"party":"United Australia Party","changeInPercent":3.2062788124628576},{"2019":{"party":"Liberal Democrats","totalVotes":"3222","percent":3.2620910996142594},"2022":{"party":"Liberal Democrats","totalVotes":"2063","percent":2.009780999142701},"party":"Liberal Democrats","changeInPercent":-1.2523101004715582},{"2019":{"party":"Australian Labor Party","totalVotes":"21138","percent":21.401018517581072},"2022":{"party":"Australian Labor Party","totalVotes":"21354","percent":20.803133037175588},"party":"ALP","changeInPercent":-0.5978854804054841},{"2019":{"party":"Informal","totalVotes":"6250","percent":6.327768272063662},"2022":{"party":"Informal","totalVotes":"5565","percent":5.4214402618657935},"party":"Informal","changeInPercent":-0.9063280101978686},{"2019":{"party":"Independent","totalVotes":"1648","percent":1.6685059379777465},"party":"Independent","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"846","percent":0.8565267133065373},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"2367","percent":2.39645239999595},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Moncrieff","totalVotes":98246,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"47356","percent":48.201453494289844},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"45104","percent":43.286819324747114},"party":"LNP","changeInPercent":-4.91463416954273},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5920","percent":6.025690613358305},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6981","percent":6.69974471678919},"party":"Pauline Hanson's One Nation","changeInPercent":0.6740541034308851},{"2022":{"party":"Australian Federation Party","totalVotes":"645","percent":0.6190138006487649},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"3551","percent":3.6143965148708346},"2022":{"party":"Animal Justice Party","totalVotes":"2384","percent":2.287951784103342},"party":"Animal Justice Party","changeInPercent":-1.3264447307674927},{"2019":{"party":"The Greens","totalVotes":"8900","percent":9.058892982920424},"2022":{"party":"Queensland Greens","totalVotes":"11850","percent":11.372579128198238},"party":"GRN","changeInPercent":2.3136861452778135},{"2019":{"party":"Australian Labor Party","totalVotes":"19822","percent":20.175885023308837},"2022":{"party":"Australian Labor Party","totalVotes":"20430","percent":19.606902243805063},"party":"ALP","changeInPercent":-0.5689827795037736},{"2019":{"party":"Liberal Democrats","totalVotes":"1799","percent":1.8311178063229037},"2022":{"party":"Liberal Democrats","totalVotes":"4305","percent":4.131557227585942},"party":"Liberal Democrats","changeInPercent":2.3004394212630386},{"2022":{"party":"Informed Medical Options Party","totalVotes":"997","percent":0.9568321848787885},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3419","percent":3.4800398998432507},"2022":{"party":"United Australia Party","totalVotes":"5482","percent":5.261137449855084},"party":"United Australia Party","changeInPercent":1.781097550011833},{"2019":{"party":"Informal","totalVotes":"6327","percent":6.439956843026688},"2022":{"party":"Informal","totalVotes":"6020","percent":5.777462139388472},"party":"Informal","changeInPercent":-0.6624947036382158},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1152","percent":1.1725668220589134},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Moreton","totalVotes":93441,"candidates":[{"2022":{"party":"Australian Federation Party","totalVotes":"1468","percent":1.5423246236118553},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"3002","percent":3.2127224665831915},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3364","percent":3.5343188241350685},"party":"Pauline Hanson's One Nation","changeInPercent":0.321596357551877},{"2019":{"party":"Australian Labor Party","totalVotes":"31864","percent":34.100662450102206},"2022":{"party":"Australian Labor Party","totalVotes":"34633","percent":36.38646368497914},"party":"ALP","changeInPercent":2.285801234876935},{"2019":{"party":"The Greens","totalVotes":"15189","percent":16.255177063601632},"2022":{"party":"Queensland Greens","totalVotes":"19250","percent":20.224624662485162},"party":"GRN","changeInPercent":3.96944759888353},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"37011","percent":39.60895110283494},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"30777","percent":32.33523497336653},"party":"LNP","changeInPercent":-7.273716129468411},{"2019":{"party":"United Australia Party","totalVotes":"2015","percent":2.156440962746546},"2022":{"party":"United Australia Party","totalVotes":"3064","percent":3.219129868356079},"party":"United Australia Party","changeInPercent":1.0626889056095332},{"2019":{"party":"Informal","totalVotes":"2799","percent":2.9954730792692716},"2022":{"party":"Informal","totalVotes":"2625","percent":2.7579033630661582},"party":"Informal","changeInPercent":-0.2375697162031134},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1561","percent":1.6705728748622126},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Oxley","totalVotes":95039,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"2368","percent":2.4916087080040823},"2022":{"party":"United Australia Party","totalVotes":"5079","percent":5.130613976604643},"party":"United Australia Party","changeInPercent":2.6390052686005605},{"2019":{"party":"The Greens","totalVotes":"10535","percent":11.084923031597555},"2022":{"party":"Queensland Greens","totalVotes":"13595","percent":13.733155544780493},"party":"GRN","changeInPercent":2.648232513182938},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"31290","percent":32.923326213449215},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"27385","percent":27.663292724811605},"party":"LNP","changeInPercent":-5.26003348863761},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5701","percent":5.9985900525047615},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5568","percent":5.624583308079278},"party":"Pauline Hanson's One Nation","changeInPercent":-0.37400674442548354},{"2019":{"party":"Australian Labor Party","totalVotes":"38501","percent":40.5107376971559},"2022":{"party":"Australian Labor Party","totalVotes":"43785","percent":44.22995333050488},"party":"ALP","changeInPercent":3.7192156333489734},{"2019":{"party":"Informal","totalVotes":"4516","percent":4.751733498879408},"2022":{"party":"Informal","totalVotes":"3582","percent":3.618401115219104},"party":"Informal","changeInPercent":-1.1333323836603038},{"2019":{"party":"Socialist Equality Party","totalVotes":"654","percent":0.6881385536463978},"party":"Socialist Equality Party","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1474","percent":1.5509422447626764},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Petrie","totalVotes":105410,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"3361","percent":3.1885020396546815},"2022":{"party":"United Australia Party","totalVotes":"5914","percent":5.355622769999819},"party":"United Australia Party","changeInPercent":2.1671207303451374},{"2019":{"party":"The Greens","totalVotes":"8877","percent":8.421402144009107},"2022":{"party":"Queensland Greens","totalVotes":"12169","percent":11.02004962599388},"party":"GRN","changeInPercent":2.598647481984772},{"2022":{"party":"Liberal Democrats","totalVotes":"2189","percent":1.9823230036404471},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7638","percent":7.245991841381273},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5613","percent":5.083042037201384},"party":"Pauline Hanson's One Nation","changeInPercent":-2.162949804179889},{"2019":{"party":"Australian Labor Party","totalVotes":"31348","percent":29.739113936059198},"2022":{"party":"Australian Labor Party","totalVotes":"31972","percent":28.953326209407205},"party":"ALP","changeInPercent":-0.7857877266519928},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"48879","percent":46.370363343136326},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"46325","percent":41.95117091989206},"party":"LNP","changeInPercent":-4.419192423244269},{"2022":{"party":"Animal Justice Party","totalVotes":"2331","percent":2.110915907485556},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"3813","percent":3.6173038611137462},"2022":{"party":"Informal","totalVotes":"3913","percent":3.5435495263796573},"party":"Informal","changeInPercent":-0.07375433473408899},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1494","percent":1.4173228346456692},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Rankin","totalVotes":91975,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"26608","percent":28.929600434900788},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"25478","percent":27.882900136798906},"party":"LNP","changeInPercent":-1.0467002981018823},{"2019":{"party":"The Greens","totalVotes":"7709","percent":8.381625441696112},"2022":{"party":"Queensland Greens","totalVotes":"9394","percent":10.280711354309165},"party":"GRN","changeInPercent":1.899085912613053},{"2019":{"party":"United Australia Party","totalVotes":"3134","percent":3.4074476759989127},"2022":{"party":"United Australia Party","totalVotes":"5064","percent":5.541997264021887},"party":"United Australia Party","changeInPercent":2.1345495880229746},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7261","percent":7.894536558847514},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"7006","percent":7.667305061559508},"party":"Pauline Hanson's One Nation","changeInPercent":-0.22723149728800518},{"2022":{"party":"Animal Justice Party","totalVotes":"2284","percent":2.499589603283174},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"35156","percent":38.22343027996738},"2022":{"party":"Australian Labor Party","totalVotes":"38596","percent":42.239124487004105},"party":"ALP","changeInPercent":4.015694207036724},{"2019":{"party":"Informal","totalVotes":"7111","percent":7.731448763250884},"2022":{"party":"Informal","totalVotes":"3553","percent":3.888372093023256},"party":"Informal","changeInPercent":-3.843076670227628},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1593","percent":1.7319923892362052},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Liberal Democrats","totalVotes":"2379","percent":2.5865724381625443},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"","totalVotes":"1024","percent":1.1133460179396575},"party":"no party","changeInPercent":null}]},{"electorate":"Ryan","totalVotes":98795,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"1478","percent":1.4960271268788907},"2022":{"party":"United Australia Party","totalVotes":"2062","percent":2.012571250097603},"party":"United Australia Party","changeInPercent":0.5165441232187122},{"2022":{"party":"Liberal Democrats","totalVotes":"2582","percent":2.52010619192629},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Australian Progressives","totalVotes":"606","percent":0.5914734129772781},"party":"Australian Progressives","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"2080","percent":2.1053697049445823},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2237","percent":2.183376278597642},"party":"Pauline Hanson's One Nation","changeInPercent":0.07800657365305952},{"2019":{"party":"Animal Justice Party","totalVotes":"1854","percent":1.8766131889265654},"2022":{"party":"Animal Justice Party","totalVotes":"1088","percent":1.0619192629030998},"party":"Animal Justice Party","changeInPercent":-0.8146939260234656},{"2019":{"party":"The Greens","totalVotes":"19621","percent":19.860316817652716},"2022":{"party":"Queensland Greens","totalVotes":"30003","percent":29.283790114780977},"party":"GRN","changeInPercent":9.423473297128261},{"2019":{"party":"Australian Labor Party","totalVotes":"23560","percent":23.84736069639152},"2022":{"party":"Australian Labor Party","totalVotes":"22146","percent":21.61513234949637},"party":"ALP","changeInPercent":-2.2322283468951483},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"46869","percent":47.44065995242674},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"38239","percent":37.32236277035996},"party":"LNP","changeInPercent":-10.118297182066783},{"2022":{"party":"Australian Federation Party","totalVotes":"353","percent":0.3445381432029359},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"2369","percent":2.3978946302950552},"2022":{"party":"Informal","totalVotes":"3140","percent":3.0647302256578435},"party":"Informal","changeInPercent":0.6668355953627882},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"964","percent":0.9757578824839315},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Wide Bay","totalVotes":98539,"candidates":[{"2019":{"party":"Independent","totalVotes":"4220","percent":4.282568323201981},"2022":{"party":"Independent","totalVotes":"4106","percent":4.014784105131414},"party":"Independent","changeInPercent":-0.26778421807056674},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"10166","percent":10.31672738712591},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"9765","percent":9.548067897371714},"party":"Pauline Hanson's One Nation","changeInPercent":-0.7686594897541958},{"2019":{"party":"United Australia Party","totalVotes":"3385","percent":3.4351880981134375},"2022":{"party":"United Australia Party","totalVotes":"4406","percent":4.308119524405507},"party":"United Australia Party","changeInPercent":0.8729314262920695},{"2019":{"party":"The Greens","totalVotes":"9330","percent":9.468332335420493},"2022":{"party":"Queensland Greens","totalVotes":"9088","percent":8.88610763454318},"party":"GRN","changeInPercent":-0.5822247008773136},{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"44204","percent":44.85939577223231},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"41601","percent":40.67682259073842},"party":"LNP","changeInPercent":-4.182573181493893},{"2022":{"party":"Australian Federation Party","totalVotes":"501","percent":0.4898701501877347},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"20418","percent":20.720729863302857},"2022":{"party":"Australian Labor Party","totalVotes":"20345","percent":19.89303035043805},"party":"ALP","changeInPercent":-0.8276995128648075},{"2022":{"party":"Australian Values Party","totalVotes":"1057","percent":1.0335184605757197},"party":"Australian Values Party","changeInPercent":null},{"2022":{"party":"Informed Medical Options Party","totalVotes":"2097","percent":2.0504145807259073},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4667","percent":4.736195820943992},"2022":{"party":"Informal","totalVotes":"6569","percent":6.423067897371714},"party":"Informal","changeInPercent":1.686872076427722},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2149","percent":2.180862399659018},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Wright","totalVotes":103162,"candidates":[{"2019":{"party":"Liberal National Party of Queensland","totalVotes":"43522","percent":42.188014966751325},"2022":{"party":"Liberal National Party of Queensland","totalVotes":"45753","percent":41.72031440920613},"party":"LNP","changeInPercent":-0.4677005575451929},{"2019":{"party":"United Australia Party","totalVotes":"4747","percent":4.601500552529032},"2022":{"party":"United Australia Party","totalVotes":"8703","percent":7.9359145040395385},"party":"United Australia Party","changeInPercent":3.3344139515105065},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"13576","percent":13.159884453577869},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"15095","percent":13.764521364871518},"party":"Pauline Hanson's One Nation","changeInPercent":0.6046369112936496},{"2022":{"party":"Australian Federation Party","totalVotes":"1632","percent":1.488154943191144},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"18155","percent":17.59853434404141},"2022":{"party":"Australian Labor Party","totalVotes":"22643","percent":20.647237977130562},"party":"ALP","changeInPercent":3.0487036330891506},{"2019":{"party":"The Greens","totalVotes":"6951","percent":6.737946142959617},"2022":{"party":"Queensland Greens","totalVotes":"12107","percent":11.039884740940673},"party":"GRN","changeInPercent":4.3019385979810565},{"2019":{"party":"Informal","totalVotes":"6269","percent":6.076850002908047},"2022":{"party":"Informal","totalVotes":"3733","percent":3.403972060620429},"party":"Informal","changeInPercent":-2.6728779422876183},{"2019":{"party":"Independent","totalVotes":"5165","percent":5.006688509334833},"party":"Independent","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2164","percent":2.0976716232721353},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Katter's Australian Party (KAP)","totalVotes":"2613","percent":2.5329094046257343},"party":"Katter's Australian Party (KAP)","changeInPercent":null}]},{"electorate":"Adelaide","totalVotes":111299,"candidates":[{"2019":{"party":"Liberal","totalVotes":"38753","percent":34.81882137305816},"2022":{"party":"Liberal","totalVotes":"36080","percent":30.784457603112575},"party":"LNP","changeInPercent":-4.034363769945582},{"2019":{"party":"Australian Labor Party","totalVotes":"43163","percent":38.781121124179016},"2022":{"party":"Australian Labor Party","totalVotes":"45086","percent":38.46862681524206},"party":"ALP","changeInPercent":-0.3124943089369552},{"2019":{"party":"United Australia Party","totalVotes":"3479","percent":3.125814248106452},"2022":{"party":"United Australia Party","totalVotes":"3055","percent":2.6066108086892714},"party":"United Australia Party","changeInPercent":-0.5192034394171805},{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"1631","percent":1.391614477568642},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"16853","percent":15.142094717832148},"2022":{"party":"The Greens","totalVotes":"22666","percent":19.339260422177095},"party":"GRN","changeInPercent":4.197165704344947},{"2022":{"party":"Australian Federation Party","totalVotes":"870","percent":0.742308151738025},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3376","percent":2.880496919847784},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4118","percent":3.699943395717841},"2022":{"party":"Informal","totalVotes":"4438","percent":3.7866248016245456},"party":"Informal","changeInPercent":0.0866814059067047},{"2019":{"party":"Australian Democrats","totalVotes":"2039","percent":1.8320020844751526},"party":"Australian Democrats","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"2894","percent":2.6002030566312366},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Barker","totalVotes":111893,"candidates":[{"2019":{"party":"National Party","totalVotes":"2796","percent":2.4988158329832966},"2022":{"party":"National Party","totalVotes":"2531","percent":2.225876807260703},"party":"National Party","changeInPercent":-0.27293902572259343},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6958","percent":6.1191824673725685},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Independent","totalVotes":"1913","percent":1.6823794280085833},"party":"Independent","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"7229","percent":6.460636500942865},"2022":{"party":"The Greens","totalVotes":"7841","percent":6.895732929960953},"party":"GRN","changeInPercent":0.4350964290180883},{"2019":{"party":"Liberal","totalVotes":"61155","percent":54.6548935143396},"2022":{"party":"Liberal","totalVotes":"56330","percent":49.53917050691244},"party":"LNP","changeInPercent":-5.115723007427157},{"2019":{"party":"United Australia Party","totalVotes":"6259","percent":5.593736873620333},"2022":{"party":"United Australia Party","totalVotes":"4222","percent":3.713019312625321},"party":"United Australia Party","changeInPercent":-1.8807175609950124},{"2019":{"party":"Australian Labor Party","totalVotes":"22205","percent":19.84485177803795},"2022":{"party":"Australian Labor Party","totalVotes":"22054","percent":19.395293207162204},"party":"ALP","changeInPercent":-0.4495585708757446},{"2022":{"party":"Australian Federation Party","totalVotes":"760","percent":0.6683786540964576},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"6227","percent":5.56513812302825},"2022":{"party":"Informal","totalVotes":"7909","percent":6.955535230590636},"party":"Informal","changeInPercent":1.3903971075623858},{"2019":{"party":"Animal Justice Party","totalVotes":"2940","percent":2.6275102106476727},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Centre Alliance","totalVotes":"3082","percent":2.754417166400043},"party":"Centre Alliance","changeInPercent":null}]},{"electorate":"Boothby","totalVotes":116030,"candidates":[{"2019":{"party":"The Greens","totalVotes":"13224","percent":11.397052486425924},"2022":{"party":"The Greens","totalVotes":"17285","percent":14.525698342801437},"party":"GRN","changeInPercent":3.1286458563755133},{"2019":{"party":"United Australia Party","totalVotes":"2094","percent":1.8047056795656298},"2022":{"party":"United Australia Party","totalVotes":"2520","percent":2.1177182426300045},"party":"United Australia Party","changeInPercent":0.31301256306437475},{"2022":{"party":"Australian Federation Party","totalVotes":"543","percent":0.4563178594238462},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1250","percent":1.0504554774950419},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2843","percent":2.450228389209687},"2022":{"party":"Independent","totalVotes":"1048","percent":0.880701872331843},"party":"Independent","changeInPercent":-1.5695265168778443},{"2019":{"party":"Animal Justice Party","totalVotes":"2675","percent":2.3054382487287772},"2022":{"party":"Animal Justice Party","totalVotes":"1358","percent":1.1412148307506134},"party":"Animal Justice Party","changeInPercent":-1.1642234179781639},{"2019":{"party":"Liberal","totalVotes":"49973","percent":43.06903387055072},"2022":{"party":"Liberal","totalVotes":"43196","percent":36.300379844700664},"party":"LNP","changeInPercent":-6.768654025850054},{"2019":{"party":"Australian Labor Party","totalVotes":"38297","percent":33.00611910712747},"2022":{"party":"Australian Labor Party","totalVotes":"36746","percent":30.880029580826246},"party":"ALP","changeInPercent":-2.1260895263012216},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2320","percent":1.9496453662307975},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"5453","percent":4.69964664310954},"2022":{"party":"Informal","totalVotes":"5289","percent":4.444687216377021},"party":"Informal","changeInPercent":-0.25495942673251903},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"868","percent":0.7480823924847022},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Rise Up Australia Party","totalVotes":"603","percent":0.5196931827975524},"party":"Rise Up Australia Party","changeInPercent":null}]},{"electorate":"Grey","totalVotes":111131,"candidates":[{"2019":{"party":"The Greens","totalVotes":"4760","percent":4.283233301239078},"2022":{"party":"The Greens","totalVotes":"6994","percent":6.312730161022456},"party":"GRN","changeInPercent":2.029496859783378},{"2019":{"party":"United Australia Party","totalVotes":"3891","percent":3.5012732720842967},"2022":{"party":"United Australia Party","totalVotes":"5781","percent":5.217885767925482},"party":"United Australia Party","changeInPercent":1.7166124958411855},{"2022":{"party":"Liberal Democrats","totalVotes":"1427","percent":1.287999133511445},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1797","percent":1.6170105551106353},"2022":{"party":"Independent","totalVotes":"11613","percent":10.481803740342263},"party":"Independent","changeInPercent":8.864793185231628},{"2019":{"party":"Australian Labor Party","totalVotes":"23612","percent":21.24699678757502},"2022":{"party":"Australian Labor Party","totalVotes":"22068","percent":19.91840566105856},"party":"ALP","changeInPercent":-1.3285911265164607},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"8990","percent":8.089551970197336},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6452","percent":5.823525164271789},"party":"Pauline Hanson's One Nation","changeInPercent":-2.266026805925547},{"2022":{"party":"Australian Federation Party","totalVotes":"721","percent":0.6507690085926782},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"52392","percent":47.14436115935248},"2022":{"party":"Liberal","totalVotes":"46730","percent":42.17813560545888},"party":"LNP","changeInPercent":-4.966225553893601},{"2019":{"party":"Informal","totalVotes":"7684","percent":6.914362329143084},"2022":{"party":"Informal","totalVotes":"7674","percent":6.92649288757311},"party":"Informal","changeInPercent":0.01213055843002575},{"2019":{"party":"Animal Justice Party","totalVotes":"2681","percent":2.4124681681978926},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Centre Alliance","totalVotes":"5324","percent":4.790742457100179},"party":"Centre Alliance","changeInPercent":null}]},{"electorate":"Hindmarsh","totalVotes":113879,"candidates":[{"2019":{"party":"The Greens","totalVotes":"11966","percent":10.507644078363878},"2022":{"party":"The Greens","totalVotes":"15310","percent":13.08222748207709},"party":"GRN","changeInPercent":2.5745834037132127},{"2019":{"party":"Liberal","totalVotes":"40039","percent":35.1592479737265},"2022":{"party":"Liberal","totalVotes":"36072","percent":30.823129309829188},"party":"LNP","changeInPercent":-4.336118663897313},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4341","percent":3.7093370019396903},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"46950","percent":41.22797003837406},"2022":{"party":"Australian Labor Party","totalVotes":"46547","percent":39.773902195182394},"party":"ALP","changeInPercent":-1.454067843191666},{"2022":{"party":"Australian Federation Party","totalVotes":"653","percent":0.5579813550487486},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4729","percent":4.1526532547704145},"2022":{"party":"United Australia Party","totalVotes":"3896","percent":3.3290893710106046},"party":"United Australia Party","changeInPercent":-0.8235638837598098},{"2022":{"party":"The Great Australian Party","totalVotes":"1184","percent":1.011715044988849},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"3219","percent":2.8266844633338897},"2022":{"party":"Animal Justice Party","totalVotes":"2340","percent":1.9995043963462047},"party":"Animal Justice Party","changeInPercent":-0.827180066987685},{"2019":{"party":"Informal","totalVotes":"4924","percent":4.323887635121489},"2022":{"party":"Informal","totalVotes":"6686","percent":5.713113843577233},"party":"Informal","changeInPercent":1.389226208455744},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2052","percent":1.8019125563097673},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Kingston","totalVotes":110628,"candidates":[{"2022":{"party":"Independent","totalVotes":"2963","percent":2.606026491231156},"party":"Independent","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5313","percent":4.6729054161023065},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"5270","percent":4.763712622482554},"2022":{"party":"United Australia Party","totalVotes":"4321","percent":3.8004186529226547},"party":"United Australia Party","changeInPercent":-0.9632939695598997},{"2019":{"party":"Australian Labor Party","totalVotes":"53655","percent":48.500379650721335},"2022":{"party":"Australian Labor Party","totalVotes":"53810","percent":47.32712976481556},"party":"ALP","changeInPercent":-1.1732498859057756},{"2019":{"party":"The Greens","totalVotes":"9764","percent":8.825975340781719},"2022":{"party":"The Greens","totalVotes":"13603","percent":11.96415064469032},"party":"GRN","changeInPercent":3.1381753039086018},{"2022":{"party":"Australian Federation Party","totalVotes":"1079","percent":0.9490052595472216},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"33650","percent":30.41725422135445},"2022":{"party":"Liberal","totalVotes":"28273","percent":24.866752273566817},"party":"LNP","changeInPercent":-5.550501947787634},{"2019":{"party":"Informal","totalVotes":"4547","percent":4.1101710236106594},"2022":{"party":"Informal","totalVotes":"4336","percent":3.81361149712396},"party":"Informal","changeInPercent":-0.29655952648669937},{"2019":{"party":"Animal Justice Party","totalVotes":"3742","percent":3.3825071410492824},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Makin","totalVotes":111725,"candidates":[{"2022":{"party":"Australian Federation Party","totalVotes":"1907","percent":1.6984173635788782},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"51666","percent":46.243902439024396},"2022":{"party":"Australian Labor Party","totalVotes":"49843","percent":44.391303960598854},"party":"ALP","changeInPercent":-1.8525984784255414},{"2019":{"party":"United Australia Party","totalVotes":"6874","percent":6.152606847169388},"2022":{"party":"United Australia Party","totalVotes":"4638","percent":4.130707777807465},"party":"United Australia Party","changeInPercent":-2.0218990693619237},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5097","percent":4.539503566943651},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"35087","percent":31.404788543298277},"2022":{"party":"Liberal","totalVotes":"33840","percent":30.138669944157957},"party":"LNP","changeInPercent":-1.26611859914032},{"2019":{"party":"The Greens","totalVotes":"9211","percent":8.244349966435443},"2022":{"party":"The Greens","totalVotes":"12317","percent":10.969798986471442},"party":"GRN","changeInPercent":2.725449020035999},{"2019":{"party":"Informal","totalVotes":"5021","percent":4.494070261803536},"2022":{"party":"Informal","totalVotes":"4639","percent":4.1315984004417485},"party":"Informal","changeInPercent":-0.36247186136178744},{"2019":{"party":"Animal Justice Party","totalVotes":"3866","percent":3.460281942268964},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Mayo","totalVotes":116216,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"15390","percent":13.24258277689819},"2022":{"party":"Australian Labor Party","totalVotes":"21051","percent":17.19993463518261},"party":"ALP","changeInPercent":3.9573518582844205},{"2019":{"party":"Animal Justice Party","totalVotes":"2302","percent":1.9807943828732706},"2022":{"party":"Animal Justice Party","totalVotes":"1929","percent":1.5761091592450365},"party":"Animal Justice Party","changeInPercent":-0.4046852236282341},{"2022":{"party":"Liberal Democrats","totalVotes":"1424","percent":1.1634937494893374},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Centre Alliance","totalVotes":"38525","percent":33.14948027810284},"2022":{"party":"Centre Alliance","totalVotes":"36500","percent":29.82269793283765},"party":"Centre Alliance","changeInPercent":-3.326782345265194},{"2019":{"party":"The Greens","totalVotes":"10436","percent":8.979830660150064},"2022":{"party":"The Greens","totalVotes":"13705","percent":11.197810278617535},"party":"GRN","changeInPercent":2.2179796184674707},{"2019":{"party":"Liberal","totalVotes":"42426","percent":36.50616094169477},"2022":{"party":"Liberal","totalVotes":"31411","percent":25.664678486804476},"party":"LNP","changeInPercent":-10.841482454890297},{"2019":{"party":"United Australia Party","totalVotes":"3597","percent":3.0950987815791287},"2022":{"party":"United Australia Party","totalVotes":"4089","percent":3.3409592286951546},"party":"United Australia Party","changeInPercent":0.24586044711602595},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4775","percent":3.9014625377890346},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"1330","percent":1.0866900890595637},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"3540","percent":3.046052178701728},"2022":{"party":"Informal","totalVotes":"6176","percent":5.0461639022795985},"party":"Informal","changeInPercent":2.0001117235778705}]},{"electorate":"Spence","totalVotes":108096,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"7157","percent":6.620966548253405},"2022":{"party":"United Australia Party","totalVotes":"7158","percent":6.404738683440556},"party":"United Australia Party","changeInPercent":-0.21622786481284884},{"2019":{"party":"Australian Labor Party","totalVotes":"51791","percent":47.912041148608644},"2022":{"party":"Australian Labor Party","totalVotes":"46596","percent":41.69254033160047},"party":"ALP","changeInPercent":-6.219500817008175},{"2019":{"party":"The Greens","totalVotes":"7330","percent":6.7810094730609825},"2022":{"party":"The Greens","totalVotes":"12052","percent":10.78372598670377},"party":"GRN","changeInPercent":4.002716513642787},{"2022":{"party":"Australian Federation Party","totalVotes":"1736","percent":1.5533146625388106},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"26252","percent":24.285820011841327},"2022":{"party":"Liberal","totalVotes":"27153","percent":24.295595064467925},"party":"LNP","changeInPercent":0.009775052626597613},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"11532","percent":10.318447401150669},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"6467","percent":5.9826450562463},"2022":{"party":"Informal","totalVotes":"5534","percent":4.951637870097798},"party":"Informal","changeInPercent":-1.0310071861485017},{"2019":{"party":"Animal Justice Party","totalVotes":"3626","percent":3.3544256956779157},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"5473","percent":5.063092066311427},"party":"Independent","changeInPercent":null}]},{"electorate":"Sturt","totalVotes":115953,"candidates":[{"2019":{"party":"The Greens","totalVotes":"12263","percent":10.575836761446448},"2022":{"party":"The Greens","totalVotes":"18454","percent":15.487910298696612},"party":"GRN","changeInPercent":4.912073537250164},{"2019":{"party":"Australian Labor Party","totalVotes":"32766","percent":28.258001086647177},"2022":{"party":"Australian Labor Party","totalVotes":"34528","percent":28.978355196347493},"party":"ALP","changeInPercent":0.7203541097003168},{"2022":{"party":"TNL","totalVotes":"251","percent":0.2106570654044028},"party":"TNL","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2893","percent":2.428011514800547},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Progressives","totalVotes":"565","percent":0.4872663924176175},"2022":{"party":"Australian Progressives","totalVotes":"457","percent":0.38354692784785693},"party":"Australian Progressives","changeInPercent":-0.10371946456976056},{"2019":{"party":"United Australia Party","totalVotes":"2657","percent":2.2914456719532916},"2022":{"party":"United Australia Party","totalVotes":"3008","percent":2.524527700145194},"party":"United Australia Party","changeInPercent":0.23308202819190216},{"2022":{"party":"Australian Federation Party","totalVotes":"755","percent":0.6336497385670283},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"1866","percent":1.609272722568627},"2022":{"party":"Animal Justice Party","totalVotes":"1531","percent":1.2849241718491662},"party":"Animal Justice Party","changeInPercent":-0.3243485507194608},{"2022":{"party":"Liberal Democrats","totalVotes":"1147","percent":0.9626440399157372},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Drew Pavlou Democratic Alliance","totalVotes":"1007","percent":0.8451460751483411},"party":"Drew Pavlou Democratic Alliance","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"55490","percent":47.85559666416566},"2022":{"party":"Liberal","totalVotes":"48579","percent":40.7709545031095},"party":"LNP","changeInPercent":-7.084642161056159},{"2019":{"party":"Informal","totalVotes":"6221","percent":5.36510482695575},"2022":{"party":"Informal","totalVotes":"6541","percent":5.4896727681681226},"party":"Informal","changeInPercent":0.1245679412123728},{"2019":{"party":"Child Protection Party","totalVotes":"1219","percent":1.0512880218709304},"party":"Child Protection Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2906","percent":2.506187851974507},"party":"Independent","changeInPercent":null}]},{"electorate":"Bass","totalVotes":71973,"candidates":[{"2019":{"party":"Independent","totalVotes":"2607","percent":3.622191655204035},"2022":{"party":"Independent","totalVotes":"3450","percent":4.730368968779565},"party":"Independent","changeInPercent":1.1081773135755304},{"2022":{"party":"Jacqui Lambie Network","totalVotes":"4587","percent":6.2893340463164815},"party":"Jacqui Lambie Network","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"7202","percent":10.006530226612757},"2022":{"party":"The Greens","totalVotes":"7614","percent":10.439718645880465},"party":"GRN","changeInPercent":0.433188419267708},{"2019":{"party":"Liberal","totalVotes":"29094","percent":40.423492142886914},"2022":{"party":"Liberal","totalVotes":"27257","percent":37.37265709623902},"party":"LNP","changeInPercent":-3.0508350466478973},{"2019":{"party":"Animal Justice Party","totalVotes":"1667","percent":2.3161463326525222},"2022":{"party":"Animal Justice Party","totalVotes":"969","percent":1.328616675578956},"party":"Animal Justice Party","changeInPercent":-0.9875296570735663},{"2022":{"party":"Liberal Democrats","totalVotes":"732","percent":1.0036608942454035},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3342","percent":4.643407944645909},"2022":{"party":"United Australia Party","totalVotes":"1140","percent":1.5630784418575954},"party":"United Australia Party","changeInPercent":-3.0803295027883135},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3230","percent":4.4287222519298535},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"23878","percent":33.17633001264363},"2022":{"party":"Australian Labor Party","totalVotes":"19630","percent":26.91511387163561},"party":"ALP","changeInPercent":-6.2612161410080205},{"2019":{"party":"Informal","totalVotes":"3240","percent":4.5016881330498935},"2022":{"party":"Informal","totalVotes":"4324","percent":5.9287291075370545},"party":"Informal","changeInPercent":1.427040974487161}]},{"electorate":"Braddon","totalVotes":75303,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"3879","percent":5.151189195649575},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3065","percent":4.008841686721774},"party":"Pauline Hanson's One Nation","changeInPercent":-1.1423475089278012},{"2019":{"party":"The Greens","totalVotes":"3384","percent":4.493844866738377},"2022":{"party":"The Greens","totalVotes":"4745","percent":6.206183948937951},"party":"GRN","changeInPercent":1.7123390821995734},{"2019":{"party":"Liberal","totalVotes":"26513","percent":35.208424631156795},"2022":{"party":"Liberal","totalVotes":"31142","percent":40.731924244009626},"party":"LNP","changeInPercent":5.523499612852831},{"2022":{"party":"The Local Party","totalVotes":"719","percent":0.9404101705556137},"party":"The Local Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"22434","percent":29.79164176726027},"2022":{"party":"Australian Labor Party","totalVotes":"15886","percent":20.777963796170347},"party":"ALP","changeInPercent":-9.013677971089923},{"2019":{"party":"United Australia Party","totalVotes":"2575","percent":3.419518478679468},"2022":{"party":"United Australia Party","totalVotes":"1000","percent":1.3079418227477242},"party":"United Australia Party","changeInPercent":-2.111576655931744},{"2019":{"party":"Independent","totalVotes":"7619","percent":10.117790791867522},"2022":{"party":"Independent","totalVotes":"5538","percent":7.243381814376897},"party":"Independent","changeInPercent":-2.874408977490625},{"2022":{"party":"Animal Justice Party","totalVotes":"566","percent":0.7402950716752119},"party":"Animal Justice Party","changeInPercent":null},{"2022":{"party":"Jacqui Lambie Network","totalVotes":"6966","percent":9.111122737260647},"party":"Jacqui Lambie Network","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"971","percent":1.2700115098880402},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"5330","percent":7.078071258781191},"2022":{"party":"Informal","totalVotes":"5858","percent":7.661923197656169},"party":"Informal","changeInPercent":0.5838519388749779},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"712","percent":0.9455134589591385},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Clark","totalVotes":69150,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1715","percent":2.4920805603185214},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"13641","percent":19.726681127982644},"2022":{"party":"Australian Labor Party","totalVotes":"12364","percent":17.966229765468338},"party":"ALP","changeInPercent":-1.7604513625143063},{"2022":{"party":"Liberal Democrats","totalVotes":"739","percent":1.0738469586445407},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"11719","percent":16.9472161966739},"2022":{"party":"Liberal","totalVotes":"10441","percent":15.171902699875034},"party":"LNP","changeInPercent":-1.7753134967988657},{"2019":{"party":"The Greens","totalVotes":"6458","percent":9.339117859725235},"2022":{"party":"The Greens","totalVotes":"8861","percent":12.875991746345433},"party":"GRN","changeInPercent":3.5368738866201976},{"2019":{"party":"Independent","totalVotes":"33761","percent":48.822848879248006},"2022":{"party":"Independent","totalVotes":"30005","percent":43.60051149408585},"party":"Independent","changeInPercent":-5.222337385162156},{"2022":{"party":"Animal Justice Party","totalVotes":"828","percent":1.2031735883053851},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1882","percent":2.7216196673897324},"2022":{"party":"United Australia Party","totalVotes":"941","percent":1.3673748147287046},"party":"United Australia Party","changeInPercent":-1.3542448526610278},{"2019":{"party":"Informal","totalVotes":"1689","percent":2.4425162689804774},"2022":{"party":"Informal","totalVotes":"2924","percent":4.248888372228196},"party":"Informal","changeInPercent":1.8063721032477185}]},{"electorate":"Franklin","totalVotes":72545,"candidates":[{"2022":{"party":"The Local Party","totalVotes":"3535","percent":4.716163031152024},"party":"The Local Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"30911","percent":42.60941484595768},"2022":{"party":"Australian Labor Party","totalVotes":"26147","percent":34.883596824761526},"party":"ALP","changeInPercent":-7.7258180211961545},{"2022":{"party":"Liberal Democrats","totalVotes":"1434","percent":1.9131478887332398},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2033","percent":2.712294043092522},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4704","percent":6.484251154455856},"2022":{"party":"United Australia Party","totalVotes":"1380","percent":1.8411046627976786},"party":"United Australia Party","changeInPercent":-4.643146491658177},{"2022":{"party":"Jacqui Lambie Network","totalVotes":"4215","percent":5.623374024414648},"party":"Jacqui Lambie Network","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"21969","percent":30.283272451581777},"2022":{"party":"Liberal","totalVotes":"19048","percent":25.41258088186245},"party":"LNP","changeInPercent":-4.870691569719327},{"2022":{"party":"Animal Justice Party","totalVotes":"1097","percent":1.4635447935427923},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"The Greens","totalVotes":"11420","percent":15.741953270383899},"2022":{"party":"The Greens","totalVotes":"12370","percent":16.50323527449803},"party":"GRN","changeInPercent":0.7612820041141326},{"2019":{"party":"Informal","totalVotes":"2284","percent":3.14839065407678},"2022":{"party":"Informal","totalVotes":"3696","percent":4.930958575145087},"party":"Informal","changeInPercent":1.7825679210683067},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1257","percent":1.7327176235440074},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Lyons","totalVotes":74991,"candidates":[{"2019":{"party":"The Nationals","totalVotes":"11222","percent":14.964462402154927},"2022":{"party":"Liberal","totalVotes":"27296","percent":34.874153570972275},"party":"LNP","changeInPercent":19.909691168817346},{"2022":{"party":"Liberal Democrats","totalVotes":"1188","percent":1.5178229206592564},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"26091","percent":34.79217506100732},"2022":{"party":"Australian Labor Party","totalVotes":"21295","percent":27.20710361568928},"party":"ALP","changeInPercent":-7.5850714453180395},{"2022":{"party":"Animal Justice Party","totalVotes":"1312","percent":1.676248882074869},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4365","percent":5.820698483818059},"2022":{"party":"United Australia Party","totalVotes":"1976","percent":2.524594352881053},"party":"United Australia Party","changeInPercent":-3.296104130937006},{"2022":{"party":"Jacqui Lambie Network","totalVotes":"7962","percent":10.172479877347643},"party":"Jacqui Lambie Network","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5820","percent":7.76093131175741},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3927","percent":5.017247987734764},"party":"Pauline Hanson's One Nation","changeInPercent":-2.743683324022646},{"2019":{"party":"The Greens","totalVotes":"6765","percent":9.02108252990359},"2022":{"party":"The Greens","totalVotes":"8382","percent":10.709083940206977},"party":"GRN","changeInPercent":1.6880014103033876},{"2019":{"party":"Informal","totalVotes":"3427","percent":4.56988171913963},"2022":{"party":"Informal","totalVotes":"4932","percent":6.301264852433882},"party":"Informal","changeInPercent":1.7313831332942522}]},{"electorate":"Aston","totalVotes":103919,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"3611","percent":3.4748217361598934},"2022":{"party":"United Australia Party","totalVotes":"5990","percent":5.902640914465905},"party":"United Australia Party","changeInPercent":2.4278191783060112},{"2019":{"party":"Liberal","totalVotes":"54744","percent":52.67949075722438},"2022":{"party":"Liberal","totalVotes":"42260","percent":41.64367363027198},"party":"LNP","changeInPercent":-11.035817126952402},{"2019":{"party":"The Greens (VIC)","totalVotes":"8867","percent":8.532607126704454},"2022":{"party":"The Greens","totalVotes":"11855","percent":11.68210484824596},"party":"GRN","changeInPercent":3.149497721541506},{"2022":{"party":"TNL","totalVotes":"973","percent":0.9588096176586519},"party":"TNL","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3022","percent":2.977926685061096},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"2111","percent":2.080212849822625},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"29839","percent":28.713709716221285},"2022":{"party":"Australian Labor Party","totalVotes":"31949","percent":31.483050847457626},"party":"ALP","changeInPercent":2.7693411312363416},{"2019":{"party":"Informal","totalVotes":"3829","percent":3.684600506163454},"2022":{"party":"Informal","totalVotes":"3320","percent":3.2715806070161606},"party":"Informal","changeInPercent":-0.4130198991472933},{"2019":{"party":"Labour DLP","totalVotes":"3029","percent":2.9147701575265352},"party":"Labour DLP","changeInPercent":null}]},{"electorate":"Ballarat","totalVotes":107372,"candidates":[{"2019":{"party":"The Greens (VIC)","totalVotes":"9077","percent":8.453786834556496},"2022":{"party":"The Greens","totalVotes":"14076","percent":13.8531035636607},"party":"GRN","changeInPercent":5.3993167291042035},{"2019":{"party":"Liberal","totalVotes":"31462","percent":29.30186640837462},"2022":{"party":"Liberal","totalVotes":"26142","percent":25.728035902331488},"party":"LNP","changeInPercent":-3.5738305060431337},{"2019":{"party":"Independent","totalVotes":"1645","percent":1.5320567745781022},"2022":{"party":"Independent","totalVotes":"2044","percent":2.011632827800687},"party":"Independent","changeInPercent":0.479576053222585},{"2022":{"party":"Australian Federation Party","totalVotes":"682","percent":0.6712003857925971},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4741","percent":4.415490071899565},"2022":{"party":"United Australia Party","totalVotes":"3693","percent":3.6345205641232567},"party":"United Australia Party","changeInPercent":-0.7809695077763079},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3476","percent":3.42095680500743},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"3216","percent":3.16507395998386},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"49077","percent":45.7074470066684},"2022":{"party":"Australian Labor Party","totalVotes":"43171","percent":42.487378086586816},"party":"ALP","changeInPercent":-3.2200689200815873},{"2019":{"party":"Informal","totalVotes":"4689","percent":4.367060313675818},"2022":{"party":"Informal","totalVotes":"5109","percent":5.028097904713165},"party":"Informal","changeInPercent":0.6610375910373465},{"2019":{"party":"Animal Justice Party","totalVotes":"4393","percent":4.091383228402191},"party":"Animal Justice Party","changeInPercent":null}]},{"electorate":"Bendigo","totalVotes":105979,"candidates":[{"2022":{"party":"Independent","totalVotes":"4319","percent":4.171213891813063},"party":"Independent","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"44340","percent":41.83847743420866},"2022":{"party":"Australian Labor Party","totalVotes":"42883","percent":41.41564374221338},"party":"ALP","changeInPercent":-0.42283369199527954},{"2019":{"party":"Liberal","totalVotes":"32210","percent":30.39281367063286},"2022":{"party":"Liberal","totalVotes":"26576","percent":25.666631254647825},"party":"LNP","changeInPercent":-4.726182415985036},{"2019":{"party":"The Greens (VIC)","totalVotes":"11381","percent":10.738919974711973},"2022":{"party":"The Greens","totalVotes":"14026","percent":13.546062988323692},"party":"GRN","changeInPercent":2.8071430136117197},{"2022":{"party":"Liberal Democrats","totalVotes":"2888","percent":2.789179374752518},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"6278","percent":5.9238150954434365},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5508","percent":5.319529084534928},"party":"Pauline Hanson's One Nation","changeInPercent":-0.6042860109085089},{"2019":{"party":"United Australia Party","totalVotes":"4321","percent":4.077222846035535},"2022":{"party":"United Australia Party","totalVotes":"3579","percent":3.4565349661493294},"party":"United Australia Party","changeInPercent":-0.6206878798862054},{"2019":{"party":"Informal","totalVotes":"4318","percent":4.074392096547429},"2022":{"party":"Informal","totalVotes":"3764","percent":3.6352046975652628},"party":"Informal","changeInPercent":-0.4391873989821664},{"2019":{"party":"Rise Up Australia Party","totalVotes":"1464","percent":1.3814057501957935},"party":"Rise Up Australia Party","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1667","percent":1.5729531322243084},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Bruce","totalVotes":98561,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"4821","percent":4.8398269267450384},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3979","percent":4.037093779486815},"2022":{"party":"United Australia Party","totalVotes":"8299","percent":8.331409181716879},"party":"United Australia Party","changeInPercent":4.294315402230064},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4544","percent":4.561745188784371},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"51713","percent":52.468014731993385},"2022":{"party":"Australian Labor Party","totalVotes":"39516","percent":39.67031753521197},"party":"ALP","changeInPercent":-12.797697196781414},{"2019":{"party":"Liberal","totalVotes":"27170","percent":27.566684591268352},"2022":{"party":"Liberal","totalVotes":"28837","percent":28.949613998453987},"party":"LNP","changeInPercent":1.3829294071856353},{"2019":{"party":"The Greens (VIC)","totalVotes":"6801","percent":6.900295248627754},"2022":{"party":"The Greens","totalVotes":"9273","percent":9.309212837939585},"party":"GRN","changeInPercent":2.408917589311831},{"2019":{"party":"Informal","totalVotes":"5521","percent":5.60160712655107},"2022":{"party":"Informal","totalVotes":"4321","percent":4.337874331148166},"party":"Informal","changeInPercent":-1.2637327954029036},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"3377","percent":3.4263045220726247},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Calwell","totalVotes":96336,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5957","percent":6.566430405978902},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"21978","percent":22.81390134529148},"2022":{"party":"Liberal","totalVotes":"20111","percent":22.168454237811265},"party":"LNP","changeInPercent":-0.6454471074802157},{"2019":{"party":"The Greens (VIC)","totalVotes":"5893","percent":6.117131705696728},"2022":{"party":"The Greens","totalVotes":"8277","percent":9.123777819420408},"party":"GRN","changeInPercent":3.0066461137236793},{"2019":{"party":"Australian Labor Party","totalVotes":"47115","percent":48.906950672645735},"2022":{"party":"Australian Labor Party","totalVotes":"38127","percent":42.02757966908806},"party":"ALP","changeInPercent":-6.879371003557672},{"2019":{"party":"United Australia Party","totalVotes":"3037","percent":3.1525078890549745},"2022":{"party":"United Australia Party","totalVotes":"7578","percent":8.353266680629195},"party":"United Australia Party","changeInPercent":5.200758791574221},{"2019":{"party":"Victorian Socialists","totalVotes":"3984","percent":4.135525660189337},"2022":{"party":"Victorian Socialists","totalVotes":"3433","percent":3.7842127889416775},"party":"Victorian Socialists","changeInPercent":-0.35131287124765986},{"2022":{"party":"Australian Federation Party","totalVotes":"1512","percent":1.6666850384153264},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"8884","percent":9.221890051486465},"2022":{"party":"Informal","totalVotes":"5724","percent":6.309593359715164},"party":"Informal","changeInPercent":-2.912296691771301},{"2019":{"party":"Citizens Electoral Council","totalVotes":"2851","percent":2.959433648895532},"party":"Citizens Electoral Council","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1771","percent":1.8383574157116758},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Socialist Equality Party","totalVotes":"823","percent":0.8543016110280685},"party":"Socialist Equality Party","changeInPercent":null}]},{"electorate":"Casey","totalVotes":106720,"candidates":[{"2019":{"party":"The Greens (VIC)","totalVotes":"10919","percent":10.231446776611694},"2022":{"party":"The Greens","totalVotes":"12894","percent":12.132902995116352},"party":"GRN","changeInPercent":1.9014562185046575},{"2019":{"party":"Independent","totalVotes":"2302","percent":2.157046476761619},"2022":{"party":"Independent","totalVotes":"3455","percent":3.251060946806809},"party":"Independent","changeInPercent":1.09401447004519},{"2019":{"party":"Animal Justice Party","totalVotes":"3105","percent":2.9094827586206895},"2022":{"party":"Animal Justice Party","totalVotes":"1844","percent":1.7351538020005082},"party":"Animal Justice Party","changeInPercent":-1.1743289566201813},{"2019":{"party":"Liberal","totalVotes":"45168","percent":42.32383808095952},"2022":{"party":"Liberal","totalVotes":"36347","percent":34.20153754951869},"party":"LNP","changeInPercent":-8.122300531440828},{"2019":{"party":"Australian Labor Party","totalVotes":"28551","percent":26.75318590704648},"2022":{"party":"Australian Labor Party","totalVotes":"24779","percent":23.316364457576242},"party":"ALP","changeInPercent":-3.436821449470237},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3260","percent":3.067571255163588},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"686","percent":0.645507325473074},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"2008","percent":1.8894733375363448},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Derryn Hinch's Justice Party","totalVotes":"3309","percent":3.1006371814092955},"2022":{"party":"Derryn Hinch's Justice Party","totalVotes":"1207","percent":1.1357541426326536},"party":"Derryn Hinch's Justice Party","changeInPercent":-1.9648830387766418},{"2019":{"party":"United Australia Party","totalVotes":"2607","percent":2.4428410794602695},"2022":{"party":"United Australia Party","totalVotes":"4834","percent":4.548662407196559},"party":"United Australia Party","changeInPercent":2.10582132773629},{"2019":{"party":"Informal","totalVotes":"6892","percent":6.458020989505248},"2022":{"party":"Informal","totalVotes":"6652","percent":6.259350916977972},"party":"Informal","changeInPercent":-0.19867007252727564},{"2019":{"party":"Rise Up Australia Party","totalVotes":"820","percent":0.7683658170914542},"party":"Rise Up Australia Party","changeInPercent":null},{"2019":{"party":"Labour DLP","totalVotes":"2246","percent":2.1045727136431784},"party":"Labour DLP","changeInPercent":null},{"2019":{"party":"The Great Australian Party","totalVotes":"801","percent":0.7505622188905547},"party":"The Great Australian Party","changeInPercent":null}]},{"electorate":"Chisholm","totalVotes":99383,"candidates":[{"2019":{"party":"Liberal","totalVotes":"41172","percent":41.427608343479264},"2022":{"party":"Liberal","totalVotes":"35038","percent":34.59484009834026},"party":"LNP","changeInPercent":-6.832768245139},{"2019":{"party":"Derryn Hinch's Justice Party","totalVotes":"2063","percent":2.075807733717034},"2022":{"party":"Derryn Hinch's Justice Party","totalVotes":"946","percent":0.934035011502651},"party":"Derryn Hinch's Justice Party","changeInPercent":-1.141772722214383},{"2022":{"party":"Australian Federation Party","totalVotes":"567","percent":0.559828595689221},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1377","percent":1.3595837323881084},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"1780","percent":1.7910507833331657},"2022":{"party":"Animal Justice Party","totalVotes":"1122","percent":1.1078089671310511},"party":"Animal Justice Party","changeInPercent":-0.6832418162021145},{"2022":{"party":"Citizens Party","totalVotes":"384","percent":0.3791431759165095},"party":"Citizens Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1620","percent":1.5995102733977744},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"11235","percent":11.304750309409053},"2022":{"party":"The Greens","totalVotes":"12130","percent":11.97658001007099},"party":"GRN","changeInPercent":0.6718297006619363},{"2019":{"party":"United Australia Party","totalVotes":"1517","percent":1.5264179990541642},"2022":{"party":"United Australia Party","totalVotes":"2295","percent":2.265972887313514},"party":"United Australia Party","changeInPercent":0.7395548882593497},{"2019":{"party":"Independent","totalVotes":"2319","percent":2.333397059859332},"2022":{"party":"Independent","totalVotes":"1590","percent":1.569889712779297},"party":"Independent","changeInPercent":-0.7635073470800349},{"2019":{"party":"Australian Labor Party","totalVotes":"32561","percent":32.76314862702876},"2022":{"party":"Australian Labor Party","totalVotes":"38692","percent":38.202624381670795},"party":"ALP","changeInPercent":5.439475754642032},{"2019":{"party":"Informal","totalVotes":"4463","percent":4.490707666301078},"2022":{"party":"Informal","totalVotes":"4763","percent":4.70275767419358},"party":"Informal","changeInPercent":0.21205000789250228},{"2019":{"party":"Rise Up Australia Party","totalVotes":"571","percent":0.5745449422939537},"party":"Rise Up Australia Party","changeInPercent":null},{"2019":{"party":"Labour DLP","totalVotes":"1702","percent":1.7125665355241841},"party":"Labour DLP","changeInPercent":null}]},{"electorate":"Cooper","totalVotes":102467,"candidates":[{"2019":{"party":"Animal Justice Party","totalVotes":"2476","percent":2.416387715069242},"2022":{"party":"Animal Justice Party","totalVotes":"2207","percent":2.2539037367620174},"party":"Animal Justice Party","changeInPercent":-0.1624839783072245},{"2019":{"party":"Victorian Socialists","totalVotes":"4125","percent":4.025686318522061},"2022":{"party":"Victorian Socialists","totalVotes":"3250","percent":3.319069843442029},"party":"Victorian Socialists","changeInPercent":-0.7066164750800317},{"2019":{"party":"The Greens (VIC)","totalVotes":"20605","percent":20.108913113490196},"2022":{"party":"The Greens","totalVotes":"25648","percent":26.193077952184968},"party":"GRN","changeInPercent":6.084164838694772},{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"1585","percent":1.6186848313401896},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"19012","percent":18.55426625157368},"2022":{"party":"Liberal","totalVotes":"15329","percent":15.654775886191649},"party":"LNP","changeInPercent":-2.8994903653820305},{"2019":{"party":"United Australia Party","totalVotes":"1892","percent":1.8464481247621185},"2022":{"party":"United Australia Party","totalVotes":"4170","percent":4.258621922201003},"party":"United Australia Party","changeInPercent":2.412173797438885},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2807","percent":2.866655092474392},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"45601","percent":44.50310831779988},"2022":{"party":"Australian Labor Party","totalVotes":"38754","percent":39.577610065462274},"party":"ALP","changeInPercent":-4.925498252337604},{"2019":{"party":"Informal","totalVotes":"4986","percent":4.865956844642665},"2022":{"party":"Informal","totalVotes":"4169","percent":4.257600669941483},"party":"Informal","changeInPercent":-0.6083561747011821},{"2019":{"party":"Independent","totalVotes":"1660","percent":1.6200337669688778},"party":"Independent","changeInPercent":null},{"2019":{"party":"Reason Australia","totalVotes":"2110","percent":2.0591995471712843},"party":"Reason Australia","changeInPercent":null}]},{"electorate":"Corangamite","totalVotes":105816,"candidates":[{"2022":{"party":"Australian Federation Party","totalVotes":"868","percent":0.8262338774927418},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"9184","percent":8.67921675361004},"2022":{"party":"The Greens","totalVotes":"15349","percent":14.61044214935034},"party":"GRN","changeInPercent":5.931225395740299},{"2019":{"party":"Australian Labor Party","totalVotes":"36047","percent":34.06573675058592},"2022":{"party":"Australian Labor Party","totalVotes":"38573","percent":36.71695778401789},"party":"ALP","changeInPercent":2.6512210334319732},{"2019":{"party":"Animal Justice Party","totalVotes":"2143","percent":2.0252135782868375},"2022":{"party":"Animal Justice Party","totalVotes":"1986","percent":1.890438341820951},"party":"Animal Justice Party","changeInPercent":-0.13477523646588652},{"2019":{"party":"Liberal","totalVotes":"43017","percent":40.65264232252211},"2022":{"party":"Liberal","totalVotes":"34463","percent":32.80472133644282},"party":"LNP","changeInPercent":-7.847920986079295},{"2022":{"party":"Liberal Democrats","totalVotes":"2526","percent":2.4044548093855598},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2548","percent":2.425396221027081},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2257","percent":2.132947758373025},"2022":{"party":"United Australia Party","totalVotes":"3233","percent":3.0774356289562608},"party":"United Australia Party","changeInPercent":0.9444878705832358},{"2019":{"party":"Derryn Hinch's Justice Party","totalVotes":"2724","percent":2.574279882059424},"2022":{"party":"Derryn Hinch's Justice Party","totalVotes":"1421","percent":1.3526248155727953},"party":"Derryn Hinch's Justice Party","changeInPercent":-1.2216550664866286},{"2019":{"party":"Informal","totalVotes":"4196","percent":3.9653738565056322},"2022":{"party":"Informal","totalVotes":"4088","percent":3.8912950359335583},"party":"Informal","changeInPercent":-0.07407882057207393},{"2019":{"party":"Rise Up Australia Party","totalVotes":"1117","percent":1.0556059575111514},"party":"Rise Up Australia Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"5131","percent":4.848983140545853},"party":"Independent","changeInPercent":null}]},{"electorate":"Corio","totalVotes":102400,"candidates":[{"2022":{"party":"Socialist Alliance","totalVotes":"2444","percent":2.389402160629613},"party":"Socialist Alliance","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"1080","percent":1.0558732952045755},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"33426","percent":32.642578125},"2022":{"party":"Liberal","totalVotes":"23822","percent":23.28982744292907},"party":"LNP","changeInPercent":-9.35275068207093},{"2019":{"party":"The Greens (VIC)","totalVotes":"12902","percent":12.599609375000002},"2022":{"party":"The Greens","totalVotes":"14450","percent":14.127193625653812},"party":"GRN","changeInPercent":1.5275842506538098},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3788","percent":3.7033778168841964},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Animal Justice Party","totalVotes":"2350","percent":2.2975020775284745},"party":"Animal Justice Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"3383","percent":3.30742533118248},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"5414","percent":5.287109375},"2022":{"party":"United Australia Party","totalVotes":"4781","percent":4.674194652197292},"party":"United Australia Party","changeInPercent":-0.6129147228027083},{"2019":{"party":"Australian Labor Party","totalVotes":"47010","percent":45.908203125},"2022":{"party":"Australian Labor Party","totalVotes":"40846","percent":39.933519088820454},"party":"ALP","changeInPercent":-5.974684036179546},{"2019":{"party":"Informal","totalVotes":"3648","percent":3.5624999999999996},"2022":{"party":"Informal","totalVotes":"5341","percent":5.221684508970035},"party":"Informal","changeInPercent":1.6591845089700352}]},{"electorate":"Deakin","totalVotes":101424,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"31648","percent":31.203659883262347},"2022":{"party":"Australian Labor Party","totalVotes":"32844","percent":31.37322329206786},"party":"ALP","changeInPercent":0.16956340880551224},{"2019":{"party":"The Greens (VIC)","totalVotes":"8730","percent":8.607430194036915},"2022":{"party":"The Greens","totalVotes":"13904","percent":13.281369402414795},"party":"GRN","changeInPercent":4.673939208377879},{"2019":{"party":"Independent","totalVotes":"1614","percent":1.5913393279697114},"2022":{"party":"Independent","totalVotes":"1271","percent":1.2140837536298335},"party":"Independent","changeInPercent":-0.377255574339878},{"2019":{"party":"Animal Justice Party","totalVotes":"1964","percent":1.9364253036756585},"2022":{"party":"Animal Justice Party","totalVotes":"1650","percent":1.5761118752865657},"party":"Animal Justice Party","changeInPercent":-0.36031342838909275},{"2022":{"party":"Liberal Democrats","totalVotes":"1843","percent":1.7604692037291763},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"46536","percent":45.882631329862754},"2022":{"party":"Liberal","totalVotes":"41626","percent":39.76195934586581},"party":"LNP","changeInPercent":-6.120671983996942},{"2019":{"party":"Derryn Hinch's Justice Party","totalVotes":"3386","percent":3.338460324972393},"2022":{"party":"Derryn Hinch's Justice Party","totalVotes":"1080","percent":1.031636863823934},"party":"Derryn Hinch's Justice Party","changeInPercent":-2.306823461148459},{"2019":{"party":"United Australia Party","totalVotes":"1997","percent":1.9689619813850767},"2022":{"party":"United Australia Party","totalVotes":"2836","percent":2.7090019868561823},"party":"United Australia Party","changeInPercent":0.7400400054711056},{"2022":{"party":"Australian Federation Party","totalVotes":"909","percent":0.8682943603851445},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2306","percent":2.20273574812777},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4155","percent":4.096663511594889},"2022":{"party":"Informal","totalVotes":"4419","percent":4.22111416781293},"party":"Informal","changeInPercent":0.12445065621804119},{"2019":{"party":"Labour DLP","totalVotes":"1394","percent":1.3744281432402587},"party":"Labour DLP","changeInPercent":null}]},{"electorate":"Dunkley","totalVotes":102078,"candidates":[{"2022":{"party":"Independent","totalVotes":"3698","percent":3.6806274384903257},"party":"Independent","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"37301","percent":36.54166421755912},"2022":{"party":"Australian Labor Party","totalVotes":"38506","percent":38.32510550203042},"party":"ALP","changeInPercent":1.7834412844712944},{"2022":{"party":"Liberal Democrats","totalVotes":"2398","percent":2.386734612628394},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"2961","percent":2.900722976547346},"2022":{"party":"Animal Justice Party","totalVotes":"2013","percent":2.0035432757385143},"party":"Animal Justice Party","changeInPercent":-0.8971797008088318},{"2019":{"party":"The Greens (VIC)","totalVotes":"8125","percent":7.959599521934208},"2022":{"party":"The Greens","totalVotes":"9898","percent":9.851500915677999},"party":"GRN","changeInPercent":1.8919013937437912},{"2019":{"party":"Liberal","totalVotes":"38616","percent":37.82989478633986},"2022":{"party":"Liberal","totalVotes":"31108","percent":30.961860020702286},"party":"LNP","changeInPercent":-6.868034765637571},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2689","percent":2.676367545186719},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"566","percent":0.5633410303368103},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2513","percent":2.46184290444562},"2022":{"party":"United Australia Party","totalVotes":"4846","percent":4.823234333943786},"party":"United Australia Party","changeInPercent":2.3613914294981657},{"2019":{"party":"Informal","totalVotes":"5250","percent":5.1431258449421025},"2022":{"party":"Informal","totalVotes":"4750","percent":4.72768532526475},"party":"Informal","changeInPercent":-0.41544051967735207},{"2019":{"party":"Derryn Hinch's Justice Party","totalVotes":"5027","percent":4.924665451909324},"party":"Derryn Hinch's Justice Party","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1337","percent":1.3097827151785888},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Rise Up Australia Party","totalVotes":"948","percent":0.9287015811438312},"party":"Rise Up Australia Party","changeInPercent":null}]},{"electorate":"Flinders","totalVotes":103076,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"2447","percent":2.373976483371493},"2022":{"party":"United Australia Party","totalVotes":"4472","percent":4.27578426029506},"party":"United Australia Party","changeInPercent":1.901807776923567},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3373","percent":3.2250045415865918},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"2366","percent":2.2621881842258746},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"45293","percent":43.94136365400287},"2022":{"party":"Liberal","totalVotes":"43013","percent":41.125739800552644},"party":"LNP","changeInPercent":-2.8156238534502265},{"2022":{"party":"Australian Federation Party","totalVotes":"486","percent":0.46467601755442733},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"6599","percent":6.402072257363499},"2022":{"party":"The Greens","totalVotes":"9293","percent":8.88525561961583},"party":"GRN","changeInPercent":2.4831833622523307},{"2019":{"party":"Independent","totalVotes":"940","percent":0.9119484652101362},"2022":{"party":"Independent","totalVotes":"5189","percent":4.961324804711777},"party":"Independent","changeInPercent":4.049376339501641},{"2019":{"party":"Australian Labor Party","totalVotes":"23982","percent":23.26632775815903},"2022":{"party":"Australian Labor Party","totalVotes":"21487","percent":20.544225492164568},"party":"ALP","changeInPercent":-2.7221022659944616},{"2019":{"party":"Animal Justice Party","totalVotes":"2304","percent":2.2352438977065465},"2022":{"party":"Animal Justice Party","totalVotes":"2060","percent":1.9696143953953094},"party":"Animal Justice Party","changeInPercent":-0.26562950231123716},{"2019":{"party":"Informal","totalVotes":"6124","percent":5.9412472350498655},"2022":{"party":"Informal","totalVotes":"5687","percent":5.437474304181128},"party":"Informal","changeInPercent":-0.5037729308687373},{"2019":{"party":"Sustainable Australia","totalVotes":"1072","percent":1.0400093135162405},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Fraser","totalVotes":98605,"candidates":[{"2019":{"party":"Liberal","totalVotes":"23929","percent":24.267532072410123},"2022":{"party":"Liberal","totalVotes":"22730","percent":23.5888707852925},"party":"LNP","changeInPercent":-0.6786612871176239},{"2019":{"party":"Australian Labor Party","totalVotes":"46709","percent":47.36980883322347},"2022":{"party":"Australian Labor Party","totalVotes":"38732","percent":40.19551884100084},"party":"ALP","changeInPercent":-7.174289992222633},{"2022":{"party":"Liberal Democrats","totalVotes":"2349","percent":2.4377587978289523},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"7645","percent":7.753156533644338},"2022":{"party":"The Greens","totalVotes":"17078","percent":17.72330555526728},"party":"GRN","changeInPercent":9.970149021622943},{"2019":{"party":"United Australia Party","totalVotes":"7314","percent":7.417473758937174},"2022":{"party":"United Australia Party","totalVotes":"4088","percent":4.242468269699769},"party":"United Australia Party","changeInPercent":-3.175005489237405},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2695","percent":2.796832677798649},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Victorian Socialists","totalVotes":"4429","percent":4.59635322076817},"party":"Victorian Socialists","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"6046","percent":6.131534912022716},"2022":{"party":"Informal","totalVotes":"4258","percent":4.418891852343839},"party":"Informal","changeInPercent":-1.7126430596788769},{"2019":{"party":"The Great Australian Party","totalVotes":"1656","percent":1.6794280208914356},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"5306","percent":5.381065868870747},"party":"Independent","changeInPercent":null}]},{"electorate":"Gellibrand","totalVotes":102113,"candidates":[{"2019":{"party":"The Greens (VIC)","totalVotes":"16303","percent":15.965645902088863},"2022":{"party":"The Greens","totalVotes":"15241","percent":15.724367042898708},"party":"GRN","changeInPercent":-0.2412788591901549},{"2019":{"party":"Liberal","totalVotes":"28895","percent":28.29708264373782},"2022":{"party":"Liberal","totalVotes":"24869","percent":25.65771825929059},"party":"LNP","changeInPercent":-2.63936438444723},{"2022":{"party":"Australian Federation Party","totalVotes":"1135","percent":1.1709964302663889},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Victorian Socialists","totalVotes":"1503","percent":1.5506675195509978},"party":"Victorian Socialists","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"5391","percent":5.279445320380363},"2022":{"party":"United Australia Party","totalVotes":"5080","percent":5.2411117759940575},"party":"United Australia Party","changeInPercent":-0.03833354438630554},{"2022":{"party":"Liberal Democrats","totalVotes":"2185","percent":2.254297092627365},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2802","percent":2.8908651961290053},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"47942","percent":46.94994760706276},"2022":{"party":"Australian Labor Party","totalVotes":"39382","percent":40.63099684295236},"party":"ALP","changeInPercent":-6.318950764110404},{"2019":{"party":"Informal","totalVotes":"3582","percent":3.5078785267301913},"2022":{"party":"Informal","totalVotes":"4729","percent":4.878979840290531},"party":"Informal","changeInPercent":1.3711013135603394}]},{"electorate":"Gippsland","totalVotes":101998,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"9443","percent":9.081641485299917},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Nationals","totalVotes":"52202","percent":51.179434890880216},"2022":{"party":"The Nationals","totalVotes":"54635","percent":52.54426374556401},"party":"LNP","changeInPercent":1.3648288546837932},{"2019":{"party":"United Australia Party","totalVotes":"4257","percent":4.173611247279358},"2022":{"party":"United Australia Party","totalVotes":"4593","percent":4.417238096154031},"party":"United Australia Party","changeInPercent":0.24362684887467267},{"2019":{"party":"The Greens (VIC)","totalVotes":"5835","percent":5.7207004058903115},"2022":{"party":"The Greens","totalVotes":"8545","percent":8.21800555881476},"party":"GRN","changeInPercent":2.497305152924448},{"2022":{"party":"Liberal Democrats","totalVotes":"4286","percent":4.1219861702843845},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"22426","percent":21.986705621678855},"2022":{"party":"Australian Labor Party","totalVotes":"19404","percent":18.661460487213763},"party":"ALP","changeInPercent":-3.325245134465092},{"2019":{"party":"Informal","totalVotes":"5320","percent":5.215788544873429},"2022":{"party":"Informal","totalVotes":"3073","percent":2.955404456669135},"party":"Informal","changeInPercent":-2.260384088204294},{"2019":{"party":"Shooters, Fishers and Farmers","totalVotes":"6872","percent":6.737387007588384},"party":"Shooters, Fishers and Farmers","changeInPercent":null},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"2043","percent":2.0029804505970703},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"3043","percent":2.983391831212377},"party":"Independent","changeInPercent":null}]},{"electorate":"Goldstein","totalVotes":101580,"candidates":[{"2019":{"party":"The Greens (VIC)","totalVotes":"13951","percent":13.734002756448119},"2022":{"party":"The Greens","totalVotes":"7683","percent":7.56394352885581},"party":"GRN","changeInPercent":-6.170059227592309},{"2022":{"party":"Derryn Hinch's Justice Party","totalVotes":"589","percent":0.5798728020950242},"party":"Derryn Hinch's Justice Party","changeInPercent":null},{"2022":{"party":"Sustainable Australia Party - Stop Overdevelopment / Corruption","totalVotes":"443","percent":0.43613523145686883},"party":"Sustainable Australia Party - Stop Overdevelopment / Corruption","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"2072","percent":2.0398920983716304},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1349","percent":1.3280173262453239},"2022":{"party":"Independent","totalVotes":"33815","percent":33.29099966526867},"party":"Independent","changeInPercent":31.96298233902335},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1239","percent":1.21980034260736},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1945","percent":1.9147469974404412},"2022":{"party":"United Australia Party","totalVotes":"1840","percent":1.8114871916041508},"party":"United Australia Party","changeInPercent":-0.10325980583629035},{"2019":{"party":"Liberal","totalVotes":"52320","percent":51.50620200826934},"2022":{"party":"Liberal","totalVotes":"39607","percent":38.993246303187824},"party":"LNP","changeInPercent":-12.512955705081517},{"2019":{"party":"Australian Labor Party","totalVotes":"28118","percent":27.68064579641662},"2022":{"party":"Australian Labor Party","totalVotes":"10799","percent":10.6316577076811},"party":"ALP","changeInPercent":-17.04898808873552},{"2019":{"party":"Informal","totalVotes":"2244","percent":2.2090962787950383},"2022":{"party":"Informal","totalVotes":"3487","percent":3.4329651288715617},"party":"Informal","changeInPercent":1.2238688500765234},{"2019":{"party":"Sustainable Australia","totalVotes":"1653","percent":1.6272888363851152},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Gorton","totalVotes":100598,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6719","percent":6.751203239452187},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"6730","percent":6.689993836855604},"2022":{"party":"The Greens","totalVotes":"8325","percent":8.36490057574631},"party":"GRN","changeInPercent":1.674906738890706},{"2019":{"party":"United Australia Party","totalVotes":"7473","percent":7.428577108888845},"2022":{"party":"United Australia Party","totalVotes":"7082","percent":7.115943048340585},"party":"United Australia Party","changeInPercent":-0.3126340605482598},{"2022":{"party":"Victorian Socialists","totalVotes":"2064","percent":2.073892467067914},"party":"Victorian Socialists","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"47398","percent":47.11624485576254},"2022":{"party":"Australian Labor Party","totalVotes":"38178","percent":38.3609818835847},"party":"ALP","changeInPercent":-8.755262972177839},{"2019":{"party":"Independent","totalVotes":"8363","percent":8.313286546452217},"2022":{"party":"Independent","totalVotes":"2341","percent":2.352220089828482},"party":"Independent","changeInPercent":-5.961066456623735},{"2022":{"party":"The Great Australian Party","totalVotes":"1312","percent":1.3182882348803795},"party":"The Great Australian Party","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"1063","percent":1.0680948122544538},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"24677","percent":24.530308753653156},"2022":{"party":"Liberal","totalVotes":"25350","percent":25.471499050470747},"party":"LNP","changeInPercent":0.9411902968175916},{"2019":{"party":"Informal","totalVotes":"5957","percent":5.9215888983876415},"2022":{"party":"Informal","totalVotes":"7089","percent":7.122976598374245},"party":"Informal","changeInPercent":1.2013876999866033}]},{"electorate":"Higgins","totalVotes":102541,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"2648","percent":2.6942056264943783},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1249","percent":1.2180493656196059},"2022":{"party":"United Australia Party","totalVotes":"1917","percent":1.9504502212952128},"party":"United Australia Party","changeInPercent":0.732400855675607},{"2019":{"party":"Animal Justice Party","totalVotes":"1729","percent":1.686154806370135},"2022":{"party":"Animal Justice Party","totalVotes":"1295","percent":1.3175967848603551},"party":"Animal Justice Party","changeInPercent":-0.3685580215097799},{"2019":{"party":"Liberal","totalVotes":"48091","percent":46.89928906486186},"2022":{"party":"Liberal","totalVotes":"38859","percent":39.53706058910312},"party":"LNP","changeInPercent":-7.362228475758741},{"2022":{"party":"Reason Australia","totalVotes":"1458","percent":1.4834410133794578},"party":"Reason Australia","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"25498","percent":24.866151100535397},"2022":{"party":"Australian Labor Party","totalVotes":"27187","percent":27.661392888029713},"party":"ALP","changeInPercent":2.795241787494316},{"2022":{"party":"Australian Federation Party","totalVotes":"515","percent":0.5239863661799867},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"22573","percent":22.01363357096186},"2022":{"party":"The Greens","totalVotes":"21632","percent":22.00946227806888},"party":"GRN","changeInPercent":-0.0041712928929804605},{"2019":{"party":"Informal","totalVotes":"2063","percent":2.0118781755590445},"2022":{"party":"Informal","totalVotes":"2774","percent":2.8224042325889},"party":"Informal","changeInPercent":0.8105260570298554},{"2019":{"party":"Sustainable Australia","totalVotes":"1338","percent":1.3048439160920997},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Holt","totalVotes":98756,"candidates":[{"2022":{"party":"Independent","totalVotes":"2673","percent":2.8100459405191174},"party":"Independent","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"48031","percent":48.63603224107902},"2022":{"party":"Australian Labor Party","totalVotes":"36326","percent":38.18845074272258},"party":"ALP","changeInPercent":-10.447581498356442},{"2019":{"party":"United Australia Party","totalVotes":"5958","percent":6.033051156385435},"2022":{"party":"United Australia Party","totalVotes":"8592","percent":9.032515795338666},"party":"United Australia Party","changeInPercent":2.9994646389532313},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4295","percent":4.515206627208982},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"730","percent":0.7674274360564742},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"2423","percent":2.5472283254312837},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"6735","percent":6.819838794604885},"2022":{"party":"The Greens","totalVotes":"7583","percent":7.97178390084417},"party":"GRN","changeInPercent":1.1519451062392854},{"2019":{"party":"Liberal","totalVotes":"33963","percent":34.39082182348414},"2022":{"party":"Liberal","totalVotes":"26274","percent":27.621080075270964},"party":"LNP","changeInPercent":-6.769741748213175},{"2019":{"party":"Informal","totalVotes":"4069","percent":4.120255984446515},"2022":{"party":"Informal","totalVotes":"6227","percent":6.546261156607761},"party":"Informal","changeInPercent":2.426005172161246}]},{"electorate":"Hotham","totalVotes":99648,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"6591","percent":6.344210222350563},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"43310","percent":43.462989723827874},"2022":{"party":"Australian Labor Party","totalVotes":"47135","percent":45.37010299355087},"party":"ALP","changeInPercent":1.9071132697229984},{"2019":{"party":"The Greens (VIC)","totalVotes":"8722","percent":8.752809890815671},"2022":{"party":"The Greens","totalVotes":"12408","percent":11.943401674848397},"party":"GRN","changeInPercent":3.1905917840327263},{"2019":{"party":"United Australia Party","totalVotes":"3483","percent":3.4953034682080926},"2022":{"party":"United Australia Party","totalVotes":"5869","percent":5.649244393108095},"party":"United Australia Party","changeInPercent":2.1539409249000023},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2926","percent":2.81644046587737},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"37447","percent":37.57927906229929},"2022":{"party":"Liberal","totalVotes":"25273","percent":24.326691693136972},"party":"LNP","changeInPercent":-13.25258736916232},{"2019":{"party":"Informal","totalVotes":"3780","percent":3.7933526011560694},"2022":{"party":"Informal","totalVotes":"3688","percent":3.549908557127731},"party":"Informal","changeInPercent":-0.24344404402833852},{"2019":{"party":"Rise Up Australia Party","totalVotes":"1134","percent":1.1380057803468207},"party":"Rise Up Australia Party","changeInPercent":null},{"2019":{"party":"Sustainable Australia","totalVotes":"1772","percent":1.7782594733461787},"party":"Sustainable Australia","changeInPercent":null}]},{"electorate":"Indi","totalVotes":105557,"candidates":[{"2022":{"party":"Animal Justice Party","totalVotes":"1749","percent":1.6278247272998025},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"32664","percent":30.944418655323663},"2022":{"party":"Independent","totalVotes":"41319","percent":38.45631212538625},"party":"Independent","changeInPercent":7.511893470062585},{"2019":{"party":"Derryn Hinch's Justice Party","totalVotes":"2891","percent":2.738804626884053},"2022":{"party":"Derryn Hinch's Justice Party","totalVotes":"1074","percent":0.9995904843453333},"party":"Derryn Hinch's Justice Party","changeInPercent":-1.73921414253872},{"2019":{"party":"United Australia Party","totalVotes":"3980","percent":3.7704747198196236},"2022":{"party":"United Australia Party","totalVotes":"2558","percent":2.3807751014481964},"party":"United Australia Party","changeInPercent":-1.3896996183714272},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5366","percent":4.994229552138789},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"4255","percent":4.030997470560929},"2022":{"party":"The Greens","totalVotes":"3626","percent":3.374781281411712},"party":"GRN","changeInPercent":-0.6562161891492169},{"2019":{"party":"Liberal","totalVotes":"35426","percent":33.561014428223615},"2022":{"party":"The Nationals","totalVotes":"3854","percent":3.5869848479207773},"party":"LNP","changeInPercent":-29.974029580302837},{"2019":{"party":"Australian Labor Party","totalVotes":"12202","percent":11.559631289256043},"2022":{"party":"Australian Labor Party","totalVotes":"8723","percent":8.118647853765683},"party":"ALP","changeInPercent":-3.4409834354903595},{"2022":{"party":"Liberal Democrats","totalVotes":"2300","percent":2.1406500130300437},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4601","percent":4.358782458766354},"2022":{"party":"Informal","totalVotes":"5880","percent":5.472618294181155},"party":"Informal","changeInPercent":1.1138358354148004}]},{"electorate":"Isaacs","totalVotes":101017,"candidates":[{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3130","percent":3.0817399523462576},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"43364","percent":42.92742805666373},"2022":{"party":"Australian Labor Party","totalVotes":"39228","percent":38.623161294133865},"party":"ALP","changeInPercent":-4.304266762529863},{"2022":{"party":"Liberal Democrats","totalVotes":"4785","percent":4.7112222594175215},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"34089","percent":33.74580516150747},"2022":{"party":"Liberal","totalVotes":"31306","percent":30.823307012189115},"party":"LNP","changeInPercent":-2.922498149318354},{"2019":{"party":"The Greens (VIC)","totalVotes":"10822","percent":10.713048298801192},"2022":{"party":"The Greens","totalVotes":"12621","percent":12.426402536281826},"party":"GRN","changeInPercent":1.7133542374806332},{"2019":{"party":"Animal Justice Party","totalVotes":"3607","percent":3.5706861221378583},"2022":{"party":"Animal Justice Party","totalVotes":"2259","percent":2.2241695055431934},"party":"Animal Justice Party","changeInPercent":-1.346516616594665},{"2019":{"party":"United Australia Party","totalVotes":"3813","percent":3.7746121939871506},"2022":{"party":"United Australia Party","totalVotes":"4855","percent":4.780142961227182},"party":"United Australia Party","changeInPercent":1.0055307672400313},{"2019":{"party":"Informal","totalVotes":"4180","percent":4.137917380242929},"2022":{"party":"Informal","totalVotes":"3382","percent":3.3298544788610362},"party":"Informal","changeInPercent":-0.8080629013818932},{"2019":{"party":"Rise Up Australia Party","totalVotes":"1142","percent":1.130502786659671},"party":"Rise Up Australia Party","changeInPercent":null}]},{"electorate":"Jagajaga","totalVotes":100936,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"41086","percent":40.70500118887216},"2022":{"party":"Australian Labor Party","totalVotes":"41412","percent":39.34781369363206},"party":"ALP","changeInPercent":-1.3571874952400975},{"2022":{"party":"Australian Federation Party","totalVotes":"764","percent":0.725918324686924},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3652","percent":3.6181342632955533},"2022":{"party":"United Australia Party","totalVotes":"3493","percent":3.318890979229614},"party":"United Australia Party","changeInPercent":-0.29924328406593936},{"2022":{"party":"Independent","totalVotes":"3150","percent":2.9929878570206943},"party":"Independent","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"3760","percent":3.57258233091994},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"13929","percent":13.799833557898076},"2022":{"party":"The Greens","totalVotes":"16855","percent":16.014860422248827},"party":"GRN","changeInPercent":2.215026864350751},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2274","percent":2.160652186306368},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"37755","percent":37.40489022747087},"2022":{"party":"Liberal","totalVotes":"29535","percent":28.062824240351176},"party":"LNP","changeInPercent":-9.342065987119696},{"2019":{"party":"Informal","totalVotes":"3169","percent":3.139613220258382},"2022":{"party":"Informal","totalVotes":"4003","percent":3.803469965604393},"party":"Informal","changeInPercent":0.6638567453460111},{"2019":{"party":"Rise Up Australia Party","totalVotes":"1345","percent":1.3325275422049616},"party":"Rise Up Australia Party","changeInPercent":null}]},{"electorate":"Kooyong","totalVotes":102062,"candidates":[{"2019":{"party":"Independent","totalVotes":"8890","percent":8.710391722678372},"2022":{"party":"Independent","totalVotes":"41303","percent":39.12639845400377},"party":"Independent","changeInPercent":30.416006731325396},{"2019":{"party":"United Australia Party","totalVotes":"1185","percent":1.1610589641590405},"2022":{"party":"United Australia Party","totalVotes":"1011","percent":0.9577219290850014},"party":"United Australia Party","changeInPercent":-0.2033370350740391},{"2022":{"party":"Liberal Democrats","totalVotes":"1080","percent":1.0230857402688442},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Derryn Hinch's Justice Party","totalVotes":"177","percent":0.16767238521072725},"party":"Derryn Hinch's Justice Party","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"741","percent":0.7019504940177903},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"48928","percent":47.93948776234054},"2022":{"party":"Liberal","totalVotes":"43736","percent":41.43118327444275},"party":"LNP","changeInPercent":-6.508304487897789},{"2019":{"party":"Australian Labor Party","totalVotes":"16666","percent":16.32929003938782},"2022":{"party":"Australian Labor Party","totalVotes":"7091","percent":6.717315726154051},"party":"ALP","changeInPercent":-9.61197431323377},{"2019":{"party":"Animal Justice Party","totalVotes":"1117","percent":1.094432795751602},"2022":{"party":"Animal Justice Party","totalVotes":"500","percent":0.4736508056800205},"party":"Animal Justice Party","changeInPercent":-0.6207819900715815},{"2019":{"party":"The Greens (VIC)","totalVotes":"21035","percent":20.610021359565753},"2022":{"party":"The Greens","totalVotes":"6461","percent":6.120515710997224},"party":"GRN","changeInPercent":-14.489505648568528},{"2022":{"party":"Australian Values Party","totalVotes":"152","percent":0.14398984492672623},"party":"Australian Values Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"3033","percent":2.971723070290608},"2022":{"party":"Informal","totalVotes":"3046","percent":2.8854807082026848},"party":"Informal","changeInPercent":-0.08624236208792313}]},{"electorate":"La Trobe","totalVotes":103305,"candidates":[{"2019":{"party":"Liberal","totalVotes":"45123","percent":43.67939596340932},"2022":{"party":"Liberal","totalVotes":"41786","percent":43.456918516977794},"party":"LNP","changeInPercent":-0.222477446431526},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"4796","percent":4.642563283480954},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4555","percent":4.7371431542821485},"party":"Pauline Hanson's One Nation","changeInPercent":0.09457987080119423},{"2019":{"party":"The Greens (VIC)","totalVotes":"7752","percent":7.503993030347031},"2022":{"party":"The Greens","totalVotes":"9980","percent":10.379075451094586},"party":"GRN","changeInPercent":2.875082420747555},{"2019":{"party":"United Australia Party","totalVotes":"2506","percent":2.4258264362809157},"2022":{"party":"United Australia Party","totalVotes":"6182","percent":6.429202849565805},"party":"United Australia Party","changeInPercent":4.00337641328489},{"2019":{"party":"Australian Labor Party","totalVotes":"34040","percent":32.950970427375246},"2022":{"party":"Australian Labor Party","totalVotes":"23918","percent":24.874421506941914},"party":"ALP","changeInPercent":-8.076548920433332},{"2022":{"party":"Australian Federation Party","totalVotes":"890","percent":0.9255888929332848},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1911","percent":1.9874161510061878},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Animal Justice Party","totalVotes":"2450","percent":2.5479694243669075},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4616","percent":4.46832195924689},"2022":{"party":"Informal","totalVotes":"4483","percent":4.662264052831366},"party":"Informal","changeInPercent":0.193942093584476},{"2019":{"party":"Rise Up Australia Party","totalVotes":"947","percent":0.9167029669425487},"party":"Rise Up Australia Party","changeInPercent":null},{"2019":{"party":"Derryn Hinch's Justice Party","totalVotes":"3525","percent":3.41222593291709},"party":"Derryn Hinch's Justice Party","changeInPercent":null}]},{"electorate":"Lalor","totalVotes":97815,"candidates":[{"2022":{"party":"Independent","totalVotes":"2535","percent":2.68897044784352},"party":"Independent","changeInPercent":null},{"2022":{"party":"Victorian Socialists","totalVotes":"1482","percent":1.5720134925854425},"party":"Victorian Socialists","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4451","percent":4.5504268261514085},"2022":{"party":"United Australia Party","totalVotes":"6340","percent":6.72507796423192},"party":"United Australia Party","changeInPercent":2.1746511380805114},{"2019":{"party":"Australian Labor Party","totalVotes":"48332","percent":49.41164443081327},"2022":{"party":"Australian Labor Party","totalVotes":"39047","percent":41.418630799584186},"party":"ALP","changeInPercent":-7.993013631229083},{"2022":{"party":"Liberal Democrats","totalVotes":"3403","percent":3.609690900990729},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"951","percent":1.008761694634788},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3489","percent":3.700914356026052},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"7273","percent":7.435464908245157},"2022":{"party":"The Greens","totalVotes":"9192","percent":9.750302310287037},"party":"GRN","changeInPercent":2.3148374020418796},{"2019":{"party":"Liberal","totalVotes":"28209","percent":28.839135101978226},"2022":{"party":"Liberal","totalVotes":"22083","percent":23.42427392494219},"party":"LNP","changeInPercent":-5.414861177036034},{"2019":{"party":"Informal","totalVotes":"4337","percent":4.433880284209988},"2022":{"party":"Informal","totalVotes":"5752","percent":6.101364108874133},"party":"Informal","changeInPercent":1.6674838246641448},{"2019":{"party":"Australia First Party","totalVotes":"4094","percent":4.185452129019067},"party":"Australia First Party","changeInPercent":null},{"2019":{"party":"","totalVotes":"1119","percent":1.1439963195828862},"party":"no party","changeInPercent":null}]},{"electorate":"Macnamara","totalVotes":101380,"candidates":[{"2019":{"party":"Independent","totalVotes":"1108","percent":1.0929177352535018},"2022":{"party":"Independent","totalVotes":"1835","percent":1.9048508818369614},"party":"Independent","changeInPercent":0.8119331465834596},{"2019":{"party":"Liberal","totalVotes":"36283","percent":35.789110278161374},"2022":{"party":"Liberal","totalVotes":"26976","percent":28.002865061816824},"party":"LNP","changeInPercent":-7.78624521634455},{"2019":{"party":"Australian Labor Party","totalVotes":"30855","percent":30.43499704083646},"2022":{"party":"Australian Labor Party","totalVotes":"29552","percent":30.676922757518195},"party":"ALP","changeInPercent":0.24192571668173457},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1349","percent":1.4003508662659732},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1946","percent":2.0200761940352736},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"1919","percent":1.8928782797395935},"2022":{"party":"Animal Justice Party","totalVotes":"1724","percent":1.7896255696386494},"party":"Animal Justice Party","changeInPercent":-0.10325271010094417},{"2019":{"party":"The Greens (VIC)","totalVotes":"23534","percent":23.213651607812192},"2022":{"party":"The Greens","totalVotes":"27587","percent":28.637123311845368},"party":"GRN","changeInPercent":5.423471704033176},{"2019":{"party":"United Australia Party","totalVotes":"1136","percent":1.1205365949891497},"2022":{"party":"United Australia Party","totalVotes":"2062","percent":2.140491835611888},"party":"United Australia Party","changeInPercent":1.0199552406227383},{"2019":{"party":"Informal","totalVotes":"4288","percent":4.2296310909449595},"2022":{"party":"Informal","totalVotes":"3302","percent":3.4276935214308697},"party":"Informal","changeInPercent":-0.8019375695140898},{"2019":{"party":"Sustainable Australia","totalVotes":"974","percent":0.9607417636614718},"party":"Sustainable Australia","changeInPercent":null},{"2019":{"party":"Rise Up Australia Party","totalVotes":"365","percent":0.36003156441112644},"party":"Rise Up Australia Party","changeInPercent":null}]},{"electorate":"Mallee","totalVotes":105619,"candidates":[{"2019":{"party":"Liberal","totalVotes":"17665","percent":16.725210426154387},"2022":{"party":"The Nationals","totalVotes":"50187","percent":46.322755718004096},"party":"LNP","changeInPercent":29.59754529184971},{"2019":{"party":"Independent","totalVotes":"2761","percent":2.61411299103381},"2022":{"party":"Independent","totalVotes":"10256","percent":9.466319617507523},"party":"Independent","changeInPercent":6.852206626473713},{"2022":{"party":"Citizens Party","totalVotes":"822","percent":0.7587085340865038},"party":"Citizens Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"14722","percent":13.938779954364271},"2022":{"party":"Australian Labor Party","totalVotes":"17133","percent":15.813811818131473},"party":"ALP","changeInPercent":1.8750318637672017},{"2019":{"party":"The Greens (VIC)","totalVotes":"3297","percent":3.121597439854572},"2022":{"party":"The Greens","totalVotes":"5463","percent":5.04236584150191},"party":"GRN","changeInPercent":1.9207684016473383},{"2019":{"party":"United Australia Party","totalVotes":"3171","percent":3.0023007224079},"2022":{"party":"United Australia Party","totalVotes":"9271","percent":8.55716158091968},"party":"United Australia Party","changeInPercent":5.554860858511779},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6901","percent":6.369644274611877},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"11792","percent":11.16465787405675},"2022":{"party":"Informal","totalVotes":"6113","percent":5.642317845341603},"party":"Informal","changeInPercent":-5.522340028715147},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1309","percent":1.2393603423626431},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Citizens Electoral Council","totalVotes":"416","percent":0.39386852744297907},"party":"Citizens Electoral Council","changeInPercent":null},{"2019":{"party":"Rise Up Australia Party","totalVotes":"919","percent":0.8701085978848503},"party":"Rise Up Australia Party","changeInPercent":null},{"2019":{"party":"Science Party","totalVotes":"497","percent":0.4705592743729821},"party":"Science Party","changeInPercent":null},{"2019":{"party":"Shooters, Fishers and Farmers","totalVotes":"5512","percent":5.218757988619472},"party":"Shooters, Fishers and Farmers","changeInPercent":null}]},{"electorate":"Maribyrnong","totalVotes":103938,"candidates":[{"2022":{"party":"The Great Australian Party","totalVotes":"1741","percent":1.7606310360519795},"party":"The Great Australian Party","changeInPercent":null},{"2022":{"party":"Victorian Socialists","totalVotes":"1837","percent":1.8577135055872984},"party":"Victorian Socialists","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"47487","percent":45.68781388904924},"2022":{"party":"Australian Labor Party","totalVotes":"39792","percent":40.240683622389646},"party":"ALP","changeInPercent":-5.447130266659592},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2227","percent":2.2521110380745313},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"3617","percent":3.4799592064499993},"2022":{"party":"United Australia Party","totalVotes":"3433","percent":3.4717095616119735},"party":"United Australia Party","changeInPercent":-0.008249644838025816},{"2019":{"party":"Liberal","totalVotes":"34877","percent":33.55558121187631},"2022":{"party":"Liberal","totalVotes":"25493","percent":25.780452040248775},"party":"LNP","changeInPercent":-7.775129171627533},{"2019":{"party":"The Greens (VIC)","totalVotes":"14943","percent":14.376840039254171},"2022":{"party":"The Greens","totalVotes":"15278","percent":15.450270516256257},"party":"GRN","changeInPercent":1.073430477002086},{"2022":{"party":"Australian Federation Party","totalVotes":"590","percent":0.5966526773524802},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"3577","percent":3.6173332659149517},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"3014","percent":2.8998056533702785},"2022":{"party":"Informal","totalVotes":"4917","percent":4.97244273651211},"party":"Informal","changeInPercent":2.0726370831418315}]},{"electorate":"McEwen","totalVotes":101462,"candidates":[{"2019":{"party":"The Greens (VIC)","totalVotes":"8026","percent":7.910350673158424},"2022":{"party":"The Greens","totalVotes":"13524","percent":13.573270973634294},"party":"GRN","changeInPercent":5.66292030047587},{"2019":{"party":"United Australia Party","totalVotes":"3016","percent":2.9725414440874416},"2022":{"party":"United Australia Party","totalVotes":"5474","percent":5.49394301313769},"party":"United Australia Party","changeInPercent":2.5214015690502483},{"2022":{"party":"Australian Federation Party","totalVotes":"1721","percent":1.727269990063932},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5693","percent":5.6109676529143915},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5387","percent":5.406626052570832},"party":"Pauline Hanson's One Nation","changeInPercent":-0.2043416003435592},{"2022":{"party":"Liberal Democrats","totalVotes":"2579","percent":2.588395877033632},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"33162","percent":32.68415761565907},"2022":{"party":"Liberal","totalVotes":"31796","percent":31.911839979124224},"party":"LNP","changeInPercent":-0.7723176365348436},{"2019":{"party":"Australian Labor Party","totalVotes":"37911","percent":37.36472768129941},"2022":{"party":"Australian Labor Party","totalVotes":"35238","percent":35.366379959252086},"party":"ALP","changeInPercent":-1.9983477220473205},{"2019":{"party":"Informal","totalVotes":"5334","percent":5.257140604364195},"2022":{"party":"Informal","totalVotes":"3918","percent":3.9322741551833156},"party":"Informal","changeInPercent":-1.3248664491808793},{"2019":{"party":"Animal Justice Party","totalVotes":"2890","percent":2.848357020362303},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Derryn Hinch's Justice Party","totalVotes":"3878","percent":3.8221205968737064},"party":"Derryn Hinch's Justice Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1552","percent":1.5296367112810707},"party":"Independent","changeInPercent":null}]},{"electorate":"Melbourne","totalVotes":95960,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"1079","percent":1.1244268445185495},"2022":{"party":"United Australia Party","totalVotes":"1709","percent":1.7176052020623322},"party":"United Australia Party","changeInPercent":0.5931783575437828},{"2019":{"party":"Australian Labor Party","totalVotes":"18371","percent":19.14443518132555},"2022":{"party":"Australian Labor Party","totalVotes":"24155","percent":24.276625895737645},"party":"ALP","changeInPercent":5.1321907144120935},{"2019":{"party":"The Greens (VIC)","totalVotes":"45876","percent":47.8074197582326},"2022":{"party":"The Greens","totalVotes":"47883","percent":48.12410174976633},"party":"GRN","changeInPercent":0.3166819915337342},{"2019":{"party":"Liberal","totalVotes":"19979","percent":20.820133388912048},"2022":{"party":"Liberal","totalVotes":"14660","percent":14.73381642026553},"party":"LNP","changeInPercent":-6.086316968646518},{"2022":{"party":"Liberal Democrats","totalVotes":"1596","percent":1.6040362214695625},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1154","percent":1.2025844101709044},"2022":{"party":"Independent","totalVotes":"1094","percent":1.099508537774249},"party":"Independent","changeInPercent":-0.10307587239665539},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"937","percent":0.941718007216153},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"1849","percent":1.9268445185493956},"2022":{"party":"Animal Justice Party","totalVotes":"1316","percent":1.3226263580538498},"party":"Animal Justice Party","changeInPercent":-0.6042181604955459},{"2022":{"party":"Victorian Socialists","totalVotes":"3156","percent":3.1718911747856766},"party":"Victorian Socialists","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"2896","percent":3.0179241350562735},"2022":{"party":"Informal","totalVotes":"2993","percent":3.008070432868672},"party":"Informal","changeInPercent":-0.00985370218760151},{"2019":{"party":"Reason Australia","totalVotes":"4756","percent":4.956231763234681},"party":"Reason Australia","changeInPercent":null}]},{"electorate":"Menzies","totalVotes":101702,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"29539","percent":29.04465988869442},"2022":{"party":"Australian Labor Party","totalVotes":"33635","percent":32.225458447506085},"party":"ALP","changeInPercent":3.1807985588116665},{"2022":{"party":"Australian Federation Party","totalVotes":"968","percent":0.9274340352961467},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"3646","percent":3.493207120547263},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2312","percent":2.2151110429800527},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"50863","percent":50.0117991779906},"2022":{"party":"Liberal","totalVotes":"42526","percent":40.743863414260254},"party":"LNP","changeInPercent":-9.26793576373035},{"2019":{"party":"The Greens (VIC)","totalVotes":"10264","percent":10.09223024129319},"2022":{"party":"The Greens","totalVotes":"14289","percent":13.690191043746527},"party":"GRN","changeInPercent":3.5979608024533363},{"2019":{"party":"United Australia Party","totalVotes":"2605","percent":2.5614048887927474},"2022":{"party":"United Australia Party","totalVotes":"3643","percent":3.4903328415122536},"party":"United Australia Party","changeInPercent":0.9289279527195062},{"2019":{"party":"Informal","totalVotes":"3376","percent":3.319502074688797},"2022":{"party":"Informal","totalVotes":"3355","percent":3.214402054151417},"party":"Informal","changeInPercent":-0.10510002053737999},{"2019":{"party":"Labour DLP","totalVotes":"3026","percent":2.975359383296297},"party":"Labour DLP","changeInPercent":null},{"2019":{"party":"Reason Australia","totalVotes":"2029","percent":1.995044345243948},"party":"Reason Australia","changeInPercent":null}]},{"electorate":"Monash","totalVotes":105117,"candidates":[{"2019":{"party":"The Greens (VIC)","totalVotes":"7047","percent":6.703958446302691},"2022":{"party":"The Greens","totalVotes":"9533","percent":9.395450603169596},"party":"GRN","changeInPercent":2.6914921568669055},{"2019":{"party":"Liberal","totalVotes":"46501","percent":44.23737359323421},"2022":{"party":"Liberal","totalVotes":"36546","percent":36.01868643065521},"party":"LNP","changeInPercent":-8.218687162579002},{"2019":{"party":"Independent","totalVotes":"2723","percent":2.590446835430996},"2022":{"party":"Independent","totalVotes":"10372","percent":10.222344871087282},"party":"Independent","changeInPercent":7.631898035656286},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7656","percent":7.2833128799337885},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"7289","percent":7.183828747141844},"party":"Pauline Hanson's One Nation","changeInPercent":-0.0994841327919449},{"2022":{"party":"Australian Federation Party","totalVotes":"674","percent":0.6642750137979974},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"29656","percent":28.212372879743526},"2022":{"party":"Australian Labor Party","totalVotes":"24759","percent":24.401758259086968},"party":"ALP","changeInPercent":-3.8106146206565583},{"2022":{"party":"Liberal Democrats","totalVotes":"3548","percent":3.4968067491918315},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"4028","percent":3.831920621783346},"2022":{"party":"United Australia Party","totalVotes":"3991","percent":3.933414807222266},"party":"United Australia Party","changeInPercent":0.10149418543891997},{"2019":{"party":"Informal","totalVotes":"4636","percent":4.4103237345053605},"2022":{"party":"Informal","totalVotes":"4752","percent":4.683434518647007},"party":"Informal","changeInPercent":0.2731107841416467}]},{"electorate":"Nicholls","totalVotes":102971,"candidates":[{"2022":{"party":"Liberal Democrats","totalVotes":"3366","percent":3.25689404934688},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Nationals","totalVotes":"48855","percent":47.44539724776879},"2022":{"party":"The Nationals","totalVotes":"24886","percent":24.079342041606193},"party":"LNP","changeInPercent":-23.366055206162596},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"10754","percent":10.443717163084752},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6219","percent":6.017416545718433},"party":"Pauline Hanson's One Nation","changeInPercent":-4.426300617366319},{"2019":{"party":"Australian Labor Party","totalVotes":"18493","percent":17.959425469306893},"2022":{"party":"Australian Labor Party","totalVotes":"10970","percent":10.614417029511369},"party":"ALP","changeInPercent":-7.345008439795524},{"2022":{"party":"Citizens Party","totalVotes":"377","percent":0.3647798742138365},"party":"Citizens Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"5077","percent":4.930514416680425},"2022":{"party":"United Australia Party","totalVotes":"3821","percent":3.697145621673924},"party":"United Australia Party","changeInPercent":-1.233368795006501},{"2019":{"party":"The Greens (VIC)","totalVotes":"4011","percent":3.8952714842042906},"2022":{"party":"The Greens","totalVotes":"3058","percent":2.958877600387034},"party":"GRN","changeInPercent":-0.9363938838172565},{"2022":{"party":"FUSION: Science, Pirate, Secular, Climate Emergency","totalVotes":"653","percent":0.6318335752298017},"party":"FUSION: Science, Pirate, Secular, Climate Emergency","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"367","percent":0.35510401548137394},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1772","percent":1.7208728671179265},"2022":{"party":"Independent","totalVotes":"24287","percent":23.499758103531686},"party":"Independent","changeInPercent":21.77888523641376},{"2019":{"party":"Informal","totalVotes":"7679","percent":7.4574394732497495},"2022":{"party":"Informal","totalVotes":"8159","percent":7.894533139816158},"party":"Informal","changeInPercent":0.43709366656640825}]},{"electorate":"Scullin","totalVotes":96864,"candidates":[{"2019":{"party":"The Greens (VIC)","totalVotes":"6128","percent":6.326395771390817},"2022":{"party":"The Greens","totalVotes":"9953","percent":10.301606359195164},"party":"GRN","changeInPercent":3.975210587804347},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5907","percent":6.113894179017968},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"3422","percent":3.5418564212966794},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"55467","percent":57.262760158572846},"2022":{"party":"Australian Labor Party","totalVotes":"42147","percent":43.62320940630951},"party":"ALP","changeInPercent":-13.639550752263332},{"2019":{"party":"United Australia Party","totalVotes":"4625","percent":4.774735711926},"2022":{"party":"United Australia Party","totalVotes":"7444","percent":7.704727995363086},"party":"United Australia Party","changeInPercent":2.9299922834370866},{"2019":{"party":"Liberal","totalVotes":"20484","percent":21.14717542120912},"2022":{"party":"Liberal","totalVotes":"19780","percent":20.472799536308685},"party":"LNP","changeInPercent":-0.6743758849004351},{"2022":{"party":"Victorian Socialists","totalVotes":"2469","percent":2.5554773536474293},"party":"Victorian Socialists","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"5055","percent":5.218657086223985},"2022":{"party":"Informal","totalVotes":"5494","percent":5.686428748861473},"party":"Informal","changeInPercent":0.46777166263748793},{"2019":{"party":"Animal Justice Party","totalVotes":"3500","percent":3.613313511727783},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1605","percent":1.656962338949455},"party":"Independent","changeInPercent":null}]},{"electorate":"Wannon","totalVotes":108050,"candidates":[{"2019":{"party":"Independent","totalVotes":"10797","percent":9.992596020360944},"2022":{"party":"Independent","totalVotes":"2346","percent":2.1986054880791723},"party":"Independent","changeInPercent":-7.7939905322817715},{"2019":{"party":"Liberal","totalVotes":"53094","percent":49.13836186950486},"2022":{"party":"Liberal","totalVotes":"44948","percent":42.12400659769081},"party":"LNP","changeInPercent":-7.014355271814054},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3275","percent":3.0692382666066877},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens (VIC)","totalVotes":"6590","percent":6.099028227672374},"2022":{"party":"The Greens","totalVotes":"6444","percent":6.039136302294197},"party":"GRN","changeInPercent":-0.05989192537817711},{"2019":{"party":"United Australia Party","totalVotes":"6258","percent":5.79176307265155},"2022":{"party":"United Australia Party","totalVotes":"3308","percent":3.1001649422702053},"party":"United Australia Party","changeInPercent":-2.6915981303813448},{"2022":{"party":"Liberal Democrats","totalVotes":"1973","percent":1.849040335882441},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"27150","percent":25.127255900046276},"2022":{"party":"Australian Labor Party","totalVotes":"19303","percent":18.09023091917829},"party":"ALP","changeInPercent":-7.037024980867987},{"2019":{"party":"Informal","totalVotes":"4161","percent":3.850994909763998},"2022":{"party":"Informal","totalVotes":"5603","percent":5.250974658869396},"party":"Informal","changeInPercent":1.3999797491053978}]},{"electorate":"Wills","totalVotes":100333,"candidates":[{"2019":{"party":"Liberal","totalVotes":"17241","percent":17.183778019196076},"2022":{"party":"Liberal","totalVotes":"15771","percent":16.419060310453602},"party":"LNP","changeInPercent":-0.7647177087424737},{"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2554","percent":2.6589487054022256},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"Victorian Socialists","totalVotes":"4344","percent":4.329582490307277},"2022":{"party":"Victorian Socialists","totalVotes":"2714","percent":2.825523408951308},"party":"Victorian Socialists","changeInPercent":-1.5040590813559689},{"2022":{"party":"Australian Federation Party","totalVotes":"789","percent":0.821421506876412},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Socialist Alliance","totalVotes":"3096","percent":3.223220513674742},"party":"Socialist Alliance","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2979","percent":2.969112854195529},"2022":{"party":"United Australia Party","totalVotes":"3352","percent":3.489740039353274},"party":"United Australia Party","changeInPercent":0.5206271851577449},{"2019":{"party":"Australian Labor Party","totalVotes":"42355","percent":42.214425961548045},"2022":{"party":"Australian Labor Party","totalVotes":"35449","percent":36.905666663196364},"party":"ALP","changeInPercent":-5.308759298351681},{"2019":{"party":"Animal Justice Party","totalVotes":"3596","percent":3.5840650633390805},"2022":{"party":"Animal Justice Party","totalVotes":"1680","percent":1.749034387265364},"party":"Animal Justice Party","changeInPercent":-1.8350306760737165},{"2019":{"party":"The Greens (VIC)","totalVotes":"25575","percent":25.490117907368465},"2022":{"party":"The Greens","totalVotes":"25793","percent":26.852883304009247},"party":"GRN","changeInPercent":1.362765396640782},{"2019":{"party":"Informal","totalVotes":"4243","percent":4.228917704045529},"2022":{"party":"Informal","totalVotes":"4855","percent":5.054501160817465},"party":"Informal","changeInPercent":0.8255834567719367}]},{"electorate":"Brand","totalVotes":94769,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"35875","percent":37.85520581624793},"2022":{"party":"Australian Labor Party","totalVotes":"48031","percent":46.98235386180452},"party":"ALP","changeInPercent":9.127148045556588},{"2022":{"party":"Australian Federation Party","totalVotes":"598","percent":0.5849440488301119},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"26510","percent":27.97328240247338},"2022":{"party":"Liberal","totalVotes":"21056","percent":20.59629078957665},"party":"LNP","changeInPercent":-7.376991612896731},{"2019":{"party":"United Australia Party","totalVotes":"2570","percent":2.7118572528991547},"2022":{"party":"United Australia Party","totalVotes":"2711","percent":2.651811565850223},"party":"United Australia Party","changeInPercent":-0.06004568704893165},{"2019":{"party":"The Greens (WA)","totalVotes":"9863","percent":10.407411706359674},"2022":{"party":"The Greens (WA)","totalVotes":"10900","percent":10.662023632522107},"party":"GRN","changeInPercent":0.25461192616243267},{"2019":{"party":"Australian Christians","totalVotes":"2726","percent":2.8764680433475083},"2022":{"party":"Australian Christians","totalVotes":"2090","percent":2.0443696689881836},"party":"Australian Christians","changeInPercent":-0.8320983743593247},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2397","percent":2.52930810708143},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2592","percent":2.5354096564676425},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":0.006101549386212657},{"2022":{"party":"Liberal Democrats","totalVotes":"1074","percent":1.0505516863604352},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"The Great Australian Party","totalVotes":"1490","percent":1.4574692855465998},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7524","percent":7.939305047009043},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5139","percent":5.026801784177166},"party":"Pauline Hanson's One Nation","changeInPercent":-2.912503262831877},{"2019":{"party":"Informal","totalVotes":"5928","percent":6.255210037037427},"2022":{"party":"Informal","totalVotes":"6551","percent":6.4079740198763595},"party":"Informal","changeInPercent":0.15276398283893222},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1376","percent":1.4519515875444502},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Burt","totalVotes":94082,"candidates":[{"2022":{"party":"Australian Federation Party","totalVotes":"1741","percent":1.7906916945230136},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5116","percent":5.43780957037478},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4436","percent":4.562612496785806},"party":"Pauline Hanson's One Nation","changeInPercent":-0.875197073588974},{"2019":{"party":"United Australia Party","totalVotes":"1871","percent":1.9886907166089156},"2022":{"party":"United Australia Party","totalVotes":"2274","percent":2.3389046027256364},"party":"United Australia Party","changeInPercent":0.3502138861167208},{"2019":{"party":"The Greens (WA)","totalVotes":"8285","percent":8.80614782849004},"2022":{"party":"The Greens (WA)","totalVotes":"9004","percent":9.260992543070198},"party":"GRN","changeInPercent":0.4548447145801582},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"901","percent":0.9576752194893815},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2390","percent":2.458215479557727},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":1.5005402600683455},{"2019":{"party":"Liberal","totalVotes":"29420","percent":31.270593737378032},"2022":{"party":"Liberal","totalVotes":"21009","percent":21.608639753149912},"party":"LNP","changeInPercent":-9.66195398422812},{"2019":{"party":"Australian Christians","totalVotes":"3298","percent":3.5054526902064156},"2022":{"party":"Australian Christians","totalVotes":"3428","percent":3.525842118796606},"party":"Australian Christians","changeInPercent":0.020389428590190217},{"2019":{"party":"Australian Labor Party","totalVotes":"36058","percent":38.326141025913564},"2022":{"party":"Australian Labor Party","totalVotes":"47268","percent":48.61712522499357},"party":"ALP","changeInPercent":10.290984199080007},{"2019":{"party":"Informal","totalVotes":"6042","percent":6.422057354222913},"2022":{"party":"Informal","totalVotes":"5675","percent":5.836976086397532},"party":"Informal","changeInPercent":-0.5850812678253812},{"2019":{"party":"Independent","totalVotes":"1149","percent":1.2212750579281904},"party":"Independent","changeInPercent":null},{"2019":{"party":"Shooters, Fishers and Farmers","totalVotes":"1942","percent":2.064156799387768},"party":"Shooters, Fishers and Farmers","changeInPercent":null}]},{"electorate":"Canning","totalVotes":96782,"candidates":[{"2019":{"party":"Liberal","totalVotes":"44580","percent":46.06228430906574},"2022":{"party":"Liberal","totalVotes":"41294","percent":40.957330741306464},"party":"LNP","changeInPercent":-5.104953567759274},{"2019":{"party":"Australian Labor Party","totalVotes":"24996","percent":25.827116612593247},"2022":{"party":"Australian Labor Party","totalVotes":"30897","percent":30.64509730019242},"party":"ALP","changeInPercent":4.817980687599171},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"6503","percent":6.719224649211631},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4215","percent":4.180635178830017},"party":"Pauline Hanson's One Nation","changeInPercent":-2.5385894703816136},{"2022":{"party":"Australian Federation Party","totalVotes":"628","percent":0.6228799270000595},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2055","percent":2.123328718150069},"2022":{"party":"United Australia Party","totalVotes":"2438","percent":2.418123028704053},"party":"United Australia Party","changeInPercent":0.29479431055398386},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2554","percent":2.6389204604161933},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2202","percent":2.184047132570272},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":-0.45487332784592116},{"2022":{"party":"Informed Medical Options Party","totalVotes":"785","percent":0.7785999087500743},"party":"Informed Medical Options Party","changeInPercent":null},{"2019":{"party":"The Greens (WA)","totalVotes":"6840","percent":7.067429893988551},"2022":{"party":"The Greens (WA)","totalVotes":"7659","percent":7.5965563071551845},"party":"GRN","changeInPercent":0.5291264131666331},{"2022":{"party":"Independent","totalVotes":"1708","percent":1.6940747059173593},"party":"Independent","changeInPercent":null},{"2019":{"party":"Australian Christians","totalVotes":"1764","percent":1.8226529726602054},"2022":{"party":"Australian Christians","totalVotes":"1689","percent":1.675229612584555},"party":"Australian Christians","changeInPercent":-0.1474233600756505},{"2022":{"party":"Liberal Democrats","totalVotes":"749","percent":0.7428934161194978},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"5890","percent":6.085842408712364},"2022":{"party":"Informal","totalVotes":"6558","percent":6.504532740870047},"party":"Informal","changeInPercent":0.41869033215768336},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"1600","percent":1.6531999752020003},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null}]},{"electorate":"Cowan","totalVotes":89703,"candidates":[{"2019":{"party":"Australian Labor Party","totalVotes":"32353","percent":36.06679821187697},"2022":{"party":"Australian Labor Party","totalVotes":"46712","percent":43.36307009645108},"party":"ALP","changeInPercent":7.296271884574111},{"2019":{"party":"The Greens (WA)","totalVotes":"8551","percent":9.532568587449695},"2022":{"party":"The Greens (WA)","totalVotes":"9829","percent":9.124328137909266},"party":"GRN","changeInPercent":-0.40824044954042904},{"2019":{"party":"Australian Christians","totalVotes":"1981","percent":2.2083988272410067},"2022":{"party":"Australian Christians","totalVotes":"1859","percent":1.7257224548146635},"party":"Australian Christians","changeInPercent":-0.4826763724263432},{"2022":{"party":"Australian Federation Party","totalVotes":"1125","percent":1.0443452187555118},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"4777","percent":5.325351437521599},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2839","percent":2.6354631787083536},"party":"Pauline Hanson's One Nation","changeInPercent":-2.6898882588132453},{"2022":{"party":"Liberal Democrats","totalVotes":"1080","percent":1.0025714100052914},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1714","percent":1.591117959952842},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"2171","percent":2.4202089116306036},"2022":{"party":"United Australia Party","totalVotes":"2423","percent":2.2492875244840933},"party":"United Australia Party","changeInPercent":-0.17092138714651028},{"2019":{"party":"Liberal","totalVotes":"33438","percent":37.27634527273335},"2022":{"party":"Liberal","totalVotes":"30328","percent":28.15369048392637},"party":"LNP","changeInPercent":-9.122654788806983},{"2022":{"party":"Animal Justice Party","totalVotes":"1775","percent":1.6477446784809187},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4850","percent":5.406731101523918},"2022":{"party":"Informal","totalVotes":"8039","percent":7.4626588565116085},"party":"Informal","changeInPercent":2.0559277549876906},{"2019":{"party":"Shooters, Fishers and Farmers","totalVotes":"1582","percent":1.7635976500228534},"party":"Shooters, Fishers and Farmers","changeInPercent":null}]},{"electorate":"Curtin","totalVotes":91989,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"1114","percent":1.211014360412658},"2022":{"party":"United Australia Party","totalVotes":"1828","percent":1.6861913107646898},"party":"United Australia Party","changeInPercent":0.4751769503520318},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1343","percent":1.4599571687919208},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1243","percent":1.1465731943547643},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":-0.3133839744371565},{"2022":{"party":"Australian Federation Party","totalVotes":"763","percent":0.703809611659441},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"48256","percent":52.45844611855765},"2022":{"party":"Liberal","totalVotes":"43408","percent":40.04058666174707},"party":"LNP","changeInPercent":-12.417859456810582},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"1054","percent":1.1457891704442922},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"1310","percent":1.2083756111059865},"party":"Pauline Hanson's One Nation","changeInPercent":0.06258644066169428},{"2019":{"party":"Independent","totalVotes":"6902","percent":7.50307101936101},"2022":{"party":"Independent","totalVotes":"30942","percent":28.541647449497283},"party":"Independent","changeInPercent":21.038576430136274},{"2019":{"party":"Australian Labor Party","totalVotes":"15692","percent":17.0585613497266},"2022":{"party":"Australian Labor Party","totalVotes":"14654","percent":13.517203210035975},"party":"ALP","changeInPercent":-3.541358139690624},{"2019":{"party":"The Greens (WA)","totalVotes":"13847","percent":15.05288675819935},"2022":{"party":"The Greens (WA)","totalVotes":"10889","percent":10.044276358269533},"party":"GRN","changeInPercent":-5.008610399929816},{"2019":{"party":"Informal","totalVotes":"2927","percent":3.1819021839567774},"2022":{"party":"Informal","totalVotes":"3373","percent":3.1113365925652614},"party":"Informal","changeInPercent":-0.07056559139151597},{"2019":{"party":"Australian Christians","totalVotes":"854","percent":0.9283718705497397},"party":"Australian Christians","changeInPercent":null}]},{"electorate":"Durack","totalVotes":81613,"candidates":[{"2022":{"party":"Australian Federation Party","totalVotes":"1453","percent":1.5176202711453697},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"34429","percent":42.185681202749564},"2022":{"party":"Liberal","totalVotes":"30736","percent":32.1029433268576},"party":"LNP","changeInPercent":-10.082737875891965},{"2022":{"party":"The Great Australian Party","totalVotes":"2738","percent":2.8597689624198366},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2895","percent":3.547228995380638},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2483","percent":2.5934281715443586},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":-0.9538008238362794},{"2019":{"party":"Australian Labor Party","totalVotes":"16742","percent":20.513888718709026},"2022":{"party":"Australian Labor Party","totalVotes":"26093","percent":27.253451985544487},"party":"ALP","changeInPercent":6.739563266835461},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7407","percent":9.075759989217405},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6174","percent":6.448580560255687},"party":"Pauline Hanson's One Nation","changeInPercent":-2.6271794289617176},{"2019":{"party":"The Greens (WA)","totalVotes":"6287","percent":7.703429600676364},"2022":{"party":"The Greens (WA)","totalVotes":"8457","percent":8.833113993858495},"party":"GRN","changeInPercent":1.1296843931821314},{"2019":{"party":"United Australia Party","totalVotes":"2083","percent":2.5522894636883833},"2022":{"party":"United Australia Party","totalVotes":"2229","percent":2.3281318543585887},"party":"United Australia Party","changeInPercent":-0.22415760932979456},{"2019":{"party":"Informal","totalVotes":"3892","percent":4.768848100180119},"2022":{"party":"Informal","totalVotes":"6219","percent":6.495581876292536},"party":"Informal","changeInPercent":1.7267337761124173}]},{"electorate":"Forrest","totalVotes":95880,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"1564","percent":1.6312056737588652},"2022":{"party":"United Australia Party","totalVotes":"2426","percent":2.4181651449304256},"party":"United Australia Party","changeInPercent":0.7869594711715604},{"2022":{"party":"Liberal Democrats","totalVotes":"1577","percent":1.5719070212511461},"party":"Liberal Democrats","changeInPercent":null},{"2022":{"party":"Australian Federation Party","totalVotes":"1152","percent":1.1482795741796579},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"The Greens (WA)","totalVotes":"11645","percent":12.145390070921986},"2022":{"party":"The Greens (WA)","totalVotes":"12780","percent":12.73872652605558},"party":"GRN","changeInPercent":0.5933364551335938},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1167","percent":1.2171464330413015},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2130","percent":2.12312108767593},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":0.9059746546346283},{"2022":{"party":"The Great Australian Party","totalVotes":"2907","percent":2.8976117379689805},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"19126","percent":19.94785148101794},"2022":{"party":"Australian Labor Party","totalVotes":"26092","percent":26.007734938798293},"party":"ALP","changeInPercent":6.059883457780355},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"5371","percent":5.601793909052983},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"5020","percent":5.0037877277620515},"party":"Pauline Hanson's One Nation","changeInPercent":-0.5980061812909314},{"2019":{"party":"Liberal","totalVotes":"47470","percent":49.50980392156863},"2022":{"party":"Liberal","totalVotes":"41006","percent":40.873569634384594},"party":"LNP","changeInPercent":-8.636234287184038},{"2019":{"party":"Informal","totalVotes":"5418","percent":5.65081351689612},"2022":{"party":"Informal","totalVotes":"5234","percent":5.2170966069933415},"party":"Informal","changeInPercent":-0.43371690990277845},{"2019":{"party":"Shooters, Fishers and Farmers","totalVotes":"2881","percent":3.0047976637463494},"party":"Shooters, Fishers and Farmers","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1238","percent":1.2911973299958281},"party":"Independent","changeInPercent":null}]},{"electorate":"Fremantle","totalVotes":96302,"candidates":[{"2022":{"party":"The Great Australian Party","totalVotes":"2293","percent":2.203155325813332},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"Socialist Alliance","totalVotes":"990","percent":1.028016032896513},"2022":{"party":"Socialist Alliance","totalVotes":"1184","percent":1.1376083322123791},"party":"Socialist Alliance","changeInPercent":0.109592299315866},{"2022":{"party":"Australian Federation Party","totalVotes":"1367","percent":1.3134379984242586},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"34636","percent":35.96602355091275},"2022":{"party":"Australian Labor Party","totalVotes":"43111","percent":41.42181825169584},"party":"ALP","changeInPercent":5.455794700783088},{"2019":{"party":"United Australia Party","totalVotes":"1767","percent":1.8348528587152917},"2022":{"party":"United Australia Party","totalVotes":"2000","percent":1.9216356963046946},"party":"United Australia Party","changeInPercent":0.08678283758940286},{"2019":{"party":"Liberal","totalVotes":"31862","percent":33.08550185873606},"2022":{"party":"Liberal","totalVotes":"23749","percent":22.818463075770097},"party":"LNP","changeInPercent":-10.267038782965962},{"2019":{"party":"The Greens (WA)","totalVotes":"14574","percent":15.133642084276547},"2022":{"party":"The Greens (WA)","totalVotes":"17790","percent":17.092949518630256},"party":"GRN","changeInPercent":1.9593074343537094},{"2022":{"party":"Liberal Democrats","totalVotes":"1251","percent":1.2019831280385864},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2333","percent":2.422587277522793},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2248","percent":2.1599185226464765},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":-0.26266875487631625},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"3485","percent":3.6188241158023713},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3060","percent":2.940102615346183},"party":"Pauline Hanson's One Nation","changeInPercent":-0.6787215004561884},{"2019":{"party":"Informal","totalVotes":"5199","percent":5.398641772756537},"2022":{"party":"Informal","totalVotes":"6025","percent":5.788927535117892},"party":"Informal","changeInPercent":0.3902857623613558},{"2019":{"party":"Australian Christians","totalVotes":"1456","percent":1.5119104483811343},"party":"Australian Christians","changeInPercent":null}]},{"electorate":"Hasluck","totalVotes":89099,"candidates":[{"2022":{"party":"Independent","totalVotes":"3318","percent":3.1813605637854168},"party":"Independent","changeInPercent":null},{"2019":{"party":"The Greens (WA)","totalVotes":"9651","percent":10.831771400352418},"2022":{"party":"The Greens (WA)","totalVotes":"10826","percent":10.380171628553622},"party":"GRN","changeInPercent":-0.4515997717987954},{"2019":{"party":"United Australia Party","totalVotes":"1920","percent":2.154906340138498},"2022":{"party":"United Australia Party","totalVotes":"2973","percent":2.8505681001006757},"party":"United Australia Party","changeInPercent":0.6956617599621779},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1542","percent":1.7306591544237309},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2561","percent":2.4555347811496238},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":0.7248756267258929},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"4445","percent":4.988832646831053},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3783","percent":3.6272112757083272},"party":"Pauline Hanson's One Nation","changeInPercent":-1.3616213711227259},{"2019":{"party":"Liberal","totalVotes":"36735","percent":41.2294189609311},"2022":{"party":"Liberal","totalVotes":"32889","percent":31.5345893858766},"party":"LNP","changeInPercent":-9.694829575054499},{"2022":{"party":"Australian Federation Party","totalVotes":"1739","percent":1.6673857807181551},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"25792","percent":28.94757516919382},"2022":{"party":"Australian Labor Party","totalVotes":"39144","percent":37.53200057529124},"party":"ALP","changeInPercent":8.584425406097424},{"2022":{"party":"Liberal Democrats","totalVotes":"1280","percent":1.2272879812071529},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4899","percent":5.498378208509635},"2022":{"party":"Informal","totalVotes":"5782","percent":5.543889927609186},"party":"Informal","changeInPercent":0.045511719099550874},{"2019":{"party":"Shooters, Fishers and Farmers","totalVotes":"2436","percent":2.734037419050719},"party":"Shooters, Fishers and Farmers","changeInPercent":null},{"2019":{"party":"Australian Christians","totalVotes":"1679","percent":1.88442070056903},"party":"Australian Christians","changeInPercent":null}]},{"electorate":"Moore","totalVotes":93527,"candidates":[{"2022":{"party":"The Great Australian Party","totalVotes":"1926","percent":1.765741317980124},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1428","percent":1.526831823965272},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"3095","percent":2.8374711210532104},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":1.3106392970879384},{"2019":{"party":"Australian Labor Party","totalVotes":"21760","percent":23.26600874613748},"2022":{"party":"Australian Labor Party","totalVotes":"34227","percent":31.379038468590707},"party":"ALP","changeInPercent":8.113029722453227},{"2019":{"party":"The Greens (WA)","totalVotes":"10735","percent":11.477968928758541},"2022":{"party":"The Greens (WA)","totalVotes":"14902","percent":13.662033811287543},"party":"GRN","changeInPercent":2.184064882529002},{"2019":{"party":"Liberal","totalVotes":"45503","percent":48.65226084446203},"2022":{"party":"Liberal","totalVotes":"43706","percent":40.06930947229455},"party":"LNP","changeInPercent":-8.582951372167479},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"4113","percent":4.397660568605858},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"3541","percent":3.2463603359125752},"party":"Pauline Hanson's One Nation","changeInPercent":-1.1513002326932824},{"2019":{"party":"United Australia Party","totalVotes":"1591","percent":1.7011130475691514},"2022":{"party":"United Australia Party","totalVotes":"2342","percent":2.147126773992446},"party":"United Australia Party","changeInPercent":0.4460137264232944},{"2022":{"party":"Australian Federation Party","totalVotes":"792","percent":0.7260992335619202},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4748","percent":5.076608893688453},"2022":{"party":"Informal","totalVotes":"4545","percent":4.1668194653269275},"party":"Informal","changeInPercent":-0.9097894283615258},{"2019":{"party":"Australian Christians","totalVotes":"1259","percent":1.346135340596833},"party":"Australian Christians","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"2390","percent":2.555411806216387},"party":"Independent","changeInPercent":null}]},{"electorate":"O'Connor","totalVotes":91742,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"7252","percent":7.904776438272547},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"6833","percent":6.658286560648581},"party":"Pauline Hanson's One Nation","changeInPercent":-1.246489877623966},{"2019":{"party":"Australian Labor Party","totalVotes":"18243","percent":19.8851125983737},"2022":{"party":"Australian Labor Party","totalVotes":"25754","percent":25.095494231368882},"party":"ALP","changeInPercent":5.210381632995183},{"2019":{"party":"The Greens (WA)","totalVotes":"7245","percent":7.897146345185411},"2022":{"party":"The Greens (WA)","totalVotes":"10284","percent":10.021047708138447},"party":"GRN","changeInPercent":2.1239013629530357},{"2022":{"party":"Australian Federation Party","totalVotes":"1348","percent":1.3135328967882756},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1279","percent":1.3941270083495019},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2366","percent":2.305503585905831},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":0.911376577556329},{"2019":{"party":"Australian Christians","totalVotes":"2527","percent":2.754463604455974},"2022":{"party":"Australian Christians","totalVotes":"2779","percent":2.7079435609603992},"party":"Australian Christians","changeInPercent":-0.046520043495574814},{"2019":{"party":"United Australia Party","totalVotes":"1598","percent":1.7418412504632557},"2022":{"party":"United Australia Party","totalVotes":"1722","percent":1.6779700654817586},"party":"United Australia Party","changeInPercent":-0.06387118498149702},{"2019":{"party":"The Great Australian Party","totalVotes":"883","percent":0.9624817422772557},"2022":{"party":"The Great Australian Party","totalVotes":"2337","percent":2.277245088868101},"party":"The Great Australian Party","changeInPercent":1.3147633465908455},{"2019":{"party":"The Nationals","totalVotes":"10795","percent":11.766693553661355},"2022":{"party":"Liberal","totalVotes":"43295","percent":42.187987215466165},"party":"LNP","changeInPercent":30.42129366180481},{"2019":{"party":"Informal","totalVotes":"5785","percent":6.305726929868545},"2022":{"party":"Informal","totalVotes":"5906","percent":5.754989086373557},"party":"Informal","changeInPercent":-0.5507378434949874}]},{"electorate":"Pearce","totalVotes":107414,"candidates":[{"2022":{"party":"The Great Australian Party","totalVotes":"2160","percent":2.1339234553753137},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"The Greens (WA)","totalVotes":"8676","percent":8.077159401940156},"2022":{"party":"The Greens (WA)","totalVotes":"10416","percent":10.290253107032068},"party":"GRN","changeInPercent":2.2130937050919126},{"2022":{"party":"Liberal Democrats","totalVotes":"1548","percent":1.5293118096856415},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"29027","percent":27.02347924851509},"2022":{"party":"Australian Labor Party","totalVotes":"40596","percent":40.105905830748256},"party":"ALP","changeInPercent":13.082426582233165},{"2019":{"party":"United Australia Party","totalVotes":"2495","percent":2.3227884633288025},"2022":{"party":"United Australia Party","totalVotes":"2534","percent":2.503408349963447},"party":"United Australia Party","changeInPercent":0.18061988663464446},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1305","percent":1.214925428715065},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2206","percent":2.1793681215546026},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":0.9644426928395375},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"8199","percent":7.63308321075465},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"4295","percent":4.2431487226097095},"party":"Pauline Hanson's One Nation","changeInPercent":-3.3899344881449407},{"2019":{"party":"Liberal","totalVotes":"43689","percent":40.67346900776435},"2022":{"party":"Liberal","totalVotes":"28380","percent":28.037383177570092},"party":"LNP","changeInPercent":-12.636085830194261},{"2019":{"party":"Australian Christians","totalVotes":"1609","percent":1.4979425400785744},"2022":{"party":"Australian Christians","totalVotes":"2097","percent":2.0716840212602},"party":"Australian Christians","changeInPercent":0.5737414811816257},{"2022":{"party":"Australian Federation Party","totalVotes":"684","percent":0.675742427535516},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"7491","percent":6.973951254026477},"2022":{"party":"Informal","totalVotes":"6306","percent":6.229870976665152},"party":"Informal","changeInPercent":-0.7440802773613244},{"2019":{"party":"Shooters, Fishers and Farmers","totalVotes":"2125","percent":1.9783268475245313},"party":"Shooters, Fishers and Farmers","changeInPercent":null},{"2019":{"party":"Independent","totalVotes":"1456","percent":1.3555030070568082},"party":"Independent","changeInPercent":null}]},{"electorate":"Perth","totalVotes":91926,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"2333","percent":2.537910928355416},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2749","percent":2.5428040218668198},"party":"Pauline Hanson's One Nation","changeInPercent":0.004893093511403546},{"2022":{"party":"Australian Christians","totalVotes":"1514","percent":1.4004384463828174},"party":"Australian Christians","changeInPercent":null},{"2022":{"party":"The Great Australian Party","totalVotes":"702","percent":0.649344642906696},"party":"The Great Australian Party","changeInPercent":null},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2222","percent":2.4171616300067447},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1878","percent":1.7371356686307338},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":-0.6800259613760109},{"2022":{"party":"Animal Justice Party","totalVotes":"1535","percent":1.4198632861278895},"party":"Animal Justice Party","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"30207","percent":32.860126623588535},"2022":{"party":"Australian Labor Party","totalVotes":"40066","percent":37.06074424885995},"party":"ALP","changeInPercent":4.200617625271413},{"2022":{"party":"Liberal Democrats","totalVotes":"1407","percent":1.301464262919831},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1661","percent":1.8068881491634574},"2022":{"party":"United Australia Party","totalVotes":"1605","percent":1.4846127519447965},"party":"United Australia Party","changeInPercent":-0.32227539721866094},{"2019":{"party":"The Greens (WA)","totalVotes":"16552","percent":18.0057872636686},"2022":{"party":"The Greens (WA)","totalVotes":"22621","percent":20.924252374917906},"party":"GRN","changeInPercent":2.9184651112493043},{"2019":{"party":"Liberal","totalVotes":"32800","percent":35.68087374627418},"2022":{"party":"Liberal","totalVotes":"27294","percent":25.246741714380853},"party":"LNP","changeInPercent":-10.434132031893327},{"2022":{"party":"Australian Federation Party","totalVotes":"710","percent":0.6567445818571996},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4220","percent":4.590649000282836},"2022":{"party":"Informal","totalVotes":"6028","percent":5.575853999204507},"party":"Informal","changeInPercent":0.9852049989216711},{"2019":{"party":"Science Party","totalVotes":"1329","percent":1.445728085634097},"party":"Science Party","changeInPercent":null},{"2019":{"party":"VOTEFLUX.ORG | Upgrade Democracy!","totalVotes":"602","percent":0.6548745730261297},"party":"VOTEFLUX.ORG | Upgrade Democracy!","changeInPercent":null}]},{"electorate":"Stirling","totalVotes":91038,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"3129","percent":3.437026296711263},"party":"Pauline Hanson's One Nation","changeInPercent":null},{"2019":{"party":"The Greens (WA)","totalVotes":"10439","percent":11.466640304048859},"party":"GRN","changeInPercent":null},{"2019":{"party":"United Australia Party","totalVotes":"1577","percent":1.7322436784639381},"party":"United Australia Party","changeInPercent":null},{"2019":{"party":"Liberal","totalVotes":"40757","percent":44.76921724993959},"party":"LNP","changeInPercent":null},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1750","percent":1.922274215162899},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":null},{"2019":{"party":"Australian Christians","totalVotes":"1504","percent":1.6520573826314289},"party":"Australian Christians","changeInPercent":null},{"2019":{"party":"Australian Labor Party","totalVotes":"27623","percent":30.342274654539864},"party":"ALP","changeInPercent":null},{"2019":{"party":"Informal","totalVotes":"4259","percent":4.678266218502164},"party":"Informal","changeInPercent":null}]},{"electorate":"Swan","totalVotes":89333,"candidates":[{"2019":{"party":"United Australia Party","totalVotes":"1482","percent":1.6589614140351272},"2022":{"party":"United Australia Party","totalVotes":"2637","percent":2.4976084712211475},"party":"United Australia Party","changeInPercent":0.8386470571860203},{"2022":{"party":"Liberal Democrats","totalVotes":"1821","percent":1.7247421411049335},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"Animal Justice Party","totalVotes":"1304","percent":1.459706939204997},"2022":{"party":"Animal Justice Party","totalVotes":"2214","percent":2.0969682045064926},"party":"Animal Justice Party","changeInPercent":0.6372612653014955},{"2019":{"party":"Australian Labor Party","totalVotes":"27953","percent":31.290788398464176},"2022":{"party":"Australian Labor Party","totalVotes":"39082","percent":37.01612979608073},"party":"ALP","changeInPercent":5.725341397616557},{"2022":{"party":"Australian Federation Party","totalVotes":"792","percent":0.7501349674657372},"party":"Australian Federation Party","changeInPercent":null},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1102","percent":1.2335866924876586},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2059","percent":1.9501614873888296},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":0.7165747949011709},{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"2038","percent":2.2813517960887912},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2544","percent":2.4095244409505496},"party":"Pauline Hanson's One Nation","changeInPercent":0.1281726448617584},{"2019":{"party":"Liberal","totalVotes":"37591","percent":42.07963462550233},"2022":{"party":"Liberal","totalVotes":"32096","percent":30.399408984571085},"party":"LNP","changeInPercent":-11.680225640931244},{"2019":{"party":"The Greens (WA)","totalVotes":"10367","percent":11.60489404811212},"2022":{"party":"The Greens (WA)","totalVotes":"14861","percent":14.075449181197374},"party":"GRN","changeInPercent":2.470555133085254},{"2019":{"party":"Australian Christians","totalVotes":"1450","percent":1.6231403848521824},"2022":{"party":"Australian Christians","totalVotes":"1930","percent":1.8279804131425164},"party":"Australian Christians","changeInPercent":0.204840028290334},{"2019":{"party":"Informal","totalVotes":"5196","percent":5.8164396135806475},"2022":{"party":"Informal","totalVotes":"5545","percent":5.251891912370597},"party":"Informal","changeInPercent":-0.5645477012100502},{"2019":{"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","totalVotes":"599","percent":0.6705248900182463},"party":"FRASER ANNING'S CONSERVATIVE NATIONAL PARTY","changeInPercent":null},{"2019":{"party":"Australia First Party","totalVotes":"251","percent":0.2809711976537226},"party":"Australia First Party","changeInPercent":null}]},{"electorate":"Tangney","totalVotes":87250,"candidates":[{"2019":{"party":"Pauline Hanson's One Nation","totalVotes":"1732","percent":1.9851002865329512},"2022":{"party":"Pauline Hanson's One Nation","totalVotes":"2288","percent":2.0461638898577164},"party":"Pauline Hanson's One Nation","changeInPercent":0.061063603324765126},{"2019":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"1080","percent":1.2378223495702005},"2022":{"party":"WESTERN AUSTRALIA PARTY","totalVotes":"2096","percent":1.8744578291703555},"party":"WESTERN AUSTRALIA PARTY","changeInPercent":0.636635479600155},{"2019":{"party":"Australian Christians","totalVotes":"1695","percent":1.9426934097421202},"2022":{"party":"Australian Christians","totalVotes":"2481","percent":2.2187642529444904},"party":"Australian Christians","changeInPercent":0.2760708432023702},{"2019":{"party":"United Australia Party","totalVotes":"969","percent":1.1106017191977078},"2022":{"party":"United Australia Party","totalVotes":"1721","percent":1.5390944293903541},"party":"United Australia Party","changeInPercent":0.42849271019264634},{"2019":{"party":"Australian Labor Party","totalVotes":"21644","percent":24.806876790830945},"2022":{"party":"Australian Labor Party","totalVotes":"40940","percent":36.612740231982045},"party":"ALP","changeInPercent":11.8058634411511},{"2019":{"party":"Liberal","totalVotes":"44740","percent":51.277936962750715},"2022":{"party":"Liberal","totalVotes":"43008","percent":38.462157593968826},"party":"LNP","changeInPercent":-12.81577936878189},{"2022":{"party":"Australian Federation Party","totalVotes":"1028","percent":0.9193428665969111},"party":"Australian Federation Party","changeInPercent":null},{"2022":{"party":"Liberal Democrats","totalVotes":"1110","percent":0.9926756633488046},"party":"Liberal Democrats","changeInPercent":null},{"2019":{"party":"The Greens (WA)","totalVotes":"9319","percent":10.68080229226361},"2022":{"party":"The Greens (WA)","totalVotes":"12876","percent":11.515037694846136},"party":"GRN","changeInPercent":0.8342354025825252},{"2019":{"party":"Informal","totalVotes":"3831","percent":4.390830945558739},"2022":{"party":"Informal","totalVotes":"4271","percent":3.819565547894365},"party":"Informal","changeInPercent":-0.5712653976643742},{"2019":{"party":"Independent","totalVotes":"1933","percent":2.2154727793696276},"party":"Independent","changeInPercent":null}]},{"totalVotes":null,"candidates":[{"2019":{"percent":null},"2022":{"percent":null},"party":"no party","changeInPercent":null}]}]`), Z2 = {
+  diffedElectorates: X2
+}, to = { None: "a", Any: "z", ALP: "b", CA: "c", CLP: "d", GRN: "e", IND: "f", KAP: "g", LIB: "h", LNP: "i", NAT: "j", ONP: "k", OTH: "l", UAP: "m", Teal: "t", PUP: "m" }, ka = {
+  hashCodes: to
 };
-function Cn(e, t) {
-  Be(t, !0), xt(e, xa);
-  let o = P(t, "name", 7, ""), n = P(t, "svgHexes", 7, ""), r = P(t, "hexes", 23, () => []), a = P(t, "svgOutline", 7, ""), s = P(t, "offset", 23, () => [1 / 0, 1 / 0]), l = P(t, "isFilled", 7, !1), c = P(t, "allocations", 7), i = P(t, "focuses", 7), d = P(t, "hasAnyFocuses", 7, !1), f = P(t, "labelsToShow", 23, () => ({})), u = P(t, "showElectorateLabels", 7), v = P(t, "showFocusedElectorateLabels", 7), h = P(t, "isStatic", 7);
-  const p = 16;
-  function m(b = [0, 0]) {
-    const He = b[0] * (p * Math.sqrt(3)), De = b[1] * 1.5 * p;
-    return [He, De].map((x) => `${Math.round(x)}px`);
+function nn(t) {
+  const e = {};
+  return Object.entries(t).forEach(([a, r]) => {
+    let n = r.defaultValue;
+    const o = r.type;
+    o === "number" && (n = n ?? 0), o === "boolean" && (n = n ?? !1), e[a] = {
+      ...r,
+      defaultValue: n
+    };
+  }), e;
+}
+const or = ["number", "boolean", "enum", "string", "custom"];
+async function eo({ schema: t, data: e }) {
+  const a = nn(t), r = {}, n = Object.entries(a).map(
+    async ([o, l]) => {
+      const { type: s, key: i, values: p, defaultValue: y, codec: u } = l;
+      if (!or.includes(s))
+        throw new Error(
+          `Unknown type "${s}", must be one of ${or}`
+        );
+      let c = e[i || o];
+      if (typeof c > "u") {
+        typeof y < "u" && (r[o] = y);
+        return;
+      }
+      if (u && (c = await u.decode(c)), s === "number" && (c = Number(c)), s === "boolean" && (c = Number(c) === 1), s === "enum") {
+        const d = p[c];
+        typeof d > "u" ? c = y : c = d;
+      }
+      r[o] = c;
+    }
+  );
+  return await Promise.all(n), r;
+}
+async function ao({ schema: t, data: e }) {
+  const a = nn(t), r = {}, n = Object.keys(e).filter((l) => !t[l]);
+  if (n.length)
+    throw console.error(`Unknown keys found in data: ${n.join()}`), new Error("Unknown keys found in data");
+  const o = Object.entries(a).map(
+    async ([l, s]) => {
+      const { type: i, key: p, values: y, defaultValue: u, codec: c } = s, d = p || l, P = e[l];
+      if (typeof P > "u" || P === u) return;
+      let V = P;
+      if (i === "enum") {
+        const h = y.indexOf(P);
+        if (h === -1)
+          throw console.error(`Enum value "${P}" not found in ${y}`), new Error("Invalid enum value");
+        V = h;
+      }
+      c && (V = await c.encode(V)), i === "boolean" && (V = V ? 1 : 0), r[d] = V;
+    }
+  );
+  return await Promise.all(o), r;
+}
+function ro(t) {
+  return t && t.__esModule && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
+}
+var aa, lr;
+function no() {
+  if (lr) return aa;
+  lr = 1;
+  function t(e) {
+    if (e.length >= 255)
+      throw new TypeError("Alphabet too long");
+    for (var a = new Uint8Array(256), r = 0; r < a.length; r++)
+      a[r] = 255;
+    for (var n = 0; n < e.length; n++) {
+      var o = e.charAt(n), l = o.charCodeAt(0);
+      if (a[l] !== 255)
+        throw new TypeError(o + " is ambiguous");
+      a[l] = n;
+    }
+    var s = e.length, i = e.charAt(0), p = Math.log(s) / Math.log(256), y = Math.log(256) / Math.log(s);
+    function u(P) {
+      if (P instanceof Uint8Array || (ArrayBuffer.isView(P) ? P = new Uint8Array(P.buffer, P.byteOffset, P.byteLength) : Array.isArray(P) && (P = Uint8Array.from(P))), !(P instanceof Uint8Array))
+        throw new TypeError("Expected Uint8Array");
+      if (P.length === 0)
+        return "";
+      for (var V = 0, h = 0, I = 0, N = P.length; I !== N && P[I] === 0; )
+        I++, V++;
+      for (var g = (N - I) * y + 1 >>> 0, A = new Uint8Array(g); I !== N; ) {
+        for (var m = P[I], T = 0, R = g - 1; (m !== 0 || T < h) && R !== -1; R--, T++)
+          m += 256 * A[R] >>> 0, A[R] = m % s >>> 0, m = m / s >>> 0;
+        if (m !== 0)
+          throw new Error("Non-zero carry");
+        h = T, I++;
+      }
+      for (var S = g - h; S !== g && A[S] === 0; )
+        S++;
+      for (var H = i.repeat(V); S < g; ++S)
+        H += e.charAt(A[S]);
+      return H;
+    }
+    function c(P) {
+      if (typeof P != "string")
+        throw new TypeError("Expected String");
+      if (P.length === 0)
+        return new Uint8Array();
+      for (var V = 0, h = 0, I = 0; P[V] === i; )
+        h++, V++;
+      for (var N = (P.length - V) * p + 1 >>> 0, g = new Uint8Array(N); P[V]; ) {
+        var A = a[P.charCodeAt(V)];
+        if (A === 255)
+          return;
+        for (var m = 0, T = N - 1; (A !== 0 || m < I) && T !== -1; T--, m++)
+          A += s * g[T] >>> 0, g[T] = A % 256 >>> 0, A = A / 256 >>> 0;
+        if (A !== 0)
+          throw new Error("Non-zero carry");
+        I = m, V++;
+      }
+      for (var R = N - I; R !== N && g[R] === 0; )
+        R++;
+      for (var S = new Uint8Array(h + (N - R)), H = h; R !== N; )
+        S[H++] = g[R++];
+      return S;
+    }
+    function d(P) {
+      var V = c(P);
+      if (V)
+        return V;
+      throw new Error("Non-base" + s + " character");
+    }
+    return {
+      encode: u,
+      decodeUnsafe: c,
+      decode: d
+    };
   }
-  let L = he(`translate(${m(s()).join(",")})`), E = he(!1), w = /* @__PURE__ */ we(() => s()[0] !== 1 / 0);
-  Rt(() => {
-    g(w) && ($(L, `translate(${m(s()).join(",")})`), $(E, !0));
+  return aa = t, aa;
+}
+var oo = no();
+const lo = /* @__PURE__ */ ro(oo);
+var so = "0123456789abcdefghijklmnopqrstuvwxyz";
+lo(so);
+new TextEncoder();
+new TextDecoder();
+const co = function(t) {
+  return t.slice(t.length - 1) + t.slice(0, t.length - 1);
+}, po = function(t, { delineator: e }) {
+  t += e;
+  const a = [];
+  let r = t;
+  for (let o = 0; o < t.length; o++)
+    r = co(r), a.push(r);
+  a.sort();
+  let n = "";
+  for (let o = 0; o < a.length; o++)
+    n += a[o].charAt(a[o].length - 1);
+  return n;
+}, io = function(t, { delineator: e }) {
+  const r = t.split("").slice(0);
+  for (let o = 0; o < t.length - 1; o++) {
+    r.sort();
+    for (let l = 0; l < t.length; l++)
+      r[l] = t[l] + r[l];
+  }
+  return r.filter(function(o) {
+    return o.charAt(o.length - 1) === e;
+  })[0].substring(0, t.length - 1);
+};
+function on(t) {
+  if (!t.match(/^[a-z]*$/))
+    throw console.error("Unexpected characters in RLE encoder", t), new Error("RLE encoder only supports a-z values.");
+  return t.split("").reduce(
+    /**
+     *
+     * @param {Memo[]} memo
+     * @param {string} char
+     * @param {number} index
+     * @returns
+     */
+    (e, a, r) => (r === 0 || a !== e[e.length - 1].char ? e.push({ char: a, repeated: 1 }) : e[e.length - 1].repeated++, e),
+    []
+  ).reduce((e, { char: a, repeated: r }) => e += r === 1 ? a : a + String(r), "");
+}
+function ln(t) {
+  return t.replace(
+    /(\w)(\d+)/g,
+    (e, a, r) => a.repeat(+r)
+  );
+}
+async function yo(t, { delineator: e }) {
+  const a = po(t, { delineator: e });
+  return on(a);
+}
+async function uo(t, { delineator: e }) {
+  const a = ln(t);
+  return io(a, { delineator: e });
+}
+function Po({ delineator: t = "q" }) {
+  if (t.length !== 1)
+    throw new Error("Delineator must be 1 char");
+  return {
+    encode: (e) => yo(e, { delineator: t }),
+    decode: (e) => uo(e, { delineator: t })
+  };
+}
+const ga = 26, fa = 97, ho = 48, sr = async (t, { maxBits: e }) => {
+  const a = [1, ...t].map((s) => s ? 1 : 0).join(""), r = [];
+  for (let s = a.length; s > 0; s -= e)
+    r.push(a.slice(Math.max(0, s - e), s));
+  return r.reverse(), r.map((s) => parseInt(s, 2)).map((s) => s > ga ? s % ga : String.fromCharCode(s + fa)).join("");
+};
+async function cr(t, { maxBits: e }) {
+  return t.split("").map((s) => s.charCodeAt(0)).map(
+    (s) => s >= fa ? s - fa : s - ho + ga
+  ).map(
+    (s, i) => Number(s).toString(2).padStart(i > 0 ? e : 0, "0")
+  ).flatMap(
+    (s) => s.split("").map((i) => i === "1")
+  ).slice(1);
+}
+function Vo({ maxBits: t = 5 } = {}) {
+  if (![4, 5].includes(t))
+    throw new Error("Bits must be 4 for alpha, and 5 for alphanumeric");
+  return t === 4 ? {
+    encode: async (e) => on(await sr(e, { maxBits: t })),
+    decode: async (e) => cr(ln(e), { maxBits: t })
+  } : {
+    encode: (e) => sr(e, { maxBits: t }),
+    decode: (e) => cr(e, { maxBits: t })
+  };
+}
+var Na = function(t) {
+  return Array.isArray(t) ? t.map(String) : [String(t)];
+};
+function Io(t, e) {
+  e === void 0 && (e = {});
+  var a = e.propMap, r = a === void 0 ? {} : a, n = e.arrayProps, o = n === void 0 ? [] : n, l = e.noTypeGuessing, s = l === void 0 ? [] : l, i = t.match(/[A-Z]+([0-9a-z]|$)+/g) || [];
+  o = Na(o), s = Na(s);
+  var p = i.map(function(y) {
+    var u = y.match(/^([A-Z]+)([0-9a-z]*$)/) || [], c = u[1], d = u[2];
+    if (typeof c != "string" || typeof d != "string")
+      throw new Error("Error reading key/value pair");
+    var P = r[c.toLowerCase()] || c.toLowerCase(), V = s.includes(P) ? d : parseFloat(d).toString() === d ? parseFloat(d) : d === "true" || d === "yes" ? !0 : d === "false" || d === "no" ? !1 : d === "" ? null : d;
+    return { key: P, value: V };
+  }).reduce(
+    /** @param {Object<string,any>} obj */
+    function(y, u, c, d) {
+      var P = u.key, V = u.value;
+      if (typeof y[P] < "u")
+        return y;
+      var h = d.filter(function(g) {
+        var A = g.key;
+        return A === P;
+      }).map(function(g) {
+        return g.value;
+      }), I = o.includes(P) || h.length > 1;
+      if (I) {
+        var N = new Set(h.map(function(g) {
+          return typeof g;
+        }));
+        if (N.size > 1)
+          throw new Error("Inconsistent types in array property '".concat(P, "'"));
+        y[P] = h;
+      } else
+        y[P] = V;
+      return y;
+    },
+    {}
+  );
+  return o.forEach(function(y) {
+    typeof p[y] > "u" && (p[y] = []);
+  }), p;
+}
+var Me = function() {
+  return Me = Object.assign || function(e) {
+    for (var a, r = 1, n = arguments.length; r < n; r++) {
+      a = arguments[r];
+      for (var o in a) Object.prototype.hasOwnProperty.call(a, o) && (e[o] = a[o]);
+    }
+    return e;
+  }, Me.apply(this, arguments);
+};
+var pr = function(t) {
+  var e = t.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (e !== t)
+    throw new Error('Illegal characters found: "'.concat(t, '"'));
+  return t;
+};
+function Ao(t, e) {
+  e === void 0 && (e = {});
+  var a = Object.entries(e.propMap || {}).reduce(function(r, n) {
+    var o, l = n[0], s = n[1];
+    return Me(Me({}, r), (o = {}, o[s] = String(l), o));
+  }, {});
+  return Object.entries(t).flatMap(function(r) {
+    var n = r[0], o = r[1];
+    if (typeof o > "u" || o === null)
+      return [];
+    var l = a[n] || n, s = Na(o);
+    return s.map(function(i) {
+      return [pr(l).toUpperCase(), pr(i)].join("");
+    });
+  }).join("");
+}
+async function go(t, e) {
+  const a = Io(e);
+  return await eo({ schema: t, data: a });
+}
+async function fo(t, e) {
+  const a = await ao({ schema: t, data: e });
+  return Ao(a);
+}
+function No(t) {
+  const e = Da(
+    /** @type {T} */
+    null
+  );
+  async function a() {
+    const n = window.location.hash.slice(1);
+    return await go(t, n);
+  }
+  let r;
+  return a().then((n) => {
+    e.set(n), e.subscribe(async (o) => {
+      if (!o)
+        return;
+      const l = "#" + await fo(t, o);
+      window.location.hash !== l && (window.location.hash = l), r = l;
+    }), window.addEventListener("hashchange", () => {
+      window.location.hash !== r && a().then((l) => {
+        e.set(l);
+      });
+    });
+  }), e;
+}
+const mo = { viewbox: [-50, -1, 480, 526], positions: { ACT: [9.0035, 11], NSW: [4, 7], NT: [2.51, 6], QLD: [4.5, 0], SA: [2.004, 7], TAS: [7, 17.75, !0], VIC: [4.02, 11], WA: [0.05, 7] }, labels: [{ left: 33.75, top: 30.75, width: 8, name: "NT" }, { left: 65.25, top: 21.5, width: 8, name: "QLD" }, { left: 57.75, top: 44.25, width: 8, name: "NSW" }, { left: 67.5, top: 57.75, width: 8, name: "ACT" }, { left: 58, top: 67.25, width: 8, name: "VIC" }, { left: 57.75, top: 86.25, width: 8, name: "TAS" }, { left: 34, top: 48.75, width: 8, name: "SA" }, { left: 24.5, top: 53.25, width: 8, name: "WA" }], overlayLabels: !0 }, Lo = { viewbox: [-1, -1, 480, 526], positions: { ACT: [11.5, 12.25, !0], NSW: [6.75, 7.75], NT: [3.5, 6], QLD: [5.75, 0], SA: [3, 7.75], TAS: [9.26, 19.5, !0], VIC: [6.25, 12.75, !0], WA: [0, 6.75] }, labels: [{ left: 30, top: 30.5, width: 8, name: "NT" }, { left: 62.5, top: 21.25, width: 8, name: "QLD" }, { left: 67.5, top: 47.75, width: 8, name: "NSW" }, { left: 71, top: 63.5, width: 8, name: "ACT" }, { left: 60.25, top: 75, width: 8, name: "VIC" }, { left: 60.25, top: 94.25, width: 8, name: "TAS" }, { left: 30, top: 52.25, width: 8, name: "SA" }, { left: 15.75, top: 52.25, width: 8, name: "WA" }], overlayLabels: !0 }, bo = { viewbox: [-1, -1, 480, 526], positions: { NSW: [6.75, 7.75], QLD: [5.75, 0], SA: [3, 7.75], TAS: [9.26, 19.5, !0], VIC: [6.25, 12.75, !0], WA: [0, 6.75] }, labels: [{ left: 62.5, top: 21.25, width: 8, name: "QLD" }, { left: 67.5, top: 47.75, width: 8, name: "NSW" }, { left: 60.25, top: 75, width: 8, name: "VIC" }, { left: 60.25, top: 94.25, width: 8, name: "TAS" }, { left: 30, top: 52.25, width: 8, name: "SA" }, { left: 15.75, top: 52.25, width: 8, name: "WA" }], overlayLabels: !0 }, To = { viewbox: [-40, -40, 650, 595], positions: { ACT: [10, 19, !0], NSW: [0, 0], NT: [15, 19], QLD: [1, 9, !0], SA: [17, 9, !0], TAS: [3, 19], VIC: [12, 0], WA: [11, 8] }, labels: [{ left: 75, top: 80, width: 8, name: "NT" }, { left: 31, top: 40, width: 8, name: "QLD" }, { left: 29, top: 3.5, width: 8, name: "NSW" }, { left: 55, top: 80, width: 8, name: "ACT" }, { left: 74, top: 3.5, width: 8, name: "VIC" }, { left: 25, top: 80, width: 8, name: "TAS" }, { left: 85, top: 40, width: 8, name: "SA" }, { left: 56, top: 40, width: 8, name: "WA" }] }, vo = { viewbox: [0, 0, 300, 300], positions: { ACT: [4, 2, !0] }, labels: [{ left: 50, top: 10, width: 8, name: "ACT" }] }, Ro = { viewbox: [0, 0, 300, 300], positions: { NSW: [0.15, 2] }, labels: [{ left: 50, top: 10, width: 8, name: "NSW" }] }, So = { viewbox: [0, 0, 300, 300], positions: { NT: [4.5, 2] }, labels: [{ left: 50, top: 10, width: 8, name: "NT" }] }, Oo = { viewbox: [0, 0, 300, 300], positions: { QLD: [0.5, 2] }, labels: [{ left: 50, top: 10, width: 8, name: "QLD" }] }, Go = { viewbox: [0, 0, 300, 300], positions: { SA: [4, 2] }, labels: [{ left: 50, top: 10, width: 8, name: "SA" }] }, xo = { viewbox: [0, 0, 300, 300], positions: { TAS: [4, 2] }, labels: [{ left: 50, top: 10, width: 8, name: "TAS" }] }, Eo = { viewbox: [0, 0, 300, 300], positions: { VIC: [1.5, 2] }, labels: [{ left: 50, top: 10, width: 8, name: "VIC" }] }, Co = { viewbox: [0, 0, 300, 300], positions: { WA: [3.5, 2] }, labels: [{ left: 50, top: 10, width: 8, name: "WA" }] }, Uo = { viewbox: [0, 0, 480, 500], positions: { ACT: [8, 11.5, !0], NT: [7.75, 6, !0] }, labels: [{ left: 51, top: 25, width: 8, name: "NT" }, { left: 50.75, top: 51, width: 8, name: "ACT" }] }, wo = { viewbox: [0, 0, 480, 500], positions: { NSW: [3.5, 12], QLD: [4.75, 3, !0] }, labels: [{ left: 73.25, top: 21.25, width: 8, name: "QLD" }, { left: 41, top: 85, width: 8, name: "NSW" }] }, Ho = { viewbox: [0, 0, 480, 500], positions: { NSW: [3.75, 3, !0], VIC: [4.25, 12] }, labels: [{ left: 50.25, top: 8.75, width: 8, name: "NSW" }, { left: 50.75, top: 53.25, width: 8, name: "VIC" }] }, _o = { viewbox: [0, 0, 480, 500], positions: { QLD: [4.75, 3, !0], VIC: [4.25, 12] }, labels: [{ left: 41.75, top: 21.5, width: 8, name: "QLD" }, { left: 62.75, top: 61.75, width: 8, name: "VIC" }] }, Fo = { viewbox: [0, 0, 480, 500], positions: { QLD: [7, 7, !0], WA: [2, 5] }, labels: [{ left: 71.5, top: 28.25, width: 8, name: "QLD" }, { left: 11.75, top: 28.75, width: 8, name: "WA" }] }, Do = { viewbox: [0, 0, 480, 500], positions: { QLD: [1, 2], NSW: [7, 10], VIC: [0, 14] }, labels: [{ left: 37.25, top: 4, width: 8, name: "QLD" }, { left: 80.25, top: 43.5, width: 8, name: "NSW" }, { left: 17.5, top: 62.5, width: 8, name: "VIC" }] }, ko = { viewbox: [0, 0, 480, 500], positions: { SA: [7.25, 7, !0], TAS: [11, 9], WA: [2, 5] }, labels: [{ left: 72.5, top: 35.75, width: 8, name: "TAS" }, { left: 50.25, top: 26.5, width: 8, name: "SA" }, { left: 24.5, top: 18.75, width: 8, name: "WA" }] }, sn = {
+  COUNTRY: mo,
+  EXPLODED: Lo,
+  EXPLODED_STATES_ONLY: bo,
+  GRID: To,
+  ACT: vo,
+  NSW: Ro,
+  NT: So,
+  QLD: Oo,
+  SA: Go,
+  TAS: xo,
+  VIC: Eo,
+  WA: Co,
+  ACT_NT: Uo,
+  NSW_QLD: wo,
+  NSW_VIC: Ho,
+  QLD_VIC: _o,
+  QLD_WA: Fo,
+  QLD_NSW_VIC: Do,
+  SA_TAS_WA: ko
+}, Mo = 291, Jo = 200, Wo = /* @__PURE__ */ JSON.parse(`[{"name":"ACT","svgHexes":"<polygon data-id='BEAN' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='CANB' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='FENN' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,27.7,24,41.6,32,55.4,24,69.3,32,69.3,48,55.4,56,41.6,48,27.7,56,13.9,48,13.9,32,0,24,0,8' />","hexes":[{"name":"Bean","coord":[0,1],"shortName":"Bean","index":21,"id":"BEAN","coordPx":[27.7,40]},{"name":"Canberra","coord":[1,1],"shortName":"Canb.","index":2,"id":"CANB","coordPx":[55.4,40]},{"name":"Fenner","coord":[0,0],"shortName":"Fenn.","index":26,"id":"FENN","coordPx":[13.9,16]}]},{"name":"NSW","svgHexes":"<polygon data-id='COOK' class='hex' points='221.7,104 221.7,120 207.8,128 194,120 194,104 207.8,96' /><polygon data-id='WHIT' class='hex' points='235.6,128 235.6,144 221.7,152 207.8,144 207.8,128 221.7,120' /><polygon data-id='BERO' class='hex' points='207.8,32 207.8,48 194,56 180.1,48 180.1,32 194,24' /><polygon data-id='MITC' class='hex' points='152.4,32 152.4,48 138.6,56 124.7,48 124.7,32 138.6,24' /><polygon data-id='SYDN' class='hex' points='235.6,80 235.6,96 221.7,104 207.8,96 207.8,80 221.7,72' /><polygon data-id='BRFD' class='hex' points='263.3,32 263.3,48 249.4,56 235.6,48 235.6,32 249.4,24' /><polygon data-id='PARK' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='PARR' class='hex' points='166.3,56 166.3,72 152.4,80 138.6,72 138.6,56 152.4,48' /><polygon data-id='BART' class='hex' points='180.1,80 180.1,96 166.3,104 152.4,96 152.4,80 166.3,72' /><polygon data-id='HUNT' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' /><polygon data-id='WERR' class='hex' points='124.7,80 124.7,96 110.9,104 97,96 97,80 110.9,72' /><polygon data-id='LYNE' class='hex' points='194,8 194,24 180.1,32 166.3,24 166.3,8 180.1,0' /><polygon data-id='MCMA' class='hex' points='83.1,56 83.1,72 69.3,80 55.4,72 55.4,56 69.3,48' /><polygon data-id='RIVE' class='hex' points='41.6,80 41.6,96 27.7,104 13.9,96 13.9,80 27.7,72' /><polygon data-id='BLAX' class='hex' points='194,56 194,72 180.1,80 166.3,72 166.3,56 180.1,48' /><polygon data-id='MACA' class='hex' points='97,80 97,96 83.1,104 69.3,96 69.3,80 83.1,72' /><polygon data-id='WENT' class='hex' points='263.3,80 263.3,96 249.4,104 235.6,96 235.6,80 249.4,72' /><polygon data-id='WATS' class='hex' points='221.7,56 221.7,72 207.8,80 194,72 194,56 207.8,48' /><polygon data-id='HUGH' class='hex' points='194,104 194,120 180.1,128 166.3,120 166.3,104 180.1,96' /><polygon data-id='HUME' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='PAGE' class='hex' points='249.4,8 249.4,24 235.6,32 221.7,24 221.7,8 235.6,0' /><polygon data-id='EMON' class='hex' points='249.4,152 249.4,168 235.6,176 221.7,168 221.7,152 235.6,144' /><polygon data-id='DOBE' class='hex' points='110.9,8 110.9,24 97,32 83.1,24 83.1,8 97,0' /><polygon data-id='PATE' class='hex' points='83.1,8 83.1,24 69.3,32 55.4,24 55.4,8 69.3,0' /><polygon data-id='FOWL' class='hex' points='138.6,56 138.6,72 124.7,80 110.9,72 110.9,56 124.7,48' /><polygon data-id='ROBE' class='hex' points='180.1,32 180.1,48 166.3,56 152.4,48 152.4,32 166.3,24' /><polygon data-id='SHOR' class='hex' points='138.6,8 138.6,24 124.7,32 110.9,24 110.9,8 124.7,0' /><polygon data-id='CHIF' class='hex' points='124.7,32 124.7,48 110.9,56 97,48 97,32 110.9,24' /><polygon data-id='BENN' class='hex' points='235.6,32 235.6,48 221.7,56 207.8,48 207.8,32 221.7,24' /><polygon data-id='LIND' class='hex' points='55.4,56 55.4,72 41.6,80 27.7,72 27.7,56 41.6,48' /><polygon data-id='MACK' class='hex' points='291,32 291,48 277.1,56 263.3,48 263.3,32 277.1,24' /><polygon data-id='CALA' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='NENG' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' /><polygon data-id='GRAY' class='hex' points='207.8,80 207.8,96 194,104 180.1,96 180.1,80 194,72' /><polygon data-id='RICH' class='hex' points='277.1,8 277.1,24 263.3,32 249.4,24 249.4,8 263.3,0' /><polygon data-id='REID' class='hex' points='249.4,56 249.4,72 235.6,80 221.7,72 221.7,56 235.6,48' /><polygon data-id='MACQ' class='hex' points='97,32 97,48 83.1,56 69.3,48 69.3,32 83.1,24' /><polygon data-id='FARR' class='hex' points='27.7,56 27.7,72 13.9,80 0,72 0,56 13.9,48' /><polygon data-id='NEWC' class='hex' points='166.3,8 166.3,24 152.4,32 138.6,24 138.6,8 152.4,0' /><polygon data-id='COWP' class='hex' points='221.7,8 221.7,24 207.8,32 194,24 194,8 207.8,0' /><polygon data-id='KSMI' class='hex' points='277.1,104 277.1,120 263.3,128 249.4,120 249.4,104 263.3,96' /><polygon data-id='WARR' class='hex' points='277.1,56 277.1,72 263.3,80 249.4,72 249.4,56 263.3,48' /><polygon data-id='CUNN' class='hex' points='249.4,104 249.4,120 235.6,128 221.7,120 221.7,104 235.6,96' /><polygon data-id='GILM' class='hex' points='263.3,128 263.3,144 249.4,152 235.6,144 235.6,128 249.4,120' /><polygon data-id='BANK' class='hex' points='152.4,80 152.4,96 138.6,104 124.7,96 124.7,80 138.6,72' /><polygon data-id='GREE' class='hex' points='110.9,56 110.9,72 97,80 83.1,72 83.1,56 97,48' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,41.6,0,55.4,8,69.3,0,83.1,8,97,0,110.9,8,124.7,0,138.6,8,152.4,0,166.3,8,180.1,0,194,8,207.8,0,221.7,8,235.6,0,249.4,8,263.3,0,277.1,8,277.1,24,291,32,291,48,277.1,56,277.1,72,263.3,80,263.3,96,277.1,104,277.1,120,263.3,128,263.3,144,249.4,152,249.4,168,235.6,176,221.7,168,221.7,152,207.8,144,207.8,128,194,120,180.1,128,166.3,120,166.3,104,152.4,96,138.6,104,124.7,96,110.9,104,97,96,83.1,104,69.3,96,55.4,104,41.6,96,27.7,104,13.9,96,13.9,80,0,72,0,56,13.9,48,13.9,32,0,24,0,8' />","hexes":[{"name":"Cook","coord":[7,4],"shortName":"Cook","index":72,"id":"COOK","coordPx":[207.8,112]},{"name":"Whitlam","coord":[7,5],"shortName":"Whit.","index":43,"id":"WHIT","coordPx":[221.7,136]},{"name":"Berowra","coord":[6,1],"shortName":"Bero.","index":70,"id":"BERO","coordPx":[194,40]},{"name":"Mitchell","coord":[4,1],"shortName":"Mitc.","index":80,"id":"MITC","coordPx":[138.6,40]},{"name":"Sydney","coord":[7,3],"shortName":"Sydn.","index":16,"id":"SYDN","coordPx":[221.7,88]},{"name":"Bradfield","coord":[8,1],"shortName":"Brad.","index":71,"id":"BRFD","coordPx":[249.4,40]},{"name":"Parkes","coord":[0,1],"shortName":"Park.","index":141,"id":"PARK","coordPx":[27.7,40]},{"name":"Parramatta","coord":[5,2],"shortName":"Parr.","index":62,"id":"PARR","coordPx":[152.4,64]},{"name":"Barton","coord":[5,3],"shortName":"Bart.","index":20,"id":"BART","coordPx":[166.3,88]},{"name":"Hunter","coord":[1,0],"shortName":"Hunt.","index":55,"id":"HUNT","coordPx":[41.6,16]},{"name":"Werriwa","coord":[3,3],"shortName":"Werr.","index":68,"id":"WERR","coordPx":[110.9,88]},{"name":"Lyne","coord":[6,0],"shortName":"Lyne","index":137,"id":"LYNE","coordPx":[180.1,16]},{"name":"McMahon","coord":[2,2],"shortName":"McMa.","index":40,"id":"MCMA","coordPx":[69.3,64]},{"name":"Riverina","coord":[0,3],"shortName":"River.","index":142,"id":"RIVE","coordPx":[27.7,88]},{"name":"Blaxland","coord":[6,2],"shortName":"Blax.","index":0,"id":"BLAX","coordPx":[180.1,64]},{"name":"Macarthur","coord":[2,3],"shortName":"Maca.","index":36,"id":"MACA","coordPx":[83.1,88]},{"name":"Wentworth","coord":[8,3],"shortName":"Went.","index":111,"id":"WENT","coordPx":[249.4,88]},{"name":"Watson","coord":[7,2],"shortName":"Wats.","index":17,"id":"WATS","coordPx":[207.8,64]},{"name":"Hughes","coord":[6,4],"shortName":"Hugh.","index":87,"id":"HUGH","coordPx":[180.1,112]},{"name":"Hume","coord":[1,3],"shortName":"Hume","index":78,"id":"HUME","coordPx":[55.4,88]},{"name":"Page","coord":[8,0],"shortName":"Page","index":144,"id":"PAGE","coordPx":[235.6,16]},{"name":"Eden-Monaro","coord":[8,6],"shortName":"Eden.","index":51,"id":"EMON","coordPx":[235.6,160]},{"name":"Dobell","coord":[3,0],"shortName":"Dobe.","index":49,"id":"DOBE","coordPx":[97,16]},{"name":"Paterson","coord":[2,0],"shortName":"Pate.","index":63,"id":"PATE","coordPx":[69.3,16]},{"name":"Fowler","coord":[4,2],"shortName":"Fowl.","index":6,"id":"FOWL","coordPx":[124.7,64]},{"name":"Robertson","coord":[5,1],"shortName":"Robe.","index":109,"id":"ROBE","coordPx":[166.3,40]},{"name":"Shortland","coord":[4,0],"shortName":"Shor.","index":66,"id":"SHOR","coordPx":[124.7,16]},{"name":"Chifley","coord":[3,1],"shortName":"Chifl.","index":3,"id":"CHIF","coordPx":[110.9,40]},{"name":"Bennelong","coord":[7,1],"shortName":"Benn.","index":84,"id":"BENN","coordPx":[221.7,40]},{"name":"Lindsay","coord":[1,2],"shortName":"Linds.","index":107,"id":"LIND","coordPx":[41.6,64]},{"name":"Mackellar","coord":[9,1],"shortName":"Mack.","index":79,"id":"MACK","coordPx":[277.1,40]},{"name":"Calare","coord":[1,1],"shortName":"Cala.","index":135,"id":"CALA","coordPx":[55.4,40]},{"name":"New England","coord":[0,0],"shortName":"New.","index":139,"id":"NENG","coordPx":[13.9,16]},{"name":"Grayndler","coord":[6,3],"shortName":"Gray.","index":11,"id":"GRAY","coordPx":[194,88]},{"name":"Richmond","coord":[9,0],"shortName":"Rich.","index":65,"id":"RICH","coordPx":[263.3,16]},{"name":"Reid","coord":[8,2],"shortName":"Reid","index":108,"id":"REID","coordPx":[235.6,64]},{"name":"Macquarie","coord":[2,1],"shortName":"Macq.","index":59,"id":"MACQ","coordPx":[83.1,40]},{"name":"Farrer","coord":[0,2],"shortName":"Farr.","index":75,"id":"FARR","coordPx":[13.9,64]},{"name":"Newcastle","coord":[5,0],"shortName":"Newc.","index":13,"id":"NEWC","coordPx":[152.4,16]},{"name":"Cowper","coord":[7,0],"shortName":"Cowp.","index":143,"id":"COWP","coordPx":[207.8,16]},{"name":"Kingsford Smith","coord":[9,4],"shortName":"Kings.","index":34,"id":"KSMI","coordPx":[263.3,112]},{"name":"Warringah","coord":[9,2],"shortName":"Warr.","index":146,"id":"WARR","coordPx":[263.3,64]},{"name":"Cunningham","coord":[8,4],"shortName":"Cunni.","index":5,"id":"CUNN","coordPx":[235.6,112]},{"name":"Gilmore","coord":[8,5],"shortName":"Gilm.","index":52,"id":"GILM","coordPx":[249.4,136]},{"name":"Banks","coord":[4,3],"shortName":"Banks","index":83,"id":"BANK","coordPx":[138.6,88]},{"name":"Greenway","coord":[3,2],"shortName":"Gree.","index":53,"id":"GREE","coordPx":[97,64]}]},{"name":"NT","svgHexes":"<polygon data-id='LING' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' /><polygon data-id='SOLO' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,41.6,0,55.4,8,55.4,24,41.6,32,27.7,24,13.9,32,0,24,0,8' />","hexes":[{"name":"Lingiari","coord":[1,0],"shortName":"Lingi.","index":57,"id":"LING","coordPx":[41.6,16]},{"name":"Solomon","coord":[0,0],"shortName":"Solo.","index":67,"id":"SOLO","coordPx":[13.9,16]}]},{"name":"QLD","svgHexes":"<polygon data-id='OXLE' class='hex' points='110.9,152 110.9,168 97,176 83.1,168 83.1,152 97,144' /><polygon data-id='FISH' class='hex' points='207.8,80 207.8,96 194,104 180.1,96 180.1,80 194,72' /><polygon data-id='BOWM' class='hex' points='235.6,128 235.6,144 221.7,152 207.8,144 207.8,128 221.7,120' /><polygon data-id='LILL' class='hex' points='194,104 194,120 180.1,128 166.3,120 166.3,104 180.1,96' /><polygon data-id='FLYN' class='hex' points='124.7,80 124.7,96 110.9,104 97,96 97,80 110.9,72' /><polygon data-id='CAPR' class='hex' points='138.6,56 138.6,72 124.7,80 110.9,72 110.9,56 124.7,48' /><polygon data-id='DICK' class='hex' points='138.6,104 138.6,120 124.7,128 110.9,120 110.9,104 124.7,96' /><polygon data-id='GRIF' class='hex' points='207.8,128 207.8,144 194,152 180.1,144 180.1,128 194,120' /><polygon data-id='FAIR' class='hex' points='194,56 194,72 180.1,80 166.3,72 166.3,56 180.1,48' /><polygon data-id='LONG' class='hex' points='180.1,80 180.1,96 166.3,104 152.4,96 152.4,80 166.3,72' /><polygon data-id='BLAI' class='hex' points='110.9,104 110.9,120 97,128 83.1,120 83.1,104 97,96' /><polygon data-id='FADD' class='hex' points='194,152 194,168 180.1,176 166.3,168 166.3,152 180.1,144' /><polygon data-id='BRIS' class='hex' points='180.1,128 180.1,144 166.3,152 152.4,144 152.4,128 166.3,120' /><polygon data-id='WRIG' class='hex' points='83.1,152 83.1,168 69.3,176 55.4,168 55.4,152 69.3,144' /><polygon data-id='HINK' class='hex' points='166.3,56 166.3,72 152.4,80 138.6,72 138.6,56 152.4,48' /><polygon data-id='LEIC' class='hex' points='166.3,8 166.3,24 152.4,32 138.6,24 138.6,8 152.4,0' /><polygon data-id='KENN' class='hex' points='69.3,128 69.3,144 55.4,152 41.6,144 41.6,128 55.4,120' /><polygon data-id='DAWS' class='hex' points='180.1,32 180.1,48 166.3,56 152.4,48 152.4,32 166.3,24' /><polygon data-id='BONN' class='hex' points='221.7,104 221.7,120 207.8,128 194,120 194,104 207.8,96' /><polygon data-id='WBAY' class='hex' points='152.4,80 152.4,96 138.6,104 124.7,96 124.7,80 138.6,72' /><polygon data-id='MARA' class='hex' points='55.4,152 55.4,168 41.6,176 27.7,168 27.7,152 41.6,144' /><polygon data-id='MCPH' class='hex' points='249.4,152 249.4,168 235.6,176 221.7,168 221.7,152 235.6,144' /><polygon data-id='MONC' class='hex' points='221.7,152 221.7,168 207.8,176 194,168 194,152 207.8,144' /><polygon data-id='RYAN' class='hex' points='152.4,128 152.4,144 138.6,152 124.7,144 124.7,128 138.6,120' /><polygon data-id='RANK' class='hex' points='138.6,152 138.6,168 124.7,176 110.9,168 110.9,152 124.7,144' /><polygon data-id='PETR' class='hex' points='166.3,104 166.3,120 152.4,128 138.6,120 138.6,104 152.4,96' /><polygon data-id='MORE' class='hex' points='124.7,128 124.7,144 110.9,152 97,144 97,128 110.9,120' /><polygon data-id='FORD' class='hex' points='166.3,152 166.3,168 152.4,176 138.6,168 138.6,152 152.4,144' /><polygon data-id='HERB' class='hex' points='152.4,32 152.4,48 138.6,56 124.7,48 124.7,32 138.6,24' /><polygon data-id='GROO' class='hex' points='97,128 97,144 83.1,152 69.3,144 69.3,128 83.1,120' />","svgOutline":"<polygon data-id='' class='hex-outline' points='27.7,152,41.6,144,41.6,128,55.4,120,69.3,128,83.1,120,83.1,104,97,96,97,80,110.9,72,110.9,56,124.7,48,124.7,32,138.6,24,138.6,8,152.4,0,166.3,8,166.3,24,180.1,32,180.1,48,194,56,194,72,207.8,80,207.8,96,221.7,104,221.7,120,235.6,128,235.6,144,249.4,152,249.4,168,235.6,176,221.7,168,207.8,176,194,168,180.1,176,166.3,168,152.4,176,138.6,168,124.7,176,110.9,168,97,176,83.1,168,69.3,176,55.4,168,41.6,176,27.7,168,27.7,152' />","hexes":[{"name":"Oxley","coord":[3,6],"shortName":"Oxley","index":41,"id":"OXLE","coordPx":[97,160]},{"name":"Fisher","coord":[6,3],"shortName":"Fishe","index":116,"id":"FISH","coordPx":[194,88]},{"name":"Bowman","coord":[7,5],"shortName":"Bowm.","index":125,"id":"BOWM","coordPx":[221.7,136]},{"name":"Lilley","coord":[6,4],"shortName":"Lille","index":56,"id":"LILL","coordPx":[180.1,112]},{"name":"Flynn","coord":[3,3],"shortName":"Flynn","index":126,"id":"FLYN","coordPx":[110.9,88]},{"name":"Capricornia","coord":[4,2],"shortName":"Capri.","index":112,"id":"CAPR","coordPx":[124.7,64]},{"name":"Dickson","coord":[4,4],"shortName":"Dicks.","index":132,"id":"DICK","coordPx":[124.7,112]},{"name":"Griffith","coord":[6,5],"shortName":"Griff.","index":54,"id":"GRIF","coordPx":[194,136]},{"name":"Fairfax","coord":[6,2],"shortName":"Fairf.","index":115,"id":"FAIR","coordPx":[180.1,64]},{"name":"Longman","coord":[5,3],"shortName":"Long.","index":134,"id":"LONG","coordPx":[166.3,88]},{"name":"Blair","coord":[3,4],"shortName":"Blair","index":45,"id":"BLAI","coordPx":[97,112]},{"name":"Fadden","coord":[6,6],"shortName":"Fadd.","index":114,"id":"FADD","coordPx":[180.1,160]},{"name":"Brisbane","coord":[5,5],"shortName":"Brisb.","index":131,"id":"BRIS","coordPx":[166.3,136]},{"name":"Wright","coord":[2,6],"shortName":"Wrig.","index":123,"id":"WRIG","coordPx":[69.3,160]},{"name":"Hinkler","coord":[5,2],"shortName":"Hinkl.","index":118,"id":"HINK","coordPx":[152.4,64]},{"name":"Leichhardt","coord":[5,0],"shortName":"Leich.","index":133,"id":"LEIC","coordPx":[152.4,16]},{"name":"Kennedy","coord":[1,5],"shortName":"Kenn.","index":148,"id":"KENN","coordPx":[55.4,136]},{"name":"Dawson","coord":[5,1],"shortName":"Daws.","index":113,"id":"DAWS","coordPx":[166.3,40]},{"name":"Bonner","coord":[7,4],"shortName":"Bonn.","index":124,"id":"BONN","coordPx":[207.8,112]},{"name":"Wide Bay","coord":[4,3],"shortName":"Wide.","index":122,"id":"WBAY","coordPx":[138.6,88]},{"name":"Maranoa","coord":[1,6],"shortName":"Mara.","index":119,"id":"MARA","coordPx":[41.6,160]},{"name":"McPherson","coord":[8,6],"shortName":"McPh.","index":120,"id":"MCPH","coordPx":[235.6,160]},{"name":"Moncrieff","coord":[7,6],"shortName":"Monc.","index":121,"id":"MONC","coordPx":[207.8,160]},{"name":"Ryan","coord":[4,5],"shortName":"Ryan","index":130,"id":"RYAN","coordPx":[138.6,136]},{"name":"Rankin","coord":[4,6],"shortName":"Ranki","index":42,"id":"RANK","coordPx":[124.7,160]},{"name":"Petrie","coord":[5,4],"shortName":"Petrie","index":129,"id":"PETR","coordPx":[152.4,112]},{"name":"Moreton","coord":[3,5],"shortName":"More.","index":61,"id":"MORE","coordPx":[110.9,136]},{"name":"Forde","coord":[5,6],"shortName":"Forde","index":127,"id":"FORD","coordPx":[152.4,160]},{"name":"Herbert","coord":[4,1],"shortName":"Herb.","index":128,"id":"HERB","coordPx":[138.6,40]},{"name":"Groom","coord":[2,5],"shortName":"Groom","index":117,"id":"GROO","coordPx":[83.1,136]}]},{"name":"SA","svgHexes":"<polygon data-id='ADEL' class='hex' points='55.4,104 55.4,120 41.6,128 27.7,120 27.7,104 41.6,96' /><polygon data-id='SPEN' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='STUR' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='GREY' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' /><polygon data-id='HIND' class='hex' points='41.6,80 41.6,96 27.7,104 13.9,96 13.9,80 27.7,72' /><polygon data-id='BOOT' class='hex' points='69.3,128 69.3,144 55.4,152 41.6,144 41.6,128 55.4,120' /><polygon data-id='MAKI' class='hex' points='55.4,56 55.4,72 41.6,80 27.7,72 27.7,56 41.6,48' /><polygon data-id='MAYO' class='hex' points='55.4,152 55.4,168 41.6,176 27.7,168 27.7,152 41.6,144' /><polygon data-id='BARK' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='KING' class='hex' points='41.6,128 41.6,144 27.7,152 13.9,144 13.9,128 27.7,120' />","svgOutline":"<polygon data-id='' class='hex-outline' points='13.9,32,27.7,24,27.7,8,41.6,0,55.4,8,55.4,24,69.3,32,69.3,48,55.4,56,55.4,72,69.3,80,69.3,96,55.4,104,55.4,120,69.3,128,69.3,144,55.4,152,55.4,168,41.6,176,27.7,168,27.7,152,13.9,144,13.9,128,27.7,120,27.7,104,13.9,96,13.9,80,27.7,72,27.7,56,13.9,48,13.9,32' />","hexes":[{"name":"Adelaide","coord":[1,4],"shortName":"Adel.","index":18,"id":"ADEL","coordPx":[41.6,112]},{"name":"Spence","coord":[0,1],"shortName":"Spen.","index":15,"id":"SPEN","coordPx":[27.7,40]},{"name":"Sturt","coord":[1,3],"shortName":"Sturt","index":93,"id":"STUR","coordPx":[55.4,88]},{"name":"Grey","coord":[1,0],"shortName":"Grey","index":77,"id":"GREY","coordPx":[41.6,16]},{"name":"Hindmarsh","coord":[0,3],"shortName":"Hind.","index":29,"id":"HIND","coordPx":[27.7,88]},{"name":"Boothby","coord":[1,5],"shortName":"Boot.","index":97,"id":"BOOT","coordPx":[55.4,136]},{"name":"Makin","coord":[1,2],"shortName":"Makin","index":38,"id":"MAKI","coordPx":[41.6,64]},{"name":"Mayo","coord":[1,6],"shortName":"Mayo","index":149,"id":"MAYO","coordPx":[41.6,160]},{"name":"Barker","coord":[1,1],"shortName":"Bark.","index":69,"id":"BARK","coordPx":[55.4,40]},{"name":"Kingston","coord":[0,5],"shortName":"Kings.","index":35,"id":"KING","coordPx":[27.7,136]}]},{"name":"TAS","svgHexes":"<polygon data-id='BASS' class='hex' points='83.1,8 83.1,24 69.3,32 55.4,24 55.4,8 69.3,0' /><polygon data-id='BRAD' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' /><polygon data-id='CLAR' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='FRAN' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='LYON' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,41.6,0,55.4,8,69.3,0,83.1,8,83.1,24,69.3,32,69.3,48,55.4,56,41.6,48,27.7,56,13.9,48,13.9,32,0,24,0,8' />","hexes":[{"name":"Bass","coord":[2,0],"shortName":"Bass","index":96,"id":"BASS","coordPx":[69.3,16]},{"name":"Braddon","coord":[0,0],"shortName":"Brad.","index":98,"id":"BRAD","coordPx":[13.9,16]},{"name":"Clark","coord":[0,1],"shortName":"Clark","index":145,"id":"CLAR","coordPx":[27.7,40]},{"name":"Franklin","coord":[1,1],"shortName":"Fran.","index":7,"id":"FRAN","coordPx":[55.4,40]},{"name":"Lyons","coord":[1,0],"shortName":"Lyons","index":58,"id":"LYON","coordPx":[41.6,16]}]},{"name":"VIC","svgHexes":"<polygon data-id='ASTO' class='hex' points='166.3,56 166.3,72 152.4,80 138.6,72 138.6,56 152.4,48' /><polygon data-id='CORI' class='hex' points='55.4,104 55.4,120 41.6,128 27.7,120 27.7,104 41.6,96' /><polygon data-id='BEND' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='BRUC' class='hex' points='180.1,80 180.1,96 166.3,104 152.4,96 152.4,80 166.3,72' /><polygon data-id='CALW' class='hex' points='83.1,8 83.1,24 69.3,32 55.4,24 55.4,8 69.3,0' /><polygon data-id='CASE' class='hex' points='207.8,80 207.8,96 194,104 180.1,96 180.1,80 194,72' /><polygon data-id='KOOY' class='hex' points='124.7,80 124.7,96 110.9,104 97,96 97,80 110.9,72' /><polygon data-id='CHIS' class='hex' points='138.6,56 138.6,72 124.7,80 110.9,72 110.9,56 124.7,48' /><polygon data-id='LALO' class='hex' points='69.3,128 69.3,144 55.4,152 41.6,144 41.6,128 55.4,120' /><polygon data-id='WANN' class='hex' points='27.7,56 27.7,72 13.9,80 0,72 0,56 13.9,48' /><polygon data-id='DEAK' class='hex' points='152.4,32 152.4,48 138.6,56 124.7,48 124.7,32 138.6,24' /><polygon data-id='DUNK' class='hex' points='180.1,128 180.1,144 166.3,152 152.4,144 152.4,128 166.3,120' /><polygon data-id='FLIN' class='hex' points='207.8,128 207.8,144 194,152 180.1,144 180.1,128 194,120' /><polygon data-id='GORT' class='hex' points='83.1,56 83.1,72 69.3,80 55.4,72 55.4,56 69.3,48' /><polygon data-id='GELL' class='hex' points='97,128 97,144 83.1,152 69.3,144 69.3,128 83.1,120' /><polygon data-id='GIPP' class='hex' points='221.7,56 221.7,72 207.8,80 194,72 194,56 207.8,48' /><polygon data-id='GOLD' class='hex' points='152.4,128 152.4,144 138.6,152 124.7,144 124.7,128 138.6,120' /><polygon data-id='HAWK' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='MARI' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='MACN' class='hex' points='138.6,104 138.6,120 124.7,128 110.9,120 110.9,104 124.7,96' /><polygon data-id='HOLT' class='hex' points='194,104 194,120 180.1,128 166.3,120 166.3,104 180.1,96' /><polygon data-id='HOTH' class='hex' points='152.4,80 152.4,96 138.6,104 124.7,96 124.7,80 138.6,72' /><polygon data-id='INDI' class='hex' points='138.6,8 138.6,24 124.7,32 110.9,24 110.9,8 124.7,0' /><polygon data-id='ISAA' class='hex' points='166.3,104 166.3,120 152.4,128 138.6,120 138.6,104 152.4,96' /><polygon data-id='JAGA' class='hex' points='97,32 97,48 83.1,56 69.3,48 69.3,32 83.1,24' /><polygon data-id='WILL' class='hex' points='97,80 97,96 83.1,104 69.3,96 69.3,80 83.1,72' /><polygon data-id='LTRO' class='hex' points='221.7,104 221.7,120 207.8,128 194,120 194,104 207.8,96' /><polygon data-id='BALL' class='hex' points='55.4,56 55.4,72 41.6,80 27.7,72 27.7,56 41.6,48' /><polygon data-id='MALL' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' /><polygon data-id='FRAS' class='hex' points='83.1,104 83.1,120 69.3,128 55.4,120 55.4,104 69.3,96' /><polygon data-id='MCEW' class='hex' points='194,56 194,72 180.1,80 166.3,72 166.3,56 180.1,48' /><polygon data-id='MELB' class='hex' points='110.9,104 110.9,120 97,128 83.1,120 83.1,104 97,96' /><polygon data-id='MENZ' class='hex' points='124.7,32 124.7,48 110.9,56 97,48 97,32 110.9,24' /><polygon data-id='MONA' class='hex' points='235.6,80 235.6,96 221.7,104 207.8,96 207.8,80 221.7,72' /><polygon data-id='NICH' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' /><polygon data-id='SCUL' class='hex' points='110.9,8 110.9,24 97,32 83.1,24 83.1,8 97,0' /><polygon data-id='CORA' class='hex' points='41.6,80 41.6,96 27.7,104 13.9,96 13.9,80 27.7,72' /><polygon data-id='COOP' class='hex' points='110.9,56 110.9,72 97,80 83.1,72 83.1,56 97,48' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,41.6,0,55.4,8,69.3,0,83.1,8,97,0,110.9,8,124.7,0,138.6,8,138.6,24,152.4,32,152.4,48,166.3,56,180.1,48,194,56,207.8,48,221.7,56,221.7,72,235.6,80,235.6,96,221.7,104,221.7,120,207.8,128,207.8,144,194,152,180.1,144,166.3,152,152.4,144,138.6,152,124.7,144,124.7,128,110.9,120,97,128,97,144,83.1,152,69.3,144,55.4,152,41.6,144,41.6,128,27.7,120,27.7,104,13.9,96,13.9,80,0,72,0,56,13.9,48,13.9,32,0,24,0,8' />","hexes":[{"name":"Aston","coord":[5,2],"shortName":"Aston","index":82,"id":"ASTO","coordPx":[152.4,64]},{"name":"Corio","coord":[1,4],"shortName":"Corio","index":25,"id":"CORI","coordPx":[41.6,112]},{"name":"Bendigo","coord":[0,1],"shortName":"Bendi.","index":22,"id":"BEND","coordPx":[27.7,40]},{"name":"Bruce","coord":[5,3],"shortName":"Bruce","index":24,"id":"BRUC","coordPx":[166.3,88]},{"name":"Calwell","coord":[2,0],"shortName":"Calw.","index":1,"id":"CALW","coordPx":[69.3,16]},{"name":"Casey","coord":[6,3],"shortName":"Casey","index":99,"id":"CASE","coordPx":[194,88]},{"name":"Kooyong","coord":[3,3],"shortName":"Kooy.","index":105,"id":"KOOY","coordPx":[110.9,88]},{"name":"Chisholm","coord":[4,2],"shortName":"Chish.","index":100,"id":"CHIS","coordPx":[124.7,64]},{"name":"Lalor","coord":[1,5],"shortName":"Lalor","index":12,"id":"LALO","coordPx":[55.4,136]},{"name":"Wannon","coord":[0,2],"shortName":"Wann.","index":95,"id":"WANN","coordPx":[13.9,64]},{"name":"Deakin","coord":[4,1],"shortName":"Deaki","index":101,"id":"DEAK","coordPx":[138.6,40]},{"name":"Dunkley","coord":[5,5],"shortName":"Dunk.","index":50,"id":"DUNK","coordPx":[166.3,136]},{"name":"Flinders","coord":[6,5],"shortName":"Flind.","index":102,"id":"FLIN","coordPx":[194,136]},{"name":"Gorton","coord":[2,2],"shortName":"Gort.","index":10,"id":"GORT","coordPx":[69.3,64]},{"name":"Gellibrand","coord":[2,5],"shortName":"Gelli.","index":9,"id":"GELL","coordPx":[83.1,136]},{"name":"Gippsland","coord":[7,2],"shortName":"Gipps.","index":136,"id":"GIPP","coordPx":[207.8,64]},{"name":"Goldstein","coord":[4,5],"shortName":"Gold.","index":86,"id":"GOLD","coordPx":[138.6,136]},{"name":"Hawke","coord":[1,1],"shortName":"Hawke","index":28,"id":"HAWK","coordPx":[55.4,40]},{"name":"Maribyrnong","coord":[1,3],"shortName":"Mari.","index":39,"id":"MARI","coordPx":[55.4,88]},{"name":"Macnamara","coord":[4,4],"shortName":"Macn.","index":37,"id":"MACN","coordPx":[124.7,112]},{"name":"Holt","coord":[6,4],"shortName":"Holt","index":30,"id":"HOLT","coordPx":[180.1,112]},{"name":"Hotham","coord":[4,3],"shortName":"Hoth.","index":31,"id":"HOTH","coordPx":[138.6,88]},{"name":"Indi","coord":[4,0],"shortName":"Indi","index":147,"id":"INDI","coordPx":[124.7,16]},{"name":"Isaacs","coord":[5,4],"shortName":"Isaac","index":32,"id":"ISAA","coordPx":[152.4,112]},{"name":"Jagajaga","coord":[2,1],"shortName":"Jaga.","index":33,"id":"JAGA","coordPx":[83.1,40]},{"name":"Wills","coord":[2,3],"shortName":"Wills","index":44,"id":"WILL","coordPx":[83.1,88]},{"name":"La Trobe","coord":[7,4],"shortName":"La Tr.","index":106,"id":"LTRO","coordPx":[207.8,112]},{"name":"Ballarat","coord":[1,2],"shortName":"Ball.","index":19,"id":"BALL","coordPx":[41.6,64]},{"name":"Mallee","coord":[0,0],"shortName":"Mall.","index":138,"id":"MALL","coordPx":[13.9,16]},{"name":"Fraser","coord":[2,4],"shortName":"Fras.","index":8,"id":"FRAS","coordPx":[69.3,112]},{"name":"McEwen","coord":[6,2],"shortName":"McEw.","index":60,"id":"MCEW","coordPx":[180.1,64]},{"name":"Melbourne","coord":[3,4],"shortName":"Melb.","index":150,"id":"MELB","coordPx":[97,112]},{"name":"Menzies","coord":[3,1],"shortName":"Menz.","index":88,"id":"MENZ","coordPx":[110.9,40]},{"name":"Monash","coord":[7,3],"shortName":"Mona.","index":89,"id":"MONA","coordPx":[221.7,88]},{"name":"Nicholls","coord":[1,0],"shortName":"Nicho.","index":140,"id":"NICH","coordPx":[41.6,16]},{"name":"Scullin","coord":[3,0],"shortName":"Scul.","index":14,"id":"SCUL","coordPx":[97,16]},{"name":"Corangamite","coord":[0,3],"shortName":"Cora.","index":47,"id":"CORA","coordPx":[27.7,88]},{"name":"Cooper","coord":[3,2],"shortName":"Coop.","index":4,"id":"COOP","coordPx":[97,64]}]},{"name":"WA","svgHexes":"<polygon data-id='DURA' class='hex' points='83.1,8 83.1,24 69.3,32 55.4,24 55.4,8 69.3,0' /><polygon data-id='PEAR' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='MOOR' class='hex' points='55.4,56 55.4,72 41.6,80 27.7,72 27.7,56 41.6,48' /><polygon data-id='HASL' class='hex' points='83.1,56 83.1,72 69.3,80 55.4,72 55.4,56 69.3,48' /><polygon data-id='CURT' class='hex' points='41.6,80 41.6,96 27.7,104 13.9,96 13.9,80 27.7,72' /><polygon data-id='COWA' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='FREM' class='hex' points='27.7,104 27.7,120 13.9,128 0,120 0,104 13.9,96' /><polygon data-id='PERT' class='hex' points='55.4,104 55.4,120 41.6,128 27.7,120 27.7,104 41.6,96' /><polygon data-id='TMP1' class='hex' points='83.1,104 83.1,120 69.3,128 55.4,120 55.4,104 69.3,96' /><polygon data-id='BRAN' class='hex' points='41.6,128 41.6,144 27.7,152 13.9,144 13.9,128 27.7,120' /><polygon data-id='CANN' class='hex' points='27.7,152 27.7,168 13.9,176 0,168 0,152 13.9,144' /><polygon data-id='SWAN' class='hex' points='69.3,128 69.3,144 55.4,152 41.6,144 41.6,128 55.4,120' /><polygon data-id='TANG' class='hex' points='55.4,152 55.4,168 41.6,176 27.7,168 27.7,152 41.6,144' /><polygon data-id='BURT' class='hex' points='83.1,152 83.1,168 69.3,176 55.4,168 55.4,152 69.3,144' /><polygon data-id='FORR' class='hex' points='41.6,176 41.6,192 27.7,200 13.9,192 13.9,176 27.7,168' /><polygon data-id='OCON' class='hex' points='69.3,176 69.3,192 55.4,200 41.6,192 41.6,176 55.4,168' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,104,13.9,96,13.9,80,27.7,72,27.7,56,41.6,48,41.6,32,55.4,24,55.4,8,69.3,0,83.1,8,83.1,24,69.3,32,69.3,48,83.1,56,83.1,72,69.3,80,69.3,96,83.1,104,83.1,120,69.3,128,69.3,144,83.1,152,83.1,168,69.3,176,69.3,192,55.4,200,41.6,192,27.7,200,13.9,192,13.9,176,0,168,0,152,13.9,144,13.9,128,0,120,0,104' />","hexes":[{"name":"Durack","coord":[2,0],"shortName":"Dura.","index":74,"id":"DURA","coordPx":[69.3,16]},{"name":"Pearce","coord":[1,1],"shortName":"Pear.","index":92,"id":"PEAR","coordPx":[55.4,40]},{"name":"Moore","coord":[1,2],"shortName":"Moore","index":90,"id":"MOOR","coordPx":[41.6,64]},{"name":"Hasluck","coord":[2,2],"shortName":"Hasl.","index":103,"id":"HASL","coordPx":[69.3,64]},{"name":"Curtin","coord":[0,3],"shortName":"Curti","index":73,"id":"CURT","coordPx":[27.7,88]},{"name":"Cowan","coord":[1,3],"shortName":"Cowan","index":48,"id":"COWA","coordPx":[55.4,88]},{"name":"Fremantle","coord":[0,4],"shortName":"Frem.","index":27,"id":"FREM","coordPx":[13.9,112]},{"name":"Perth","coord":[1,4],"shortName":"Perth","index":64,"id":"PERT","coordPx":[41.6,112]},{"name":"Bullwinkel","coord":[2,4],"shortName":"Bull","index":37,"id":"TMP1","coordPx":[69.3,112]},{"name":"Brand","coord":[0,5],"shortName":"Brand","index":23,"id":"BRAN","coordPx":[27.7,136]},{"name":"Canning","coord":[0,6],"shortName":"Canni.","index":85,"id":"CANN","coordPx":[13.9,160]},{"name":"Swan","coord":[1,5],"shortName":"Swan","index":110,"id":"SWAN","coordPx":[55.4,136]},{"name":"Tangney","coord":[1,6],"shortName":"Tang.","index":94,"id":"TANG","coordPx":[41.6,160]},{"name":"Burt","coord":[2,6],"shortName":"Burt","index":46,"id":"BURT","coordPx":[69.3,160]},{"name":"Forrest","coord":[0,7],"shortName":"Forr.","index":76,"id":"FORR","coordPx":[27.7,184]},{"name":"O'Connor","coord":[1,7],"shortName":"O'Con.","index":81,"id":"OCON","coordPx":[55.4,184]}]}]`), Ma = {
+  svgWidth: Mo,
+  svgHeight: Jo,
+  groups: Wo
+}, Yo = { Australia: [[112, -44], [156, -10]], "Brisbane & surrounds": [[152.67620200034025, -27.85975844732532], [153.50771856749492, -27.122141459597835]], "Sydney & surrounds": [[150.53643051298894, -34.250330919454555], [151.6159583706169, -33.35329642067877]], "Melbourne & surrounds": [[143.7112326761349, -38.73737902155104], [146.2181523182391, -36.755303142447325]], "Inner-city Sydney": [[150.97804393208258, -33.9820617904466], [151.29883502771884, -33.71564208020996]], "Inner-city Melbourne": [[144.77343032299214, -38.00505753293409], [145.25008324655565, -37.62851493730817]], Perth: [[115.29761105882773, -32.58735478749758], [116.46158922227181, -31.601283791419284]], Adelaide: [[138.1361307284978, -35.308045628940405], [139.08340859017528, -34.53133194772551]], Tasmania: [[143.15169589003773, -43.824678713957354], [149.19913869957333, -39.30289848300832]], "Focus Driven": [[112, -44], [156, -10]] }, $o = {
+  areas: Yo
+}, zt = Ma.groups.flatMap((t) => t.hexes.map((e) => ({ ...e, group: t.name }))).sort((t, e) => t.index - e.index), Bo = Object.values(zt).reduce((t, e) => (t[e.id] = e, t), {});
+Ma.groups;
+const ma = "q", jo = "x", ir = Po({ delineator: ma }), cn = Q2(ka.hashCodes);
+if (cn[ma] || jo === ma)
+  throw new Error("Can not use delineator in allocation map");
+function pn(t) {
+  return zt.map(({ id: e }) => t[e]);
+}
+function Qo(t) {
+  return zt.reduce((e, { id: a }, r) => (e[a] = t[r] ?? null, e), {});
+}
+const yr = Vo({ maxBits: 4 }), ra = {
+  encode: async function(t) {
+    const e = pn(t);
+    return yr.encode(e);
+  },
+  decode: async function(t) {
+    const e = await yr.decode(t);
+    return Qo(e);
+  }
+}, na = Object.freeze(
+  zt.reduce((t, e) => (t[e.id] = null, t), {})
+), Ko = {
+  version: {
+    type: "number",
+    key: "ver"
+  },
+  vizType: {
+    type: "enum",
+    key: "v",
+    defaultValue: "hex",
+    values: ["hex", "geo"]
+  },
+  layout: {
+    type: "enum",
+    key: "l",
+    defaultValue: "COUNTRY",
+    values: Object.keys(sn)
+  },
+  geoArea: {
+    type: "enum",
+    key: "g",
+    defaultValue: "Australia",
+    values: Object.keys($o.areas)
+  },
+  allocations: {
+    type: "custom",
+    codec: {
+      encode: async (t) => {
+        const e = Object.entries(t).reduce((n, [o, l]) => (n[o] = ka.hashCodes[l] || "x", n), {}), a = pn(e).map((n) => n ?? "x").join("");
+        return await ir.encode(a);
+      },
+      decode: async (t) => (await ir.decode(t).catch((r) => (console.error("decoding string failed", t, r), ""))).split("").reduce((r, n, o) => {
+        var s;
+        const l = (s = zt[o]) == null ? void 0 : s.id;
+        if (l)
+          return r[l] = cn[String(n)] || null, r;
+      }, {})
+    },
+    key: "a",
+    defaultValue: na
+  },
+  focuses: {
+    type: "custom",
+    codec: ra,
+    key: "f",
+    defaultValue: na
+  },
+  certainties: {
+    type: "custom",
+    codec: ra,
+    key: "c",
+    defaultValue: Object.freeze(
+      zt.reduce((t, e) => (t[e.id] = !0, t), {})
+    )
+  },
+  labelsToShow: {
+    type: "custom",
+    codec: ra,
+    key: "li",
+    defaultValue: na
+  },
+  showLabelsWhen: {
+    type: "enum",
+    key: "lb",
+    defaultValue: "none",
+    values: ["none", "states", "electorates"]
+  },
+  showStateLabels: {
+    type: "boolean",
+    key: "ls",
+    defaultValue: !1
+  },
+  showElectorateLabels: {
+    type: "boolean",
+    key: "le",
+    defaultValue: !1
+  },
+  showFocusedElectorateLabels: {
+    type: "boolean",
+    key: "lf",
+    defaultValue: !1
+  },
+  showTotals: {
+    type: "boolean",
+    key: "t",
+    defaultValue: !1
+  },
+  firstPreferenceArrows: {
+    type: "enum",
+    key: "fpa",
+    defaultValue: "None",
+    values: ["None", "ALP", "LNP", "GRN", "Independent", "Informal"]
+  }
+}, ur = No(Ko);
+ur.subscribe((t) => {
+  t && t.version !== 1 && ur.set({ ...t, version: 1 });
+});
+function zo(t = "") {
+  const e = t.trim().toLowerCase();
+  return zt.find((a) => a.name.toLowerCase() === e || a.id.toLocaleLowerCase() === e);
+}
+const oa = Da({});
+var qo = /* @__PURE__ */ me('<g><path id="path14" style="color:#000000;" d="M 0 -4.2808757 L -0.74207357 -2.2406901 C -0.56187965 -2.394702 -0.34988926 -2.4842981 -0.13280843 -2.5104411 L -0.13280843 0 L 0.13280843 0 L 0.13280843 -2.5104411 C 0.35029345 -2.4845375 0.56222883 -2.3950633 0.74207357 -2.2406901 L 0 -4.2808757 z "></path></g>'), Xo = /* @__PURE__ */ me('<g class="hex-map-arrows"></g>');
+function yn(t, e) {
+  ct(e, !0);
+  const [a, r] = en(), n = () => tn(oa, "$arrowData", a);
+  let o = b(e, "hexes", 7), l = b(e, "offset", 7), s = b(e, "firstPreferenceArrows", 7);
+  const i = 0.5;
+  Dt(() => {
+    console.group("first preference arrows"), Ia(oa, Z2.diffedElectorates.reduce(
+      (u, c) => {
+        const d = zo(c.electorate);
+        if (!d)
+          return console.error("couldn't match", c.electorate), u;
+        const P = c.candidates.find((V) => V.party === s());
+        return P || console.error("couldn't find party", s(), c.candidates), {
+          ...u,
+          [d.id]: P == null ? void 0 : P.changeInPercent
+        };
+      },
+      {}
+    )), console.log("all done"), console.groupEnd();
+  }), Fa(() => () => {
+    Ia(oa, {});
   });
-  let _ = /* @__PURE__ */ we(() => d() && v() ? i() : f());
-  var y = pa(), T = te(y), I = te(T);
-  Ut(I, n), U(T);
-  var M = rt(T), Y = te(M);
-  Ut(Y, n), U(M);
-  var fe = rt(M);
+  var p = Xo();
+  Kt(p, 21, o, Qt, (u, c) => {
+    var d = qe(), P = se(d);
+    {
+      var V = (h) => {
+        var I = qo(), N = D(I);
+        w(I), St(
+          (g, A) => {
+            Bt(I, "transform", g), Bt(N, "transform", `scale(1 ${n()[f(c).id] * i})`), _t(N, "fill", A);
+          },
+          [
+            () => `translate(${f(c).coordPx.join(" ")}) scale(2) rotate(10)`,
+            () => `var(--a-${s().length > 3 ? "OTH" : s().toUpperCase()}, hotpink)`
+          ]
+        ), F(h, I);
+      };
+      $t(P, (h) => {
+        n()[f(c).id] && h(V);
+      });
+    }
+    F(u, d);
+  }), w(p), St((u) => Bt(p, "transform", u), [
+    () => `translate(${ke(l(), "").join(",")})`
+  ]), F(t, p);
+  var y = pt({
+    get hexes() {
+      return o();
+    },
+    set hexes(u) {
+      o(u), L();
+    },
+    get offset() {
+      return l();
+    },
+    set offset(u) {
+      l(u), L();
+    },
+    get firstPreferenceArrows() {
+      return s();
+    },
+    set firstPreferenceArrows(u) {
+      s(u), L();
+    }
+  });
+  return r(), y;
+}
+At(
+  yn,
   {
-    var re = (b) => {
-      Ln(b, {
+    hexes: {},
+    offset: {},
+    firstPreferenceArrows: {}
+  },
+  [],
+  [],
+  !0
+);
+var Zo = /* @__PURE__ */ me('<g><g class="group-hexes svelte-1tykyyj"><!></g><g class="group-outline group-outline__under svelte-1tykyyj"><!></g><g class="group-hex-strokes svelte-1tykyyj"><!></g><!><g class="group-outline group-outline__over svelte-1tykyyj"><!></g></g>');
+const t1 = {
+  hash: "svelte-1tykyyj",
+  code: `.group.svelte-1tykyyj:not(.group--map-is-static) {transition:all 1s cubic-bezier(0.42, 0, 0.58, 1);}.group--never-rendered.svelte-1tykyyj {display:none;}.group--hidden.svelte-1tykyyj {opacity:0;pointer-events:none;}.group-hex-strokes.svelte-1tykyyj,
+.group-outline.svelte-1tykyyj {pointer-events:none;}.group.svelte-1tykyyj .hex {transition:all 0.5s;vector-effect:non-scaling-stroke;}.group-outline.svelte-1tykyyj .hex-outline {fill:none;stroke:var(--c-state-outline);stroke-width:1px;transition:opacity 0.5s, stroke 0.5s;vector-effect:non-scaling-stroke;}.group--map-is-empty.svelte-1tykyyj:not(.group--has-focuses) .group-outline:where(.svelte-1tykyyj) .hex-outline {stroke:var(--c-empty-state-outline);}.group-hexes.svelte-1tykyyj .hex[data-allocation="Any"] {fill:var(--a-Any);}.group-hexes.svelte-1tykyyj .hex[data-allocation="ALP"] {fill:var(--a-ALP);}.group-hexes.svelte-1tykyyj .hex[data-allocation="CLP"] {fill:var(--a-CLP);}.group-hexes.svelte-1tykyyj .hex[data-allocation="GRN"] {fill:var(--a-GRN);}.group-hexes.svelte-1tykyyj .hex[data-allocation="IND"] {fill:var(--a-IND);}.group-hexes.svelte-1tykyyj .hex[data-allocation="KAP"] {fill:var(--a-KAP);}.group-hexes.svelte-1tykyyj .hex[data-allocation="LIB"] {fill:var(--a-LIB);}.group-hexes.svelte-1tykyyj .hex[data-allocation="LNP"] {fill:var(--a-LNP);}.group-hexes.svelte-1tykyyj .hex[data-allocation="NAT"] {fill:var(--a-NAT);}.group-hexes.svelte-1tykyyj .hex[data-allocation="ONP"] {fill:var(--a-ONP);}.group-hexes.svelte-1tykyyj .hex[data-allocation="OTH"] {fill:var(--a-OTH);}.group-hexes.svelte-1tykyyj .hex[data-allocation="PUP"] {fill:var(--a-PUP);}.group-hexes.svelte-1tykyyj .hex[data-allocation="Teal"] {fill:var(--a-Teal);}.group-hexes.svelte-1tykyyj .hex[data-allocation="CA"] {fill:var(--a-CA);}.group-hexes.svelte-1tykyyj .hex[data-allocation="null"] {fill:var(--a-null);stroke:var(--a-null-border);stroke-width:1;}.group-hexes.svelte-1tykyyj .hex[data-userfocused="true"] {fill:limegreen !important;}.group--map-is-empty.svelte-1tykyyj .group-hexes:where(.svelte-1tykyyj) .hex {fill:var(--a-empty);stroke:var(--a-empty-border);stroke-width:0.5;}.group-hex-strokes.svelte-1tykyyj .hex {fill:transparent;stroke:transparent;stroke-width:1px;}.group-hex-strokes.svelte-1tykyyj .hex:not([data-allocation="null"]) {fill:transparent;stroke:var(--c-filled-border);stroke-width:1px;}.group-hex-strokes.svelte-1tykyyj .hex[data-certain="null"]:not([data-allocation="null"]) {fill:url(#uncertainty-hash);}.group--has-focuses.svelte-1tykyyj .group-hexes:where(.svelte-1tykyyj) .hex {stroke-width:1;}.group--has-focuses.svelte-1tykyyj .group-hexes:where(.svelte-1tykyyj) .hex[data-allocation="null"][data-focused="true"] {fill:var(--c-white);}.group--has-focuses.svelte-1tykyyj .group-hex-strokes:where(.svelte-1tykyyj) .hex[data-allocation="null"][data-focused="true"] {stroke:var(--c-black);}.group--has-focuses.svelte-1tykyyj .group-hexes:where(.svelte-1tykyyj) .hex[data-allocation="null"][data-focused="false"] {fill:#ebebeb;stroke:#fff;}.group--has-focuses.svelte-1tykyyj .group-hex-strokes:where(.svelte-1tykyyj) .hex[data-allocation="null"][data-focused="false"] {stroke:transparent;}.group--has-focuses.svelte-1tykyyj .group-hexes:where(.svelte-1tykyyj) .hex:not([data-allocation="null"])[data-focused="false"] {opacity:0.1;}.group--has-focuses.svelte-1tykyyj .group-hex-strokes:where(.svelte-1tykyyj) .hex:not([data-allocation="null"])[data-focused="false"] {stroke:var(--c-white);}.group--has-focuses.svelte-1tykyyj:not(.group--map-is-empty) .group-outline:where(.svelte-1tykyyj) .hex-outline {stroke:#60646c;}`
+};
+function un(t, e) {
+  ct(e, !0), Xt(t, t1);
+  let a = b(e, "name", 7, ""), r = b(e, "svgHexes", 7, ""), n = b(e, "hexes", 23, () => []), o = b(e, "svgOutline", 7, ""), l = b(e, "offset", 23, () => [1 / 0, 1 / 0]), s = b(e, "hasAllocations", 7), i = b(e, "allocations", 7), p = b(e, "focuses", 7), y = b(e, "hasAnyFocuses", 7, !1), u = b(e, "labelsToShow", 23, () => ({})), c = b(e, "showElectorateLabels", 7), d = b(e, "showFocusedElectorateLabels", 7), P = b(e, "isStaticLayout", 7), V = Ft(`translate(${ke(l()).join(",")})`), h = Ft(!1), I = /* @__PURE__ */ et(() => l()[0] !== 1 / 0);
+  Dt(() => {
+    f(I) && (_(V, `translate(${ke(l()).join(",")})`), _(h, !0));
+  });
+  let N = /* @__PURE__ */ et(() => y() && d() ? p() : u());
+  var g = Zo();
+  let A;
+  var m = D(g), T = D(m);
+  be(T, r), w(m);
+  var R = ut(m), S = D(R);
+  be(S, o), w(R);
+  var H = ut(R), it = D(H);
+  be(it, r), w(H);
+  var $ = ut(H);
+  {
+    var Et = (O) => {
+      rn(O, {
         get hexes() {
-          return r();
+          return n();
         },
         get allocations() {
-          return c();
+          return i();
         },
         get labelsToShow() {
-          return g(_);
+          return f(N);
         },
         get showElectorateLabels() {
-          return u();
+          return c();
         }
       });
     };
-    yn(fe, (b) => {
-      g(w) && b(re);
+    $t($, (O) => {
+      f(I) && O(Et);
     });
   }
-  var Q = rt(fe), Z = te(Q);
-  return Ut(Z, a), U(Q), U(y), lt(() => {
-    No(y, "data-name", o()), Ye(y, "group--never-rendered", !g(E)), Ye(y, "group--hidden", !g(w)), Ye(y, "group--map-is-filled", l()), Ye(y, "group--map-is-static", h()), Ye(y, "group--has-focuses", d()), ye(y, "transform", g(L));
-  }), le(e, y), Fe({
+  var Jt = ut($), Ct = D(Jt);
+  return be(Ct, o), w(Jt), w(g), St(() => {
+    A = Xe(g, 0, "group svelte-1tykyyj", null, A, {
+      "group--never-rendered": !f(h),
+      "group--hidden": !f(I),
+      "group--map-is-static": P(),
+      "group--map-is-empty": !s(),
+      "group--has-focuses": y()
+    }), Bt(g, "data-name", a()), _t(g, "transform", f(V)), _t(Jt, "opacity", y() && !s() ? 0 : 1);
+  }), F(t, g), pt({
     get name() {
-      return o();
-    },
-    set name(b = "") {
-      o(b), N();
-    },
-    get svgHexes() {
-      return n();
-    },
-    set svgHexes(b = "") {
-      n(b), N();
-    },
-    get hexes() {
-      return r();
-    },
-    set hexes(b = []) {
-      r(b), N();
-    },
-    get svgOutline() {
       return a();
     },
-    set svgOutline(b = "") {
-      a(b), N();
+    set name(O = "") {
+      a(O), L();
+    },
+    get svgHexes() {
+      return r();
+    },
+    set svgHexes(O = "") {
+      r(O), L();
+    },
+    get hexes() {
+      return n();
+    },
+    set hexes(O = []) {
+      n(O), L();
+    },
+    get svgOutline() {
+      return o();
+    },
+    set svgOutline(O = "") {
+      o(O), L();
     },
     get offset() {
-      return s();
-    },
-    set offset(b = [1 / 0, 1 / 0]) {
-      s(b), N();
-    },
-    get isFilled() {
       return l();
     },
-    set isFilled(b = !1) {
-      l(b), N();
+    set offset(O = [1 / 0, 1 / 0]) {
+      l(O), L();
+    },
+    get hasAllocations() {
+      return s();
+    },
+    set hasAllocations(O) {
+      s(O), L();
     },
     get allocations() {
-      return c();
-    },
-    set allocations(b) {
-      c(b), N();
-    },
-    get focuses() {
       return i();
     },
-    set focuses(b) {
-      i(b), N();
+    set allocations(O) {
+      i(O), L();
+    },
+    get focuses() {
+      return p();
+    },
+    set focuses(O) {
+      p(O), L();
     },
     get hasAnyFocuses() {
-      return d();
+      return y();
     },
-    set hasAnyFocuses(b = !1) {
-      d(b), N();
+    set hasAnyFocuses(O = !1) {
+      y(O), L();
     },
     get labelsToShow() {
-      return f();
-    },
-    set labelsToShow(b = {}) {
-      f(b), N();
-    },
-    get showElectorateLabels() {
       return u();
     },
-    set showElectorateLabels(b) {
-      u(b), N();
+    set labelsToShow(O = {}) {
+      u(O), L();
+    },
+    get showElectorateLabels() {
+      return c();
+    },
+    set showElectorateLabels(O) {
+      c(O), L();
     },
     get showFocusedElectorateLabels() {
-      return v();
+      return d();
     },
-    set showFocusedElectorateLabels(b) {
-      v(b), N();
+    set showFocusedElectorateLabels(O) {
+      d(O), L();
     },
-    get isStatic() {
-      return h();
+    get isStaticLayout() {
+      return P();
     },
-    set isStatic(b) {
-      h(b), N();
+    set isStaticLayout(O) {
+      P(O), L();
     }
   });
 }
-nt(
-  Cn,
+At(
+  un,
   {
     name: {},
     svgHexes: {},
     hexes: {},
     svgOutline: {},
     offset: {},
-    isFilled: {},
+    hasAllocations: {},
     allocations: {},
     focuses: {},
     hasAnyFocuses: {},
     labelsToShow: {},
     showElectorateLabels: {},
     showFocusedElectorateLabels: {},
-    isStatic: {}
+    isStaticLayout: {}
   },
   [],
   [],
   !0
 );
-const ga = (e) => e;
-function ma(e, { delay: t = 0, duration: o = 400, easing: n = ga } = {}) {
-  const r = +getComputedStyle(e).opacity;
+const e1 = (t) => t;
+function a1(t, { delay: e = 0, duration: a = 400, easing: r = e1 } = {}) {
+  const n = +getComputedStyle(t).opacity;
   return {
-    delay: t,
-    duration: o,
-    easing: n,
-    css: (a) => `opacity: ${a * r}`
+    delay: e,
+    duration: a,
+    easing: r,
+    css: (o) => `opacity: ${o * n}`
   };
 }
-var ya = /* @__PURE__ */ pt('<div class="label svelte-lh1lcp"> </div>'), _a = /* @__PURE__ */ pt('<div class="labels svelte-lh1lcp" aria-hidden="true"></div>');
-const Na = {
-  hash: "svelte-lh1lcp",
-  code: '.labels.svelte-lh1lcp {position:absolute;left:0;top:0;pointer-events:none;width:100%;height:100%;}.label.svelte-lh1lcp {transition:all 1s cubic-bezier(0.42, 0, 0.58, 1);position:absolute;height:2em;margin-top:-1em;display:flex;justify-content:center;align-items:center;color:var(--Border, #000);text-align:center;font-family:ABCSans, "ABC Sans Nova";font-size:0.875rem;font-style:normal;font-weight:700;line-height:normal;-webkit-text-stroke:2px white;paint-order:stroke fill;}'
+var r1 = /* @__PURE__ */ q('<div class="state-labels__label svelte-dbcm70"> </div>'), n1 = /* @__PURE__ */ q('<div aria-hidden="true"></div>');
+const o1 = {
+  hash: "svelte-dbcm70",
+  code: `.state-labels.svelte-dbcm70 {position:absolute;left:0;top:0;pointer-events:none;width:100%;height:100%;container-type:inline-size;}.state-labels__label.svelte-dbcm70 {transition:all 1s cubic-bezier(0.42, 0, 0.58, 1);position:absolute;height:2em;margin-top:-1em;display:flex;justify-content:center;align-items:center;color:var(--Border, #000);text-align:center;font-family:ABCSans, "ABC Sans Nova";font-size:0.875rem;font-style:normal;font-weight:700;line-height:normal;-webkit-text-stroke:2px transparent;paint-order:stroke fill;}
+@container (min-width: 30rem) {.state-labels__label.svelte-dbcm70 {font-size:1.125rem;}
+}
+@container (min-width: 38rem) {.state-labels__label.svelte-dbcm70 {font-size:1.25rem;}
+}.state-labels--overlaid.svelte-dbcm70 .state-labels__label:where(.svelte-dbcm70) {-webkit-text-stroke:2px #f1f1f1;paint-order:stroke fill;}`
 };
-function On(e, t) {
-  Be(t, !0), xt(e, Na);
-  let o = P(t, "labels", 7);
-  var n = _a();
-  return _o(n, 21, o, yo, (r, a) => {
-    var s = Br(), l = pr(s);
-    Dr(l, () => g(a), (c) => {
-      var i = ya(), d = te(i, !0);
-      U(i), lt(
-        (f) => {
-          ye(i, "left", g(a).left + "%"), ye(i, "top", g(a).top + "%"), ye(i, "width", g(a).width + "%"), ye(i, "margin-left", f), xn(d, g(a).name);
+function Pn(t, e) {
+  ct(e, !0), Xt(t, o1);
+  let a = b(e, "labels", 7), r = b(e, "overlayLabels", 7, !1);
+  var n = n1();
+  let o;
+  return Kt(n, 21, a, Qt, (l, s) => {
+    var i = qe(), p = se(i);
+    S2(p, () => f(s).name, (y) => {
+      var u = r1(), c = D(u, !0);
+      w(u), St(
+        (d) => {
+          _t(u, "left", f(s).left + "%"), _t(u, "top", f(s).top + "%"), _t(u, "width", f(s).width + "%"), _t(u, "margin-left", d), Fe(c, f(s).name);
         },
         [
-          () => Math.round(0 - g(a).width / 2) + "%"
+          () => Math.round(0 - f(s).width / 2) + "%"
         ]
-      ), zr(3, i, () => ma, () => ({ duration: 1e3 })), le(c, i);
-    }), le(r, s);
-  }), U(n), le(e, n), Fe({
+      ), _2(3, u, () => a1, () => ({ duration: 1e3 })), F(y, u);
+    }), F(l, i);
+  }), w(n), St(() => o = Xe(n, 1, "state-labels svelte-dbcm70", null, o, { "state-labels--overlaid": r() })), F(t, n), pt({
     get labels() {
-      return o();
-    },
-    set labels(r) {
-      o(r), N();
-    }
-  });
-}
-nt(On, { labels: {} }, [], [], !0);
-var wa = ({ target: e, clientX: t, clientY: o }, n) => {
-  var a;
-  const r = (a = e == null ? void 0 : e.dataset) == null ? void 0 : a.id;
-  !r || !n() || n()({ code: r, clientX: t, clientY: o });
-}, ba = /* @__PURE__ */ pt('<div class="hexmap__labels svelte-ahmprl"><!></div>'), Pa = /* @__PURE__ */ pt('<div class="hexmap svelte-ahmprl"><svg class="svelte-ahmprl"><defs id="defs1"><pattern id="uncertainty-hash" patternUnits="userSpaceOnUse" width="5.2070173" height="2.9824252" patternTransform="translate(393.99999,558.99999)" preserveAspectRatio="xMidYMid"><path clip-path="none" style="opacity:0.8;fill:#ffffff;fill-opacity:0.8;stroke:none;stroke-width:0.00999999;stroke-dasharray:none" d="M 2.0117291,0 0,1.1523402 v 1.830085 L 5.2050898,0 Z M 5.2070173,1.1503748 2.0117291,2.9824252 h 3.1952882 z"></path></pattern></defs><!></svg> <!></div>');
-const Aa = {
-  hash: "svelte-ahmprl",
-  code: ".hexmap.svelte-ahmprl {position:relative;height:100%;display:flex;align-items:center;justify-content:center;}.hexmap__labels.svelte-ahmprl {position:absolute;top:0;left:50%;top:50%;pointer-events:none;}.hexmap.svelte-ahmprl svg:where(.svelte-ahmprl) {max-width:100%;max-height:100%;}"
-};
-function Rn(e, t) {
-  Be(t, !0), xt(e, Aa);
-  let o = P(t, "config", 23, () => ({})), n = P(t, "layout", 23, () => ({})), r = P(t, "allocations", 23, () => ({})), a = P(t, "focuses", 23, () => ({})), s = P(t, "certainties", 23, () => ({})), l = P(t, "labelsToShow", 23, () => ({})), c = P(t, "showStateLabels", 7, !1), i = P(t, "showElectorateLabels", 7, !1), d = P(t, "showFocusedElectorateLabels", 7, !1), f = P(t, "isStatic", 7, !1), u = P(t, "onClick", 7, () => {
-  }), v = he(void 0), h = he(0), p = he(0), m = /* @__PURE__ */ we(() => Object.values(a()).some(Boolean)), L = /* @__PURE__ */ we(() => {
-    const x = Object.values(r());
-    return x.length !== 0 && x.every(Boolean);
-  });
-  const E = n().viewbox, w = { easing: ua, duration: 1100 };
-  let _ = new je(E[0], w), y = new je(E[1], w), T = new je(E[2], w), I = new je(E[3], w);
-  Rt(() => {
-    const [x, k, We, Gt] = n().viewbox;
-    _.set(x), y.set(k), T.set(We), I.set(Gt);
-  });
-  let M = /* @__PURE__ */ we(() => {
-    var x;
-    return Array.from(((x = g(v)) == null ? void 0 : x.querySelectorAll("polygon.hex")) || []).filter((k) => k instanceof SVGPolygonElement);
-  }), Y = he(void 0), fe = he(void 0), re = he(void 0);
-  Rt(() => {
-    const x = r(), k = a(), We = s(), Gt = J(() => g(Y) || {}), Tn = J(() => g(fe) || {}), $n = J(() => g(re) || {});
-    g(M).forEach((gt) => {
-      const Se = gt.dataset.id;
-      if (!Se)
-        return;
-      const bo = x[Se] || null;
-      bo !== Gt[Se] && (gt.dataset.allocation = bo);
-      const Po = g(m) ? k[Se] || !1 : !0;
-      Po !== Tn[Se] && (gt.dataset.focused = Po);
-      const Ao = We[Se] || null;
-      Ao !== $n[Se] && (gt.dataset.certain = Ao);
-    }), $(Y, ge(x)), $(fe, ge(k)), $(re, ge(We));
-  });
-  var Q = Pa();
-  Q.__click = [wa, u];
-  var Z = te(Q), b = rt(te(Z));
-  _o(b, 17, () => o().groups, yo, (x, k) => {
-    Cn(x, sa(() => g(k), {
-      get isStatic() {
-        return f();
-      },
-      get layout() {
-        return n();
-      },
-      get offset() {
-        return n().positions[g(k).name];
-      },
-      get isFilled() {
-        return g(L);
-      },
-      get allocations() {
-        return r();
-      },
-      get focuses() {
-        return a();
-      },
-      get hasAnyFocuses() {
-        return g(m);
-      },
-      get showElectorateLabels() {
-        return i();
-      },
-      get showFocusedElectorateLabels() {
-        return d();
-      },
-      get labelsToShow() {
-        return l();
-      }
-    }));
-  }), U(Z), Pn(Z, (x) => $(v, x), () => g(v));
-  var He = rt(Z, 2);
-  {
-    var De = (x) => {
-      var k = ba(), We = te(k);
-      On(We, {
-        get labels() {
-          return n().labels;
-        }
-      }), U(k), lt(() => {
-        ye(k, "width", `${g(h)}px`), ye(k, "height", `${g(p)}px`), ye(k, "margin-left", `${0 - g(h) / 2}px`), ye(k, "margin-top", `${0 - g(p) / 2}px`);
-      }), le(x, k);
-    };
-    yn(He, (x) => {
-      c() && x(De);
-    });
-  }
-  return U(Q), lt((x) => No(Z, "viewBox", x), [
-    () => [
-      _.current,
-      y.current,
-      T.current,
-      I.current
-    ].join(" ")
-  ]), Io(Z, "clientWidth", (x) => $(h, x)), Io(Z, "clientHeight", (x) => $(p, x)), le(e, Q), Fe({
-    get config() {
-      return o();
-    },
-    set config(x = {}) {
-      o(x), N();
-    },
-    get layout() {
-      return n();
-    },
-    set layout(x = {}) {
-      n(x), N();
-    },
-    get allocations() {
-      return r();
-    },
-    set allocations(x = {}) {
-      r(x), N();
-    },
-    get focuses() {
       return a();
     },
-    set focuses(x = {}) {
-      a(x), N();
+    set labels(l) {
+      a(l), L();
     },
-    get certainties() {
-      return s();
+    get overlayLabels() {
+      return r();
     },
-    set certainties(x = {}) {
-      s(x), N();
-    },
-    get labelsToShow() {
-      return l();
-    },
-    set labelsToShow(x = {}) {
-      l(x), N();
-    },
-    get showStateLabels() {
-      return c();
-    },
-    set showStateLabels(x = !1) {
-      c(x), N();
-    },
-    get showElectorateLabels() {
-      return i();
-    },
-    set showElectorateLabels(x = !1) {
-      i(x), N();
-    },
-    get showFocusedElectorateLabels() {
-      return d();
-    },
-    set showFocusedElectorateLabels(x = !1) {
-      d(x), N();
-    },
-    get isStatic() {
-      return f();
-    },
-    set isStatic(x = !1) {
-      f(x), N();
-    },
-    get onClick() {
-      return u();
-    },
-    set onClick(x = () => {
-    }) {
-      u(x), N();
+    set overlayLabels(l = !1) {
+      r(l), L();
     }
   });
 }
-Ir(["click"]);
-nt(
-  Rn,
+At(Pn, { labels: {}, overlayLabels: {} }, [], [], !0);
+var l1 = /* @__PURE__ */ q('<span class="accessible-hide svelte-ivafae"><!></span>');
+const s1 = {
+  hash: "svelte-ivafae",
+  code: ".accessible-hide.svelte-ivafae {clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px;}"
+};
+function dn(t, e) {
+  ct(e, !0), Xt(t, s1);
+  let a = b(e, "children", 7);
+  var r = l1(), n = D(r);
+  return De(n, () => a() ?? M), w(r), F(t, r), pt({
+    get children() {
+      return a();
+    },
+    set children(o) {
+      a(o), L();
+    }
+  });
+}
+At(dn, { children: {} }, [], [], !0);
+function c1(t, e) {
+  _(e, wt(t.target.dataset.id));
+}
+function p1(t, e) {
+  var r;
+  const a = t.target.dataset.id;
+  (r = e()) == null || r({ code: a, clientX: null, clientY: null });
+}
+function i1(t, e) {
+  f(e) === t.target.dataset.id && _(e, null);
+}
+var y1 = /* @__PURE__ */ q("<li><button> </button></li>"), u1 = /* @__PURE__ */ q("<li> <ul></ul></li>"), P1 = /* @__PURE__ */ q('<ul class="hexmapkeyboardnav svelte-1vj52vk"></ul>');
+const d1 = {
+  hash: "svelte-1vj52vk",
+  code: ".hexmapkeyboardnav.svelte-1vj52vk {max-height:300px;overflow:auto;}"
+};
+function hn(t, e) {
+  ct(e, !0), Xt(t, d1);
+  let a = b(e, "groups", 7), r = b(e, "onChange", 7), n = b(e, "onClick", 7), o = Ft(null);
+  Dt(() => {
+    var s;
+    (s = r()) == null || s(f(o));
+  });
+  let l = /* @__PURE__ */ et(() => a().map((s) => ({
+    ...s,
+    hexes: [...s.hexes].sort((i, p) => i.coord[0] + i.coord[1] * 1e3 - (p.coord[0] + p.coord[1] * 1e3))
+  })));
+  return dn(t, {
+    children: (s, i) => {
+      var p = P1();
+      p.__click = [p1, n], p.__focusin = [c1, o], p.__focusout = [i1, o], Kt(p, 21, () => f(l), Qt, (y, u) => {
+        var c = u1(), d = D(c), P = ut(d);
+        Kt(P, 21, () => f(u).hexes, Qt, (V, h) => {
+          var I = y1(), N = D(I), g = D(N, !0);
+          w(N), w(I), St(() => {
+            Bt(N, "data-id", f(h).id), Fe(g, f(h).name);
+          }), F(V, I);
+        }), w(P), w(c), St(() => Fe(d, `${f(u).name ?? ""} `)), F(y, c);
+      }), w(p), F(s, p);
+    },
+    $$slots: { default: !0 }
+  }), pt({
+    get groups() {
+      return a();
+    },
+    set groups(s) {
+      a(s), L();
+    },
+    get onChange() {
+      return r();
+    },
+    set onChange(s) {
+      r(s), L();
+    },
+    get onClick() {
+      return n();
+    },
+    set onClick(s) {
+      n(s), L();
+    }
+  });
+}
+jr(["click", "focusin", "focusout"]);
+At(hn, { groups: {}, onChange: {}, onClick: {} }, [], [], !0);
+var h1 = typeof global == "object" && global && global.Object === Object && global, V1 = typeof self == "object" && self && self.Object === Object && self, Vn = h1 || V1 || Function("return this")(), Je = Vn.Symbol, In = Object.prototype, I1 = In.hasOwnProperty, A1 = In.toString, ue = Je ? Je.toStringTag : void 0;
+function g1(t) {
+  var e = I1.call(t, ue), a = t[ue];
+  try {
+    t[ue] = void 0;
+    var r = !0;
+  } catch {
+  }
+  var n = A1.call(t);
+  return r && (e ? t[ue] = a : delete t[ue]), n;
+}
+var f1 = Object.prototype, N1 = f1.toString;
+function m1(t) {
+  return N1.call(t);
+}
+var L1 = "[object Null]", b1 = "[object Undefined]", Pr = Je ? Je.toStringTag : void 0;
+function T1(t) {
+  return t == null ? t === void 0 ? b1 : L1 : Pr && Pr in Object(t) ? g1(t) : m1(t);
+}
+function v1(t) {
+  return t != null && typeof t == "object";
+}
+var R1 = "[object Symbol]";
+function S1(t) {
+  return typeof t == "symbol" || v1(t) && T1(t) == R1;
+}
+var O1 = /\s/;
+function G1(t) {
+  for (var e = t.length; e-- && O1.test(t.charAt(e)); )
+    ;
+  return e;
+}
+var x1 = /^\s+/;
+function E1(t) {
+  return t && t.slice(0, G1(t) + 1).replace(x1, "");
+}
+function La(t) {
+  var e = typeof t;
+  return t != null && (e == "object" || e == "function");
+}
+var dr = NaN, C1 = /^[-+]0x[0-9a-f]+$/i, U1 = /^0b[01]+$/i, w1 = /^0o[0-7]+$/i, H1 = parseInt;
+function hr(t) {
+  if (typeof t == "number")
+    return t;
+  if (S1(t))
+    return dr;
+  if (La(t)) {
+    var e = typeof t.valueOf == "function" ? t.valueOf() : t;
+    t = La(e) ? e + "" : e;
+  }
+  if (typeof t != "string")
+    return t === 0 ? t : +t;
+  t = E1(t);
+  var a = U1.test(t);
+  return a || w1.test(t) ? H1(t.slice(2), a ? 2 : 8) : C1.test(t) ? dr : +t;
+}
+var la = function() {
+  return Vn.Date.now();
+}, _1 = "Expected a function", F1 = Math.max, D1 = Math.min;
+function k1(t, e, a) {
+  var r, n, o, l, s, i, p = 0, y = !1, u = !1, c = !0;
+  if (typeof t != "function")
+    throw new TypeError(_1);
+  e = hr(e) || 0, La(a) && (y = !!a.leading, u = "maxWait" in a, o = u ? F1(hr(a.maxWait) || 0, e) : o, c = "trailing" in a ? !!a.trailing : c);
+  function d(T) {
+    var R = r, S = n;
+    return r = n = void 0, p = T, l = t.apply(S, R), l;
+  }
+  function P(T) {
+    return p = T, s = setTimeout(I, e), y ? d(T) : l;
+  }
+  function V(T) {
+    var R = T - i, S = T - p, H = e - R;
+    return u ? D1(H, o - S) : H;
+  }
+  function h(T) {
+    var R = T - i, S = T - p;
+    return i === void 0 || R >= e || R < 0 || u && S >= o;
+  }
+  function I() {
+    var T = la();
+    if (h(T))
+      return N(T);
+    s = setTimeout(I, V(T));
+  }
+  function N(T) {
+    return s = void 0, c && r ? d(T) : (r = n = void 0, l);
+  }
+  function g() {
+    s !== void 0 && clearTimeout(s), p = 0, r = i = n = s = void 0;
+  }
+  function A() {
+    return s === void 0 ? l : N(la());
+  }
+  function m() {
+    var T = la(), R = h(T);
+    if (r = arguments, n = this, i = T, R) {
+      if (s === void 0)
+        return P(i);
+      if (u)
+        return clearTimeout(s), s = setTimeout(I, e), d(i);
+    }
+    return s === void 0 && (s = setTimeout(I, e)), l;
+  }
+  return m.cancel = g, m.flush = A, m;
+}
+var M1 = ({ target: t, clientX: e, clientY: a }, r) => {
+  var o;
+  const n = (o = t == null ? void 0 : t.dataset) == null ? void 0 : o.id;
+  !n || !r() || r()({ code: n, clientX: e, clientY: a });
+}, J1 = (t, e) => {
+  const a = t.target, { clientX: r, clientY: n } = t, o = a.dataset.id;
+  a.nodeName !== "polygon" || !o || f(e)({ code: o, clientX: r, clientY: n });
+}, W1 = (t, e) => {
+  f(e)({ code: null });
+}, Y1 = /* @__PURE__ */ q('<div class="hex-map-interaction-handlers"><!></div>'), $1 = /* @__PURE__ */ q("<!> <!>", 1);
+function An(t, e) {
+  ct(e, !0);
+  let a = b(e, "isInteractive", 7, !1), r = b(e, "onClick", 7), n = b(e, "onHover", 7), o = b(e, "children", 7);
+  const l = /* @__PURE__ */ et(() => k1(n(), 60));
+  var s = $1(), i = se(s);
+  {
+    var p = (c) => {
+      var d = Y1();
+      d.__click = [M1, r], d.__mouseover = [J1, l], d.__mouseout = [W1, l];
+      var P = D(d);
+      De(P, () => o() ?? M), w(d), T2("blur", d, (V) => {
+        f(l)({ code: null });
+      }), F(c, d);
+    };
+    $t(i, (c) => {
+      a() && c(p);
+    });
+  }
+  var y = ut(i, 2);
+  {
+    var u = (c) => {
+      var d = qe(), P = se(d);
+      De(P, () => o() ?? M), F(c, d);
+    };
+    $t(y, (c) => {
+      a() || c(u);
+    });
+  }
+  return F(t, s), pt({
+    get isInteractive() {
+      return a();
+    },
+    set isInteractive(c = !1) {
+      a(c), L();
+    },
+    get onClick() {
+      return r();
+    },
+    set onClick(c) {
+      r(c), L();
+    },
+    get onHover() {
+      return n();
+    },
+    set onHover(c) {
+      n(c), L();
+    },
+    get children() {
+      return o();
+    },
+    set children(c) {
+      o(c), L();
+    }
+  });
+}
+jr(["click", "mouseover", "mouseout"]);
+At(
+  An,
+  {
+    isInteractive: {},
+    onClick: {},
+    onHover: {},
+    children: {}
+  },
+  [],
+  [],
+  !0
+);
+var B1 = /* @__PURE__ */ q('<div class="hexmap__labels svelte-ko8kvy"><!></div>'), j1 = /* @__PURE__ */ q('<div><svg class="svelte-ko8kvy"><defs id="defs1"><pattern id="uncertainty-hash" patternUnits="userSpaceOnUse" width="5.2070173" height="2.9824252" patternTransform="translate(393.99999,558.99999)" preserveAspectRatio="xMidYMid"><path clip-path="none" style="opacity:0.8;fill:#ffffff;fill-opacity:0.8;stroke:none;stroke-width:0.00999999;stroke-dasharray:none" d="M 2.0117291,0 0,1.1523402 v 1.830085 L 5.2050898,0 Z M 5.2070173,1.1503748 2.0117291,2.9824252 h 3.1952882 z"></path></pattern></defs><!><!></svg> <!></div> <!>', 1), Q1 = /* @__PURE__ */ q('<div class="hexmap svelte-ko8kvy"><!></div>');
+const K1 = {
+  hash: "svelte-ko8kvy",
+  code: ".hexmap.svelte-ko8kvy {position:relative;width:100%;height:100%;position:relative;}.hexmap__labels.svelte-ko8kvy {position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;}.hexmap.svelte-ko8kvy svg:where(.svelte-ko8kvy) {width:100%;height:100%;margin:0 auto;}.hexmap__viz.svelte-ko8kvy {position:relative;margin:0 auto;max-height:100%;}"
+};
+function gn(t, e) {
+  ct(e, !0), Xt(t, K1);
+  let a = b(e, "config", 23, () => ({})), r = b(e, "layout", 23, () => ({})), n = b(e, "allocations", 23, () => ({})), o = b(e, "focuses", 23, () => ({})), l = b(e, "certainties", 23, () => ({})), s = b(e, "labelsToShow", 23, () => ({})), i = b(e, "showStateLabels", 7, !1), p = b(e, "showElectorateLabels", 7, !1), y = b(e, "showFocusedElectorateLabels", 7, !1), u = b(e, "isStaticLayout", 7, !1), c = b(e, "onClick", 7, ({ code: v }) => {
+  }), d = b(e, "onHover", 7, ({ code: v }) => {
+  }), P = b(e, "customViewbox", 7, null), V = b(e, "onViewboxChange", 7, ({ newViewbox: v }) => {
+  }), h = b(e, "isInteractive", 7, !1), I = b(e, "firstPreferenceArrows", 7, "None"), N = Ft(void 0), g = Ft(0), A = Ft(null), m = /* @__PURE__ */ et(() => Object.values(o()).some(Boolean)), T = /* @__PURE__ */ et(() => {
+    const v = Object.values(n());
+    return v.length !== 0 && v.some(Boolean);
+  });
+  const R = r().viewbox, S = { easing: j2, duration: 1100 };
+  let H = new ae(R[0], S), it = new ae(R[1], S), $ = new ae(R[2], S), Et = new ae(R[3], S);
+  Dt(() => {
+    const [v, X, gt, ft] = P() || r().viewbox;
+    H.set(v), it.set(X), $.set(gt), Et.set(ft);
+  }), Dt(() => {
+    V()(r().viewbox);
+  });
+  let Jt = /* @__PURE__ */ et(() => {
+    var v;
+    return Array.from(((v = f(N)) == null ? void 0 : v.querySelectorAll("polygon.hex")) || []).filter((X) => X instanceof SVGPolygonElement);
+  });
+  Dt(() => {
+    const v = { ...n() }, X = o(), gt = l(), ft = f(A);
+    f(Jt).forEach((Nt) => {
+      const rt = Nt.dataset.id;
+      if (!rt)
+        return;
+      const Le = v[rt] || null;
+      Nt.dataset.allocation = Le;
+      const Ze = f(m) ? X[rt] || !1 : !0;
+      Nt.dataset.focused = Ze;
+      const ta = gt[rt] || null;
+      Nt.dataset.certain = ta, rt === ft ? Nt.dataset.userfocused = "true" : delete Nt.dataset.userfocused;
+    });
+  }), Fa(() => {
+    if (!f(N))
+      return;
+    const v = f(N).getBoundingClientRect();
+    _(g, v.height / v.width);
+  });
+  var Ct = Q1(), O = D(Ct);
+  return An(O, {
+    get isInteractive() {
+      return h();
+    },
+    get onClick() {
+      return c();
+    },
+    get onHover() {
+      return d();
+    },
+    children: (v, X) => {
+      var gt = j1(), ft = se(gt);
+      let Nt;
+      var rt = D(ft), Le = ut(D(rt));
+      Kt(Le, 17, () => a().groups, Qt, (k, Q) => {
+        un(k, J2(() => f(Q), {
+          get isStaticLayout() {
+            return u();
+          },
+          get layout() {
+            return r();
+          },
+          get offset() {
+            return r().positions[f(Q).name];
+          },
+          get hasAllocations() {
+            return f(T);
+          },
+          get allocations() {
+            return n();
+          },
+          get focuses() {
+            return o();
+          },
+          get hasAnyFocuses() {
+            return f(m);
+          },
+          get showElectorateLabels() {
+            return p();
+          },
+          get showFocusedElectorateLabels() {
+            return y();
+          },
+          get labelsToShow() {
+            return s();
+          }
+        }));
+      });
+      var Ze = ut(Le);
+      {
+        var ta = (k) => {
+          var Q = qe(), ea = se(Q);
+          Kt(ea, 17, () => a().groups, Qt, (Tn, Wa) => {
+            yn(Tn, {
+              get hexes() {
+                return f(Wa).hexes;
+              },
+              get offset() {
+                return r().positions[f(Wa).name];
+              },
+              get firstPreferenceArrows() {
+                return I();
+              }
+            });
+          }), F(k, Q);
+        };
+        $t(Ze, (k) => {
+          I() !== "None" && k(ta);
+        });
+      }
+      w(rt), _a(rt, (k) => _(N, k), () => f(N));
+      var Nn = ut(rt, 2);
+      {
+        var mn = (k) => {
+          var Q = B1(), ea = D(Q);
+          Pn(ea, {
+            get labels() {
+              return r().labels;
+            },
+            get overlayLabels() {
+              return r().overlayLabels;
+            }
+          }), w(Q), F(k, Q);
+        };
+        $t(Nn, (k) => {
+          i() && k(mn);
+        });
+      }
+      w(ft);
+      var Ln = ut(ft, 2);
+      {
+        var bn = (k) => {
+          hn(k, {
+            get groups() {
+              return a().groups;
+            },
+            onChange: (Q) => {
+              _(A, wt(Q));
+            },
+            get onClick() {
+              return c();
+            }
+          });
+        };
+        $t(Ln, (k) => {
+          h() && k(bn);
+        });
+      }
+      St(
+        (k, Q) => {
+          Nt = Xe(ft, 1, "hexmap__viz svelte-ko8kvy", null, Nt, {
+            "hexmap__viz--vertical": f(g) <= 1
+          }), _t(ft, "aspect-ratio", k), Bt(rt, "viewBox", Q);
+        },
+        [
+          () => f(g) ? f(g).toFixed(3) : null,
+          () => [
+            H.current,
+            it.current,
+            $.current,
+            Et.current
+          ].join(" ")
+        ]
+      ), F(v, gt);
+    },
+    $$slots: { default: !0 }
+  }), w(Ct), F(t, Ct), pt({
+    get config() {
+      return a();
+    },
+    set config(v = {}) {
+      a(v), L();
+    },
+    get layout() {
+      return r();
+    },
+    set layout(v = {}) {
+      r(v), L();
+    },
+    get allocations() {
+      return n();
+    },
+    set allocations(v = {}) {
+      n(v), L();
+    },
+    get focuses() {
+      return o();
+    },
+    set focuses(v = {}) {
+      o(v), L();
+    },
+    get certainties() {
+      return l();
+    },
+    set certainties(v = {}) {
+      l(v), L();
+    },
+    get labelsToShow() {
+      return s();
+    },
+    set labelsToShow(v = {}) {
+      s(v), L();
+    },
+    get showStateLabels() {
+      return i();
+    },
+    set showStateLabels(v = !1) {
+      i(v), L();
+    },
+    get showElectorateLabels() {
+      return p();
+    },
+    set showElectorateLabels(v = !1) {
+      p(v), L();
+    },
+    get showFocusedElectorateLabels() {
+      return y();
+    },
+    set showFocusedElectorateLabels(v = !1) {
+      y(v), L();
+    },
+    get isStaticLayout() {
+      return u();
+    },
+    set isStaticLayout(v = !1) {
+      u(v), L();
+    },
+    get onClick() {
+      return c();
+    },
+    set onClick(v = ({ code: X }) => {
+    }) {
+      c(v), L();
+    },
+    get onHover() {
+      return d();
+    },
+    set onHover(v = ({ code: X }) => {
+    }) {
+      d(v), L();
+    },
+    get customViewbox() {
+      return P();
+    },
+    set customViewbox(v = null) {
+      P(v), L();
+    },
+    get onViewboxChange() {
+      return V();
+    },
+    set onViewboxChange(v = ({ newViewbox: X }) => {
+    }) {
+      V(v), L();
+    },
+    get isInteractive() {
+      return h();
+    },
+    set isInteractive(v = !1) {
+      h(v), L();
+    },
+    get firstPreferenceArrows() {
+      return I();
+    },
+    set firstPreferenceArrows(v = "None") {
+      I(v), L();
+    }
+  });
+}
+At(
+  gn,
   {
     config: {},
     layout: {},
@@ -2856,132 +3790,185 @@ nt(
     showStateLabels: {},
     showElectorateLabels: {},
     showFocusedElectorateLabels: {},
-    isStatic: {},
-    onClick: {}
+    isStaticLayout: {},
+    onClick: {},
+    onHover: {},
+    customViewbox: {},
+    onViewboxChange: {},
+    isInteractive: {},
+    firstPreferenceArrows: {}
   },
   [],
   [],
   !0
 );
-const Ea = { None: "a", Any: "z", ALP: "b", CA: "c", CLP: "d", GRN: "e", IND: "f", KAP: "g", LIB: "h", LNP: "i", NAT: "j", ONP: "k", OTH: "l", UAP: "m", Teal: "t", NXT: "c", PUP: "m" }, La = {
-  hashCodes: Ea
+let sa = Da({});
+var z1 = /* @__PURE__ */ q('<div class="style-root svelte-1y6eltw"><!></div>');
+const q1 = {
+  hash: "svelte-1y6eltw",
+  code: ".style-root.svelte-1y6eltw * {box-sizing:border-box;}.style-root.svelte-1y6eltw {height:100%;font-family:ABCSans, sans-serif;--c-black: #000;--c-grey: #989494;--c-lightgrey: #ddd;--c-white: #fff;--c-ptyaqua: #005d82;--c-ptyblack: #757575;--c-ptyblue: #0a52bf;--c-ptybrown: #804a40;--c-ptygold: #cc8500;--c-ptygreen: #007056;--c-ptylightblue: #00a1c7;--c-ptylightgreen: #51a802;--c-ptyorange: #e5660b;--c-ptypurple: #985eb5;--c-ptyred: #e11f30;--c-ptyteal: #0098a6;--c-supp-ptygold: #a36a00;--c-supp-ptylightgreen: #508423;--c-supp-ptylightblue: #0e81a0;--c-supp-ptyorange: #bd5800;--c-supp-ptyteal: #007e8a;--a-empty: #f1f1f1;--a-empty-border: black;--c-empty-state-outline: black;--c-state-outline: #949494;--a-null: #f1f1f1;--a-null-border: #fff;--a-Any: var(--c-white);--a-ALP: var(--c-ptyred);--a-CA: var(--c-ptyblack);--a-CLP: var(--c-ptygold);--a-GRN: var(--c-ptylightgreen);--a-IND: var(--c-ptyblack);--a-KAP: var(--c-ptybrown);--a-LIB: var(--c-ptyblue);--a-LNP: var(--c-ptyblue);--a-NAT: var(--c-ptygreen);--a-ONP: var(--c-ptyorange);--a-OTH: var(--c-ptyblack);--a-PUP: var(--c-ptygold);--a-Teal: var(--c-ptyteal);--c-filled-border: #fff;}"
 };
-let Yt = Qr({});
-var Ca = /* @__PURE__ */ pt('<div class="style-root svelte-yk8qkj"><!></div>');
-const Oa = {
-  hash: "svelte-yk8qkj",
-  code: ".style-root.svelte-yk8qkj * {box-sizing:border-box;}.style-root.svelte-yk8qkj {height:100%;font-family:ABCSans, sans-serif;--c-black: #000;--c-grey: #989494;--c-lightgrey: #ddd;--c-white: #fff;--c-ptyaqua: #005d82;--c-ptyblack: #757575;--c-ptyblue: #0a52bf;--c-ptybrown: #804a40;--c-ptygold: #cc8500;--c-ptygreen: #007056;--c-ptylightblue: #00a1c7;--c-ptylightgreen: #51a802;--c-ptyorange: #e5660b;--c-ptypurple: #985eb5;--c-ptyred: #e11f30;--c-ptyteal: #0098a6;--c-supp-ptygold: #a36a00;--c-supp-ptylightgreen: #508423;--c-supp-ptylightblue: #0e81a0;--c-supp-ptyorange: #bd5800;--c-supp-ptyteal: #007e8a;--a-null: var(--c-white);--a-Any: var(--c-white);--a-ALP: var(--c-ptyred);--a-NXT: var(--c-pty-xxxxxx);--a-CLP: var(--c-ptygold);--a-GRN: var(--c-ptylightgreen);--a-IND: var(--c-ptyblack);--a-KAP: var(--c-ptybrown);--a-LIB: var(--c-ptyblue);--a-LNP: var(--c-ptyblue);--a-NAT: var(--c-ptygreen);--a-ONP: var(--c-ptyorange);--a-OTH: var(--c-ptyblack);--a-PUP: var(--c-ptygold);--a-Teal: var(--c-ptyteal);--c-empty-border: #cdcbcb;--c-filled-border: #fff;}"
-};
-function Sn(e, t) {
-  Be(t, !0), xt(e, Oa);
-  const [o, n] = oa(), r = () => ea(Yt, "$partyColours", o);
-  let a = P(t, "children", 7), s = he(void 0);
-  Jr(() => {
-    if (!g(s))
+function fn(t, e) {
+  ct(e, !0), Xt(t, q1);
+  const [a, r] = en(), n = () => tn(sa, "$partyColours", a);
+  let o = b(e, "children", 7), l = Ft(void 0);
+  Fa(() => {
+    if (!f(l))
       return;
-    const d = window.getComputedStyle(g(s));
-    ta(Yt, {}), Object.keys(La.hashCodes).forEach((u) => {
-      na(Yt, J(r)[u] = d.getPropertyValue(`--a-${u}`), J(r));
+    const y = window.getComputedStyle(f(l));
+    Ia(sa, {}), Object.keys(ka.hashCodes).forEach((c) => {
+      D2(sa, kt(n)[c] = y.getPropertyValue(`--a-${c}`), kt(n));
     });
   });
-  var l = Ca(), c = te(l);
-  Ur(c, () => a() ?? K), U(l), Pn(l, (d) => $(s, d), () => g(s)), le(e, l);
-  var i = Fe({
+  var s = z1(), i = D(s);
+  De(i, () => o() ?? M), w(s), _a(s, (y) => _(l, y), () => f(l)), F(t, s);
+  var p = pt({
     get children() {
-      return a();
+      return o();
     },
-    set children(d) {
-      a(d), N();
+    set children(y) {
+      o(y), L();
     }
   });
-  return n(), i;
+  return r(), p;
 }
-nt(Sn, { children: {} }, [], [], !0);
-const Ra = { viewbox: [-50, -1, 480, 502], positions: { ACT: [9.0035, 10], NSW: [4, 6], NT: [2.51, 5], QLD: [5, 0], SA: [2.004, 6], TAS: [7, 16.75, !0], VIC: [4.02, 10], WA: [0.05, 6] }, labels: [{ left: 30, top: 27, width: 8, name: "NT" }, { left: 68, top: 17, width: 8, name: "QLD" }, { left: 64, top: 40, width: 8, name: "NSW" }, { left: 71, top: 55.5, width: 8, name: "ACT" }, { left: 59, top: 65, width: 8, name: "VIC" }, { left: 59, top: 85.5, width: 8, name: "TAS" }, { left: 30, top: 46, width: 8, name: "SA" }, { left: 19, top: 46, width: 8, name: "WA" }] }, Sa = {
-  COUNTRY: Ra
-}, Ta = 291, $a = 200, Ma = /* @__PURE__ */ JSON.parse(`[{"name":"ACT","svgHexes":"<polygon data-id='BEAN' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='CANB' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='FENN' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,27.7,24,41.6,32,55.4,24,69.3,32,69.3,48,55.4,56,41.6,48,27.7,56,13.9,48,13.9,32,0,24,0,8' />","hexes":[{"name":"Bean","coord":[0,1],"shortName":"Bean","index":21,"id":"BEAN","coordPx":[27.7,40]},{"name":"Canberra","coord":[1,1],"shortName":"Canb.","index":2,"id":"CANB","coordPx":[55.4,40]},{"name":"Fenner","coord":[0,0],"shortName":"Fenn.","index":26,"id":"FENN","coordPx":[13.9,16]}]},{"name":"NSW","svgHexes":"<polygon data-id='BANK' class='hex' points='221.7,104 221.7,120 207.8,128 194,120 194,104 207.8,96' /><polygon data-id='BART' class='hex' points='235.6,128 235.6,144 221.7,152 207.8,144 207.8,128 221.7,120' /><polygon data-id='BENN' class='hex' points='207.8,32 207.8,48 194,56 180.1,48 180.1,32 194,24' /><polygon data-id='BERO' class='hex' points='152.4,32 152.4,48 138.6,56 124.7,48 124.7,32 138.6,24' /><polygon data-id='BLAX' class='hex' points='235.6,80 235.6,96 221.7,104 207.8,96 207.8,80 221.7,72' /><polygon data-id='BRFD' class='hex' points='263.3,32 263.3,48 249.4,56 235.6,48 235.6,32 249.4,24' /><polygon data-id='CALA' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='CHIF' class='hex' points='166.3,56 166.3,72 152.4,80 138.6,72 138.6,56 152.4,48' /><polygon data-id='COOK' class='hex' points='180.1,80 180.1,96 166.3,104 152.4,96 152.4,80 166.3,72' /><polygon data-id='COWP' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' /><polygon data-id='CUNN' class='hex' points='124.7,80 124.7,96 110.9,104 97,96 97,80 110.9,72' /><polygon data-id='DOBE' class='hex' points='194,8 194,24 180.1,32 166.3,24 166.3,8 180.1,0' /><polygon data-id='EMON' class='hex' points='83.1,56 83.1,72 69.3,80 55.4,72 55.4,56 69.3,48' /><polygon data-id='FARR' class='hex' points='41.6,80 41.6,96 27.7,104 13.9,96 13.9,80 27.7,72' /><polygon data-id='FOWL' class='hex' points='194,56 194,72 180.1,80 166.3,72 166.3,56 180.1,48' /><polygon data-id='GILM' class='hex' points='97,80 97,96 83.1,104 69.3,96 69.3,80 83.1,72' /><polygon data-id='GRAY' class='hex' points='263.3,80 263.3,96 249.4,104 235.6,96 235.6,80 249.4,72' /><polygon data-id='GREE' class='hex' points='221.7,56 221.7,72 207.8,80 194,72 194,56 207.8,48' /><polygon data-id='HUGH' class='hex' points='194,104 194,120 180.1,128 166.3,120 166.3,104 180.1,96' /><polygon data-id='HUME' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='HUNT' class='hex' points='249.4,8 249.4,24 235.6,32 221.7,24 221.7,8 235.6,0' /><polygon data-id='KSMI' class='hex' points='249.4,152 249.4,168 235.6,176 221.7,168 221.7,152 235.6,144' /><polygon data-id='LIND' class='hex' points='110.9,8 110.9,24 97,32 83.1,24 83.1,8 97,0' /><polygon data-id='LYNE' class='hex' points='83.1,8 83.1,24 69.3,32 55.4,24 55.4,8 69.3,0' /><polygon data-id='MACA' class='hex' points='138.6,56 138.6,72 124.7,80 110.9,72 110.9,56 124.7,48' /><polygon data-id='MACK' class='hex' points='180.1,32 180.1,48 166.3,56 152.4,48 152.4,32 166.3,24' /><polygon data-id='MACQ' class='hex' points='138.6,8 138.6,24 124.7,32 110.9,24 110.9,8 124.7,0' /><polygon data-id='MCMA' class='hex' points='124.7,32 124.7,48 110.9,56 97,48 97,32 110.9,24' /><polygon data-id='MITC' class='hex' points='235.6,32 235.6,48 221.7,56 207.8,48 207.8,32 221.7,24' /><polygon data-id='NENG' class='hex' points='55.4,56 55.4,72 41.6,80 27.7,72 27.7,56 41.6,48' /><polygon data-id='NEWC' class='hex' points='291,32 291,48 277.1,56 263.3,48 263.3,32 277.1,24' /><polygon data-id='NSYD' class='hex' points='291,80 291,96 277.1,104 263.3,96 263.3,80 277.1,72' /><polygon data-id='PAGE' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='PARK' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' /><polygon data-id='PARR' class='hex' points='207.8,80 207.8,96 194,104 180.1,96 180.1,80 194,72' /><polygon data-id='PATE' class='hex' points='277.1,8 277.1,24 263.3,32 249.4,24 249.4,8 263.3,0' /><polygon data-id='REID' class='hex' points='249.4,56 249.4,72 235.6,80 221.7,72 221.7,56 235.6,48' /><polygon data-id='RICH' class='hex' points='97,32 97,48 83.1,56 69.3,48 69.3,32 83.1,24' /><polygon data-id='RIVE' class='hex' points='27.7,56 27.7,72 13.9,80 0,72 0,56 13.9,48' /><polygon data-id='ROBE' class='hex' points='166.3,8 166.3,24 152.4,32 138.6,24 138.6,8 152.4,0' /><polygon data-id='SHOR' class='hex' points='221.7,8 221.7,24 207.8,32 194,24 194,8 207.8,0' /><polygon data-id='SYDN' class='hex' points='277.1,104 277.1,120 263.3,128 249.4,120 249.4,104 263.3,96' /><polygon data-id='WARR' class='hex' points='277.1,56 277.1,72 263.3,80 249.4,72 249.4,56 263.3,48' /><polygon data-id='WATS' class='hex' points='249.4,104 249.4,120 235.6,128 221.7,120 221.7,104 235.6,96' /><polygon data-id='WENT' class='hex' points='263.3,128 263.3,144 249.4,152 235.6,144 235.6,128 249.4,120' /><polygon data-id='WERR' class='hex' points='152.4,80 152.4,96 138.6,104 124.7,96 124.7,80 138.6,72' /><polygon data-id='WHIT' class='hex' points='110.9,56 110.9,72 97,80 83.1,72 83.1,56 97,48' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,41.6,0,55.4,8,69.3,0,83.1,8,97,0,110.9,8,124.7,0,138.6,8,152.4,0,166.3,8,180.1,0,194,8,207.8,0,221.7,8,235.6,0,249.4,8,263.3,0,277.1,8,277.1,24,291,32,291,48,277.1,56,277.1,72,291,80,291,96,277.1,104,277.1,120,263.3,128,263.3,144,249.4,152,249.4,168,235.6,176,221.7,168,221.7,152,207.8,144,207.8,128,194,120,180.1,128,166.3,120,166.3,104,152.4,96,138.6,104,124.7,96,110.9,104,97,96,83.1,104,69.3,96,55.4,104,41.6,96,27.7,104,13.9,96,13.9,80,0,72,0,56,13.9,48,13.9,32,0,24,0,8' />","hexes":[{"name":"Banks","coord":[7,4],"shortName":"Banks","index":83,"id":"BANK","coordPx":[207.8,112]},{"name":"Barton","coord":[7,5],"shortName":"Bart.","index":20,"id":"BART","coordPx":[221.7,136]},{"name":"Bennelong","coord":[6,1],"shortName":"Benn.","index":84,"id":"BENN","coordPx":[194,40]},{"name":"Berowra","coord":[4,1],"shortName":"Bero.","index":70,"id":"BERO","coordPx":[138.6,40]},{"name":"Blaxland","coord":[7,3],"shortName":"Blax.","index":0,"id":"BLAX","coordPx":[221.7,88]},{"name":"Bradfield","coord":[8,1],"shortName":"Brad.","index":71,"id":"BRFD","coordPx":[249.4,40]},{"name":"Calare","coord":[0,1],"shortName":"Cala.","index":135,"id":"CALA","coordPx":[27.7,40]},{"name":"Chifley","coord":[5,2],"shortName":"Chifl.","index":3,"id":"CHIF","coordPx":[152.4,64]},{"name":"Cook","coord":[5,3],"shortName":"Cook","index":72,"id":"COOK","coordPx":[166.3,88]},{"name":"Cowper","coord":[1,0],"shortName":"Cowp.","index":143,"id":"COWP","coordPx":[41.6,16]},{"name":"Cunningham","coord":[3,3],"shortName":"Cunni.","index":5,"id":"CUNN","coordPx":[110.9,88]},{"name":"Dobell","coord":[6,0],"shortName":"Dobe.","index":49,"id":"DOBE","coordPx":[180.1,16]},{"name":"Eden-Monaro","coord":[2,2],"shortName":"Eden.","index":51,"id":"EMON","coordPx":[69.3,64]},{"name":"Farrer","coord":[0,3],"shortName":"Farr.","index":75,"id":"FARR","coordPx":[27.7,88]},{"name":"Fowler","coord":[6,2],"shortName":"Fowl.","index":6,"id":"FOWL","coordPx":[180.1,64]},{"name":"Gilmore","coord":[2,3],"shortName":"Gilm.","index":52,"id":"GILM","coordPx":[83.1,88]},{"name":"Grayndler","coord":[8,3],"shortName":"Gray.","index":11,"id":"GRAY","coordPx":[249.4,88]},{"name":"Greenway","coord":[7,2],"shortName":"Gree.","index":53,"id":"GREE","coordPx":[207.8,64]},{"name":"Hughes","coord":[6,4],"shortName":"Hugh.","index":87,"id":"HUGH","coordPx":[180.1,112]},{"name":"Hume","coord":[1,3],"shortName":"Hume","index":78,"id":"HUME","coordPx":[55.4,88]},{"name":"Hunter","coord":[8,0],"shortName":"Hunt.","index":55,"id":"HUNT","coordPx":[235.6,16]},{"name":"Kingsford Smith","coord":[8,6],"shortName":"Kings.","index":34,"id":"KSMI","coordPx":[235.6,160]},{"name":"Lindsay","coord":[3,0],"shortName":"Linds.","index":107,"id":"LIND","coordPx":[97,16]},{"name":"Lyne","coord":[2,0],"shortName":"Lyne","index":137,"id":"LYNE","coordPx":[69.3,16]},{"name":"Macarthur","coord":[4,2],"shortName":"Maca.","index":36,"id":"MACA","coordPx":[124.7,64]},{"name":"Mackellar","coord":[5,1],"shortName":"Mack.","index":79,"id":"MACK","coordPx":[166.3,40]},{"name":"Macquarie","coord":[4,0],"shortName":"Macq.","index":59,"id":"MACQ","coordPx":[124.7,16]},{"name":"McMahon","coord":[3,1],"shortName":"McMa.","index":40,"id":"MCMA","coordPx":[110.9,40]},{"name":"Mitchell","coord":[7,1],"shortName":"Mitc.","index":80,"id":"MITC","coordPx":[221.7,40]},{"name":"New England","coord":[1,2],"shortName":"New.","index":139,"id":"NENG","coordPx":[41.6,64]},{"name":"Newcastle","coord":[9,1],"shortName":"Newc.","index":13,"id":"NEWC","coordPx":[277.1,40]},{"name":"North Sydney","coord":[9,3],"shortName":"Nort.","index":91,"id":"NSYD","coordPx":[277.1,88]},{"name":"Page","coord":[1,1],"shortName":"Page","index":144,"id":"PAGE","coordPx":[55.4,40]},{"name":"Parkes","coord":[0,0],"shortName":"Park.","index":141,"id":"PARK","coordPx":[13.9,16]},{"name":"Parramatta","coord":[6,3],"shortName":"Parr.","index":62,"id":"PARR","coordPx":[194,88]},{"name":"Paterson","coord":[9,0],"shortName":"Pate.","index":63,"id":"PATE","coordPx":[263.3,16]},{"name":"Reid","coord":[8,2],"shortName":"Reid","index":108,"id":"REID","coordPx":[235.6,64]},{"name":"Richmond","coord":[2,1],"shortName":"Rich.","index":65,"id":"RICH","coordPx":[83.1,40]},{"name":"Riverina","coord":[0,2],"shortName":"River.","index":142,"id":"RIVE","coordPx":[13.9,64]},{"name":"Robertson","coord":[5,0],"shortName":"Robe.","index":109,"id":"ROBE","coordPx":[152.4,16]},{"name":"Shortland","coord":[7,0],"shortName":"Shor.","index":66,"id":"SHOR","coordPx":[207.8,16]},{"name":"Sydney","coord":[9,4],"shortName":"Sydn.","index":16,"id":"SYDN","coordPx":[263.3,112]},{"name":"Warringah","coord":[9,2],"shortName":"Warr.","index":146,"id":"WARR","coordPx":[263.3,64]},{"name":"Watson","coord":[8,4],"shortName":"Wats.","index":17,"id":"WATS","coordPx":[235.6,112]},{"name":"Wentworth","coord":[8,5],"shortName":"Went.","index":111,"id":"WENT","coordPx":[249.4,136]},{"name":"Werriwa","coord":[4,3],"shortName":"Werr.","index":68,"id":"WERR","coordPx":[138.6,88]},{"name":"Whitlam","coord":[3,2],"shortName":"Whit.","index":43,"id":"WHIT","coordPx":[97,64]}]},{"name":"NT","svgHexes":"<polygon data-id='LING' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' /><polygon data-id='SOLO' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,41.6,0,55.4,8,55.4,24,41.6,32,27.7,24,13.9,32,0,24,0,8' />","hexes":[{"name":"Lingiari","coord":[1,0],"shortName":"Lingi.","index":57,"id":"LING","coordPx":[41.6,16]},{"name":"Solomon","coord":[0,0],"shortName":"Solo.","index":67,"id":"SOLO","coordPx":[13.9,16]}]},{"name":"QLD","svgHexes":"<polygon data-id='BLAI' class='hex' points='97,128 97,144 83.1,152 69.3,144 69.3,128 83.1,120' /><polygon data-id='BONN' class='hex' points='194,56 194,72 180.1,80 166.3,72 166.3,56 180.1,48' /><polygon data-id='BOWM' class='hex' points='221.7,104 221.7,120 207.8,128 194,120 194,104 207.8,96' /><polygon data-id='BRIS' class='hex' points='180.1,80 180.1,96 166.3,104 152.4,96 152.4,80 166.3,72' /><polygon data-id='CAPR' class='hex' points='110.9,56 110.9,72 97,80 83.1,72 83.1,56 97,48' /><polygon data-id='DAWS' class='hex' points='124.7,32 124.7,48 110.9,56 97,48 97,32 110.9,24' /><polygon data-id='DICK' class='hex' points='124.7,80 124.7,96 110.9,104 97,96 97,80 110.9,72' /><polygon data-id='FADD' class='hex' points='194,104 194,120 180.1,128 166.3,120 166.3,104 180.1,96' /><polygon data-id='FAIR' class='hex' points='180.1,32 180.1,48 166.3,56 152.4,48 152.4,32 166.3,24' /><polygon data-id='FISH' class='hex' points='166.3,56 166.3,72 152.4,80 138.6,72 138.6,56 152.4,48' /><polygon data-id='FLYN' class='hex' points='97,80 97,96 83.1,104 69.3,96 69.3,80 83.1,72' /><polygon data-id='FORD' class='hex' points='180.1,128 180.1,144 166.3,152 152.4,144 152.4,128 166.3,120' /><polygon data-id='GRIF' class='hex' points='166.3,104 166.3,120 152.4,128 138.6,120 138.6,104 152.4,96' /><polygon data-id='GROO' class='hex' points='69.3,128 69.3,144 55.4,152 41.6,144 41.6,128 55.4,120' /><polygon data-id='HERB' class='hex' points='152.4,32 152.4,48 138.6,56 124.7,48 124.7,32 138.6,24' /><polygon data-id='HINK' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='KENN' class='hex' points='55.4,104 55.4,120 41.6,128 27.7,120 27.7,104 41.6,96' /><polygon data-id='LEIC' class='hex' points='166.3,8 166.3,24 152.4,32 138.6,24 138.6,8 152.4,0' /><polygon data-id='LILL' class='hex' points='207.8,80 207.8,96 194,104 180.1,96 180.1,80 194,72' /><polygon data-id='LONG' class='hex' points='138.6,56 138.6,72 124.7,80 110.9,72 110.9,56 124.7,48' /><polygon data-id='MARA' class='hex' points='41.6,128 41.6,144 27.7,152 13.9,144 13.9,128 27.7,120' /><polygon data-id='MCPH' class='hex' points='235.6,128 235.6,144 221.7,152 207.8,144 207.8,128 221.7,120' /><polygon data-id='MONC' class='hex' points='207.8,128 207.8,144 194,152 180.1,144 180.1,128 194,120' /><polygon data-id='MORE' class='hex' points='138.6,104 138.6,120 124.7,128 110.9,120 110.9,104 124.7,96' /><polygon data-id='OXLE' class='hex' points='124.7,128 124.7,144 110.9,152 97,144 97,128 110.9,120' /><polygon data-id='PETR' class='hex' points='152.4,80 152.4,96 138.6,104 124.7,96 124.7,80 138.6,72' /><polygon data-id='RANK' class='hex' points='110.9,104 110.9,120 97,128 83.1,120 83.1,104 97,96' /><polygon data-id='RYAN' class='hex' points='152.4,128 152.4,144 138.6,152 124.7,144 124.7,128 138.6,120' /><polygon data-id='WBAY' class='hex' points='138.6,8 138.6,24 124.7,32 110.9,24 110.9,8 124.7,0' /><polygon data-id='WRIG' class='hex' points='83.1,104 83.1,120 69.3,128 55.4,120 55.4,104 69.3,96' />","svgOutline":"<polygon data-id='' class='hex-outline' points='13.9,128,27.7,120,27.7,104,41.6,96,41.6,80,55.4,72,69.3,80,83.1,72,83.1,56,97,48,97,32,110.9,24,110.9,8,124.7,0,138.6,8,152.4,0,166.3,8,166.3,24,180.1,32,180.1,48,194,56,194,72,207.8,80,207.8,96,221.7,104,221.7,120,235.6,128,235.6,144,221.7,152,207.8,144,194,152,180.1,144,166.3,152,152.4,144,138.6,152,124.7,144,110.9,152,97,144,83.1,152,69.3,144,55.4,152,41.6,144,27.7,152,13.9,144,13.9,128' />","hexes":[{"name":"Blair","coord":[2,5],"shortName":"Blair","index":45,"id":"BLAI","coordPx":[83.1,136]},{"name":"Bonner","coord":[6,2],"shortName":"Bonn.","index":124,"id":"BONN","coordPx":[180.1,64]},{"name":"Bowman","coord":[7,4],"shortName":"Bowm.","index":125,"id":"BOWM","coordPx":[207.8,112]},{"name":"Brisbane","coord":[5,3],"shortName":"Brisb.","index":131,"id":"BRIS","coordPx":[166.3,88]},{"name":"Capricornia","coord":[3,2],"shortName":"Capri.","index":112,"id":"CAPR","coordPx":[97,64]},{"name":"Dawson","coord":[3,1],"shortName":"Daws.","index":113,"id":"DAWS","coordPx":[110.9,40]},{"name":"Dickson","coord":[3,3],"shortName":"Dicks.","index":132,"id":"DICK","coordPx":[110.9,88]},{"name":"Fadden","coord":[6,4],"shortName":"Fadd.","index":114,"id":"FADD","coordPx":[180.1,112]},{"name":"Fairfax","coord":[5,1],"shortName":"Fairf.","index":115,"id":"FAIR","coordPx":[166.3,40]},{"name":"Fisher","coord":[5,2],"shortName":"Fishe","index":116,"id":"FISH","coordPx":[152.4,64]},{"name":"Flynn","coord":[2,3],"shortName":"Flynn","index":126,"id":"FLYN","coordPx":[83.1,88]},{"name":"Forde","coord":[5,5],"shortName":"Forde","index":127,"id":"FORD","coordPx":[166.3,136]},{"name":"Griffith","coord":[5,4],"shortName":"Griff.","index":54,"id":"GRIF","coordPx":[152.4,112]},{"name":"Groom","coord":[1,5],"shortName":"Groom","index":117,"id":"GROO","coordPx":[55.4,136]},{"name":"Herbert","coord":[4,1],"shortName":"Herb.","index":128,"id":"HERB","coordPx":[138.6,40]},{"name":"Hinkler","coord":[1,3],"shortName":"Hinkl.","index":118,"id":"HINK","coordPx":[55.4,88]},{"name":"Kennedy","coord":[1,4],"shortName":"Kenn.","index":148,"id":"KENN","coordPx":[41.6,112]},{"name":"Leichhardt","coord":[5,0],"shortName":"Leich.","index":133,"id":"LEIC","coordPx":[152.4,16]},{"name":"Lilley","coord":[6,3],"shortName":"Lille","index":56,"id":"LILL","coordPx":[194,88]},{"name":"Longman","coord":[4,2],"shortName":"Long.","index":134,"id":"LONG","coordPx":[124.7,64]},{"name":"Maranoa","coord":[0,5],"shortName":"Mara.","index":119,"id":"MARA","coordPx":[27.7,136]},{"name":"McPherson","coord":[7,5],"shortName":"McPh.","index":120,"id":"MCPH","coordPx":[221.7,136]},{"name":"Moncrieff","coord":[6,5],"shortName":"Monc.","index":121,"id":"MONC","coordPx":[194,136]},{"name":"Moreton","coord":[4,4],"shortName":"More.","index":61,"id":"MORE","coordPx":[124.7,112]},{"name":"Oxley","coord":[3,5],"shortName":"Oxley","index":41,"id":"OXLE","coordPx":[110.9,136]},{"name":"Petrie","coord":[4,3],"shortName":"Petrie","index":129,"id":"PETR","coordPx":[138.6,88]},{"name":"Rankin","coord":[3,4],"shortName":"Ranki","index":42,"id":"RANK","coordPx":[97,112]},{"name":"Ryan","coord":[4,5],"shortName":"Ryan","index":130,"id":"RYAN","coordPx":[138.6,136]},{"name":"Wide Bay","coord":[4,0],"shortName":"Wide.","index":122,"id":"WBAY","coordPx":[124.7,16]},{"name":"Wright","coord":[2,4],"shortName":"Wrig.","index":123,"id":"WRIG","coordPx":[69.3,112]}]},{"name":"SA","svgHexes":"<polygon data-id='ADEL' class='hex' points='55.4,104 55.4,120 41.6,128 27.7,120 27.7,104 41.6,96' /><polygon data-id='BARK' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='BOOT' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='GREY' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' /><polygon data-id='HIND' class='hex' points='41.6,80 41.6,96 27.7,104 13.9,96 13.9,80 27.7,72' /><polygon data-id='KING' class='hex' points='69.3,128 69.3,144 55.4,152 41.6,144 41.6,128 55.4,120' /><polygon data-id='MAKI' class='hex' points='55.4,56 55.4,72 41.6,80 27.7,72 27.7,56 41.6,48' /><polygon data-id='MAYO' class='hex' points='55.4,152 55.4,168 41.6,176 27.7,168 27.7,152 41.6,144' /><polygon data-id='SPEN' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='STUR' class='hex' points='41.6,128 41.6,144 27.7,152 13.9,144 13.9,128 27.7,120' />","svgOutline":"<polygon data-id='' class='hex-outline' points='13.9,32,27.7,24,27.7,8,41.6,0,55.4,8,55.4,24,69.3,32,69.3,48,55.4,56,55.4,72,69.3,80,69.3,96,55.4,104,55.4,120,69.3,128,69.3,144,55.4,152,55.4,168,41.6,176,27.7,168,27.7,152,13.9,144,13.9,128,27.7,120,27.7,104,13.9,96,13.9,80,27.7,72,27.7,56,13.9,48,13.9,32' />","hexes":[{"name":"Adelaide","coord":[1,4],"shortName":"Adel.","index":18,"id":"ADEL","coordPx":[41.6,112]},{"name":"Barker","coord":[0,1],"shortName":"Bark.","index":69,"id":"BARK","coordPx":[27.7,40]},{"name":"Boothby","coord":[1,3],"shortName":"Boot.","index":97,"id":"BOOT","coordPx":[55.4,88]},{"name":"Grey","coord":[1,0],"shortName":"Grey","index":77,"id":"GREY","coordPx":[41.6,16]},{"name":"Hindmarsh","coord":[0,3],"shortName":"Hind.","index":29,"id":"HIND","coordPx":[27.7,88]},{"name":"Kingston","coord":[1,5],"shortName":"Kings.","index":35,"id":"KING","coordPx":[55.4,136]},{"name":"Makin","coord":[1,2],"shortName":"Makin","index":38,"id":"MAKI","coordPx":[41.6,64]},{"name":"Mayo","coord":[1,6],"shortName":"Mayo","index":149,"id":"MAYO","coordPx":[41.6,160]},{"name":"Spence","coord":[1,1],"shortName":"Spen.","index":15,"id":"SPEN","coordPx":[55.4,40]},{"name":"Sturt","coord":[0,5],"shortName":"Sturt","index":93,"id":"STUR","coordPx":[27.7,136]}]},{"name":"TAS","svgHexes":"<polygon data-id='BASS' class='hex' points='83.1,8 83.1,24 69.3,32 55.4,24 55.4,8 69.3,0' /><polygon data-id='BRAD' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' /><polygon data-id='CLAR' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='FRAN' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='LYON' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,41.6,0,55.4,8,69.3,0,83.1,8,83.1,24,69.3,32,69.3,48,55.4,56,41.6,48,27.7,56,13.9,48,13.9,32,0,24,0,8' />","hexes":[{"name":"Bass","coord":[2,0],"shortName":"Bass","index":96,"id":"BASS","coordPx":[69.3,16]},{"name":"Braddon","coord":[0,0],"shortName":"Brad.","index":98,"id":"BRAD","coordPx":[13.9,16]},{"name":"Clark","coord":[0,1],"shortName":"Clark","index":145,"id":"CLAR","coordPx":[27.7,40]},{"name":"Franklin","coord":[1,1],"shortName":"Fran.","index":7,"id":"FRAN","coordPx":[55.4,40]},{"name":"Lyons","coord":[1,0],"shortName":"Lyons","index":58,"id":"LYON","coordPx":[41.6,16]}]},{"name":"VIC","svgHexes":"<polygon data-id='ASTO' class='hex' points='166.3,56 166.3,72 152.4,80 138.6,72 138.6,56 152.4,48' /><polygon data-id='BALL' class='hex' points='55.4,104 55.4,120 41.6,128 27.7,120 27.7,104 41.6,96' /><polygon data-id='BEND' class='hex' points='41.6,32 41.6,48 27.7,56 13.9,48 13.9,32 27.7,24' /><polygon data-id='BRUC' class='hex' points='180.1,80 180.1,96 166.3,104 152.4,96 152.4,80 166.3,72' /><polygon data-id='CALW' class='hex' points='83.1,8 83.1,24 69.3,32 55.4,24 55.4,8 69.3,0' /><polygon data-id='CASE' class='hex' points='207.8,80 207.8,96 194,104 180.1,96 180.1,80 194,72' /><polygon data-id='CHIS' class='hex' points='124.7,80 124.7,96 110.9,104 97,96 97,80 110.9,72' /><polygon data-id='COOP' class='hex' points='138.6,56 138.6,72 124.7,80 110.9,72 110.9,56 124.7,48' /><polygon data-id='CORA' class='hex' points='69.3,128 69.3,144 55.4,152 41.6,144 41.6,128 55.4,120' /><polygon data-id='CORI' class='hex' points='27.7,56 27.7,72 13.9,80 0,72 0,56 13.9,48' /><polygon data-id='DEAK' class='hex' points='152.4,32 152.4,48 138.6,56 124.7,48 124.7,32 138.6,24' /><polygon data-id='DUNK' class='hex' points='180.1,128 180.1,144 166.3,152 152.4,144 152.4,128 166.3,120' /><polygon data-id='FLIN' class='hex' points='207.8,128 207.8,144 194,152 180.1,144 180.1,128 194,120' /><polygon data-id='FRAS' class='hex' points='83.1,56 83.1,72 69.3,80 55.4,72 55.4,56 69.3,48' /><polygon data-id='GELL' class='hex' points='97,128 97,144 83.1,152 69.3,144 69.3,128 83.1,120' /><polygon data-id='GIPP' class='hex' points='221.7,56 221.7,72 207.8,80 194,72 194,56 207.8,48' /><polygon data-id='GOLD' class='hex' points='152.4,128 152.4,144 138.6,152 124.7,144 124.7,128 138.6,120' /><polygon data-id='GORT' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='HAWK' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='HIGG' class='hex' points='138.6,104 138.6,120 124.7,128 110.9,120 110.9,104 124.7,96' /><polygon data-id='HOLT' class='hex' points='194,104 194,120 180.1,128 166.3,120 166.3,104 180.1,96' /><polygon data-id='HOTH' class='hex' points='152.4,80 152.4,96 138.6,104 124.7,96 124.7,80 138.6,72' /><polygon data-id='INDI' class='hex' points='138.6,8 138.6,24 124.7,32 110.9,24 110.9,8 124.7,0' /><polygon data-id='ISAA' class='hex' points='166.3,104 166.3,120 152.4,128 138.6,120 138.6,104 152.4,96' /><polygon data-id='JAGA' class='hex' points='97,32 97,48 83.1,56 69.3,48 69.3,32 83.1,24' /><polygon data-id='KOOY' class='hex' points='97,80 97,96 83.1,104 69.3,96 69.3,80 83.1,72' /><polygon data-id='LTRO' class='hex' points='221.7,104 221.7,120 207.8,128 194,120 194,104 207.8,96' /><polygon data-id='LALO' class='hex' points='55.4,56 55.4,72 41.6,80 27.7,72 27.7,56 41.6,48' /><polygon data-id='MACN' class='hex' points='124.7,128 124.7,144 110.9,152 97,144 97,128 110.9,120' /><polygon data-id='MALL' class='hex' points='27.7,8 27.7,24 13.9,32 0,24 0,8 13.9,0' /><polygon data-id='MARI' class='hex' points='83.1,104 83.1,120 69.3,128 55.4,120 55.4,104 69.3,96' /><polygon data-id='MCEW' class='hex' points='194,56 194,72 180.1,80 166.3,72 166.3,56 180.1,48' /><polygon data-id='MELB' class='hex' points='110.9,104 110.9,120 97,128 83.1,120 83.1,104 97,96' /><polygon data-id='MENZ' class='hex' points='124.7,32 124.7,48 110.9,56 97,48 97,32 110.9,24' /><polygon data-id='MONA' class='hex' points='235.6,80 235.6,96 221.7,104 207.8,96 207.8,80 221.7,72' /><polygon data-id='NICH' class='hex' points='55.4,8 55.4,24 41.6,32 27.7,24 27.7,8 41.6,0' /><polygon data-id='SCUL' class='hex' points='110.9,8 110.9,24 97,32 83.1,24 83.1,8 97,0' /><polygon data-id='WANN' class='hex' points='41.6,80 41.6,96 27.7,104 13.9,96 13.9,80 27.7,72' /><polygon data-id='WILL' class='hex' points='110.9,56 110.9,72 97,80 83.1,72 83.1,56 97,48' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,8,13.9,0,27.7,8,41.6,0,55.4,8,69.3,0,83.1,8,97,0,110.9,8,124.7,0,138.6,8,138.6,24,152.4,32,152.4,48,166.3,56,180.1,48,194,56,207.8,48,221.7,56,221.7,72,235.6,80,235.6,96,221.7,104,221.7,120,207.8,128,207.8,144,194,152,180.1,144,166.3,152,152.4,144,138.6,152,124.7,144,110.9,152,97,144,83.1,152,69.3,144,55.4,152,41.6,144,41.6,128,27.7,120,27.7,104,13.9,96,13.9,80,0,72,0,56,13.9,48,13.9,32,0,24,0,8' />","hexes":[{"name":"Aston","coord":[5,2],"shortName":"Aston","index":82,"id":"ASTO","coordPx":[152.4,64]},{"name":"Ballarat","coord":[1,4],"shortName":"Ball.","index":19,"id":"BALL","coordPx":[41.6,112]},{"name":"Bendigo","coord":[0,1],"shortName":"Bendi.","index":22,"id":"BEND","coordPx":[27.7,40]},{"name":"Bruce","coord":[5,3],"shortName":"Bruce","index":24,"id":"BRUC","coordPx":[166.3,88]},{"name":"Calwell","coord":[2,0],"shortName":"Calw.","index":1,"id":"CALW","coordPx":[69.3,16]},{"name":"Casey","coord":[6,3],"shortName":"Casey","index":99,"id":"CASE","coordPx":[194,88]},{"name":"Chisholm","coord":[3,3],"shortName":"Chish.","index":100,"id":"CHIS","coordPx":[110.9,88]},{"name":"Cooper","coord":[4,2],"shortName":"Coop.","index":4,"id":"COOP","coordPx":[124.7,64]},{"name":"Corangamite","coord":[1,5],"shortName":"Cora.","index":47,"id":"CORA","coordPx":[55.4,136]},{"name":"Corio","coord":[0,2],"shortName":"Corio","index":25,"id":"CORI","coordPx":[13.9,64]},{"name":"Deakin","coord":[4,1],"shortName":"Deaki","index":101,"id":"DEAK","coordPx":[138.6,40]},{"name":"Dunkley","coord":[5,5],"shortName":"Dunk.","index":50,"id":"DUNK","coordPx":[166.3,136]},{"name":"Flinders","coord":[6,5],"shortName":"Flind.","index":102,"id":"FLIN","coordPx":[194,136]},{"name":"Fraser","coord":[2,2],"shortName":"Fras.","index":8,"id":"FRAS","coordPx":[69.3,64]},{"name":"Gellibrand","coord":[2,5],"shortName":"Gelli.","index":9,"id":"GELL","coordPx":[83.1,136]},{"name":"Gippsland","coord":[7,2],"shortName":"Gipps.","index":136,"id":"GIPP","coordPx":[207.8,64]},{"name":"Goldstein","coord":[4,5],"shortName":"Gold.","index":86,"id":"GOLD","coordPx":[138.6,136]},{"name":"Gorton","coord":[1,1],"shortName":"Gort.","index":10,"id":"GORT","coordPx":[55.4,40]},{"name":"Hawke","coord":[1,3],"shortName":"Hawke","index":28,"id":"HAWK","coordPx":[55.4,88]},{"name":"Higgins","coord":[4,4],"shortName":"Higgi.","index":104,"id":"HIGG","coordPx":[124.7,112]},{"name":"Holt","coord":[6,4],"shortName":"Holt","index":30,"id":"HOLT","coordPx":[180.1,112]},{"name":"Hotham","coord":[4,3],"shortName":"Hoth.","index":31,"id":"HOTH","coordPx":[138.6,88]},{"name":"Indi","coord":[4,0],"shortName":"Indi","index":147,"id":"INDI","coordPx":[124.7,16]},{"name":"Isaacs","coord":[5,4],"shortName":"Isaac","index":32,"id":"ISAA","coordPx":[152.4,112]},{"name":"Jagajaga","coord":[2,1],"shortName":"Jaga.","index":33,"id":"JAGA","coordPx":[83.1,40]},{"name":"Kooyong","coord":[2,3],"shortName":"Kooy.","index":105,"id":"KOOY","coordPx":[83.1,88]},{"name":"La Trobe","coord":[7,4],"shortName":"La Tr.","index":106,"id":"LTRO","coordPx":[207.8,112]},{"name":"Lalor","coord":[1,2],"shortName":"Lalor","index":12,"id":"LALO","coordPx":[41.6,64]},{"name":"Macnamara","coord":[3,5],"shortName":"Macn.","index":37,"id":"MACN","coordPx":[110.9,136]},{"name":"Mallee","coord":[0,0],"shortName":"Mall.","index":138,"id":"MALL","coordPx":[13.9,16]},{"name":"Maribyrnong","coord":[2,4],"shortName":"Mari.","index":39,"id":"MARI","coordPx":[69.3,112]},{"name":"McEwen","coord":[6,2],"shortName":"McEw.","index":60,"id":"MCEW","coordPx":[180.1,64]},{"name":"Melbourne","coord":[3,4],"shortName":"Melb.","index":150,"id":"MELB","coordPx":[97,112]},{"name":"Menzies","coord":[3,1],"shortName":"Menz.","index":88,"id":"MENZ","coordPx":[110.9,40]},{"name":"Monash","coord":[7,3],"shortName":"Mona.","index":89,"id":"MONA","coordPx":[221.7,88]},{"name":"Nicholls","coord":[1,0],"shortName":"Nicho.","index":140,"id":"NICH","coordPx":[41.6,16]},{"name":"Scullin","coord":[3,0],"shortName":"Scul.","index":14,"id":"SCUL","coordPx":[97,16]},{"name":"Wannon","coord":[0,3],"shortName":"Wann.","index":95,"id":"WANN","coordPx":[27.7,88]},{"name":"Wills","coord":[3,2],"shortName":"Wills","index":44,"id":"WILL","coordPx":[97,64]}]},{"name":"WA","svgHexes":"<polygon data-id='DURA' class='hex' points='83.1,8 83.1,24 69.3,32 55.4,24 55.4,8 69.3,0' /><polygon data-id='PEAR' class='hex' points='69.3,32 69.3,48 55.4,56 41.6,48 41.6,32 55.4,24' /><polygon data-id='MOOR' class='hex' points='55.4,56 55.4,72 41.6,80 27.7,72 27.7,56 41.6,48' /><polygon data-id='HASL' class='hex' points='83.1,56 83.1,72 69.3,80 55.4,72 55.4,56 69.3,48' /><polygon data-id='CURT' class='hex' points='41.6,80 41.6,96 27.7,104 13.9,96 13.9,80 27.7,72' /><polygon data-id='COWA' class='hex' points='69.3,80 69.3,96 55.4,104 41.6,96 41.6,80 55.4,72' /><polygon data-id='FREM' class='hex' points='27.7,104 27.7,120 13.9,128 0,120 0,104 13.9,96' /><polygon data-id='PERT' class='hex' points='55.4,104 55.4,120 41.6,128 27.7,120 27.7,104 41.6,96' /><polygon data-id='SWAN' class='hex' points='83.1,104 83.1,120 69.3,128 55.4,120 55.4,104 69.3,96' /><polygon data-id='BRAN' class='hex' points='41.6,128 41.6,144 27.7,152 13.9,144 13.9,128 27.7,120' /><polygon data-id='TANG' class='hex' points='69.3,128 69.3,144 55.4,152 41.6,144 41.6,128 55.4,120' /><polygon data-id='CANN' class='hex' points='55.4,152 55.4,168 41.6,176 27.7,168 27.7,152 41.6,144' /><polygon data-id='BURT' class='hex' points='83.1,152 83.1,168 69.3,176 55.4,168 55.4,152 69.3,144' /><polygon data-id='FORR' class='hex' points='41.6,176 41.6,192 27.7,200 13.9,192 13.9,176 27.7,168' /><polygon data-id='OCON' class='hex' points='69.3,176 69.3,192 55.4,200 41.6,192 41.6,176 55.4,168' />","svgOutline":"<polygon data-id='' class='hex-outline' points='0,104,13.9,96,13.9,80,27.7,72,27.7,56,41.6,48,41.6,32,55.4,24,55.4,8,69.3,0,83.1,8,83.1,24,69.3,32,69.3,48,83.1,56,83.1,72,69.3,80,69.3,96,83.1,104,83.1,120,69.3,128,69.3,144,83.1,152,83.1,168,69.3,176,69.3,192,55.4,200,41.6,192,27.7,200,13.9,192,13.9,176,27.7,168,27.7,152,13.9,144,13.9,128,0,120,0,104' />","hexes":[{"name":"Durack","coord":[2,0],"shortName":"Dura.","index":74,"id":"DURA","coordPx":[69.3,16]},{"name":"Pearce","coord":[1,1],"shortName":"Pear.","index":92,"id":"PEAR","coordPx":[55.4,40]},{"name":"Moore","coord":[1,2],"shortName":"Moore","index":90,"id":"MOOR","coordPx":[41.6,64]},{"name":"Hasluck","coord":[2,2],"shortName":"Hasl.","index":103,"id":"HASL","coordPx":[69.3,64]},{"name":"Curtin","coord":[0,3],"shortName":"Curti","index":73,"id":"CURT","coordPx":[27.7,88]},{"name":"Cowan","coord":[1,3],"shortName":"Cowan","index":48,"id":"COWA","coordPx":[55.4,88]},{"name":"Fremantle","coord":[0,4],"shortName":"Frem.","index":27,"id":"FREM","coordPx":[13.9,112]},{"name":"Perth","coord":[1,4],"shortName":"Perth","index":64,"id":"PERT","coordPx":[41.6,112]},{"name":"Swan","coord":[2,4],"shortName":"Swan","index":110,"id":"SWAN","coordPx":[69.3,112]},{"name":"Brand","coord":[0,5],"shortName":"Brand","index":23,"id":"BRAN","coordPx":[27.7,136]},{"name":"Tangney","coord":[1,5],"shortName":"Tang.","index":94,"id":"TANG","coordPx":[55.4,136]},{"name":"Canning","coord":[1,6],"shortName":"Canni.","index":85,"id":"CANN","coordPx":[41.6,160]},{"name":"Burt","coord":[2,6],"shortName":"Burt","index":46,"id":"BURT","coordPx":[69.3,160]},{"name":"Forrest","coord":[0,7],"shortName":"Forr.","index":76,"id":"FORR","coordPx":[27.7,184]},{"name":"O'Connor","coord":[1,7],"shortName":"O'Con.","index":81,"id":"OCON","coordPx":[55.4,184]}]}]`), ka = {
-  svgWidth: Ta,
-  svgHeight: $a,
-  groups: Ma
-};
-function Ia(e, t) {
-  Be(t, !0);
-  let o = P(t, "allocations", 23, () => ({})), n = P(t, "certainties", 23, () => ({})), r = P(t, "showStateLabels", 7, !1), a = P(t, "showElectorateLabels", 7, !1), s = P(t, "onClick", 7, () => {
+At(fn, { children: {} }, [], [], !0);
+var X1 = /* @__PURE__ */ q("<div><!></div>");
+function Z1(t, e) {
+  ct(e, !0);
+  let a = b(e, "allocations", 23, () => ({})), r = b(e, "certainties", 23, () => ({})), n = b(e, "showStateLabels", 7, !1), o = b(e, "showElectorateLabels", 7, !1), l = b(e, "layoutName", 7, "COUNTRY"), s = b(e, "onClick", 7, () => {
+  }), i = b(e, "onHover", 7, () => {
+  }), p = b(e, "onApi", 7, () => {
+  }), y = Ft(null), u = /* @__PURE__ */ et(() => sn[l()]);
+  function c(h, I, N) {
+    const g = N.getScreenCTM(), A = N.createSVGPoint();
+    A.x = h, A.y = I;
+    const m = A.matrixTransform(g);
+    return [m.x, m.y].map(Number);
+  }
+  function d(h) {
+    var $;
+    const I = Bo[h], N = f(u).positions[I == null ? void 0 : I.group], g = ($ = f(y)) == null ? void 0 : $.querySelector("svg");
+    if (!I || !N || !g)
+      throw new Error(`Could not find hexagon with id ${h}`);
+    const A = [-0.5, -1], [m, T] = ke(
+      [
+        N[0] + A[0],
+        N[1] + A[1]
+      ],
+      ""
+    ).map(Number), R = Number(I.coordPx[0] + m), S = Number(I.coordPx[1] + T), [H, it] = c(R, S, g);
+    return {
+      code: h,
+      screenCoord: [H, it],
+      svgCoord: [R, S]
+    };
+  }
+  Dt(() => {
+    p() && p()({ getHex: d });
   });
-  return Sn(e, {
-    children: (l, c) => {
-      Rn(l, {
-        config: ka,
+  var P = X1(), V = D(P);
+  return fn(V, {
+    children: (h, I) => {
+      gn(h, {
+        config: Ma,
         get layout() {
-          return Sa.COUNTRY;
+          return f(u);
         },
         get allocations() {
-          return o();
+          return a();
         },
         get certainties() {
-          return n();
+          return r();
         },
         focuses: {},
         get showStateLabels() {
-          return r();
+          return n();
         },
         get showElectorateLabels() {
-          return a();
+          return o();
         },
         get onClick() {
           return s();
         },
-        isStatic: !0
+        get onHover() {
+          return i();
+        },
+        isStaticLayout: !0,
+        isInteractive: !0
       });
     },
     $$slots: { default: !0 }
-  }), Fe({
+  }), w(P), _a(P, (h) => _(y, h), () => f(y)), F(t, P), pt({
     get allocations() {
-      return o();
-    },
-    set allocations(l = {}) {
-      o(l), N();
-    },
-    get certainties() {
-      return n();
-    },
-    set certainties(l = {}) {
-      n(l), N();
-    },
-    get showStateLabels() {
-      return r();
-    },
-    set showStateLabels(l = !1) {
-      r(l), N();
-    },
-    get showElectorateLabels() {
       return a();
     },
-    set showElectorateLabels(l = !1) {
-      a(l), N();
+    set allocations(h = {}) {
+      a(h), L();
+    },
+    get certainties() {
+      return r();
+    },
+    set certainties(h = {}) {
+      r(h), L();
+    },
+    get showStateLabels() {
+      return n();
+    },
+    set showStateLabels(h = !1) {
+      n(h), L();
+    },
+    get showElectorateLabels() {
+      return o();
+    },
+    set showElectorateLabels(h = !1) {
+      o(h), L();
+    },
+    get layoutName() {
+      return l();
+    },
+    set layoutName(h = "COUNTRY") {
+      l(h), L();
     },
     get onClick() {
       return s();
     },
-    set onClick(l = () => {
+    set onClick(h = () => {
     }) {
-      s(l), N();
+      s(h), L();
+    },
+    get onHover() {
+      return i();
+    },
+    set onHover(h = () => {
+    }) {
+      i(h), L();
+    },
+    get onApi() {
+      return p();
+    },
+    set onApi(h = () => {
+    }) {
+      p(h), L();
     }
   });
 }
-customElements.define("abcnews-hexmap", nt(
-  Ia,
+customElements.define("abcnews-hexmap", At(
+  Z1,
   {
     allocations: {},
     certainties: {},
     showStateLabels: {},
     showElectorateLabels: {},
-    onClick: {}
+    layoutName: {},
+    onClick: {},
+    onHover: {},
+    onApi: {}
   },
   [],
   [],
   !0
 ));
 export {
-  Ia as default
+  Z1 as default
 };

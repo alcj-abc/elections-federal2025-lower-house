@@ -27,6 +27,10 @@
     onClick = ({ code }) => {},
     /** Call back to this function when someone hovers a hexagon*/
     onHover = ({ code }) => {},
+    /** Override the viewbox with your own */
+    customViewbox = null,
+    /** Receive the current value of the viewbox (excluding animation frames) */
+    onViewboxChange = ({ newViewbox }) => {},
     /** Is the map intended to be clicked on? If so, we include HexMapKeyboardNav for accessibility porpoises*/
     isInteractive = false,
     /** Party for whom to show first preference arrows */
@@ -56,11 +60,15 @@
   let viewboxHeight = new Tween(initial[3], tweenOptions);
 
   $effect(() => {
-    const [newX, newY, newW, newH] = layout.viewbox;
+    const [newX, newY, newW, newH] = customViewbox || layout.viewbox;
     viewboxX.set(newX);
     viewboxY.set(newY);
     viewboxWidth.set(newW);
     viewboxHeight.set(newH);
+  });
+
+  $effect(() => {
+    onViewboxChange(layout.viewbox);
   });
 
   // Set properties manually on hexes. Svelte is slow, and I don't trust it to
