@@ -7,6 +7,7 @@
   import HexMapKeyboardNav from './HexMapKeyboardNav/HexMapKeyboardNav.svelte';
   import HexMapArrows from './HexMapGroup/HexMapArrows/HexMapArrows.svelte';
   import HexMapInteractionHandlers from './HexMapInteractionHandlers/HexMapInteractionHandlers.svelte';
+  import HexMapFocusIndicator from './HexMapFocusIndicator/HexMapFocusIndicator.svelte';
   let {
     config = {},
     layout = {},
@@ -80,7 +81,6 @@
     const _allocations = { ...allocations };
     const _focuses = focuses;
     const _certainties = certainties;
-    const _userFocusedElectorate = userFocusedElectorate;
 
     hexes.forEach(hex => {
       const electorateCode = hex.dataset.id;
@@ -95,12 +95,6 @@
       hex.dataset.focused = newFocus;
       const newCertainty = _certainties[electorateCode] || null;
       hex.dataset.certain = newCertainty;
-
-      if (electorateCode === _userFocusedElectorate) {
-        hex.dataset.userfocused = 'true';
-      } else {
-        delete hex.dataset.userfocused;
-      }
     });
   });
 
@@ -157,23 +151,26 @@
           />
         {/each}
 
+        <HexMapFocusIndicator groups={config.groups} {userFocusedElectorate} {layout} />
+
         {#if firstPreferenceArrows !== 'None'}
           {#each config.groups as group}
             <HexMapArrows hexes={group.hexes} offset={layout.positions[group.name]} {firstPreferenceArrows} />
           {/each}
         {/if}
-      </svg>
 
-      {#if showStateLabels}
-        <div class="hexmap__labels">
-          <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
-        </div>
-      {/if}
+        {#if showStateLabels}
+          <div class="hexmap__labels">
+            <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
+          </div>
+        {/if}
+      </svg>
     </div>
 
     {#if isInteractive}
       <HexMapKeyboardNav
         groups={config.groups}
+        {layout}
         onChange={newValue => {
           userFocusedElectorate = newValue;
         }}

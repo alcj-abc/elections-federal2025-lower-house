@@ -1,6 +1,6 @@
 <script lang="ts">
   import AccessibleHide from '../../AccessibleHide/AccesibleHide.svelte';
-  let { groups, onChange, onClick } = $props();
+  let { groups, layout, onChange, onClick } = $props();
   let focused = $state(null);
   function onFocus(e) {
     focused = e.target.dataset.id;
@@ -26,10 +26,13 @@
   });
 
   let sortedGroups = $derived.by(() =>
-    groups.map(group => ({
-      ...group,
-      hexes: [...group.hexes].sort((a, b) => a.coord[0] + a.coord[1] * 1000 - (b.coord[0] + b.coord[1] * 1000))
-    }))
+    ['QLD', 'NT', 'WA', 'SA', 'NSW', 'ACT', 'VIC', 'TAS']
+      .filter(groupName => layout.positions[groupName])
+      .map(groupName => groups.find(group => group.name === groupName))
+      .map(group => ({
+        ...group,
+        hexes: [...group.hexes].sort((a, b) => a.coord[0] + a.coord[1] * 1000 - (b.coord[0] + b.coord[1] * 1000))
+      }))
   );
 </script>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { hexToPx } from '../../../lib/utils';
   import HexLabels from './HexLabels/HexLabels.svelte';
-  import HexMapArrows from './HexMapArrows/HexMapArrows.svelte';
+  // import HexMapArrows from './HexMapArrows/HexMapArrows.svelte';
 
   let {
     name = '',
@@ -57,9 +57,9 @@
   {#if isVisible}
     <HexLabels {hexes} {allocations} labelsToShow={labels} {showElectorateLabels} />
   {/if}
-  <g class="group-outline group-outline__over" style:opacity={hasAnyFocuses && !hasAllocations ? 0 : 1}
-    >{@html svgOutline}</g
-  >
+  <g class="group-outline group-outline__over" style:opacity={hasAnyFocuses && !hasAllocations ? 0 : 1}>
+    {@html svgOutline}
+  </g>
 </g>
 
 <style lang="scss">
@@ -111,9 +111,6 @@
     fill: var(--a-null);
     stroke: var(--a-null-border);
     stroke-width: 1;
-  }
-  .group-hexes :global(.hex[data-userfocused='true']) {
-    fill: limegreen !important;
   }
 
   .group--map-is-empty .group-hexes :global(.hex) {
