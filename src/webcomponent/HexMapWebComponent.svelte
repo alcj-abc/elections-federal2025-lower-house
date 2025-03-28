@@ -18,6 +18,7 @@
     showStateLabels = false,
     showElectorateLabels = false,
     layoutName = 'COUNTRY',
+    selectedElectorate = null,
     onClick = () => {},
     onHover = () => {},
     onApi = () => {}
@@ -85,6 +86,7 @@
       {showElectorateLabels}
       {onClick}
       {onHover}
+      {selectedElectorate}
       isStaticLayout={true}
       isInteractive={true}
     />

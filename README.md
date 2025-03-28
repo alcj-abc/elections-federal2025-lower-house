@@ -24,6 +24,7 @@ The properties are:
   onClick = ({code, clientX, clientY}) => {},
   onHover = ({code, clientX, clientY}) => {},
   onApi = (api) => { global.api = api },
+  selectedElectorate='ADEL',
   customViewbox = null | [0,0,100,100],
   onViewboxChange = ({newViewbox}) => {}
 }
