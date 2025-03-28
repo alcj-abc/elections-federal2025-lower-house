@@ -35,7 +35,9 @@
     /** Is the map intended to be clicked on? If so, we include HexMapKeyboardNav for accessibility porpoises*/
     isInteractive = false,
     /** Party for whom to show first preference arrows */
-    firstPreferenceArrows = 'None'
+    firstPreferenceArrows = 'None',
+    /** which electorate is currently focused */
+    selectedElectorate = null
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgRatio = $state(0);
@@ -151,7 +153,9 @@
           />
         {/each}
 
-        <HexMapFocusIndicator groups={config.groups} {userFocusedElectorate} {layout} />
+        <HexMapFocusIndicator groups={config.groups} id={userFocusedElectorate} {layout} />
+
+        <HexMapFocusIndicator groups={config.groups} id={selectedElectorate} {layout} />
 
         {#if firstPreferenceArrows !== 'None'}
           {#each config.groups as group}

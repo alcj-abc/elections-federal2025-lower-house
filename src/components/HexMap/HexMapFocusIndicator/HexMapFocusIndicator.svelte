@@ -1,17 +1,17 @@
 <script lang="ts">
   import { hexToPx } from '../../../lib/utils';
 
-  let { groups, userFocusedElectorate, layout } = $props();
+  let { groups, id, layout } = $props();
 
   let flatGroups = $derived.by(() =>
     groups.flatMap(group => group.hexes.map(hex => ({ ...hex, group: group.name }))).sort((a, b) => a.index - b.index)
   );
 
   let coords = $derived.by(() => {
-    if (!userFocusedElectorate) {
+    if (!id) {
       return;
     }
-    const hex = flatGroups.find(hex => hex.id === userFocusedElectorate);
+    const hex = flatGroups.find(hex => hex.id === id);
     const [groupX, groupY] = layout.positions[hex.group];
     const [hexX, hexY] = hex.coord;
     const xOffset = hexY % 2 ? 0.5 : 0;

@@ -19,6 +19,8 @@
     type: string;
     props?: {};
   }>();
+  // @ts-ignore
+  let selectedElectorate = $derived.by(() => modal?.props?.electorate?.id);
 
   function onVizClick({ code, clientX, clientY }) {
     if (!code) {
@@ -86,6 +88,7 @@
               {layout}
               onClick={onVizClick}
               isInteractive={true}
+              {selectedElectorate}
             />
           </LabelDragger>
         </div>
