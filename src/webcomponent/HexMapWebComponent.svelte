@@ -15,7 +15,8 @@
     certainties = {},
     showStateLabels = false,
     showElectorateLabels = false,
-    onClick = () => {}
+    onClick = () => {},
+    onHover = () => {}
   } = $props();
 </script>
 
@@ -29,6 +30,7 @@
     {showStateLabels}
     {showElectorateLabels}
     {onClick}
+    {onHover}
     isStaticLayout={true}
     isInteractive={true}
   />

@@ -20,7 +20,8 @@ The properties are:
   certainties = { ADEL: true }
   showStateLabels = false,
   showElectorateLabels = false,
-  onClick = () => {}
+  onClick = ({code, clientX, clientY}) => {},
+  onHover = ({code, clientX, clientY}) => {}
 }
 ```
 
