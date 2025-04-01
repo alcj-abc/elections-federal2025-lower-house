@@ -2,7 +2,7 @@
   /**
    * A root component that swaps between the geo and hex maps
    */
-  import GeoMap from '../GeoMap/GeoMap.svelte';
+  import GeoMap from '../GeoMap/index.svelte';
   import HexMap from '../HexMap/HexMap.svelte';
   import StyleRoot from '../StyleRoot/StyleRoot.svelte';
   import Totals from '../Totals/Totals.svelte';

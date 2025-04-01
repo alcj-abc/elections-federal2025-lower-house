@@ -1,60 +1,64 @@
 {
-	"name": "@abcnews/elections-federal2025-lower-house",
-	"version": "1.0.6",
-	"description": "Election hexagons & geo maps for 2025",
-	"license": "MIT",
-	"private": true,
-	"type": "module",
-	"contributors": [
-		"Ash Kyd <kyd.ashley@abc.net.au>"
-	],
-	"aunty": {
-		"type": "svelte",
-		"build": {
-			"entry": [
-				"index"
-			],
-			"includedDependencies": [
-				"@abcnews/svelte-scrollyteller"
-			]
-		}
-	},
-	"scripts": {
-		"start": "aunty serve",
-		"build-data": "node data/build.js",
-		"build-webcomponent": "vite build",
-		"build": "npm run build-data && aunty build && npm run build-webcomponent",
-		"dev": "aunty serve",
-		"test": "aunty test"
-	},
-	"devDependencies": {
-		"@abcnews/alternating-case-to-object": "^3.1.1",
-		"@abcnews/aunty": "git+https://github.com/abcnews/aunty/tree/svelte-5",
-		"@abcnews/env-utils": "^4.0.0",
-		"@abcnews/mount-utils": "^3.0.0",
-		"@abcnews/svelte-scrollyteller": "github:abcnews/svelte-scrollyteller#feature/future-news",
-		"@sveltejs/vite-plugin-svelte": "^5.0.3",
-		"@testing-library/svelte": "^5.2.6",
-		"@types/jest": "^29.5.14",
-		"@types/webpack-env": "^1.18.8",
-		"debounce": "^2.2.0",
-		"hash-codec": "github:ashkyd/hash-codec",
-		"honeycomb-grid": "^4.1.5",
-		"maplibre-gl": "^5.1.0",
-		"polygon-clipping": "^0.15.7",
-		"polylabel": "^2.0.1",
-		"svelte": "^5.20.2",
-		"vite": "^6.1.0"
-	},
-	"files": [
-		"dist-wc"
-	],
-	"exports": {
-		"./wc": {
-			"default": "./dist-wc/elections-federal2025-lower-house.js"
-		}
-	},
-	"dependencies": {
-		"lodash-es": "^4.17.21"
-	}
+  "name": "@abcnews/elections-federal2025-lower-house",
+  "version": "1.0.6",
+  "description": "Election hexagons & geo maps for 2025",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "contributors": [
+    "Ash Kyd <kyd.ashley@abc.net.au>"
+  ],
+  "aunty": {
+    "type": "svelte",
+    "build": {
+      "entry": [
+        "index"
+      ],
+      "includedDependencies": [
+        "@abcnews/svelte-scrollyteller"
+      ]
+    },
+    "serve": {
+      "hasBundleAnalysis": true
+    }
+  },
+  "scripts": {
+    "start": "aunty serve",
+    "build-data": "node data/build.js",
+    "build-webcomponent": "vite build",
+    "build": "npm run build-data && aunty build && npm run build-webcomponent",
+    "dev": "aunty serve",
+    "test": "aunty test"
+  },
+  "devDependencies": {
+    "@abcnews/alternating-case-to-object": "^3.1.1",
+    "@abcnews/aunty": "git+https://github.com/abcnews/aunty/tree/svelte-5",
+    "@abcnews/env-utils": "^4.0.0",
+    "@abcnews/mount-utils": "^3.0.0",
+    "@abcnews/svelte-scrollyteller": "github:abcnews/svelte-scrollyteller#feature/future-news",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@testing-library/svelte": "^5.2.6",
+    "@types/jest": "^29.5.14",
+    "@types/webpack-env": "^1.18.8",
+    "debounce": "^2.2.0",
+    "hash-codec": "github:ashkyd/hash-codec",
+    "honeycomb-grid": "^4.1.5",
+    "maplibre-gl": "^5.1.0",
+    "polygon-clipping": "^0.15.7",
+    "polylabel": "^2.0.1",
+    "svelte": "^5.20.2",
+    "vite": "^6.1.0"
+  },
+  "files": [
+    "dist-wc"
+  ],
+  "exports": {
+    "./wc": {
+      "default": "./dist-wc/elections-federal2025-lower-house.js"
+    }
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "topojson-client": "^3.1.0"
+  }
 }

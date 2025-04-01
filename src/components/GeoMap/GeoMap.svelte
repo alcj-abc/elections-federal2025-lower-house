@@ -1,11 +1,13 @@
 <script lang="ts">
   import debounce from 'debounce';
-  import { type Map as MapType, type MapOptions, LngLatBounds, Map } from 'maplibre-gl';
   import mapConfig from '../../../data/appdata-mapconfig.json';
-  import { onMount, untrack } from 'svelte';
-  import { electorateIdToNumber } from './utils';
+  import { untrack } from 'svelte';
+  import { ausOutlineGeojson, electorateIdToNumber } from './utils';
   import patternURL from './pattern.webp';
   import { partyColours } from '../StyleRoot/store';
+  import type { MapOptions, Map as MapType } from './maplibre-gl';
+
+  const { LngLatBounds, Map } = window.maplibregl;
   let {
     geoArea = 'Australia',
     isInteractive = false,
@@ -21,7 +23,7 @@
   } = $props();
 
   let mapRootEl = $state<HTMLElement>();
-  let map = $state<MapType>();
+  let map = $state<MapType | void>();
   let bounds = $state([
     [0, 0],
     [0, 0]
@@ -71,7 +73,8 @@
         center,
         interactive: isInteractive
       } as MapOptions;
-      map = new Map(mapOptions);
+      const _map = new Map(mapOptions);
+      map = _map;
 
       map.on('load', () => {
         if (!mapRootEl || !map) {
@@ -109,10 +112,25 @@
           }
         });
 
+        map.addSource('ausoutline', { type: 'geojson', data: ausOutlineGeojson });
+
         map.loadImage(patternURL).then(image => {
           map?.addImage('diagonal_stripes_pattern', image.data);
         });
 
+        // Electorate outline underneath
+        // map.addLayer({
+        //   id: 'electorate_polygons_baseline',
+        //   type: 'line',
+        //   source: 'electorate_polygons',
+        //   'source-layer': 'federalelectorates2025',
+        //   paint: {
+        //     'line-color': '#000',
+        //     'line-width': 1
+        //   }
+        // });
+
+        // empty electorate fill
         map.addLayer({
           id: 'electorate_polygons_fill',
           type: 'fill',
@@ -120,10 +138,11 @@
           'source-layer': 'federalelectorates2025',
           paint: {
             'fill-opacity': ['coalesce', ['feature-state', 'opacity'], 1],
-            'fill-color': ['coalesce', ['feature-state', 'fill'], '#fff']
+            'fill-color': ['coalesce', ['feature-state', 'fill'], '#F1F1F1']
           }
         });
 
+        // electorate pattern
         map.addLayer({
           id: 'electorate_polygons_pattern',
           type: 'fill',
@@ -135,18 +154,7 @@
           }
         });
 
-        map.addLayer({
-          id: 'electorate_polygons_baseline',
-          type: 'line',
-          source: 'electorate_polygons',
-          'source-layer': 'federalelectorates2025',
-          paint: {
-            'line-opacity': ['coalesce', ['feature-state', 'opacity'], 1],
-            'line-color': '#ddd',
-            'line-width': 1
-          }
-        });
-
+        // Second electorate outline
         map.addLayer({
           id: 'electorate_polygons_line',
           type: 'line',
@@ -154,10 +162,11 @@
           'source-layer': 'federalelectorates2025',
           paint: {
             'line-color': ['coalesce', ['feature-state', 'stroke'], 'transparent'],
-            'line-width': 1
+            'line-width': ['coalesce', ['feature-state', 'strokeWidth'], 0.5]
           }
         });
 
+        // Labels
         map.addLayer({
           id: 'electorate_points_label',
           type: 'symbol',
@@ -174,6 +183,20 @@
             'text-color': '#000',
             'text-halo-color': '#fff',
             'text-halo-width': 1.5
+          }
+        });
+
+        map.addLayer({
+          id: 'ausoutline',
+          type: 'line',
+          source: 'ausoutline',
+          layout: {
+            // 'line-join': 'round',
+            // 'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#000',
+            'line-width': 1
           }
         });
 
@@ -226,8 +249,28 @@
     }
 
     electoratesRenderProps.forEach(electorateRenderProps => {
-      const { id, hasAllocation, annotation, certainty, focus, color, geoProps } = electorateRenderProps;
+      const { id, hasAllocation, annotation, certainty, focus, color } = electorateRenderProps;
       const geoPropsID = id.toLowerCase();
+
+      let style = {
+        fill: color,
+        opacity: 1,
+        strokeWidth: 0.5,
+        'pattern-opacity': 0,
+        stroke: hasAllocation ? '#FFFFFF' : '#CDCBCB'
+      };
+
+      if (hasAnyFocuses) {
+        if (focus) {
+          style.strokeWidth = 1;
+          style.stroke = '#000';
+        } else {
+          style.opacity = 0.25;
+        }
+      }
+      if (!certainty) {
+        style['pattern-opacity'] = 1;
+      }
 
       map?.setFeatureState(
         {
@@ -235,12 +278,19 @@
           sourceLayer: 'federalelectorates2025',
           id: geoPropsID
         },
-        {
-          opacity: hasAnyFocuses && !focus ? 0.25 : 1,
-          'pattern-opacity': certainty ? 0 : 1,
-          fill: color,
-          stroke: hasAllocation ? '#fff' : focus ? '#000' : 'transparent'
-        }
+        style
+        // {
+        //   // how opaque is the fill
+        //   opacity: hasAnyFocuses && !focus ? 0.25 : 1,
+        //   // how opaque is the pattern
+        //   'pattern-opacity': certainty ? 0 : 1,
+        //   // fill colour
+        //   fill: color,
+        //   // stroke colour
+        //   stroke: hasAllocation ? '#fff' : focus ? '#000' : 'transparent',
+        //   // stroke width
+        //   strokeWidth: hasAnyFocuses && focus ? 1 : 0.5
+        // }
       );
 
       map?.setFeatureState(
