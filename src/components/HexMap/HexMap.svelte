@@ -5,7 +5,7 @@
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
   import { onMount } from 'svelte';
   import HexMapKeyboardNav from './HexMapKeyboardNav/HexMapKeyboardNav.svelte';
-  import HexMapArrows from './HexMapGroup/HexMapArrows/HexMapArrows.svelte';
+  import HexMapArrows from './HexMapGroup/HexMapArrows/index.svelte';
   import HexMapInteractionHandlers from './HexMapInteractionHandlers/HexMapInteractionHandlers.svelte';
   import HexMapFocusIndicator from './HexMapFocusIndicator/HexMapFocusIndicator.svelte';
   let {
