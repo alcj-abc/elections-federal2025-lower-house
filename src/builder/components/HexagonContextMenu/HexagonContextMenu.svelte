@@ -6,110 +6,118 @@
   // import HexagonRedistribute from './HexagonRedistribute/HexagonRedistribute.svelte';
   let { position = [0, 0], electorate = {}, onClose = () => {} } = $props();
   let allocation = $derived.by(() => $hashConfig.allocations[electorate.id]);
+  $effect(() => {
+    if (!electorate?.id) {
+      alert("This electorate has no ID and can't be modified");
+      onClose();
+    }
+  });
 </script>
 
-<ContextMenu {position} {onClose}>
-  <h1 class="section">
-    <strong>{electorate.name}</strong>
-    <small style="opacity:0.5">{electorate.id}</small>
-  </h1>
-  <hr />
-  <!-- <HexagonRedistribute {electorate} />
+{#if electorate?.id}
+  <ContextMenu {position} {onClose}>
+    <h1 class="section">
+      <strong>{electorate.name}</strong>
+      <small style="opacity:0.5">{electorate.id}</small>
+    </h1>
+    <hr />
+    <!-- <HexagonRedistribute {electorate} />
   <hr /> -->
-  {#if Object.values($arrowData).length > 0}
+    {#if Object.values($arrowData).length > 0}
+      <div class="section">
+        Change in first preference
+        <br />
+        vote for {$hashConfig.firstPreferenceArrows}: {$arrowData[electorate.id]
+          ? $arrowData[electorate.id].toFixed(3) + '%'
+          : 'not applicable'}
+      </div>
+      <hr />
+    {/if}
+
+    <label class="item">
+      <div class="section">
+        <input
+          type="checkbox"
+          checked={$hashConfig.focuses[electorate.id]}
+          onchange={e => {
+            $hashConfig.focuses = { ...$hashConfig.focuses, [electorate.id]: (e.target as HTMLInputElement)?.checked };
+            onClose();
+          }}
+        /> Focused
+      </div>
+    </label>
+    <label class="item">
+      <div class="section">
+        <input
+          type="checkbox"
+          disabled={$hashConfig.showElectorateLabels || $hashConfig.showFocusedElectorateLabels}
+          checked={$hashConfig.labelsToShow[electorate.id]}
+          onchange={e => {
+            $hashConfig.labelsToShow = {
+              ...$hashConfig.labelsToShow,
+              [electorate.id]: (e.target as HTMLInputElement)?.checked
+            };
+            onClose();
+          }}
+        /> Show Label
+      </div>
+    </label>
+    <label class="item">
+      <div class="section">
+        <input
+          type="checkbox"
+          checked={$hashConfig.certainties[electorate.id]}
+          onchange={e => {
+            $hashConfig.certainties = {
+              ...$hashConfig.certainties,
+              [electorate.id]: (e.target as HTMLInputElement)?.checked
+            };
+            onClose();
+          }}
+        /> Is certain
+      </div>
+    </label>
+    <hr />
     <div class="section">
-      Change in first preference
-      <br />
-      vote for {$hashConfig.firstPreferenceArrows}: {$arrowData[electorate.id]
-        ? $arrowData[electorate.id].toFixed(3) + '%'
-        : 'not applicable'}
+      <ul class="menu menu--double">
+        {#each Object.values(allocationMap).filter(item => item !== 'Any') as allocationOption}
+          <li>
+            <button
+              class="item"
+              disabled={allocation === allocationOption}
+              onclick={e => {
+                e.preventDefault();
+                $hashConfig.allocations = {
+                  ...$hashConfig.allocations,
+                  [electorate.id]: allocationOption === 'None' ? null : allocationOption
+                };
+                onClose();
+              }}
+            >
+              <Circle allocation={allocationOption} />
+              {allocationOption}
+            </button>
+          </li>
+        {/each}
+      </ul>
     </div>
     <hr />
-  {/if}
-
-  <label class="item">
-    <div class="section">
-      <input
-        type="checkbox"
-        checked={$hashConfig.focuses[electorate.id]}
-        onchange={e => {
-          $hashConfig.focuses = { ...$hashConfig.focuses, [electorate.id]: (e.target as HTMLInputElement)?.checked };
-          onClose();
-        }}
-      /> Focused
-    </div>
-  </label>
-  <label class="item">
-    <div class="section">
-      <input
-        type="checkbox"
-        disabled={$hashConfig.showElectorateLabels || $hashConfig.showFocusedElectorateLabels}
-        checked={$hashConfig.labelsToShow[electorate.id]}
-        onchange={e => {
-          $hashConfig.labelsToShow = {
-            ...$hashConfig.labelsToShow,
-            [electorate.id]: (e.target as HTMLInputElement)?.checked
-          };
-          onClose();
-        }}
-      /> Show Label
-    </div>
-  </label>
-  <label class="item">
-    <div class="section">
-      <input
-        type="checkbox"
-        checked={$hashConfig.certainties[electorate.id]}
-        onchange={e => {
-          $hashConfig.certainties = {
-            ...$hashConfig.certainties,
-            [electorate.id]: (e.target as HTMLInputElement)?.checked
-          };
-          onClose();
-        }}
-      /> Is certain
-    </div>
-  </label>
-  <hr />
-  <div class="section">
-    <ul class="menu menu--double">
-      {#each Object.values(allocationMap).filter(item => item !== 'Any') as allocationOption}
-        <li>
-          <button
-            class="item"
-            disabled={allocation === allocationOption}
-            onclick={e => {
-              e.preventDefault();
-              $hashConfig.allocations = {
-                ...$hashConfig.allocations,
-                [electorate.id]: allocationOption === 'None' ? null : allocationOption
-              };
-              onClose();
-            }}
-          >
-            <Circle allocation={allocationOption} />
-            {allocationOption}
-          </button>
-        </li>
-      {/each}
-    </ul>
-  </div>
-  <hr />
-  <a
-    class="item section"
-    href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id.toLowerCase()}`}
-    target="_blank"
-  >
-    2022 guide
-  </a>
-  <a
-    class="item section"
-    href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id.toLowerCase()}`}
-    target="_blank"
-  >
-    2019 guide
-  </a>
-</ContextMenu>
+    <a
+      class="item section"
+      href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id?.toLowerCase()}`}
+      target="_blank"
+    >
+      2022 guide
+    </a>
+    <a
+      class="item section"
+      href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id?.toLowerCase()}`}
+      target="_blank"
+    >
+      2019 guide
+    </a>
+  </ContextMenu>
+{/if}
 
 <style lang="scss">
   h1 {

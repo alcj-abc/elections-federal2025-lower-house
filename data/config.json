@@ -179,7 +179,7 @@
       { "name": "Cowan", "coord": [1, 3], "shortName": "Cowan", "index": 48, "id": "COWA" },
       { "name": "Fremantle", "coord": [0, 4], "shortName": "Frem.", "index": 27, "id": "FREM" },
       { "name": "Perth", "coord": [1, 4], "shortName": "Perth", "index": 64, "id": "PERT" },
-      { "name": "Bullwinkel", "coord": [2, 4], "shortName": "Bull", "index": 37, "id": "TMP1" },
+      { "name": "Bullwinkel", "coord": [2, 4], "shortName": "Bull", "index": 37, "id": "BULL" },
       { "name": "Brand", "coord": [0, 5], "shortName": "Brand", "index": 23, "id": "BRAN" },
       { "name": "Canning", "coord": [0, 6], "shortName": "Canni.", "index": 85, "id": "CANN" },
       { "name": "Swan", "coord": [1, 5], "shortName": "Swan", "index": 110, "id": "SWAN" },
