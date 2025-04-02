@@ -102,20 +102,33 @@
       </ul>
     </div>
     <hr />
-    <a
-      class="item section"
-      href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id?.toLowerCase()}`}
-      target="_blank"
-    >
-      2022 guide
-    </a>
-    <a
-      class="item section"
-      href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id?.toLowerCase()}`}
-      target="_blank"
-    >
-      2019 guide
-    </a>
+    <div class="section">
+      Election guide
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <a
+          class="item section"
+          href={`https://www.abc.net.au/news/elections/federal/2025/guide/${electorate.id?.toLowerCase()}`}
+          target="_blank"
+        >
+          2025
+        </a>
+
+        <a
+          class="item section"
+          href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id?.toLowerCase()}`}
+          target="_blank"
+        >
+          2022
+        </a>
+        <a
+          class="item section"
+          href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id?.toLowerCase()}`}
+          target="_blank"
+        >
+          2019
+        </a>
+      </div>
+    </div>
   </ContextMenu>
 {/if}
 
