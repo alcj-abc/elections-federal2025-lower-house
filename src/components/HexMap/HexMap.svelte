@@ -42,6 +42,7 @@
   let svgEl = $state<SVGElement>();
   let svgRatio = $state(0);
   let userFocusedElectorate = $state<null | string>(null);
+  let userHoveredElectorate = $state<null | string>(null);
 
   /** Are any of the electorates focused? If so, we use different styles for unallocated */
   let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
@@ -109,7 +110,16 @@
     svgRatio = style.height / style.width;
   });
 
-  let interactionHandlers = $derived.by(() => getInteractionHandlers({ isInteractive, onClick, onHover }));
+  let interactionHandlers = $derived.by(() =>
+    getInteractionHandlers({
+      isInteractive,
+      onClick,
+      onHover: res => {
+        userHoveredElectorate = res.code;
+        onHover(res);
+      }
+    })
+  );
 </script>
 
 <div class="hexmap">
@@ -155,9 +165,11 @@
         />
       {/each}
 
-      <HexMapFocusIndicator groups={config.groups} id={userFocusedElectorate} {layout} />
+      <HexMapFocusIndicator groups={config.groups} id={userFocusedElectorate} {layout} type="focus" />
 
-      <HexMapFocusIndicator groups={config.groups} id={selectedElectorate} {layout} />
+      <HexMapFocusIndicator groups={config.groups} id={selectedElectorate} {layout} type="focus" />
+
+      <HexMapFocusIndicator groups={config.groups} id={userHoveredElectorate} {layout} type="hover" />
 
       {#if firstPreferenceArrows !== 'None'}
         {#each config.groups as group}

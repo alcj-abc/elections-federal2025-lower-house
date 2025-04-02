@@ -8,9 +8,7 @@ export function getInteractionHandlers({ isInteractive = false, onClick, onHover
   if (!isInteractive) {
     return {};
   }
-  const debouncedOnHover = () => {
-    return debounce(onHover, 60);
-  };
+  const debouncedOnHover = debounce(onHover, 10);
 
   const onclick = ({ target, clientX, clientY }) => {
     const code = (target as HTMLElement)?.dataset?.id;
