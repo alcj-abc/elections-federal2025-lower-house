@@ -3,7 +3,7 @@
   import mapConfig from '../../../data/appdata-mapconfig.json';
   import { untrack } from 'svelte';
   import { ausOutlineGeojson, electorateIdToNumber } from './utils';
-  import patternURL from './pattern.webp';
+  import patternURL from './hash-pattern.png';
   import { partyColours } from '../StyleRoot/store';
   import type { MapOptions, Map as MapType } from './maplibre-gl';
 
@@ -36,26 +36,7 @@
   /** Are any of the electorates focused? If so, we use different styles for unallocated */
   let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
 
-  let electoratesRenderProps = $derived.by(() =>
-    electorates.map(electorate => {
-      const id = electorate.id;
-      const allocation = allocations ? allocations[id] : null;
-      const annotationBecauseFocused = showFocusedElectorateLabels ? focuses[id] : false;
-      return {
-        id,
-        name: electorate.name,
-        allocation,
-        hasAllocation: allocation !== null, // && determineIfAllocationIsMade(allocation),
-        hasDefinitiveAllocation: true, //allocation && determineIfAllocationIsDefinitive(allocation),
-        certainty: certainties ? certainties[id] : true,
-        annotation: annotationBecauseFocused || showElectorateLabels || (labelsToShow ? labelsToShow[id] : false),
-        focus: focuses ? focuses[id] : false,
-        // @ts-ignore
-        color: $partyColours[allocation] || $partyColours.null,
-        geoProps: mapConfig.electoratesGeo.find(geoProps => geoProps.id.toUpperCase() === id)
-      };
-    })
-  );
+  let hasAnyAllocations = $derived.by(() => Object.values(allocations).some(Boolean));
 
   // Load the map, set up the layers, get everything started
   $effect(() => {
@@ -161,10 +142,25 @@
           source: 'electorate_polygons',
           'source-layer': 'federalelectorates2025',
           paint: {
+            'line-opacity': 0,
             'line-color': ['coalesce', ['feature-state', 'stroke'], 'transparent'],
             'line-width': ['coalesce', ['feature-state', 'strokeWidth'], 0.5]
           }
         });
+
+        // map.addLayer({
+        //   id: 'ausoutline',
+        //   type: 'line',
+        //   source: 'ausoutline',
+        //   layout: {
+        //     // 'line-join': 'round',
+        //     // 'line-cap': 'round'
+        //   },
+        //   paint: {
+        //     'line-color': '#fff',
+        //     'line-width': 0.7
+        //   }
+        // });
 
         // Labels
         map.addLayer({
@@ -176,27 +172,13 @@
             'text-anchor': 'center',
             'text-max-width': 6,
             'text-font': ['ABC Sans Bold'],
-            'text-size': 13
+            'text-size': 12
           },
           paint: {
             'text-opacity': ['coalesce', ['feature-state', 'opacity'], 0],
-            'text-color': '#000',
-            'text-halo-color': '#fff',
+            'text-color': ['coalesce', ['feature-state', 'fill'], '#000'],
+            'text-halo-color': ['coalesce', ['feature-state', 'stroke'], '#fff'],
             'text-halo-width': 1.5
-          }
-        });
-
-        map.addLayer({
-          id: 'ausoutline',
-          type: 'line',
-          source: 'ausoutline',
-          layout: {
-            // 'line-join': 'round',
-            // 'line-cap': 'round'
-          },
-          paint: {
-            'line-color': '#000',
-            'line-width': 1
           }
         });
 
@@ -212,7 +194,7 @@
           'resize',
           debounce(() => {
             resizeDirtyValue = Math.random();
-          }, 200)
+          }, 1000)
         );
 
         map.on('click', event => {
@@ -243,33 +225,93 @@
     });
   });
 
+  $effect(() => {
+    if (!map || !isElectoratePolygonsLoaded) {
+      return;
+    }
+    map.setPaintProperty('ausoutline', 'line-opacity', geoArea === 'Australia' ? 1 : 0);
+  });
+
+  let electoratesRenderProps = $derived.by(() =>
+    electorates.map(electorate => {
+      const id = electorate.id;
+      const allocation = allocations ? allocations[id] : null;
+      const annotationBecauseFocused = showFocusedElectorateLabels ? focuses[id] : false;
+      return {
+        id,
+        name: electorate.name,
+        allocation,
+        hasAllocation: allocation !== null, // && determineIfAllocationIsMade(allocation),
+        hasDefinitiveAllocation: true, //allocation && determineIfAllocationIsDefinitive(allocation),
+        certainty: certainties ? certainties[id] : true,
+        annotation: annotationBecauseFocused || showElectorateLabels || (labelsToShow ? labelsToShow[id] : false),
+        focus: focuses ? focuses[id] : false,
+        geoProps: mapConfig.electoratesGeo.find(geoProps => geoProps.id.toUpperCase() === id)
+      };
+    })
+  );
+  $effect(() => console.log({ hasAnyAllocations }));
   const updateMapState = (isInspectionChange = false) => {
     if (!map || !isElectoratePolygonsLoaded) {
       return;
     }
 
     electoratesRenderProps.forEach(electorateRenderProps => {
-      const { id, hasAllocation, annotation, certainty, focus, color } = electorateRenderProps;
+      const { id, allocation, hasAllocation, annotation, certainty, focus } = electorateRenderProps;
       const geoPropsID = id.toLowerCase();
+      const colour = $partyColours.allocated[allocation] || $partyColours.allocated['null'];
+      const uncertainColour = $partyColours.uncertain[allocation] || 'white';
+      // const colorUncertain = $part
 
-      let style = {
-        fill: color,
+      const style = {
+        fill: colour,
         opacity: 1,
         strokeWidth: 0.5,
         'pattern-opacity': 0,
-        stroke: hasAllocation ? '#FFFFFF' : '#CDCBCB'
+        stroke: hasAllocation ? '#FFFFFF' : '#60646C'
+      };
+
+      const labelStyle = {
+        opacity: isInspecting || annotation ? 1 : 0,
+        fill: 'black',
+        stroke: 'white'
       };
 
       if (hasAnyFocuses) {
         if (focus) {
-          style.strokeWidth = 1;
-          style.stroke = '#000';
+          style.stroke = '#fff';
         } else {
-          style.opacity = 0.25;
+          // Make the unfocused electorates grey
+          style.opacity = 0.1;
+          // style.stroke = '#CDCBCB';
+          // style.fill = '#F1F1F1';
+        }
+        if (!hasAnyAllocations) {
+          if (focus) {
+            style.strokeWidth = 2;
+            style.stroke = '#000';
+            style.fill = '#fff';
+          } else {
+            style.opacity = 1;
+            style.stroke = '#CDCBCB';
+            style.fill = '#F1F1F1';
+          }
         }
       }
+
+      if (hasAllocation) {
+        labelStyle.stroke = colour;
+        labelStyle.fill = '#fff';
+      }
+
       if (!certainty) {
         style['pattern-opacity'] = 1;
+        labelStyle.stroke = uncertainColour;
+        labelStyle.fill = 'black';
+      }
+
+      if (id === 'BERO') {
+        console.log(id, style, { hasAnyFocuses, hasAnyAllocations });
       }
 
       map?.setFeatureState(
@@ -298,7 +340,7 @@
           source: 'electorate_points',
           id: electorateIdToNumber(geoPropsID)
         },
-        { opacity: isInspecting || annotation ? 1 : 0 }
+        labelStyle
       );
     });
 
@@ -334,13 +376,8 @@
 
   // When dependencies change, update the map.
   $effect(() => {
-    const deps = [isElectoratePolygonsLoaded, geoArea, electoratesRenderProps];
+    const deps = [isElectoratePolygonsLoaded, geoArea, electoratesRenderProps, isInspecting];
     deps && updateMapState(false);
-  });
-
-  $effect(() => {
-    const deps = [isInspecting];
-    deps && updateMapState(true);
   });
 
   $effect(() => {
@@ -350,7 +387,7 @@
     }
     let textIgnorePlacementTimeout;
 
-    map.fitBounds(new LngLatBounds(bounds), mapConfig.fitBounds);
+    map?.fitBounds(new LngLatBounds(bounds), mapConfig.fitBounds);
     textIgnorePlacementTimeout = setTimeout(
       () => map?.setLayoutProperty('electorate_points_label', 'text-ignore-placement', geoArea !== 'Australia'),
       geoArea === 'Australia' ? 250 : 750

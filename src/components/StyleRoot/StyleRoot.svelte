@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, type Snippet } from 'svelte';
+  import { onMount } from 'svelte';
   import parties from '../../../data/parties.json';
   import { partyColours } from './store';
 
@@ -10,11 +10,16 @@
       return;
     }
     const styles = window.getComputedStyle(rootEl);
-    $partyColours = {};
+    $partyColours = {
+      allocated: {},
+      uncertain: {}
+    };
     const partyCodes = Object.keys(parties.hashCodes);
     partyCodes.forEach(partyCode => {
-      $partyColours[partyCode] = styles.getPropertyValue(`--a-${partyCode}`);
+      $partyColours.allocated[partyCode] = styles.getPropertyValue(`--a-${partyCode}`);
+      $partyColours.uncertain[partyCode] = styles.getPropertyValue(`--u-${partyCode}`);
     });
+    console.log({ $partyColours });
   });
 </script>
 
@@ -45,6 +50,17 @@
     --c-ptyred: #e11f30;
     --c-ptyteal: #0098a6;
 
+    --c-alt-ptyblue: #cedcf2;
+    --c-alt-ptyred: #f9d2d6;
+    --c-alt-ptylightgreen: #dceecc;
+    --c-alt-ptyblack: #e3e3e3;
+    --c-alt-ptygreen: #cce2dd;
+    --c-alt-ptygold: #f5e7cc;
+    --c-alt-ptybrown: #e6dbd9;
+    --c-alt-ptylightblue: #cfe6ec;
+    --c-alt-ptyorange: #f4dccc;
+    --c-alt-ptypurple: #e9def0;
+
     --c-supp-ptygold: #a36a00;
     --c-supp-ptylightgreen: #508423;
     --c-supp-ptylightblue: #0e81a0;
@@ -73,6 +89,19 @@
     --a-OTH: var(--c-ptyblack);
     --a-PUP: var(--c-ptygold);
     --a-Teal: var(--c-ptyteal);
+
+    --u-ALP: var(--c-alt-ptyred);
+    --u-CA: var(--c-alt-ptyblack);
+    --u-CLP: var(--c-alt-ptygold);
+    --u-GRN: var(--c-alt-ptylightgreen);
+    --u-IND: var(--c-alt-ptyblack);
+    --u-KAP: var(--c-alt-ptybrown);
+    --u-LIB: var(--c-alt-ptyblue);
+    --u-LNP: var(--c-alt-ptyblue);
+    --u-NAT: var(--c-alt-ptygreen);
+    --u-ONP: var(--c-alt-ptyorange);
+    --u-OTH: var(--c-alt-ptyblack);
+    --u-PUP: var(--c-alt-ptygold);
 
     --c-filled-border: #fff;
   }
