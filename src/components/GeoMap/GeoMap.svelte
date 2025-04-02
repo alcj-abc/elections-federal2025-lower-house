@@ -2,7 +2,7 @@
   import debounce from 'debounce';
   import mapConfig from '../../../data/appdata-mapconfig.json';
   import { untrack } from 'svelte';
-  import { ausOutlineGeojson, electorateIdToNumber } from './utils';
+  import { electorateIdToNumber } from './utils';
   import patternURL from './hash-pattern.png';
   import { partyColours } from '../StyleRoot/store';
   import type { MapOptions, Map as MapType } from './maplibre-gl';
@@ -93,8 +93,6 @@
           }
         });
 
-        map.addSource('ausoutline', { type: 'geojson', data: ausOutlineGeojson });
-
         map.loadImage(patternURL).then(image => {
           map?.addImage('diagonal_stripes_pattern', image.data);
         });
@@ -147,20 +145,6 @@
             'line-width': ['coalesce', ['feature-state', 'strokeWidth'], 0.5]
           }
         });
-
-        // map.addLayer({
-        //   id: 'ausoutline',
-        //   type: 'line',
-        //   source: 'ausoutline',
-        //   layout: {
-        //     // 'line-join': 'round',
-        //     // 'line-cap': 'round'
-        //   },
-        //   paint: {
-        //     'line-color': '#fff',
-        //     'line-width': 0.7
-        //   }
-        // });
 
         // Labels
         map.addLayer({
@@ -223,13 +207,6 @@
         updateMapState();
       });
     });
-  });
-
-  $effect(() => {
-    if (!map || !isElectoratePolygonsLoaded) {
-      return;
-    }
-    map.setPaintProperty('ausoutline', 'line-opacity', geoArea === 'Australia' ? 1 : 0);
   });
 
   let electoratesRenderProps = $derived.by(() =>

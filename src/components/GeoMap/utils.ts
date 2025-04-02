@@ -1,7 +1,3 @@
-import ausOutlineTopo from './australia-10m.topo.json';
-import { feature } from 'topojson-client';
-export const ausOutlineGeojson = feature(ausOutlineTopo, ausOutlineTopo.objects['10m']);
-
 // GeoJSON prefers numeric IDs. This will convert a letter-based electorate code to an integer.
 // Our electorate codes are 4 letter long but this code can safely handle up to 11 letters, because Math.pow(26, 11) < Number.MAX_SAFE_INTEGER
 export const electorateIdToNumber = (electorateId: string): number => {
