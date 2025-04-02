@@ -97,18 +97,6 @@
           map?.addImage('diagonal_stripes_pattern', image.data);
         });
 
-        // Electorate outline underneath
-        // map.addLayer({
-        //   id: 'electorate_polygons_baseline',
-        //   type: 'line',
-        //   source: 'electorate_polygons',
-        //   'source-layer': 'federalelectorates2025',
-        //   paint: {
-        //     'line-color': '#000',
-        //     'line-width': 1
-        //   }
-        // });
-
         // empty electorate fill
         map.addLayer({
           id: 'electorate_polygons_fill',
@@ -140,7 +128,6 @@
           source: 'electorate_polygons',
           'source-layer': 'federalelectorates2025',
           paint: {
-            'line-opacity': 0,
             'line-color': ['coalesce', ['feature-state', 'stroke'], 'transparent'],
             'line-width': ['coalesce', ['feature-state', 'strokeWidth'], 0.5]
           }
@@ -238,14 +225,13 @@
       const geoPropsID = id.toLowerCase();
       const colour = $partyColours.allocated[allocation] || $partyColours.allocated['null'];
       const uncertainColour = $partyColours.uncertain[allocation] || 'white';
-      // const colorUncertain = $part
 
       const style = {
         fill: colour,
         opacity: 1,
         strokeWidth: 0.5,
         'pattern-opacity': 0,
-        stroke: hasAllocation ? '#FFFFFF' : '#60646C'
+        stroke: '#60646C'
       };
 
       const labelStyle = {
@@ -276,19 +262,20 @@
         }
       }
 
+      if (hasAnyAllocations) {
+        style.stroke = '#CDCBCB';
+      }
+
       if (hasAllocation) {
         labelStyle.stroke = colour;
         labelStyle.fill = '#fff';
+        style.stroke = '#FFFFFF';
       }
 
       if (!certainty) {
         style['pattern-opacity'] = 1;
         labelStyle.stroke = uncertainColour;
         labelStyle.fill = 'black';
-      }
-
-      if (id === 'BERO') {
-        console.log(id, style, { hasAnyFocuses, hasAnyAllocations });
       }
 
       map?.setFeatureState(
