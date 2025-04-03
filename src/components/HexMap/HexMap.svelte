@@ -47,10 +47,16 @@
   /** Are any of the electorates focused? If so, we use different styles for unallocated */
   let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
 
-  /** Are all of the electorates allocated? If so, turn off state borders. */
+  /** Are some of the electorates allocated?  */
   let hasAllocations = $derived.by(() => {
     const allocationValues = Object.values(allocations);
     return allocationValues.length !== 0 && allocationValues.some(Boolean);
+  });
+
+  /** Are all the electorates allocated? If so, turn off state borders. */
+  let hasAllAllocations = $derived.by(() => {
+    const allocationValues = Object.values(allocations);
+    return allocationValues.length !== 0 && allocationValues.every(Boolean);
   });
 
   const initial = layout.viewbox;
@@ -156,6 +162,7 @@
           {layout}
           offset={layout.positions[group.name]}
           {hasAllocations}
+          {hasAllAllocations}
           {allocations}
           {focuses}
           {hasAnyFocuses}

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { hexToPx } from '../../../lib/utils';
   import HexLabels from './HexLabels/HexLabels.svelte';
-  // import HexMapArrows from './HexMapArrows/HexMapArrows.svelte';
 
   let {
     name = '',
@@ -10,6 +9,7 @@
     svgOutline = '',
     offset = [Infinity, Infinity],
     hasAllocations,
+    hasAllAllocations,
     allocations,
     focuses,
     hasAnyFocuses = false,
@@ -45,6 +45,7 @@
   class:group--hidden={!isVisible}
   class:group--map-is-static={isStaticLayout}
   class:group--map-is-empty={!hasAllocations}
+  class:group--map-is-full={hasAllAllocations}
   class:group--has-focuses={hasAnyFocuses}
 >
   <g class="group-hexes">
@@ -97,6 +98,9 @@
   }
   .group--map-is-empty:not(.group--has-focuses) .group-outline :global(.hex-outline) {
     stroke: var(--c-empty-state-outline);
+  }
+  .group--map-is-full:not(.group--has-focuses) .group-outline :global(.hex-outline) {
+    stroke: transparent;
   }
 
   // Party colours
