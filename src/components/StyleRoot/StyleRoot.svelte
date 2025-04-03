@@ -19,7 +19,6 @@
       $partyColours.allocated[partyCode] = styles.getPropertyValue(`--a-${partyCode}`);
       $partyColours.uncertain[partyCode] = styles.getPropertyValue(`--u-${partyCode}`);
     });
-    console.log({ $partyColours });
   });
 </script>
 
