@@ -235,6 +235,11 @@
                 Full certainty
               </button>
             </div>
+
+            <label>
+              <input type="checkbox" bind:checked={$hashConfig.combineCoalition} />
+              Combine Coalition
+            </label>
           </fieldset>
           <Focuses />
           <Labels />

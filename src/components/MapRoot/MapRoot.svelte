@@ -7,7 +7,25 @@
   import StyleRoot from '../StyleRoot/StyleRoot.svelte';
   import Totals from '../Totals/Totals.svelte';
 
-  let { vizType = 'hex', totals, allocations, certainties, showTotals, ...componentProps } = $props();
+  let {
+    vizType = 'hex',
+    totals,
+    allocations: sourceAllocations,
+    certainties,
+    showTotals,
+    combineCoalition,
+    ...componentProps
+  } = $props();
+
+  let allocations = $derived.by(() => {
+    if (!combineCoalition) {
+      return sourceAllocations;
+    }
+    return Object.entries(sourceAllocations).reduce((obj, [id, allocation]) => {
+      obj[id] = allocation === 'NAT' ? 'LNP' : allocation;
+      return obj;
+    }, {});
+  });
 </script>
 
 <StyleRoot>

@@ -168,6 +168,11 @@ export const schema = {
     key: 'fpa',
     defaultValue: 'None',
     values: ['None', 'ALP', 'LNP', 'GRN', 'Independent', 'Informal']
+  },
+  combineCoalition: {
+    type: 'boolean',
+    key: 'cc',
+    defaultValue: false
   }
 };
 
@@ -185,6 +190,7 @@ export const hashConfig = makeSvelteStore<{
   showFocusedElectorateLabels: boolean;
   showTotals: boolean;
   firstPreferenceArrows: string;
+  combineCoalition: boolean;
 }>(schema);
 
 // Version our hash. This way we can introduce/deprecate/upgrade features as needed.

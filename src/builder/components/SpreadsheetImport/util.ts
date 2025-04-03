@@ -33,7 +33,11 @@ function matchAllocation(allocationName = '') {
       code: 'ALP'
     },
     {
-      keywords: ['lnp', 'clp', 'nat', 'lib', 'coalition', 'national'],
+      keywords: ['nat', 'national'],
+      code: 'NAT'
+    },
+    {
+      keywords: ['lnp', 'clp', 'lib', 'coalition'],
       code: 'LNP'
     },
     {
