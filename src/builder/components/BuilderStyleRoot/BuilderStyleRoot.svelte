@@ -13,6 +13,7 @@
     font-weight: 400;
 
     --text: #222;
+    --text-light: #888;
     --background: #fff;
     --border: rgba(122, 123, 135, 0.5);
     --background-alt: #f2f4f5;
@@ -32,6 +33,7 @@
   @media (prefers-color-scheme: dark) {
     .style-root {
       --text: #ccc;
+      --text-light: #888;
       --background: #1a1a1a;
       --background-alt: #2c2c2f;
       --border: rgba(122, 123, 135, 0.5);
@@ -107,6 +109,9 @@
         background: Highlight;
         color: HighlightText;
       }
+    }
+    button:disabled {
+      color: var(--text-light);
     }
 
     select,

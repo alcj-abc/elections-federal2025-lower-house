@@ -31,11 +31,29 @@
       .then(tsv => {
         // remove the comments before the --- line
         const sanitisedTsv = tsv.replace(/^(.*?)---/s, '');
-        return parseTsv(sanitisedTsv).forEach(([electorateName = '', demographic = '']) => {
-          demographics[matchElectorate(electorateName)?.id || 'eeee'] = demographic;
-        });
+        demographics = parseTsv(sanitisedTsv).reduce((obj, [electorateName = '', demographic = '']) => {
+          obj[matchElectorate(electorateName)?.id || 'eeee'] = demographic;
+          return obj;
+        }, {});
       });
   });
+
+  // Load safeties from tsv.
+  let safety = $state({});
+  $effect(() => {
+    fetch('./data/safety.tsv', { cache: 'force-cache' })
+      .then(res => res.text())
+      .then(tsv => {
+        // remove the comments before the --- line
+        const sanitisedTsv = tsv.replace(/^(.*?)---/s, '');
+        safety = parseTsv(sanitisedTsv).reduce((obj, [electorateName = '', electorateSafety = '']) => {
+          obj[matchElectorate(electorateName)?.id || 'eeee'] = electorateSafety;
+          return obj;
+        }, {});
+      });
+  });
+
+  $effect(() => console.log({ safety }));
 
   /**
    * Buttons to show in the builder. Each item in the array is a button with a
@@ -50,6 +68,12 @@
       ...['Outer metro', 'Inner metro', 'Rural', 'Regional'].map(situation => ({
         name: situation,
         focusCheck: code => demographics[code] === situation
+      })),
+      ...['Marginal', 'Safe', 'Very safe'].map(electorateSafety => ({
+        name: electorateSafety,
+        focusCheck: code => {
+          return safety[code] === electorateSafety;
+        }
       }))
       // {
       //   name: 'Key seats',
