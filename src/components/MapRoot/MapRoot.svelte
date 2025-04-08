@@ -28,24 +28,22 @@
   });
 </script>
 
-<StyleRoot>
-  <div class="interactive">
-    <div class="interactive__map">
-      <div class="interactive__map-inner">
-        {#if vizType === 'geo'}
-          <GeoMap {allocations} {certainties} {...componentProps} />
-        {/if}
+<div class="interactive">
+  <div class="interactive__map">
+    <div class="interactive__map-inner">
+      {#if vizType === 'geo'}
+        <GeoMap {allocations} {certainties} {...componentProps} />
+      {/if}
 
-        {#if vizType === 'hex'}
-          <HexMap {allocations} {certainties} {...componentProps} />
-        {/if}
-      </div>
-    </div>
-    <div class="interactive__totals">
-      <Totals {allocations} {certainties} {totals} {showTotals} {...componentProps} />
+      {#if vizType === 'hex'}
+        <HexMap {allocations} {certainties} {...componentProps} />
+      {/if}
     </div>
   </div>
-</StyleRoot>
+  <div class="interactive__totals">
+    <Totals {allocations} {certainties} {totals} {showTotals} {...componentProps} />
+  </div>
+</div>
 
 <style lang="scss">
   .interactive {

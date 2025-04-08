@@ -1,60 +1,53 @@
-function replaceNodeWithTextState(node, props) {
+import { mount } from 'svelte';
+import { matchAllocation } from '../../builder/components/SpreadsheetImport/util';
+import InlineHighlights from './InlineHighlights.svelte';
+
+function mountInlineHighlight(node, props) {
   const newParent = document.createElement('span');
   node.replaceWith(newParent);
-  // render(createElement(TextState, props), newParent);
+  mount(InlineHighlights, {
+    target: newParent,
+    props: {
+      ...props
+    }
+  });
 }
 
-export function applyColourToPanels(panels) {
+/**
+ * Search panels for any <strong> elements with a party or electorate name and
+ * colourise them accordingly.
+ */
+export function applyColourToPanels(panels, { config }) {
+  const electorates = config.groups.flatMap(group => group.hexes.map(hex => hex.name));
+  const electorateIds = config.groups.flatMap(group => group.hexes.map(hex => hex.id));
   panels.forEach(({ data, nodes }, i) => {
-    const hasFocuses = getHasFocuses(data.focuses);
-
     (nodes as HTMLElement[]).forEach(node =>
-      node.querySelectorAll('strong').forEach(stronk => {
+      node.querySelectorAll('span,strong').forEach(stronk => {
         const textContent = String(stronk.textContent).trim();
-        const magicWords = ['solid', 'likely', 'lean', 'leans', 'leaning'];
 
-        if (magicWords.includes(textContent.toLowerCase())) {
-          const redWords = ['trump', 'donald', 'republican'];
-          const blueWords = ['harris', 'kamala', 'democrat'];
-          const blockText = String(node.textContent).toLowerCase();
-          const isRed = hasWords(redWords, blockText);
-          const isBlue = hasWords(blueWords, blockText);
-
-          let allocation = 'n';
-          if (isBlue) {
-            allocation = textContent === 'solid' ? 'd' : 's';
-          }
-          if (isRed) {
-            allocation = textContent === 'solid' ? 'r' : 'e';
-          }
-
-          replaceNodeWithTextState(stronk, {
+        // Party names
+        const allocationText = matchAllocation(textContent.toLowerCase());
+        if (allocationText) {
+          mountInlineHighlight(stronk, {
             name: textContent,
-            allocation: allocation,
-            showAbbr: false
+            allocation: allocationText,
+            certainty: true
           });
-
-          return;
         }
 
-        const state = STATES.find(({ name }) => name === stronk.textContent?.trim());
-        const stateId = state ? StateId[state.id] : null;
-        if (!stateId) {
-          return;
-        }
+        // Electorate names w allocation corresponding to the map
+        const electorateIndex = electorates.indexOf(textContent);
+        if (electorateIndex !== -1) {
+          const electorateId = electorateIds[electorateIndex];
+          const allocation = data.allocations?.[electorateId] ?? null;
+          const certainty = data.certainties?.[electorateId] ?? true;
 
-        const { allocations } = data as GraphicProps;
-        let stateMainAllocation = allocations && getStateAllocations(stateId, allocations)[0];
-        if (stateMainAllocation === 'n' && hasFocuses) {
-          stateMainAllocation = Allocation.UnallocatedFocused;
+          mountInlineHighlight(stronk, {
+            name: textContent,
+            allocation,
+            certainty
+          });
         }
-
-        replaceNodeWithTextState(stronk, {
-          name: state?.name,
-          id: stateId,
-          allocation: stateMainAllocation,
-          showAbbr: true
-        });
       })
     );
   });

@@ -20,7 +20,7 @@ export function matchElectorate(electorateName = '') {
 }
 
 /** Sanitise allocations */
-function matchAllocation(allocationName = '') {
+export function matchAllocation(allocationName = '') {
   const sanitisedAllocationName = allocationName.trim().toLowerCase();
   if (!sanitisedAllocationName) {
     return null;
@@ -33,15 +33,15 @@ function matchAllocation(allocationName = '') {
       code: 'ALP'
     },
     {
-      keywords: ['nat', 'national'],
+      keywords: ['nat', 'nationals', 'national'],
       code: 'NAT'
     },
     {
-      keywords: ['lnp', 'clp', 'lib', 'coalition'],
+      keywords: ['lnp', 'clp', 'lib', 'coalition', 'liberal'],
       code: 'LNP'
     },
     {
-      keywords: ['grn', 'green'],
+      keywords: ['grn', 'greens', 'green'],
       code: 'GRN'
     },
 
@@ -52,7 +52,9 @@ function matchAllocation(allocationName = '') {
     }))
   ];
 
-  const matched = matches.find(match => match.keywords.some(keyword => sanitisedAllocationName.includes(keyword)));
+  const matched = matches.find(match =>
+    match.keywords.some(keyword => sanitisedAllocationName.match(new RegExp(`\\b(${keyword})\\b`, 'i')))
+  );
 
   if (!matched) {
     return undefined;
