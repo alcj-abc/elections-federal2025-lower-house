@@ -29,6 +29,8 @@
     onClick = ({ code }) => {},
     /** Call back to this function when someone hovers a hexagon*/
     onHover = ({ code }) => {},
+    /** Call back to this function when someone focuses a hexagon via keyboard navigation*/
+    onFocus = ({ code }) => {},
     /** Override the viewbox with your own */
     customViewbox = null,
     /** Receive the current value of the viewbox (excluding animation frames) */
@@ -161,6 +163,7 @@
         userFocusedElectorate = newValue;
       }}
       {onClick}
+      {onFocus}
     />
   {/if}
 </div>
