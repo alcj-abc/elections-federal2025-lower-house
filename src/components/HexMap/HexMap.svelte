@@ -165,6 +165,7 @@
           {hasAllAllocations}
           {allocations}
           {focuses}
+          {certainties}
           {hasAnyFocuses}
           {showElectorateLabels}
           {showFocusedElectorateLabels}

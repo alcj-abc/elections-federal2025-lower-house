@@ -1,5 +1,5 @@
 <script lang="ts">
-  let { hexes, allocations, labelsToShow = {}, showElectorateLabels = false } = $props();
+  let { hexes, allocations, certainties, labelsToShow = {}, showElectorateLabels = false } = $props();
 
   let labels = $derived.by(() => {
     if (showElectorateLabels) {
@@ -11,15 +11,17 @@
 
 <g class="hexlabels">
   {#each labels as { id, coordPx, shortName }}
-    <g transform={`translate(${coordPx.join(' ')})`}>
-      <text class="hexlabels__text" class:hexlabels__text--allocation={allocations[id]}>
-        <!-- {multiLineLabel
-      ? multiLineLabel.map((line, index) => (
-          <tspan key={index} x="0" y="-0.6em" dy={`${index * 1.2}em`}>
-            {line}
-          </tspan>
-        ))
-      : label} -->
+    <g transform={`translate(${coordPx.join(' ')}) rotate(-30) translate(0 3)`}>
+      <text
+        class="hexlabels__text"
+        class:hexlabels__text--allocation={allocations[id]}
+        style:stroke={`var(--u-${allocations[id]})`}
+        style:stroke-width="3"
+        style:opacity={allocations[id] && !certainties[id] ? 1 : 0}
+      >
+        {shortName}
+      </text>
+      <text class="hexlabels__text" style:fill={allocations[id] && certainties[id] ? 'white' : 'black'}>
         {shortName}
       </text>
     </g>
@@ -31,13 +33,10 @@
     pointer-events: none;
   }
   .hexlabels__text {
-    transform: rotate(30deg) translate(0, 0.3em);
-    fill: black;
-    font-size: 9px;
-    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: ABCSans, sans-serif;
     text-anchor: middle;
-  }
-  .hexlabels__text--allocation {
-    fill: white;
+    transition: all 0.2s;
   }
 </style>

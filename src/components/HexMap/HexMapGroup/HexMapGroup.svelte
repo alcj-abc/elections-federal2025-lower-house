@@ -12,6 +12,7 @@
     hasAllAllocations,
     allocations,
     focuses,
+    certainties,
     hasAnyFocuses = false,
     /** The hex map is to be used as a base for other visualisations, such as the arrow map */
     isOutlineOnly = false,
@@ -55,15 +56,15 @@
     {@html svgHexes}
   </g>
   <g class="group-outline group-outline__under">{@html svgOutline}</g>
-  {#if isVisible}
-    <HexLabels {hexes} {allocations} labelsToShow={labels} {showElectorateLabels} />
-  {/if}
   <g class="group-outline group-outline__over" style:opacity={hasAnyFocuses && !hasAllocations ? 0 : 1}>
     {@html svgOutline}
   </g>
   <g class="group-hex-strokes">
     {@html svgHexes}
   </g>
+  {#if isVisible}
+    <HexLabels {hexes} {allocations} {certainties} labelsToShow={labels} {showElectorateLabels} />
+  {/if}
 </g>
 
 <style lang="scss">
