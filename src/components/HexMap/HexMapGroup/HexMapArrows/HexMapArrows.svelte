@@ -9,7 +9,6 @@
 
   const arrowHeight = 0.08;
   $effect(() => {
-    console.group('first preference arrows');
     $arrowData = data.diffedElectorates.reduce((obj, electorate) => {
       const matchedElectorate = matchElectorate(electorate.electorate);
       if (!matchedElectorate) {
@@ -25,13 +24,8 @@
         [matchedElectorate.id]: party?.changeInPercent
       };
     }, {});
-    console.log('all done');
-
-    console.groupEnd();
   });
-  console.time('hexmaparr');
   onMount(() => {
-    console.timeEnd('hexmaparr');
     return () => {
       $arrowData = {};
     };
@@ -68,3 +62,10 @@
     {/if}
   {/each}
 </g>
+
+<style lang="scss">
+  path,
+  g {
+    transition: all 0.5s;
+  }
+</style>
