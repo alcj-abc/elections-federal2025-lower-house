@@ -1,0 +1,152 @@
+“Marginal” to margins < 6, “Safe” to margins < 12, and “Very safe” to margins >= 12. See _snippet-calculate-Safety.js
+---
+ADEL	Safe
+ASTO	Marginal
+BALL	Very safe
+BANK	Marginal
+BARK	Very safe
+BART	Very safe
+BASS	Marginal
+BEAN	Very safe
+BEND	Safe
+BENN	Marginal
+BERO	Safe
+BLAI	Marginal
+BLAX	Very safe
+BONN	Marginal
+BOOT	Marginal
+BOWM	Marginal
+BRAD	Safe
+BRFD	Marginal
+BRAN	Very safe
+BRIS	Marginal
+BRUC	Marginal
+BULL	Marginal
+BURT	Very safe
+CALA	Safe
+CALW	Very safe
+CANB	Very safe
+CANN	Marginal
+CAPR	Safe
+CASE	Marginal
+CHIF	Very safe
+CHIS	Marginal
+CLAR	Very safe
+COOK	Safe
+COOP	Safe
+CORA	Safe
+CORI	Very safe
+COWA	Safe
+COWP	Marginal
+CUNN	Very safe
+CURT	Marginal
+DAWS	Safe
+DEAK	Marginal
+DICK	Marginal
+DOBE	Safe
+DUNK	Safe
+DURA	Marginal
+EMON	Safe
+FADD	Safe
+FAIR	Safe
+FARR	Very safe
+FENN	Very safe
+FISH	Safe
+FLIN	Safe
+FLYN	Marginal
+FORD	Marginal
+FORR	Marginal
+FOWL	Marginal
+FRAN	Very safe
+FRAS	Very safe
+FREM	Very safe
+GELL	Safe
+GILM	Marginal
+GIPP	Very safe
+GOLD	Marginal
+GORT	Safe
+GRAY	Very safe
+GREE	Safe
+GREY	Safe
+GRIF	Safe
+GROO	Safe
+HASL	Safe
+HAWK	Safe
+HERB	Safe
+HIND	Safe
+HINK	Safe
+HOLT	Safe
+HOTH	Safe
+HUGH	Marginal
+HUME	Safe
+HUNT	Marginal
+INDI	Safe
+ISAA	Safe
+JAGA	Very safe
+KENN	Very safe
+KSMI	Very safe
+KING	Very safe
+KOOY	Marginal
+LTRO	Safe
+LALO	Very safe
+LEIC	Marginal
+LILL	Safe
+LIND	Safe
+LING	Marginal
+LONG	Marginal
+LYNE	Very safe
+LYON	Marginal
+MACA	Safe
+MACK	Marginal
+MACN	Very safe
+MACQ	Safe
+MAKI	Safe
+MALL	Very safe
+MARA	Very safe
+MARI	Very safe
+MAYO	Very safe
+MCEW	Marginal
+MCMA	Safe
+MCPH	Safe
+MELB	Safe
+MENZ	Marginal
+MITC	Safe
+MONA	Marginal
+MONC	Safe
+MOOR	Marginal
+MORE	Safe
+NENG	Very safe
+NEWC	Very safe
+NICH	Marginal
+OCON	Safe
+OXLE	Safe
+PAGE	Safe
+PARK	Very safe
+PARR	Marginal
+PATE	Marginal
+PEAR	Safe
+PERT	Very safe
+PETR	Marginal
+RANK	Safe
+REID	Marginal
+RICH	Safe
+RIVE	Safe
+ROBE	Marginal
+RYAN	Marginal
+SCUL	Very safe
+SHOR	Safe
+SOLO	Safe
+SPEN	Very safe
+STUR	Marginal
+SWAN	Safe
+SYDN	Very safe
+TANG	Marginal
+WANN	Marginal
+WARR	Safe
+WATS	Very safe
+WENT	Safe
+WERR	Marginal
+WHIT	Safe
+WBAY	Safe
+WILL	Marginal
+WRIG	Safe
