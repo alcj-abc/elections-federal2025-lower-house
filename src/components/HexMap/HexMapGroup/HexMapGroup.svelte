@@ -93,7 +93,7 @@
   .group-outline :global(.hex-outline) {
     fill: none;
     stroke: var(--c-state-outline);
-    stroke-width: 1px;
+    stroke-width: 1.5px;
     transition:
       opacity 0.5s,
       stroke 0.5s;
@@ -117,25 +117,25 @@
   .group-hexes :global(.hex[data-allocation='null']) {
     fill: var(--a-null);
     stroke: var(--a-null-border);
-    stroke-width: 1;
+    stroke-width: 1.5px;
   }
 
   .group--map-is-empty .group-hexes :global(.hex) {
     fill: var(--a-empty);
     stroke: var(--a-empty-border);
-    stroke-width: 0.5;
+    stroke-width: 1px;
   }
 
   // Strokes
   .group-hex-strokes :global(.hex) {
     fill: transparent;
     stroke: transparent;
-    stroke-width: 1px;
+    stroke-width: 1.5px;
   }
   .group-hex-strokes :global(.hex:not([data-allocation='null'])) {
     fill: transparent;
     stroke: var(--c-filled-border);
-    stroke-width: 1px;
+    stroke-width: 1.5px;
   }
 
   // Uncertainty hash
@@ -145,7 +145,7 @@
 
   .group--has-focuses {
     .group-hexes :global(.hex) {
-      stroke-width: 1;
+      stroke-width: 1.5px;
     }
     // Focused null hexes turn white w black border
     .group-hexes :global(.hex[data-allocation='null'][data-focused='true']) {
@@ -181,7 +181,7 @@
     .hex {
       stroke: white !important;
       fill: #f1f1f1;
-      stroke-width: 1 !important;
+      stroke-width: 1.5 !important;
     }
     .hex-outline {
       stroke: #cdcbcb !important;
