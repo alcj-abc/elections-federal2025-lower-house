@@ -141,6 +141,7 @@
   // Uncertainty hash
   .group-hex-strokes :global(.hex[data-certain='null']:not([data-allocation='null'])) {
     fill: url(#uncertainty-hash);
+    stroke-width: 2px;
   }
 
   .group--has-focuses {
