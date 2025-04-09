@@ -121,15 +121,29 @@
           }
         });
 
-        // Second electorate outline
+        // Electorate outline (light)
+        // Used for base outlines
         map.addLayer({
-          id: 'electorate_polygons_line',
+          id: 'electorate_polygons_line_underlay',
           type: 'line',
           source: 'electorate_polygons',
           'source-layer': 'federalelectorates2025',
           paint: {
             'line-color': ['coalesce', ['feature-state', 'stroke'], 'transparent'],
             'line-width': ['coalesce', ['feature-state', 'strokeWidth'], 0.5]
+          }
+        });
+
+        // Second electorate outline (overlaid)
+        // Draw more important layers above the base outlines so they don't overlap, e.g. focused outlines
+        map.addLayer({
+          id: 'electorate_polygons_line_overlay',
+          type: 'line',
+          source: 'electorate_polygons',
+          'source-layer': 'federalelectorates2025',
+          paint: {
+            'line-color': ['coalesce', ['feature-state', 'strokeOverlay'], 'transparent'],
+            'line-width': ['coalesce', ['feature-state', 'strokeOverlayWidth'], 0.5]
           }
         });
 
@@ -231,7 +245,10 @@
         opacity: 1,
         strokeWidth: 0.5,
         'pattern-opacity': 0,
-        stroke: '#60646C'
+        stroke: '#60646C',
+        strokeOverlay: 'transparent',
+        strokeOverlayOpacity: 0,
+        strokeOverlayWidth: 2
       };
 
       const labelStyle = {
@@ -251,8 +268,9 @@
         }
         if (!hasAnyAllocations) {
           if (focus) {
-            style.strokeWidth = 2;
-            style.stroke = '#000';
+            style.strokeOverlay = '#000';
+            style.strokeOverlayWidth = 1;
+            style.stroke = 'transparent';
             style.fill = '#fff';
           } else {
             style.opacity = 1;
@@ -269,7 +287,9 @@
       if (hasAllocation) {
         labelStyle.stroke = colour;
         labelStyle.fill = '#fff';
-        style.stroke = '#FFFFFF';
+        style.stroke = 'transparent';
+        style.strokeOverlay = '#fff';
+        style.strokeOverlayWidth = 0.5;
       }
 
       if (!certainty) {
