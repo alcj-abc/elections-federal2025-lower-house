@@ -22,7 +22,7 @@
   }
 
   onMount(() => {
-    Promise.all([importModule(MAPLIBRE_URL), import('./GeoMap.svelte' /* webpackChunkName: "geo-map" */)]).then(
+    Promise.all([importModule(MAPLIBRE_URL), import(/* webpackChunkName: "dynamic-geo-map" */ './GeoMap.svelte')]).then(
       ([_, module]) => {
         GeoMap = module.default as Component;
       }

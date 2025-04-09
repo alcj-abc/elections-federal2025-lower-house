@@ -84,7 +84,7 @@ whenOdysseyLoaded.then(() => {
   );
   mountThing(
     'electionsfederal2025google-doc-preview',
-    () => import(/* webpackChunkName: "dynamic-builder" */ './builder/GoogleDocEntrypoint.svelte')
+    () => import(/* webpackChunkName: "dynamic-googledoc" */ './builder/GoogleDocEntrypoint.svelte')
   );
 
   mountScrollyteller();
