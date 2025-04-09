@@ -163,99 +163,117 @@
             </div>
           {/if}
 
-          <fieldset>
-            <legend>Mix-ins</legend>
-            <div class="buttons">
-              <button
-                onclick={e => {
-                  e.preventDefault();
-                  $hashConfig.allocations = electorates.reduce((obj, electorate) => {
-                    obj[electorate.id] = null;
-                    return obj;
-                  }, {});
-                }}>Blank</button
-              >
-              <button
-                onclick={e => {
-                  e.preventDefault();
-                  fetch('./data/2019.tsv', { cache: 'force-cache' })
-                    .then(res => res.text())
-                    .then(tsv => {
-                      $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
-                    });
-                }}
-              >
-                2019 results
-              </button>
-              <button
-                onclick={e => {
-                  e.preventDefault();
-                  fetch('./data/2022.tsv', { cache: 'force-cache' })
-                    .then(res => res.text())
-                    .then(tsv => {
-                      const rows = parseSpreadsheet(tsv);
-                      $hashConfig = applyHashConfig(rows, $hashConfig);
-                    });
-                }}
-              >
-                2022 (before redist)
-              </button>
-              <button
-                onclick={e => {
-                  e.preventDefault();
-                  fetch('./data/2022-redist.tsv', { cache: 'force-cache' })
-                    .then(res => res.text())
-                    .then(tsv => {
-                      $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
-                    });
-                }}
-              >
-                2022 redistributed
-              </button>
-              <button
-                onclick={e => {
-                  e.preventDefault();
-                  $hashConfig.certainties = electorates.reduce((obj, electorate) => {
-                    obj[electorate.id] = null;
-                    return obj;
-                  }, {});
-                }}
-              >
-                No certainty
-              </button>
-              <button
-                onclick={e => {
-                  e.preventDefault();
-                  $hashConfig.certainties = electorates.reduce((obj, electorate) => {
-                    obj[electorate.id] = true;
-                    return obj;
-                  }, {});
-                }}
-              >
-                Full certainty
-              </button>
-            </div>
+          {#if $hashConfig.firstPreferenceArrows === 'None'}
+            <fieldset>
+              <legend>Mix-ins</legend>
+              <div class="buttons">
+                <button
+                  onclick={e => {
+                    e.preventDefault();
+                    $hashConfig.allocations = electorates.reduce((obj, electorate) => {
+                      obj[electorate.id] = null;
+                      return obj;
+                    }, {});
+                  }}>Blank</button
+                >
+                <button
+                  onclick={e => {
+                    e.preventDefault();
+                    fetch('./data/2019.tsv', { cache: 'force-cache' })
+                      .then(res => res.text())
+                      .then(tsv => {
+                        $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
+                      });
+                  }}
+                >
+                  2019 results
+                </button>
+                <button
+                  onclick={e => {
+                    e.preventDefault();
+                    fetch('./data/2022.tsv', { cache: 'force-cache' })
+                      .then(res => res.text())
+                      .then(tsv => {
+                        const rows = parseSpreadsheet(tsv);
+                        $hashConfig = applyHashConfig(rows, $hashConfig);
+                      });
+                  }}
+                >
+                  2022 (before redist)
+                </button>
+                <button
+                  onclick={e => {
+                    e.preventDefault();
+                    fetch('./data/2022-redist.tsv', { cache: 'force-cache' })
+                      .then(res => res.text())
+                      .then(tsv => {
+                        $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
+                      });
+                  }}
+                >
+                  2022 redistributed
+                </button>
+                <button
+                  onclick={e => {
+                    e.preventDefault();
+                    $hashConfig.certainties = electorates.reduce((obj, electorate) => {
+                      obj[electorate.id] = null;
+                      return obj;
+                    }, {});
+                  }}
+                >
+                  No certainty
+                </button>
+                <button
+                  onclick={e => {
+                    e.preventDefault();
+                    $hashConfig.certainties = electorates.reduce((obj, electorate) => {
+                      obj[electorate.id] = true;
+                      return obj;
+                    }, {});
+                  }}
+                >
+                  Full certainty
+                </button>
+              </div>
 
-            <label>
-              <input type="checkbox" bind:checked={$hashConfig.combineCoalition} />
-              Combine Coalition
-            </label>
-          </fieldset>
+              <label>
+                <input type="checkbox" bind:checked={$hashConfig.combineCoalition} />
+                Combine Coalition
+              </label>
+            </fieldset>
+          {/if}
           <Focuses />
-          <Labels />
-          <fieldset>
-            <legend>Totals bar</legend>
+          {#if $hashConfig.firstPreferenceArrows === 'None'}
+            <Labels />
+            <fieldset>
+              <legend>Totals bar</legend>
 
-            <label>
-              <input type="checkbox" bind:checked={$hashConfig.showTotals} />
-              Show totals
-            </label>
-          </fieldset>
+              <label>
+                <input type="checkbox" bind:checked={$hashConfig.showTotals} />
+                Show totals
+              </label>
+            </fieldset>
+          {/if}
           <fieldset>
             <legend>Change arrows</legend>
             <label>
               Show change in first preference for:
-              <select bind:value={$hashConfig.firstPreferenceArrows}>
+              <select
+                bind:value={$hashConfig.firstPreferenceArrows}
+                onchange={e => {
+                  if ($hashConfig.firstPreferenceArrows === 'None') {
+                    return;
+                  }
+                  $hashConfig.showStateLabels = false;
+                  $hashConfig.showElectorateLabels = false;
+                  $hashConfig.showTotals = false;
+                  $hashConfig.allocations = electorates.reduce((obj, electorate) => {
+                    obj[electorate.id] = null;
+                    return obj;
+                  }, {});
+                }}
+              >
                 {#each schema.firstPreferenceArrows.values as value}
                   <option>{value}</option>
                 {/each}
