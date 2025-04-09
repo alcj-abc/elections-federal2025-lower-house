@@ -173,10 +173,13 @@
         />
       {/each}
 
+      <!-- focus/hover hexagon (from props) -->
       <HexMapFocusIndicator groups={config.groups} id={userFocusedElectorate} {layout} type="focus" />
 
+      <!-- selected electorate double hexagon -->
       <HexMapFocusIndicator groups={config.groups} id={selectedElectorate} {layout} type="focus" />
 
+      <!-- focus/hover hexagon (interactive) -->
       <HexMapFocusIndicator groups={config.groups} id={userHoveredElectorate} {layout} type="hover" />
 
       {#if firstPreferenceArrows !== 'None'}
@@ -184,13 +187,13 @@
           <HexMapArrows hexes={group.hexes} offset={layout.positions[group.name]} {firstPreferenceArrows} />
         {/each}
       {/if}
-
-      {#if showStateLabels}
-        <div class="hexmap__labels">
-          <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
-        </div>
-      {/if}
     </svg>
+
+    {#if showStateLabels}
+      <div class="hexmap__labels">
+        <HexMapStateLabels labels={layout.labels} overlayLabels={layout.overlayLabels} />
+      </div>
+    {/if}
   </div>
 
   {#if isInteractive}
