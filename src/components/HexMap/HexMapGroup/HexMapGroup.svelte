@@ -13,6 +13,8 @@
     allocations,
     focuses,
     hasAnyFocuses = false,
+    /** The hex map is to be used as a base for other visualisations, such as the arrow map */
+    isOutlineOnly = false,
     labelsToShow = {},
     showElectorateLabels,
     showFocusedElectorateLabels,
@@ -47,6 +49,7 @@
   class:group--map-is-empty={!hasAllocations}
   class:group--map-is-full={hasAllAllocations}
   class:group--has-focuses={hasAnyFocuses}
+  class:group--is-outline={isOutlineOnly}
 >
   <g class="group-hexes">
     {@html svgHexes}
@@ -171,6 +174,17 @@
 
     &:not(.group--map-is-empty) .group-outline :global(.hex-outline) {
       stroke: #60646c;
+    }
+  }
+
+  .group--is-outline :global {
+    .hex {
+      stroke: white !important;
+      fill: #f1f1f1;
+      stroke-width: 1 !important;
+    }
+    .hex-outline {
+      stroke: #cdcbcb !important;
     }
   }
 </style>

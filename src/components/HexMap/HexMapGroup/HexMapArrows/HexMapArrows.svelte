@@ -7,7 +7,7 @@
 
   let { hexes, offset, firstPreferenceArrows } = $props();
 
-  const arrowHeight = 0.5;
+  const arrowHeight = 0.08;
   $effect(() => {
     console.group('first preference arrows');
     $arrowData = data.diffedElectorates.reduce((obj, electorate) => {
@@ -29,23 +29,40 @@
 
     console.groupEnd();
   });
+  console.time('hexmaparr');
   onMount(() => {
+    console.timeEnd('hexmaparr');
     return () => {
       $arrowData = {};
     };
   });
+
+  function scaleArrowSize(value) {
+    const minArrowScale = 0.3;
+    const maxArrowScale = 1.5;
+    const absVal = Math.abs(value);
+    return Math.min(maxArrowScale, minArrowScale + absVal / 20);
+  }
 </script>
 
 <g class="hex-map-arrows" transform={`translate(${hexToPx(offset, '').join(',')})`}>
   {#each hexes as hex}
     {#if $arrowData[hex.id]}
-      <g transform={`translate(${hex.coordPx.join(' ')}) scale(2) rotate(10)`}>
+      <g transform={`translate(${hex.coordPx.join(' ')}) rotate(10)`}>
         <path
-          transform={`scale(1 ${$arrowData[hex.id] * arrowHeight})`}
-          id="path14"
-          style="color:#000000;"
+          id="shape"
+          transform={`scale(${scaleArrowSize($arrowData[hex.id])} ${$arrowData[hex.id] * arrowHeight})`}
+          d="m -0.2818285,0 -1.224857,-62.62499 1.603794,-1.590508 1.473302,1.469369 L 0.2818285,0 Z"
           style:fill={`var(--a-${firstPreferenceArrows.length > 3 ? 'OTH' : firstPreferenceArrows.toUpperCase()}, hotpink)`}
-          d="M 0 -4.2808757 L -0.74207357 -2.2406901 C -0.56187965 -2.394702 -0.34988926 -2.4842981 -0.13280843 -2.5104411 L -0.13280843 0 L 0.13280843 0 L 0.13280843 -2.5104411 C 0.35029345 -2.4845375 0.56222883 -2.3950633 0.74207357 -2.2406901 L 0 -4.2808757 z "
+          stroke-width="2"
+        />
+        <path
+          id="shape"
+          transform={`translate(0 ${-63 * $arrowData[hex.id] * arrowHeight}) rotate(${$arrowData[hex.id] < 0 ? 180 : 0}) scale(${scaleArrowSize($arrowData[hex.id])})`}
+          d="M -3.3195607,1.900056 -1.8778392e-5,-1.419517 3.3195642,1.900064"
+          style:stroke={`var(--a-${firstPreferenceArrows.length > 3 ? 'OTH' : firstPreferenceArrows.toUpperCase()}, hotpink)`}
+          stroke-width="2"
+          fill="none"
         />
       </g>
     {/if}

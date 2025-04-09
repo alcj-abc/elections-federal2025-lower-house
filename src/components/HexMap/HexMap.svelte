@@ -169,6 +169,7 @@
           {showElectorateLabels}
           {showFocusedElectorateLabels}
           {labelsToShow}
+          isOutlineOnly={firstPreferenceArrows !== 'None'}
         />
       {/each}
 
