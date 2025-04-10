@@ -341,13 +341,13 @@
   }
   .container-controls {
     width: 22rem;
-    @media (min-width: 1920px) {
-      width: 25rem;
-    }
     padding: 2rem 1rem;
     background: rgba(0, 0, 0, 0.04);
     border-left: 1px solid var(--border);
     height: 100vh;
     overflow: auto;
+    @media (min-width: 1920px) {
+      width: 25rem;
+    }
   }
 </style>
