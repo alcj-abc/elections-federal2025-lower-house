@@ -1,13 +1,13 @@
 <script lang="ts">
   import { Tween } from 'svelte/motion';
-  import HexMapGroup from './HexMapGroup/HexMapGroup.svelte';
   import { cubicInOut } from 'svelte/easing';
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
   import { onMount } from 'svelte';
   import HexMapKeyboardNav from './HexMapKeyboardNav/HexMapKeyboardNav.svelte';
-  import HexMapArrows from './HexMapGroup/HexMapArrows/index.svelte';
   import HexMapFocusIndicator from './HexMapFocusIndicator/HexMapFocusIndicator.svelte';
   import { getInteractionHandlers } from './utils';
+  import HexMapGroups from './HexMapGroups/HexMapGroups.svelte';
+  import HexMapArrows from './HexMapArrows/index.svelte';
   let {
     config = {},
     layout = {},
@@ -44,21 +44,6 @@
   let userFocusedElectorate = $state<null | string>(null);
   let userHoveredElectorate = $state<null | string>(null);
 
-  /** Are any of the electorates focused? If so, we use different styles for unallocated */
-  let hasAnyFocuses = $derived.by(() => Object.values(focuses).some(Boolean));
-
-  /** Are some of the electorates allocated?  */
-  let hasAllocations = $derived.by(() => {
-    const allocationValues = Object.values(allocations);
-    return allocationValues.length !== 0 && allocationValues.some(Boolean);
-  });
-
-  /** Are all the electorates allocated? If so, turn off state borders. */
-  let hasAllAllocations = $derived.by(() => {
-    const allocationValues = Object.values(allocations);
-    return allocationValues.length !== 0 && allocationValues.every(Boolean);
-  });
-
   const initial = layout.viewbox;
   const tweenOptions = {
     easing: cubicInOut,
@@ -79,32 +64,6 @@
 
   $effect(() => {
     onViewboxChange(layout.viewbox);
-  });
-
-  // Set properties manually on hexes. Svelte is slow, and I don't trust it to
-  // be performant creating all 150+ electorates
-  let hexes = $derived.by(() =>
-    Array.from(svgEl?.querySelectorAll('polygon.hex') || []).filter(hex => hex instanceof SVGPolygonElement)
-  );
-  $effect(() => {
-    const _allocations = { ...allocations };
-    const _focuses = focuses;
-    const _certainties = certainties;
-
-    hexes.forEach(hex => {
-      const electorateCode = hex.dataset.id;
-      if (!electorateCode) {
-        return;
-      }
-
-      // set allocation
-      const newAllocation = _allocations[electorateCode] || null;
-      hex.dataset.allocation = newAllocation;
-      const newFocus = hasAnyFocuses ? _focuses[electorateCode] || false : true;
-      hex.dataset.focused = newFocus;
-      const newCertainty = _certainties[electorateCode] || null;
-      hex.dataset.certain = newCertainty;
-    });
   });
 
   onMount(() => {
@@ -155,24 +114,18 @@
           />
         </pattern>
       </defs>
-      {#each config.groups as group}
-        <HexMapGroup
-          {...group}
-          {isStaticLayout}
-          {layout}
-          offset={layout.positions[group.name]}
-          {hasAllocations}
-          {hasAllAllocations}
-          {allocations}
-          {focuses}
-          {certainties}
-          {hasAnyFocuses}
-          {showElectorateLabels}
-          {showFocusedElectorateLabels}
-          {labelsToShow}
-          isOutlineOnly={firstPreferenceArrows !== 'None'}
-        />
-      {/each}
+      <HexMapGroups
+        groups={config.groups}
+        {isStaticLayout}
+        {layout}
+        {allocations}
+        {focuses}
+        {certainties}
+        {showElectorateLabels}
+        {showFocusedElectorateLabels}
+        {labelsToShow}
+        isOutlineOnly={firstPreferenceArrows !== 'None'}
+      />
 
       <!-- focus/hover hexagon (from props) -->
       <HexMapFocusIndicator groups={config.groups} id={userFocusedElectorate} {layout} type="focus" />

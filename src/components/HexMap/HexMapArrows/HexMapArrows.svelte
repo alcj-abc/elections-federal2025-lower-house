@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { hexToPx } from '../../../../lib/utils';
-  import data from '../../../../../data/appdata-change-in-first-preference.json';
-  import { matchElectorate } from '../../../../builder/components/SpreadsheetImport/util';
+  import { hexToPx } from '../../../lib/utils';
+  import data from '../../../../data/appdata-change-in-first-preference.json';
+  import { matchElectorate } from '../../../builder/components/SpreadsheetImport/util';
   import { arrowData } from './utils';
   import { onMount } from 'svelte';
 
