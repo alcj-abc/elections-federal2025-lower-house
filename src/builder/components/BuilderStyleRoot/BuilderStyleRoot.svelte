@@ -2,12 +2,12 @@
   let { children } = $props();
 </script>
 
-<div class="style-root">
+<div class="builder-style-root">
   {@render children?.()}
 </div>
 
 <style lang="scss">
-  .style-root {
+  .builder-style-root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
@@ -31,7 +31,7 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    .style-root {
+    .builder-style-root {
       --text: #ccc;
       --text-light: #888;
       --background: #1a1a1a;
@@ -40,14 +40,8 @@
     }
   }
 
-  /* // style-root */
-
-  /*
-	--c-grey => --border
-	--c-white => --background
-	--c-black => --text
-*/
-  .style-root :global {
+  /* // builder-style-root */
+  .builder-style-root :global {
     fieldset {
       margin-bottom: 1rem;
       padding: var(--padding);

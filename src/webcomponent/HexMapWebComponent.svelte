@@ -25,7 +25,8 @@
     onHover = () => {},
     onApi = () => {},
     isStaticLayout = true,
-    isInteractive = true
+    isInteractive = true,
+    colours
   } = $props();
 
   let rootEl = $state();
@@ -96,5 +97,6 @@
     {customViewbox}
     {isStaticLayout}
     {isInteractive}
+    {colours}
   />
 </StyleRoot>

@@ -55,7 +55,6 @@
       hex.dataset.focused = newFocus;
       const newCertainty = _certainties[electorateCode] || null;
       hex.dataset.certain = newCertainty;
-      console.log({ hex, data: { ...hex.dataset } });
     });
   });
 
@@ -150,7 +149,7 @@
   // Group/state outlines
   .group-outline :global(.hex-outline) {
     fill: none;
-    stroke: var(--c-state-outline);
+    stroke: var(--c-stateOutline);
     stroke-width: 1.5px;
     transition:
       opacity 0.5s,
@@ -158,7 +157,7 @@
     vector-effect: non-scaling-stroke;
   }
   .group--map-is-empty:not(.group--has-focuses) .group-outline :global(.hex-outline) {
-    stroke: var(--c-empty-state-outline);
+    stroke: var(--c-emptyStateOutline);
   }
   .group--map-is-full:not(.group--has-focuses) .group-outline :global(.hex-outline) {
     stroke: transparent;
@@ -174,13 +173,13 @@
 
   .group-hexes :global(.hex[data-allocation='null']) {
     fill: var(--a-null);
-    stroke: var(--a-null-border);
+    stroke: var(--a-nullBorder);
     stroke-width: 1.5px;
   }
 
   .group--map-is-empty .group-hexes :global(.hex) {
-    fill: var(--a-empty);
-    stroke: var(--a-empty-border);
+    fill: var(--c-empty);
+    stroke: var(--c-emptyBorder);
     stroke-width: 1px;
   }
 
@@ -192,7 +191,7 @@
   }
   .group-hex-strokes :global(.hex:not([data-allocation='null'])) {
     fill: transparent;
-    stroke: var(--c-filled-border);
+    stroke: var(--c-filledBorder);
     stroke-width: 1.5px;
   }
 

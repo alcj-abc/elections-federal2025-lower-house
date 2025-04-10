@@ -53,8 +53,6 @@
       });
   });
 
-  $effect(() => console.log({ safety }));
-
   /**
    * Buttons to show in the builder. Each item in the array is a button with a
    * name and onClick function.

@@ -1,0 +1,43 @@
+{
+  "c": {
+    "black": "#000",
+    "white": "#fff",
+    "emptyStateOutline": "black",
+    "stateOutline": "#949494",
+    "filledBorder": "#fff",
+    "empty": "#f1f1f1",
+    "emptyBorder": "black"
+  },
+  "allocated": {
+    "null": "#f1f1f1",
+    "nullBorder": "#fff",
+    "Any": "#fff",
+    "ALP": "#e11f30",
+    "CA": "#757575",
+    "CLP": "#cc8500",
+    "GRN": "#51a802",
+    "IND": "#757575",
+    "KAP": "#804a40",
+    "LIB": "#0a52bf",
+    "LNP": "#0a52bf",
+    "NAT": "#007056",
+    "ONP": "#e5660b",
+    "OTH": "#757575",
+    "PUP": "#cc8500",
+    "Teal": "#0098a6"
+  },
+  "uncertain": {
+    "ALP": "#f9d2d6",
+    "CA": "#e3e3e3",
+    "CLP": "#f5e7cc",
+    "GRN": "#dceecc",
+    "IND": "#e3e3e3",
+    "KAP": "#e6dbd9",
+    "LIB": "#cedcf2",
+    "LNP": "#cedcf2",
+    "NAT": "#cce2dd",
+    "ONP": "#f4dccc",
+    "OTH": "#e3e3e3",
+    "PUP": "#f5e7cc"
+  }
+}
