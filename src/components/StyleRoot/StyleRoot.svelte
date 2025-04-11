@@ -5,13 +5,15 @@
 
   let { children, rootEl = $bindable(), colours = defaultColours } = $props();
 
-  onMount(() => {
-    if (!rootEl) {
+  $effect(() => {
+    const _colours = colours;
+    const _rootEl = rootEl;
+    if (!_rootEl) {
       return;
     }
     $partyColours = {
-      allocated: colours.allocated,
-      uncertain: colours.uncertain
+      allocated: _colours.allocated,
+      uncertain: _colours.uncertain
     };
 
     /** Rewrite the human-readable config to abbreviated CSS variables.*/
@@ -19,14 +21,20 @@
       allocated: 'a',
       uncertain: 'u'
     };
-    Object.entries(colours).forEach(([key, variable]) => {
+    Object.entries(_colours).forEach(([key, variable]) => {
       const baseKey = keyMap[key] || key;
       Object.entries(variable).forEach(([name, value]) => {
         // Create CSS variables for each config, in the form `--a-ALP: red;`
         const cssKey = `--${baseKey}-${name}`;
-        rootEl.style.setProperty(cssKey, value);
+        _rootEl.style.setProperty(cssKey, value);
       });
     });
+  });
+
+  onMount(() => {
+    if (!rootEl) {
+      return;
+    }
   });
 </script>
 
