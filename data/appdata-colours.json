@@ -6,7 +6,10 @@
     "stateOutline": "#949494",
     "filledBorder": "#fff",
     "empty": "#f1f1f1",
-    "emptyBorder": "black"
+    "emptyBorder": "black",
+    "tileFocusBorder": "black",
+    "tileFocusBorderGap": "white",
+    "tileInteractBorder": "black"
   },
   "allocated": {
     "null": "#f1f1f1",
