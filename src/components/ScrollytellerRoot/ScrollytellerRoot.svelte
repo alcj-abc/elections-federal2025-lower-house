@@ -44,15 +44,13 @@
   });
 </script>
 
-<StyleRoot>
-  {#if options}
-    <Scrollyteller panels={resolvedPanels} onMarker={setConfig} layout={{ align: 'left', resizeInteractive: true }}>
-      <div class="container">
-        <MapRoot {...options} layout={layouts[options.layout]} {config} totals={parties.totals} />
-      </div>
-    </Scrollyteller>
-  {/if}
-</StyleRoot>
+{#if options}
+  <Scrollyteller panels={resolvedPanels} onMarker={setConfig} layout={{ align: 'left', resizeInteractive: true }}>
+    <div class="container">
+      <MapRoot {...options} layout={layouts[options.layout]} {config} totals={parties.totals} />
+    </div>
+  </Scrollyteller>
+{/if}
 
 <style type="scss">
   .container {

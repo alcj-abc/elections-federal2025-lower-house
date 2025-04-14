@@ -74,250 +74,249 @@
   />
 </svelte:head>
 
-<StyleRoot>
-  <BuilderStyleRoot>
-    {#if $hashConfig}
-      <div class="container">
-        <!-- svelte-ignore a11y_no_static_element_interactions -->
-        <div class="container-viz">
-          <LabelDragger>
-            <MapRoot
-              totals={parties.totals}
-              {config}
-              {...$hashConfig}
-              {layout}
-              onClick={onVizClick}
-              isInteractive={true}
-              {selectedElectorate}
-            />
-          </LabelDragger>
+<StyleRoot />
+<BuilderStyleRoot>
+  {#if $hashConfig}
+    <div class="container">
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <div class="container-viz">
+        <LabelDragger>
+          <MapRoot
+            totals={parties.totals}
+            {config}
+            {...$hashConfig}
+            {layout}
+            onClick={onVizClick}
+            isInteractive={true}
+            {selectedElectorate}
+          />
+        </LabelDragger>
+      </div>
+
+      <UpdateChecker />
+
+      {#if modal?.type === 'contextMenu'}
+        <HexagonContextMenu
+          {...modal.props}
+          onClose={() => {
+            modal = undefined;
+          }}
+        />
+      {/if}
+
+      {#if modal?.type === 'spreadsheetImport'}
+        <SpreadsheetImport
+          onClose={() => {
+            modal = undefined;
+          }}
+        />
+      {/if}
+
+      <form class="container-controls">
+        <div class="fieldset">
+          <label
+            ><input
+              name="vizType"
+              type="radio"
+              checked={$hashConfig.vizType === 'geo'}
+              onchange={() => {
+                $hashConfig.vizType = 'geo';
+              }}
+            />Geo map</label
+          >
+
+          <label>
+            <input
+              name="vizType"
+              type="radio"
+              checked={$hashConfig.vizType === 'hex'}
+              onchange={() => {
+                $hashConfig.vizType = 'hex';
+              }}
+            />Hex map</label
+          >
         </div>
 
-        <UpdateChecker />
-
-        {#if modal?.type === 'contextMenu'}
-          <HexagonContextMenu
-            {...modal.props}
-            onClose={() => {
-              modal = undefined;
-            }}
-          />
-        {/if}
-
-        {#if modal?.type === 'spreadsheetImport'}
-          <SpreadsheetImport
-            onClose={() => {
-              modal = undefined;
-            }}
-          />
-        {/if}
-
-        <form class="container-controls">
+        {#if $hashConfig.vizType === 'hex'}
           <div class="fieldset">
-            <label
-              ><input
-                name="vizType"
-                type="radio"
-                checked={$hashConfig.vizType === 'geo'}
-                onchange={() => {
-                  $hashConfig.vizType = 'geo';
-                }}
-              />Geo map</label
-            >
-
             <label>
-              <input
-                name="vizType"
-                type="radio"
-                checked={$hashConfig.vizType === 'hex'}
-                onchange={() => {
-                  $hashConfig.vizType = 'hex';
-                }}
-              />Hex map</label
-            >
+              <span>Layout</span>
+              <select name="layout" bind:value={$hashConfig.layout}>
+                {#each schema.layout.values as item}
+                  <option>{item}</option>
+                {/each}
+              </select>
+            </label>
           </div>
+        {/if}
 
-          {#if $hashConfig.vizType === 'hex'}
-            <div class="fieldset">
-              <label>
-                <span>Layout</span>
-                <select name="layout" bind:value={$hashConfig.layout}>
-                  {#each schema.layout.values as item}
-                    <option>{item}</option>
-                  {/each}
-                </select>
-              </label>
-            </div>
-          {/if}
-
-          {#if $hashConfig.vizType === 'geo'}
-            <div class="fieldset">
-              <label>
-                <span>Map area</span>
-                <select name="layout" bind:value={$hashConfig.geoArea}>
-                  {#each Object.keys(mapConfig.areas) as item}
-                    <option>{item}</option>
-                  {/each}
-                </select>
-              </label>
-            </div>
-          {/if}
-
-          {#if $hashConfig.firstPreferenceArrows === 'None'}
-            <fieldset>
-              <legend>Mix-ins</legend>
-              <div class="buttons">
-                <button
-                  onclick={e => {
-                    e.preventDefault();
-                    $hashConfig.allocations = electorates.reduce((obj, electorate) => {
-                      obj[electorate.id] = null;
-                      return obj;
-                    }, {});
-                  }}>Blank</button
-                >
-                <button
-                  onclick={e => {
-                    e.preventDefault();
-                    fetch('./data/2019.tsv', { cache: 'force-cache' })
-                      .then(res => res.text())
-                      .then(tsv => {
-                        $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
-                      });
-                  }}
-                >
-                  2019 results
-                </button>
-                <button
-                  onclick={e => {
-                    e.preventDefault();
-                    fetch('./data/2022.tsv', { cache: 'force-cache' })
-                      .then(res => res.text())
-                      .then(tsv => {
-                        const rows = parseSpreadsheet(tsv);
-                        $hashConfig = applyHashConfig(rows, $hashConfig);
-                      });
-                  }}
-                >
-                  2022 (before redist)
-                </button>
-                <button
-                  onclick={e => {
-                    e.preventDefault();
-                    fetch('./data/2022-redist.tsv', { cache: 'force-cache' })
-                      .then(res => res.text())
-                      .then(tsv => {
-                        $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
-                      });
-                  }}
-                >
-                  2022 redistributed
-                </button>
-                <button
-                  onclick={e => {
-                    e.preventDefault();
-                    $hashConfig.certainties = electorates.reduce((obj, electorate) => {
-                      obj[electorate.id] = null;
-                      return obj;
-                    }, {});
-                  }}
-                >
-                  No certainty
-                </button>
-                <button
-                  onclick={e => {
-                    e.preventDefault();
-                    $hashConfig.certainties = electorates.reduce((obj, electorate) => {
-                      obj[electorate.id] = true;
-                      return obj;
-                    }, {});
-                  }}
-                >
-                  Full certainty
-                </button>
-              </div>
-
-              <label>
-                <input type="checkbox" bind:checked={$hashConfig.combineCoalition} />
-                Combine Coalition
-              </label>
-            </fieldset>
-          {/if}
-          <Focuses />
-          {#if $hashConfig.firstPreferenceArrows === 'None'}
-            <Labels />
-            <fieldset>
-              <legend>Totals bar</legend>
-
-              <label>
-                <input type="checkbox" bind:checked={$hashConfig.showTotals} />
-                Show totals
-              </label>
-            </fieldset>
-          {/if}
-          <fieldset>
-            <legend>Change arrows</legend>
+        {#if $hashConfig.vizType === 'geo'}
+          <div class="fieldset">
             <label>
-              Show change in first preference for:
-              <select
-                bind:value={$hashConfig.firstPreferenceArrows}
-                onchange={e => {
-                  if ($hashConfig.firstPreferenceArrows === 'None') {
-                    return;
-                  }
-                  $hashConfig.showStateLabels = false;
-                  $hashConfig.showElectorateLabels = false;
-                  $hashConfig.showTotals = false;
+              <span>Map area</span>
+              <select name="layout" bind:value={$hashConfig.geoArea}>
+                {#each Object.keys(mapConfig.areas) as item}
+                  <option>{item}</option>
+                {/each}
+              </select>
+            </label>
+          </div>
+        {/if}
+
+        {#if $hashConfig.firstPreferenceArrows === 'None'}
+          <fieldset>
+            <legend>Mix-ins</legend>
+            <div class="buttons">
+              <button
+                onclick={e => {
+                  e.preventDefault();
                   $hashConfig.allocations = electorates.reduce((obj, electorate) => {
+                    obj[electorate.id] = null;
+                    return obj;
+                  }, {});
+                }}>Blank</button
+              >
+              <button
+                onclick={e => {
+                  e.preventDefault();
+                  fetch('./data/2019.tsv', { cache: 'force-cache' })
+                    .then(res => res.text())
+                    .then(tsv => {
+                      $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
+                    });
+                }}
+              >
+                2019 results
+              </button>
+              <button
+                onclick={e => {
+                  e.preventDefault();
+                  fetch('./data/2022.tsv', { cache: 'force-cache' })
+                    .then(res => res.text())
+                    .then(tsv => {
+                      const rows = parseSpreadsheet(tsv);
+                      $hashConfig = applyHashConfig(rows, $hashConfig);
+                    });
+                }}
+              >
+                2022 (before redist)
+              </button>
+              <button
+                onclick={e => {
+                  e.preventDefault();
+                  fetch('./data/2022-redist.tsv', { cache: 'force-cache' })
+                    .then(res => res.text())
+                    .then(tsv => {
+                      $hashConfig = applyHashConfig(parseSpreadsheet(tsv), $hashConfig);
+                    });
+                }}
+              >
+                2022 redistributed
+              </button>
+              <button
+                onclick={e => {
+                  e.preventDefault();
+                  $hashConfig.certainties = electorates.reduce((obj, electorate) => {
                     obj[electorate.id] = null;
                     return obj;
                   }, {});
                 }}
               >
-                {#each schema.firstPreferenceArrows.values as value}
-                  <option>{value}</option>
-                {/each}
-              </select>
+                No certainty
+              </button>
+              <button
+                onclick={e => {
+                  e.preventDefault();
+                  $hashConfig.certainties = electorates.reduce((obj, electorate) => {
+                    obj[electorate.id] = true;
+                    return obj;
+                  }, {});
+                }}
+              >
+                Full certainty
+              </button>
+            </div>
+
+            <label>
+              <input type="checkbox" bind:checked={$hashConfig.combineCoalition} />
+              Combine Coalition
             </label>
           </fieldset>
+        {/if}
+        <Focuses />
+        {#if $hashConfig.firstPreferenceArrows === 'None'}
+          <Labels />
           <fieldset>
-            <legend>Markers</legend>
-            <MarkerAdmin
-              prefixes={{
-                'Scrolly mark': '#mark',
-                'Scrolly opener': '#scrollytellerNAMEelectionmap1',
-                'Inline graphic': '#electioninline'
+            <legend>Totals bar</legend>
+
+            <label>
+              <input type="checkbox" bind:checked={$hashConfig.showTotals} />
+              Show totals
+            </label>
+          </fieldset>
+        {/if}
+        <fieldset>
+          <legend>Change arrows</legend>
+          <label>
+            Show change in first preference for:
+            <select
+              bind:value={$hashConfig.firstPreferenceArrows}
+              onchange={e => {
+                if ($hashConfig.firstPreferenceArrows === 'None') {
+                  return;
+                }
+                $hashConfig.showStateLabels = false;
+                $hashConfig.showElectorateLabels = false;
+                $hashConfig.showTotals = false;
+                $hashConfig.allocations = electorates.reduce((obj, electorate) => {
+                  obj[electorate.id] = null;
+                  return obj;
+                }, {});
               }}
-              defaultName={() =>
-                [
-                  $hashConfig.vizType,
-                  $hashConfig.vizType === 'geo'
-                    ? $hashConfig.geoArea
-                    : $hashConfig.layout.replace(/_/g, ' ').toLowerCase()
-                ].join(' ')}
-            />
-          </fieldset>
-          <fieldset>
-            <legend>Tools</legend>
-            <button
-              onclick={e => {
-                e.preventDefault();
-                modal = { type: 'spreadsheetImport' };
-              }}>Spreadsheet import/export</button
             >
-            <button
-              onclick={e => {
-                // @ts-ignore
-                e.preventDefault();
-                window.location = String(window.location.pathname).replace('/builder', '/google-doc-preview');
-              }}>Google Doc preview</button
-            >
-          </fieldset>
-        </form>
-      </div>
-    {/if}
-  </BuilderStyleRoot>
-</StyleRoot>
+              {#each schema.firstPreferenceArrows.values as value}
+                <option>{value}</option>
+              {/each}
+            </select>
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Markers</legend>
+          <MarkerAdmin
+            prefixes={{
+              'Scrolly mark': '#mark',
+              'Scrolly opener': '#scrollytellerNAMEelectionmap1',
+              'Inline graphic': '#electioninline'
+            }}
+            defaultName={() =>
+              [
+                $hashConfig.vizType,
+                $hashConfig.vizType === 'geo'
+                  ? $hashConfig.geoArea
+                  : $hashConfig.layout.replace(/_/g, ' ').toLowerCase()
+              ].join(' ')}
+          />
+        </fieldset>
+        <fieldset>
+          <legend>Tools</legend>
+          <button
+            onclick={e => {
+              e.preventDefault();
+              modal = { type: 'spreadsheetImport' };
+            }}>Spreadsheet import/export</button
+          >
+          <button
+            onclick={e => {
+              // @ts-ignore
+              e.preventDefault();
+              window.location = String(window.location.pathname).replace('/builder', '/google-doc-preview');
+            }}>Google Doc preview</button
+          >
+        </fieldset>
+      </form>
+    </div>
+  {/if}
+</BuilderStyleRoot>
 
 <style lang="scss">
   :global(body) {

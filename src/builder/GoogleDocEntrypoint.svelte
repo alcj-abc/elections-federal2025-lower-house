@@ -4,8 +4,7 @@
   import GoogleDocScrollyteller from './components/GoogleDocScrollyteller/GoogleDocScrollyteller.svelte';
 </script>
 
-<StyleRoot>
-  <BuilderStyleRoot>
-    <GoogleDocScrollyteller name="electionmap" />
-  </BuilderStyleRoot>
-</StyleRoot>
+<StyleRoot />
+<BuilderStyleRoot>
+  <GoogleDocScrollyteller name="electionmap" />
+</BuilderStyleRoot>

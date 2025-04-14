@@ -7,6 +7,7 @@ import ScrollytellerRoot from './components/ScrollytellerRoot/ScrollytellerRoot.
 import { schema } from './lib/hashConfig';
 import { decodeSchema } from 'hash-codec';
 import InlineGraphics from './components/InlineGraphics/InlineGraphics.svelte';
+import StyleRoot from './components/StyleRoot/StyleRoot.svelte';
 
 async function mountThing(id, AppFetcher) {
   const [appMountNode] = selectMounts(id);
@@ -77,18 +78,30 @@ async function mountInlineGraphics() {
 
 // Load the Odyssey app
 whenOdysseyLoaded.then(() => {
-  // mountThing('electionsfederal2025hex', App);
+  // Mount styles. This component creates styles on the body
+  const styleroot = document.createElement('div');
+  document.body.appendChild(styleroot);
+  mount(StyleRoot, {
+    target: styleroot,
+    props: {}
+  });
+
+  // Builder
   mountThing(
     'electionsfederal2025builder',
     () => import(/* webpackChunkName: "dynamic-builder" */ './builder/Builder.svelte')
   );
+
+  // Google Doc Preview for the builder
   mountThing(
     'electionsfederal2025google-doc-preview',
     () => import(/* webpackChunkName: "dynamic-googledoc" */ './builder/GoogleDocEntrypoint.svelte')
   );
 
+  // Scrollyteller + StyleRoot into the page
   mountScrollyteller();
 
+  // Inline graphics - if using without a scrollyteller, also mount electionsfederal2025colours
   mountInlineGraphics();
 });
 

@@ -3,7 +3,7 @@
   import { partyColours } from './store';
   import defaultColours from '../../../data/appdata-colours.json';
 
-  let { children, rootEl = $bindable(), colours = defaultColours } = $props();
+  let { rootEl = $bindable(), colours = defaultColours } = $props();
 
   $effect(() => {
     const _colours = colours;
@@ -38,14 +38,4 @@
   });
 </script>
 
-<div class="style-root" bind:this={rootEl}>{@render children?.()}</div>
-
-<style lang="scss">
-  .style-root :global(*) {
-    box-sizing: border-box;
-  }
-  .style-root {
-    height: 100%;
-    font-family: ABCSans, sans-serif;
-  }
-</style>
+<svelte:body bind:this={rootEl} />

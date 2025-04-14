@@ -82,7 +82,8 @@
   });
 </script>
 
-<StyleRoot bind:this={rootEl}>
+<StyleRoot {colours} />
+<div bind:this={rootEl}>
   <HexMap
     {config}
     layout={layoutDefinition}
@@ -97,6 +98,5 @@
     {customViewbox}
     {isStaticLayout}
     {isInteractive}
-    {colours}
   />
-</StyleRoot>
+</div>
