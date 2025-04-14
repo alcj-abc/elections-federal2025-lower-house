@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   /**
    * A root component that swaps between the geo and hex maps
    */
@@ -28,9 +29,30 @@
       return obj;
     }, {});
   });
+
+  // If the component is rendering "inline", lazy load it to stop the page
+  // thrashing on load
+  let rootEl = $state<HTMLDivElement>();
+  let isRenderable = $state(isInline ? false : true);
+  onMount(() => {
+    if (!isInline || !rootEl) {
+      return;
+    }
+    let observer = new IntersectionObserver(
+      items => {
+        if (items[0].isIntersecting) {
+          isRenderable = true;
+          observer.unobserve(rootEl as Element);
+        }
+      },
+      { rootMargin: '50%' }
+    );
+    observer.observe(rootEl);
+    return () => observer.disconnect();
+  });
 </script>
 
-<div class="interactive">
+<div class="interactive" bind:this={rootEl}>
   <div class="interactive__map">
     <div class="interactive__map-inner">
       {#if vizType === 'geo'}
