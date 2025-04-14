@@ -18,8 +18,16 @@
   let textboxValue = $state(
     (() => {
       try {
+        // migrate keys
+        const legacyKey = 'last-successfully-loaded-google-doc-url';
+        const oldVar = localStorage[legacyKey];
+        if (oldVar) {
+          localStorage[localStorageKey] = oldVar;
+          delete localStorage[legacyKey];
+        }
+
         // try to load our localStorage value, or fall back to the React version of the var
-        return localStorage[localStorageKey] || localStorage['last-successfully-loaded-google-doc-url'];
+        return localStorage[localStorageKey];
       } catch (e) {
         return '';
       }
