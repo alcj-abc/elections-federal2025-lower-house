@@ -1,4 +1,14 @@
 <script lang="ts">
+  /**
+   * @file
+   * Geographic map, largely ported from the older React version.
+   *
+   * This component uses Mapbox to render maps, and manually syncs props to
+   * mapbox via the effect.
+   *
+   * 1. Mount the map, create layers with map.addLayer
+   * 2. Apply state (style props) to the layers with map.setFeatureState
+   */
   import debounce from 'debounce';
   import mapConfig from '../../../data/appdata-mapconfig.json';
   import { untrack } from 'svelte';
@@ -372,7 +382,7 @@
     map?.fitBounds(new LngLatBounds(bounds), {
       ...mapConfig.fitBounds,
       // If this is an inline map, we don't animate, it's essentially a static graphic
-      duration: isInline ? 0 : 750
+      duration: isInline ? 0 : 3000
     });
     textIgnorePlacementTimeout = setTimeout(
       () => map?.setLayoutProperty('electorate_points_label', 'text-ignore-placement', geoArea !== 'Australia'),

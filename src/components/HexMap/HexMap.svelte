@@ -1,4 +1,11 @@
 <script lang="ts">
+  /**
+   * @file
+   * Hexagon map.
+   *
+   * To make a faster map, SVG hexes are pre-rendered in `npm run build-data`.
+   * Styles are applied to the pre-rendered hexes via dom manipulation in <HexMapGroups>
+   */
   import { Tween } from 'svelte/motion';
   import { cubicInOut } from 'svelte/easing';
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
