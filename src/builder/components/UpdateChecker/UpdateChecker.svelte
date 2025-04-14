@@ -88,7 +88,7 @@
   <button onclick={onClick}>Open new builder</button>
 {/snippet}
 
-{#if newVersion?.newVersion}
+{#if isOpen && newVersion?.newVersion}
   <Modal title="New version available" {onClose} footerChildren={Buttons}>
     <p>You are using <code>{newVersion.thisVersion}</code> but <code>{newVersion.newVersion}</code> is available.</p>
 
