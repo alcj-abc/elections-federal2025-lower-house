@@ -66,7 +66,7 @@ async function mountInlineGraphics() {
       try {
         mount(InlineGraphics, {
           target: mountNode,
-          props: { graphics: accumulatedGraphics }
+          props: { graphics: accumulatedGraphics, mountNode }
         });
       } catch (e) {
         console.error('eeee', e);

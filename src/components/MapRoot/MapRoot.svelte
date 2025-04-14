@@ -14,6 +14,8 @@
     certainties,
     showTotals,
     combineCoalition,
+    hideTotals = false,
+    isInline = false,
     ...componentProps
   } = $props();
 
@@ -32,7 +34,7 @@
   <div class="interactive__map">
     <div class="interactive__map-inner">
       {#if vizType === 'geo'}
-        <GeoMap {allocations} {certainties} {...componentProps} />
+        <GeoMap {allocations} {certainties} {isInline} {...componentProps} />
       {/if}
 
       {#if vizType === 'hex'}
@@ -40,9 +42,13 @@
       {/if}
     </div>
   </div>
-  <div class="interactive__totals">
-    <Totals {allocations} {certainties} {totals} {showTotals} {...componentProps} />
-  </div>
+
+  <!-- Hide totals allows inline graphics to take up the full space -->
+  {#if !hideTotals}
+    <div class="interactive__totals">
+      <Totals {allocations} {certainties} {totals} {showTotals} {...componentProps} />
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">

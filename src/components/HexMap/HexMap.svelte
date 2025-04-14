@@ -8,6 +8,7 @@
   import { getInteractionHandlers } from './utils';
   import HexMapGroups from './HexMapGroups/HexMapGroups.svelte';
   import HexMapArrows from './HexMapArrows/index.svelte';
+  import { fade } from 'svelte/transition';
   let {
     config = {},
     layout = {},
@@ -87,7 +88,7 @@
   );
 </script>
 
-<div class="hexmap">
+<div class="hexmap" transition:fade={{ duration: 750 }}>
   <div
     class="hexmap__viz"
     class:hexmap__viz--vertical={svgRatio <= 1}

@@ -16,10 +16,10 @@
     focuses = {},
     certainties = {},
     labelsToShow = {},
-    showStateLabels = false,
     showElectorateLabels = false,
     showFocusedElectorateLabels = false,
-    onClick = () => {}
+    onClick = () => {},
+    isInline = false
   } = $props();
 
   let mapRootEl = $state<HTMLElement>();
@@ -228,7 +228,6 @@
       };
     })
   );
-  $effect(() => console.log({ hasAnyAllocations }));
   const updateMapState = (isInspectionChange = false) => {
     if (!map || !isElectoratePolygonsLoaded) {
       return;
@@ -370,8 +369,11 @@
       return;
     }
     let textIgnorePlacementTimeout;
-
-    map?.fitBounds(new LngLatBounds(bounds), mapConfig.fitBounds);
+    map?.fitBounds(new LngLatBounds(bounds), {
+      ...mapConfig.fitBounds,
+      // If this is an inline map, we don't animate, it's essentially a static graphic
+      duration: isInline ? 0 : 750
+    });
     textIgnorePlacementTimeout = setTimeout(
       () => map?.setLayoutProperty('electorate_points_label', 'text-ignore-placement', geoArea !== 'Australia'),
       geoArea === 'Australia' ? 250 : 750
@@ -391,11 +393,16 @@ help with authoring graphics in the editor. -->
   onkeyup={event => (isInspecting = isInteractive ? event.altKey : false)}
 />
 
-<div class="geomap" bind:this={mapRootEl}></div>
+<div class="geomap" class:geomap--border={isInline && geoArea !== 'Australia'} bind:this={mapRootEl}></div>
 
 <style lang="scss">
   .geomap {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+  }
+  .geomap--border {
+    border-radius: 1rem;
+    border: 1px solid #cdcbcb;
   }
 </style>
