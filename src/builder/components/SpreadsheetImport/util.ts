@@ -37,12 +37,16 @@ export function matchAllocation(allocationName = '') {
       code: 'NAT'
     },
     {
-      keywords: ['lnp', 'clp', 'lib', 'coalition', 'liberal'],
+      keywords: ['lnp', 'clp', 'lib', 'coalition', 'liberal', 'liberals'],
       code: 'LNP'
     },
     {
       keywords: ['grn', 'greens', 'green'],
       code: 'GRN'
+    },
+    {
+      keywords: ['independent', 'teal', 'teals'],
+      code: 'IND'
     },
 
     // matches on party codes like 'onp', 'ind'(ependent), 'oth'(er)
