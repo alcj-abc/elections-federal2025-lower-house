@@ -139,7 +139,9 @@
 
       {#if firstPreferenceArrows !== 'None'}
         {#each config.groups as group}
-          <HexMapArrows hexes={group.hexes} offset={layout.positions[group.name]} {firstPreferenceArrows} />
+          {#if layout.positions[group.name]}
+            <HexMapArrows hexes={group.hexes} offset={layout.positions[group.name]} {firstPreferenceArrows} />
+          {/if}
         {/each}
       {/if}
     </svg>
