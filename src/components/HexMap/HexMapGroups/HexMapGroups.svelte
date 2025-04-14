@@ -69,7 +69,7 @@
     const _layout = layout;
     return _groups.map(group => {
       const offset = _layout.positions[group.name];
-      const isVisible = offset[0] !== Infinity;
+      const isVisible = offset && offset[0] !== Infinity;
       const transform = hexToPx(offset).join(',');
       const labels = hasAnyFocuses && showFocusedElectorateLabels ? focuses : labelsToShow;
 
