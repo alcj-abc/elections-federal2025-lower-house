@@ -28,6 +28,9 @@
     -webkit-text-size-adjust: 100%;
 
     color-scheme: dark light;
+    :global(*) {
+      box-sizing: border-box;
+    }
   }
 
   @media (prefers-color-scheme: dark) {

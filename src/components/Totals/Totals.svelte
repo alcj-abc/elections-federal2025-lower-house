@@ -120,6 +120,9 @@
     line-height: var(--barHeight);
     margin-right: 20px;
     transition: opacity 0.5s;
+    :global(*) {
+      box-sizing: border-box;
+    }
   }
   .totals__win-marker {
     text-align: right;

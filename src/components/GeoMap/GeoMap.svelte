@@ -410,6 +410,9 @@ help with authoring graphics in the editor. -->
     width: 100%;
     height: 100%;
     overflow: hidden;
+    :global(*) {
+      box-sizing: border-box;
+    }
   }
   .geomap--border {
     border-radius: 1rem;

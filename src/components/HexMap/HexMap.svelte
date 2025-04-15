@@ -181,6 +181,9 @@
     width: 100%;
     height: 100%;
     position: relative;
+    :global(*) {
+      box-sizing: border-box;
+    }
   }
   .hexmap__labels {
     position: absolute;
