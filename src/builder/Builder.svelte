@@ -15,6 +15,7 @@
   import LabelDragger from './components/LabelDragger/LabelDragger.svelte';
   import { onMount } from 'svelte';
   import { isDraggingEnabled, offsets } from './components/LabelDragger/utils';
+  import { getLiveData, getMapAllocationsAndCertainty, liveDataName } from '../liveData';
   let modal = $state<{
     type: string;
     props?: {};
@@ -216,6 +217,41 @@
               <button
                 onclick={e => {
                   e.preventDefault();
+                  const target = e.target as HTMLButtonElement;
+                  target.disabled = true;
+                  target.dataset.loading = 'true';
+                  const finished = () => {
+                    target.disabled = false;
+                    delete target.dataset.loading;
+                  };
+                  getLiveData({ cache: false })
+                    .then(json => {
+                      const newData = getMapAllocationsAndCertainty(json);
+
+                      $hashConfig = { ...$hashConfig, ...newData };
+                      finished();
+                      alert(
+                        [
+                          `Live (${liveDataName}) data loaded in to the map.`,
+                          json.meta.afterCount && 'Data is finished counting.',
+                          `Updated at: ${new Date(json.data.overall.updated).toLocaleString()} (local browser time)`
+                        ]
+                          .filter(Boolean)
+                          .join('\n')
+                      );
+                    })
+                    .catch(e => {
+                      alert('Error loading data: ' + e.message);
+                      console.error(e);
+                      finished();
+                    });
+                }}
+              >
+                Live ({liveDataName})
+              </button>
+              <button
+                onclick={e => {
+                  e.preventDefault();
                   $hashConfig.certainties = electorates.reduce((obj, electorate) => {
                     obj[electorate.id] = null;
                     return obj;
@@ -347,6 +383,21 @@
     overflow: auto;
     @media (min-width: 1920px) {
       width: 25rem;
+    }
+  }
+
+  .container :global(button[data-loading]) {
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    from {
+      outline: 3px solid transparent;
+    }
+    50% {
+      outline: 3px solid Highlight;
+    }
+    to {
+      outline: 3px solid transparent;
     }
   }
 </style>
