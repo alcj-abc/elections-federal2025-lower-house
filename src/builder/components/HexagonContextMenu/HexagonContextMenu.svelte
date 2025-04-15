@@ -122,7 +122,7 @@
         </a>
         <a
           class="item section"
-          href={`https://www.abc.net.au/news/elections/federal/2022/guide/${electorate.id?.toLowerCase()}`}
+          href={`https://www.abc.net.au/news/elections/federal/2019/guide/${electorate.id?.toLowerCase()}`}
           target="_blank"
         >
           2019
