@@ -1,5 +1,5 @@
 import fs from 'fs';
-const config = JSON.parse(fs.readFileSync('data/config.json', 'utf8'));
+const config = JSON.parse(fs.readFileSync('data/appdata-hexconfig.json', 'utf8'));
 
 const newMap = {
   HINK: 'LEIC',
@@ -152,4 +152,4 @@ config.forEach(state =>
 console.log(Object.values(duplicates).map(dup => dup.map(hex => `${hex.shortName} - ${hex.coord}/${hex.state}`)));
 console.log(Object.entries(duplicates).length, 'duplicates');
 
-fs.writeFileSync('data/config.json', JSON.stringify(config));
+fs.writeFileSync('data/appdata-hexconfig.json', JSON.stringify(config));

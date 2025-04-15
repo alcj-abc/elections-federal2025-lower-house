@@ -1,5 +1,6 @@
 import parties from '../../../../data/parties.json';
 import { electorates } from '../../../lib/hashConfig';
+import { memoize } from 'lodash-es';
 
 export function parseTsv(tsv) {
   return tsv
@@ -9,15 +10,17 @@ export function parseTsv(tsv) {
 }
 
 /** Match electorate name to electorate */
-export function matchElectorate(electorateName = '') {
+export const matchElectorate = memoize(function matchElectorate(electorateName = '') {
   const sanitisedElectorateName = electorateName.trim().toLowerCase();
-  return electorates.find(electorate => {
-    return (
-      electorate.name.toLowerCase() === sanitisedElectorateName ||
-      electorate.id.toLocaleLowerCase() === sanitisedElectorateName
-    );
-  });
-}
+  return Object.freeze(
+    electorates.find(electorate => {
+      return (
+        electorate.name.toLowerCase() === sanitisedElectorateName ||
+        electorate.id.toLocaleLowerCase() === sanitisedElectorateName
+      );
+    })
+  );
+});
 
 /** Sanitise allocations */
 export function matchAllocation(allocationName = '') {

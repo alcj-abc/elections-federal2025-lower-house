@@ -3,7 +3,7 @@ import { defineHex, Grid, Orientation, rectangle } from 'honeycomb-grid';
 import fs from 'fs';
 import path from 'path';
 import polygonClipping from 'polygon-clipping';
-const config = JSON.parse(fs.readFileSync('data/config.json', 'utf8'));
+const config = JSON.parse(fs.readFileSync('data/appdata-hexconfig.json', 'utf8'));
 
 console.time('build');
 

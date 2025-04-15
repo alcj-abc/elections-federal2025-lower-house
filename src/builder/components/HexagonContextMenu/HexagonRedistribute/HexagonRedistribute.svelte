@@ -3,7 +3,7 @@
    * @file
    * Create an object in localStorage mapping old electorates to new ones.
    *
-   * Use this in conjunction with _snippet-redistribute.js to rewrite config.json
+   * Use this in conjunction with _snippet-redistribute.js to rewrite appdata-hexconfig.json
    */
   import { electorates } from '../../../../lib/hashConfig';
   let { electorate } = $props();
