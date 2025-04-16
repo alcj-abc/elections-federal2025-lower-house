@@ -28,11 +28,14 @@ if (allocationMap[rleDelineator] || nullAllocationDelineator === rleDelineator) 
   throw new Error('Can not use delineator in allocation map');
 }
 
-/** get electorate values in a stable order */
+/** get electorate values in a stable order as an array */
 function getSortedValues(obj) {
   return electorates.map(({ id }) => obj[id]);
 }
 
+/**
+ * Put an array of values back into a `{[electorate]: value}` object.
+ */
 function putValues(arr) {
   return electorates.reduce((obj, { id }, i) => {
     obj[id] = arr[i] ?? null;
@@ -60,6 +63,7 @@ export const defaultNullElectorates = Object.freeze(
     return obj;
   }, {})
 );
+
 export const schema = {
   version: {
     type: 'number',

@@ -2,7 +2,7 @@
   import { allocationMap, hashConfig } from '../../../lib/hashConfig';
   import Circle from '../Circle/Circle.svelte';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
-  import { arrowData } from '../../../components/HexMap/HexMapArrows/utils';
+  import { arrowDataFormatter } from '../../../components/HexMap/HexMapArrows/utils';
   // import HexagonRedistribute from './HexagonRedistribute/HexagonRedistribute.svelte';
   let { position = [0, 0], electorate = {}, onClose = () => {} } = $props();
   let allocation = $derived.by(() => $hashConfig.allocations[electorate.id]);
@@ -16,20 +16,16 @@
 
 {#if electorate?.id}
   <ContextMenu {position} {onClose}>
-    <h1 class="section">
+    <h1 class="section" style="white-space:pre-wrap;">
       <strong>{electorate.name}</strong>
       <small style="opacity:0.5">{electorate.id}</small>
     </h1>
     <hr />
     <!-- <HexagonRedistribute {electorate} />
   <hr /> -->
-    {#if Object.values($arrowData).length > 0}
+    {#if typeof $arrowDataFormatter === 'function'}
       <div class="section">
-        Change in first preference
-        <br />
-        vote for {$hashConfig.firstPreferenceArrows}: {$arrowData[electorate.id]
-          ? $arrowData[electorate.id].toFixed(3) + '%'
-          : 'not applicable'}
+        {$arrowDataFormatter(electorate.id)}
       </div>
       <hr />
     {/if}

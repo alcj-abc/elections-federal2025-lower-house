@@ -1,15 +1,13 @@
 <script lang="ts">
-  import { hexToPx } from '../../../lib/utils';
+  import HexMapArrowsViz from './HexMapArrowsViz/HexMapArrowsViz.svelte';
   import data from '../../../../data/appdata-change-in-first-preference.json';
   import { matchElectorate } from '../../../builder/components/SpreadsheetImport/util';
-  import { arrowData as arrowDataStore } from './utils';
   import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
+  import { arrowDataFormatter } from './utils';
 
-  let { hexes, offset, firstPreferenceArrows } = $props();
+  let { firstPreferenceArrows, ...props } = $props();
   let arrowData = $state({});
 
-  const arrowHeight = 0.08;
   $effect(() => {
     arrowData = data.diffedElectorates.reduce((obj, electorate) => {
       const matchedElectorate = matchElectorate(electorate.electorate);
@@ -27,15 +25,18 @@
       };
     }, {});
   });
-  onMount(() => {
-    return () => {
-      arrowData = {};
-    };
-  });
 
   // Sync to the store so the builder can access it
   $effect(() => {
-    $arrowDataStore = arrowData;
+    $arrowDataFormatter = id => {
+      return `Change in first pref
+for ${firstPreferenceArrows}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applicable'}`;
+    };
+  });
+  onMount(() => {
+    return () => {
+      $arrowDataFormatter = undefined;
+    };
   });
 
   function scaleArrowSize(value) {
@@ -44,43 +45,12 @@
     const absVal = Math.abs(value);
     return Math.min(maxArrowScale, minArrowScale + absVal / 20);
   }
+
+  let getColourForValue = $derived.by(() => {
+    return () => {
+      return `var(--a-${firstPreferenceArrows.length > 3 ? 'OTH' : firstPreferenceArrows.toUpperCase()}, hotpink)`;
+    };
+  });
 </script>
 
-<g class="hex-map-arrows" transform={`translate(${hexToPx(offset, '').join(',')})`} transition:fade={{ duration: 750 }}>
-  {#each hexes as hex}
-    {#if arrowData[hex.id]}
-      <g transform={`translate(${hex.coordPx.join(' ')}) rotate(10)`}>
-        <path
-          id="shape"
-          transform={`scale(${scaleArrowSize(arrowData[hex.id])} ${arrowData[hex.id] * arrowHeight})`}
-          d="m -0.2818285,0 -1.224857,-62.62499 1.603794,-1.590508 1.473302,1.469369 L 0.2818285,0 Z"
-          style:fill={`var(--a-${firstPreferenceArrows.length > 3 ? 'OTH' : firstPreferenceArrows.toUpperCase()}, hotpink)`}
-          stroke-width="2"
-        />
-        <path
-          id="shape"
-          transform={`translate(0 ${-63 * arrowData[hex.id] * arrowHeight}) rotate(${arrowData[hex.id] < 0 ? 180 : 0}) scale(${scaleArrowSize(arrowData[hex.id])})`}
-          d="M -3.3195607,1.900056 -1.8778392e-5,-1.419517 3.3195642,1.900064"
-          style:stroke={`var(--a-${firstPreferenceArrows.length > 3 ? 'OTH' : firstPreferenceArrows.toUpperCase()}, hotpink)`}
-          stroke-width="2"
-          fill="none"
-        />
-      </g>
-    {/if}
-  {/each}
-</g>
-
-<style lang="scss">
-  path,
-  g {
-    transition: all 0.5s;
-  }
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-</style>
+<HexMapArrowsViz {arrowData} arrowHeight={0.08} {...props} {scaleArrowSize} {getColourForValue} rotationDegrees={10} />
