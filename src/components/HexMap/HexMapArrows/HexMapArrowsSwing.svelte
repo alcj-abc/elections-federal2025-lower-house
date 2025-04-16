@@ -8,7 +8,6 @@
 
   let { hexes, offset } = $props();
   let resultsData = $state();
-  let rotationDegrees = $state(90);
 
   let arrowData = $derived.by(() => {
     const _resultsData = resultsData;
@@ -31,7 +30,7 @@
   // Sync to the store so the builder can access it
   $effect(() => {
     $arrowDataFormatter = id => {
-      return `Swing: ${arrowData[id] ? `${arrowData[id].toFixed(3)}% to ${arrowData[id] > 0 ? 'ALP' : 'Coalition'}` : 'not applicable'}`;
+      return `Swing: ${arrowData[id] ? `${arrowData[id].toFixed(2)}% to ${arrowData[id] > 0 ? 'ALP' : 'Coalition'}` : 'not applicable'}`;
     };
   });
   onMount(() => {
@@ -46,6 +45,8 @@
     };
   });
 
+  const getRotationForValue = value => (value < 0 ? 135 : 45);
+
   onMount(() => {
     getLiveData({ cache: true }).then(json => {
       resultsData = json;
@@ -53,4 +54,4 @@
   });
 </script>
 
-<HexMapArrowsViz {arrowData} arrowHeight={0.02} {hexes} {offset} {getColourForValue} {rotationDegrees} />
+<HexMapArrowsViz {arrowData} arrowHeight={0.03} {hexes} {offset} {getRotationForValue} {getColourForValue} />

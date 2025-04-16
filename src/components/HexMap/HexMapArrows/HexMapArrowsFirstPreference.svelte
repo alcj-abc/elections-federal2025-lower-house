@@ -7,7 +7,6 @@
 
   let { arrowChart, hexes, offset } = $props();
   let arrowData = $state({});
-  let rotationDegrees = $state(10);
 
   let partyCode = $derived.by(() => arrowChart.split(' ')[0]);
 
@@ -47,6 +46,8 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
       return `var(--a-${partyCode.length > 3 ? 'OTH' : partyCode.toUpperCase()}, hotpink)`;
     };
   });
+
+  const getRotationForValue = () => 20;
 </script>
 
-<HexMapArrowsViz {arrowData} arrowHeight={0.08} {hexes} {offset} {getColourForValue} {rotationDegrees} />
+<HexMapArrowsViz {arrowData} arrowHeight={0.08} {hexes} {offset} {getRotationForValue} {getColourForValue} />

@@ -2,7 +2,7 @@
   import { hexToPx } from '../../../../lib/utils';
   import { fade } from 'svelte/transition';
 
-  let { hexes, offset, rotationDegrees = 10, arrowData, arrowHeight, getColourForValue } = $props();
+  let { hexes, offset, arrowData, arrowHeight, getColourForValue, getRotationForValue } = $props();
 
   /** preprocess our hexagons */
   let hexData = $derived.by(() =>
@@ -25,7 +25,7 @@
 
 <g class="hex-map-arrows" transform={`translate(${hexToPx(offset, '').join(',')})`} transition:fade={{ duration: 750 }}>
   {#each hexData as { coordPx, value }}
-    <g transform={`translate(${coordPx.join(' ')}) rotate(${rotationDegrees})`}>
+    <g transform={`translate(${coordPx.join(' ')}) rotate(${getRotationForValue(value)})`}>
       <!-- arrow body -->
       <path
         transform={`scale(${scaleArrowSize(value)} ${value * arrowHeight})`}
