@@ -292,9 +292,8 @@
           </fieldset>
         {/if}
         <fieldset>
-          <legend>Change arrows</legend>
+          <legend>Arrow charts</legend>
           <label>
-            Show change in first preference for:
             <select
               bind:value={$hashConfig.arrowChart}
               onchange={e => {

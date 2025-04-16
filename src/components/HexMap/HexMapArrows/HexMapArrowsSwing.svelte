@@ -1,7 +1,5 @@
 <script lang="ts">
   import HexMapArrowsViz from './HexMapArrowsViz/HexMapArrowsViz.svelte';
-  import data from '../../../../data/appdata-change-in-first-preference.json';
-  import { matchElectorate } from '../../../builder/components/SpreadsheetImport/util';
   import { onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
   import { getLiveData } from '../../../liveData';
@@ -19,7 +17,7 @@
     return _resultsData.data.electorates.reduce((obj, electorate) => {
       const [alpSwing, lnpSwing] =
         electorate.swingDial[0].party.code === 'ALP' ? electorate.swingDial : [...electorate.swingDial].reverse();
-      const isLaborCoalition = coalitionParties.includes(lnpSwing.party.code);
+      const isLaborCoalition = alpSwing.party.code === 'ALP' && coalitionParties.includes(lnpSwing.party.code);
       if (isLaborCoalition) {
         obj[electorate.code] = Number(alpSwing.predicted2CP.swing || alpSwing.simple2CP.swing || 0);
       }
@@ -54,4 +52,6 @@
   });
 </script>
 
-<HexMapArrowsViz {arrowData} arrowHeight={0.03} {hexes} {offset} {getRotationForValue} {getColourForValue} />
+{#if resultsData}
+  <HexMapArrowsViz {arrowData} arrowHeight={0.03} {hexes} {offset} {getRotationForValue} {getColourForValue} />
+{/if}
