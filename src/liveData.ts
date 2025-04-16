@@ -41,22 +41,6 @@ export function getPrimaryCountPct(data, checkFn = code => true): { string: numb
   }, {});
 }
 
-/**
- * Get the swing in each electorate for the given party code(s).
- * @param data
- * @param codes - The party codes to return matches for. E.g. ['ALP'] or ['LNP', 'CLP', 'LIB']
- * @returns
- */
-export function getSwing(data, codes = []) {
-  return data.data.electorates.reduce((obj, electorate) => {
-    const id = electorate.code;
-    const swing = electorate.swingDial.find(candidate => codes.includes(candidate.party.code));
-    const swingString = swing?.predicted2CP?.swing;
-    obj[id] = typeof swingString === 'string' ? Number(swingString) : null;
-    return obj;
-  }, {});
-}
-
 let liveDataPromise;
 export async function getLiveData({ cache } = { cache: true }) {
   if (cache && liveDataPromise) {
