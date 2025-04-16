@@ -164,7 +164,7 @@
           </div>
         {/if}
 
-        {#if $hashConfig.firstPreferenceArrows === 'None'}
+        {#if $hashConfig.arrowChart === 'None'}
           <fieldset>
             <legend>Mix-ins</legend>
             <div class="buttons">
@@ -280,7 +280,7 @@
           </fieldset>
         {/if}
         <Focuses />
-        {#if $hashConfig.firstPreferenceArrows === 'None'}
+        {#if $hashConfig.arrowChart === 'None'}
           <Labels />
           <fieldset>
             <legend>Totals bar</legend>
@@ -296,9 +296,9 @@
           <label>
             Show change in first preference for:
             <select
-              bind:value={$hashConfig.firstPreferenceArrows}
+              bind:value={$hashConfig.arrowChart}
               onchange={e => {
-                if ($hashConfig.firstPreferenceArrows === 'None') {
+                if ($hashConfig.arrowChart === 'None') {
                   return;
                 }
                 $hashConfig.showStateLabels = false;
@@ -310,7 +310,7 @@
                 }, {});
               }}
             >
-              {#each schema.firstPreferenceArrows.values as value}
+              {#each schema.arrowChart.values as value}
                 <option>{value}</option>
               {/each}
             </select>

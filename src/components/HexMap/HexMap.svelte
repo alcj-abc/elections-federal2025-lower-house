@@ -14,8 +14,9 @@
   import HexMapFocusIndicator from './HexMapFocusIndicator/HexMapFocusIndicator.svelte';
   import { getInteractionHandlers } from './utils';
   import HexMapGroups from './HexMapGroups/HexMapGroups.svelte';
-  import HexMapArrows from './HexMapArrows/index.svelte';
   import { fade } from 'svelte/transition';
+  import HexMapArrowsFirstPreference from './HexMapArrows/HexMapArrowsFirstPreference.svelte';
+  import HexMapArrowsSwing from './HexMapArrows/HexMapArrowsSwing.svelte';
   let {
     config = {},
     layout = {},
@@ -45,7 +46,7 @@
     /** Is the map intended to be clicked on? If so, we include HexMapKeyboardNav for accessibility porpoises*/
     isInteractive = false,
     /** Party for whom to show first preference arrows */
-    firstPreferenceArrows = 'None',
+    arrowChart = 'None',
     /** which electorate is currently focused */
     selectedElectorate = null
   } = $props();
@@ -134,7 +135,7 @@
         {showElectorateLabels}
         {showFocusedElectorateLabels}
         {labelsToShow}
-        isOutlineOnly={firstPreferenceArrows !== 'None'}
+        isOutlineOnly={arrowChart !== 'None'}
       />
 
       <!-- focus/hover hexagon (from props) -->
@@ -146,10 +147,14 @@
       <!-- focus/hover hexagon (interactive) -->
       <HexMapFocusIndicator groups={config.groups} id={userHoveredElectorate} {layout} type="hover" />
 
-      {#if firstPreferenceArrows !== 'None'}
+      {#if arrowChart !== 'None'}
         {#each config.groups as group}
           {#if layout.positions[group.name]}
-            <HexMapArrows hexes={group.hexes} offset={layout.positions[group.name]} {firstPreferenceArrows} />
+            {#if arrowChart === 'Labor/Coalition 2CP Swing'}
+              <HexMapArrowsSwing hexes={group.hexes} offset={layout.positions[group.name]} />
+            {:else}
+              <HexMapArrowsFirstPreference hexes={group.hexes} offset={layout.positions[group.name]} {arrowChart} />
+            {/if}
           {/if}
         {/each}
       {/if}

@@ -167,11 +167,19 @@ export const schema = {
     key: 't',
     defaultValue: false
   },
-  firstPreferenceArrows: {
+  arrowChart: {
     type: 'enum',
     key: 'fpa',
     defaultValue: 'None',
-    values: ['None', 'ALP', 'LNP', 'GRN', 'Independent', 'Informal']
+    values: [
+      'None',
+      'ALP first preference',
+      'LNP first preference',
+      'GRN first preference',
+      'Independent first preference',
+      'Informal votes',
+      'Labor/Coalition 2CP Swing'
+    ]
   },
   combineCoalition: {
     type: 'boolean',
@@ -193,7 +201,7 @@ export const hashConfig = makeSvelteStore<{
   showElectorateLabels: boolean;
   showFocusedElectorateLabels: boolean;
   showTotals: boolean;
-  firstPreferenceArrows: string;
+  arrowChart: string;
   combineCoalition: boolean;
 }>(schema);
 

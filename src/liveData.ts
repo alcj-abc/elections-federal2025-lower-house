@@ -53,5 +53,6 @@ export async function getLiveData({ cache } = { cache: true }) {
   if (cache && liveDataPromise) {
     return liveDataPromise;
   }
-  return fetch(config.liveData.url).then(res => res.json());
+  liveDataPromise = fetch(config.liveData.url).then(res => res.json());
+  return liveDataPromise;
 }

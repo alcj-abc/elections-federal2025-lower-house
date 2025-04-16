@@ -3,7 +3,7 @@
   let props = $props();
   let Component = $state<ComponentType | null>(null);
   onMount(() => {
-    import(/* webpackChunkName: "dynamic-hex-map-arrows" */ './HexMapArrows.svelte').then(module => {
+    import(/* webpackChunkName: "dynamic-hex-map-arrows" */ './HexMapArrowsFirstPreference.svelte').then(module => {
       Component = module.default as ComponentType;
     });
   });
