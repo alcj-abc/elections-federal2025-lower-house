@@ -5,7 +5,7 @@
    *
    * Use this in conjunction with _snippet-redistribute.js to rewrite appdata-hexconfig.json
    */
-  import { electorates } from '../../../../lib/hashConfig';
+  import { electorates } from '../../../../lib/hashConfig/schema';
   let { electorate } = $props();
   function onChange(e) {
     const swapsies = JSON.parse(localStorage.swapsies || '{}');

@@ -1,7 +1,6 @@
 <script lang="ts">
   import layouts from '../../../data/appdata-layouts.json';
   import MapRoot from '../MapRoot/MapRoot.svelte';
-  import parties from '../../../data/parties.json';
   import config from '../../../data/appdata-built.json';
   import { onMount } from 'svelte';
 
@@ -19,14 +18,7 @@
 <div class={`inline-graphics inline-graphics--grid-${gridStyle}`}>
   {#each graphics as { layout, ...graphic }}
     <div class="inline-graphics__graphic">
-      <MapRoot
-        {config}
-        {...graphic}
-        layout={layouts[layout]}
-        totals={parties.totals}
-        hideTotals={!graphic.showTotals}
-        isInline={true}
-      />
+      <MapRoot {config} {...graphic} layout={layouts[layout]} hideTotals={!graphic.showTotals} isInline={true} />
     </div>
   {/each}
 </div>

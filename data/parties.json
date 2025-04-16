@@ -19,14 +19,15 @@
   },
   "totals": {
     "__usage": "These values control the totals bar",
-    "groups": {
-      "LIB": "LNP",
-      "LNP": "LNP",
-      "CLP": "LNP",
-      "NAT": "LNP",
-      "ALP": "ALP"
-    },
+    "groups": {},
     "barMax": 90,
     "partyOrder": ["ALP", "LNP", "OTH"]
+  },
+  "synonyms": {
+    "LIB": "LNP",
+    "LNP": "LNP",
+    "CLP": "LNP",
+    "NAT": "LNP",
+    "ALP": "ALP"
   }
 }

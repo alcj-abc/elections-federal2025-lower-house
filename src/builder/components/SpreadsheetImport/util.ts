@@ -1,5 +1,5 @@
 import parties from '../../../../data/parties.json';
-import { electorates } from '../../../lib/hashConfig';
+import { electorates } from '../../../lib/hashConfig/schema';
 import { memoize } from 'lodash-es';
 
 export function parseTsv(tsv) {

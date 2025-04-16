@@ -1,30 +1,37 @@
 <script lang="ts">
   import HexMapArrowsViz from './HexMapArrowsViz/HexMapArrowsViz.svelte';
-  import data from '../../../../data/appdata-change-in-first-preference.json';
-  import { matchElectorate } from '../../../builder/components/SpreadsheetImport/util';
+  import baselineFirstPreferences from '../../../../data/appdata-first-preference-baseline.json';
   import { onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
+  import { getLiveData, getPrimaryCountPct } from '../../../liveData';
 
   let { arrowChart, hexes, offset } = $props();
   let arrowData = $state({});
+  let resultsData = $state();
 
-  let partyCode = $derived.by(() => arrowChart.split(' ')[0]);
+  let partyCode = $derived.by(() => String(arrowChart.split(' ')[0]));
+  let newPrimaryCounts = $derived.by(() => {
+    if (!resultsData) {
+      return {};
+    }
+    return getPrimaryCountPct(resultsData, [partyCode]);
+  });
 
   $effect(() => {
-    arrowData = data.diffedElectorates.reduce((obj, electorate) => {
-      const matchedElectorate = matchElectorate(electorate.electorate);
-      if (!matchedElectorate) {
-        // console.error("couldn't match", electorate.electorate);
-        return obj;
-      }
-      const party = electorate.candidates.find(candidate => candidate.party === partyCode);
-      if (!party) {
-        // console.error(`couldn't find party`, arrowChart, electorate.candidates);
-      }
-      return {
-        ...obj,
-        [matchedElectorate.id]: party?.changeInPercent
-      };
+    const _resultsData = resultsData;
+    const _partyCode = partyCode;
+    const _newPrimaryCounts = newPrimaryCounts;
+    if (!_resultsData || !_newPrimaryCounts) {
+      return;
+    }
+    arrowData = _resultsData.data.electorates.reduce((obj, electorate) => {
+      const id = electorate.code;
+      const originalPct = baselineFirstPreferences[id]?.pct?.[_partyCode];
+      const newPct = newPrimaryCounts[id];
+      const diff = originalPct && newPct ? newPct - originalPct : 0;
+
+      obj[id] = diff;
+      return obj;
     }, {});
   });
 
@@ -48,6 +55,12 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
   });
 
   const getRotationForValue = () => 20;
+
+  onMount(() => {
+    getLiveData({ cache: true }).then(json => {
+      resultsData = json;
+    });
+  });
 </script>
 
 <HexMapArrowsViz {arrowData} arrowHeight={0.08} {hexes} {offset} {getRotationForValue} {getColourForValue} />

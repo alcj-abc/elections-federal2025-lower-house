@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { electorates, hashConfig, schema, mapConfig, parties } from '../lib/hashConfig';
+  import { electorates, schema, mapConfig, parties } from '../lib/hashConfig/schema';
   import HexagonContextMenu from './components/HexagonContextMenu/HexagonContextMenu.svelte';
-  import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
   import Focuses from './components/Focuses/Focuses.svelte';
   import config from '../../data/appdata-built.json';
   import layouts from '../../data/appdata-layouts.json';
@@ -16,6 +15,7 @@
   import { onMount } from 'svelte';
   import { isDraggingEnabled, offsets } from './components/LabelDragger/utils';
   import { getLiveData, getMapAllocationsAndCertainty, liveDataName } from '../liveData';
+  import { hashConfig } from '../lib/hashConfig/svelteStore';
   let modal = $state<{
     type: string;
     props?: {};
@@ -61,6 +61,7 @@
     }
     return newLayout;
   });
+  $effect(() => console.log({ config }));
 </script>
 
 <svelte:head>
@@ -75,22 +76,13 @@
   />
 </svelte:head>
 
-<StyleRoot />
 <BuilderStyleRoot>
   {#if $hashConfig}
     <div class="container">
       <!-- svelte-ignore a11y_no_static_element_interactions -->
       <div class="container-viz">
         <LabelDragger>
-          <MapRoot
-            totals={parties.totals}
-            {config}
-            {...$hashConfig}
-            {layout}
-            onClick={onVizClick}
-            isInteractive={true}
-            {selectedElectorate}
-          />
+          <MapRoot {config} {...$hashConfig} {layout} onClick={onVizClick} isInteractive={true} {selectedElectorate} />
         </LabelDragger>
       </div>
 

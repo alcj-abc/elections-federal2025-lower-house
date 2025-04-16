@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { electorates, hashConfig, schema, groups, electoratesByCode } from '../../../lib/hashConfig';
+  import { electorates, groups, electoratesByCode } from '../../../lib/hashConfig/schema';
   import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
   import { matchElectorate, parseTsv } from '../SpreadsheetImport/util';
+  import { hashConfig } from '../../../lib/hashConfig/svelteStore';
 
   // const historicalByCode = Object.values(historical19).reduce((obj, electorate) => {
   //   obj[electorate.id] = electorate;

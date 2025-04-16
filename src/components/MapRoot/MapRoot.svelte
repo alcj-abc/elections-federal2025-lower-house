@@ -5,12 +5,10 @@
    */
   import GeoMap from '../GeoMap/index.svelte';
   import HexMap from '../HexMap/HexMap.svelte';
-  import StyleRoot from '../StyleRoot/StyleRoot.svelte';
   import Totals from '../Totals/Totals.svelte';
 
   let {
     vizType = 'hex',
-    totals,
     allocations: sourceAllocations,
     certainties,
     showTotals,
@@ -68,7 +66,7 @@
   <!-- Hide totals allows inline graphics to take up the full space -->
   {#if !hideTotals}
     <div class="interactive__totals">
-      <Totals {allocations} {certainties} {totals} {showTotals} {...componentProps} />
+      <Totals {allocations} {certainties} {showTotals} {...componentProps} />
     </div>
   {/if}
 </div>

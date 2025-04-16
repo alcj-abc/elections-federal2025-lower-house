@@ -1,7 +1,8 @@
 <script lang="ts">
   import AccesibleHide from '../AccessibleHide/AccesibleHide.svelte';
+  import partiesConfig from '../../../data/parties.json';
 
-  let { totals, allocations, certainties, showTotals } = $props();
+  let { allocations, certainties, showTotals } = $props();
 
   /** Width of the chart. Used to caculate whether the totals text will fit inside or outside*/
   let chartWidth = $state(0);
@@ -10,8 +11,8 @@
    * Normalise parties into two party + other
    */
   function normalisePartyCodes(code) {
-    if (totals.groups[code]) {
-      return totals.groups[code];
+    if (partiesConfig.synonyms[code]) {
+      return partiesConfig.synonyms[code];
     }
     return code ? 'OTH' : null;
   }
@@ -53,14 +54,14 @@
   /** How wide is a seat (decimal percent) */
   let seatWidth = $derived.by(() => {
     const { ALP, LNP, OTH } = resultTotals;
-    const maxCount = Math.max(totals.barMax, ALP.total + 5, LNP.total + 5, OTH.total + 5);
+    const maxCount = Math.max(partiesConfig.totals.barMax, ALP.total + 5, LNP.total + 5, OTH.total + 5);
     const seatWidth = 100 / maxCount;
     return seatWidth / 100;
   });
 
   /** Iterable array of the chart */
   let allocationsArray = $derived.by(() =>
-    totals.partyOrder.map(code => ({
+    partiesConfig.totals.partyOrder.map(code => ({
       code,
       ...resultTotals[code],
       // Calculate whether the number should be shown inside or outside the bars

@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { allocationMap, hashConfig } from '../../../lib/hashConfig';
+  import { allocationMap } from '../../../lib/hashConfig/schema';
   import Circle from '../Circle/Circle.svelte';
   import ContextMenu from '../ContextMenu/ContextMenu.svelte';
   import { arrowDataFormatter } from '../../../components/HexMap/HexMapArrows/utils';
+  import { hashConfig } from '../../../lib/hashConfig/svelteStore';
   // import HexagonRedistribute from './HexagonRedistribute/HexagonRedistribute.svelte';
   let { position = [0, 0], electorate = {}, onClose = () => {} } = $props();
   let allocation = $derived.by(() => $hashConfig.allocations[electorate.id]);

@@ -4,10 +4,10 @@ import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import { loadScrollyteller } from '@abcnews/svelte-scrollyteller';
 import { mount } from 'svelte';
 import ScrollytellerRoot from './components/ScrollytellerRoot/ScrollytellerRoot.svelte';
-import { schema } from './lib/hashConfig';
+import { schema } from './lib/hashConfig/schema';
 import { decodeSchema } from 'hash-codec';
 import InlineGraphics from './components/InlineGraphics/InlineGraphics.svelte';
-import StyleRoot from './components/StyleRoot/StyleRoot.svelte';
+import App from './components/App/App.svelte';
 
 async function mountThing(id, AppFetcher) {
   const [appMountNode] = selectMounts(id);
@@ -15,10 +15,10 @@ async function mountThing(id, AppFetcher) {
   if (appMountNode) {
     const appProps = acto(getMountValue(appMountNode));
 
-    const App = await AppFetcher();
-    mount(App.default, {
+    const FetchedApp = await AppFetcher();
+    mount(App, {
       target: appMountNode,
-      props: appProps
+      props: { ...appProps, Component: FetchedApp.default }
     });
   }
 }
@@ -35,9 +35,9 @@ function mountScrollyteller() {
     try {
       const scrollyConfig = loadScrollyteller(MARKER_NAME + (id || ''), 'u-full', 'mark');
 
-      mount(ScrollytellerRoot, {
+      mount(App, {
         target: scrollyConfig.mountNode,
-        props: { panels: scrollyConfig.panels }
+        props: { Component: ScrollytellerRoot, panels: scrollyConfig.panels }
       });
     } catch (e) {
       const errorMessage = 'Unable to load interactive.';
@@ -64,9 +64,9 @@ async function mountInlineGraphics() {
     accumulatedGraphics.push(data);
     if (!adjacent) {
       try {
-        mount(InlineGraphics, {
+        mount(App, {
           target: mountNode,
-          props: { graphics: accumulatedGraphics, mountNode }
+          props: { Component: InlineGraphics, graphics: accumulatedGraphics, mountNode }
         });
       } catch (e) {
         console.error('eeee', e);
@@ -78,14 +78,6 @@ async function mountInlineGraphics() {
 
 // Load the Odyssey app
 whenOdysseyLoaded.then(() => {
-  // Mount styles. This component creates styles on the body
-  const styleroot = document.createElement('div');
-  document.body.appendChild(styleroot);
-  mount(StyleRoot, {
-    target: styleroot,
-    props: {}
-  });
-
   // Builder
   mountThing(
     'electionsfederal2025builder',

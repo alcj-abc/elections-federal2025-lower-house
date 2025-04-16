@@ -12,7 +12,7 @@
         coordPx: hex.coordPx,
         value: arrowData[hex.id]
       }))
-      .filter(({ value }) => !!value)
+      .filter(({ value }) => typeof value === 'number')
   );
 
   function scaleArrowSize(value) {
@@ -25,7 +25,10 @@
 
 <g class="hex-map-arrows" transform={`translate(${hexToPx(offset, '').join(',')})`} transition:fade={{ duration: 750 }}>
   {#each hexData as { coordPx, value }}
-    <g transform={`translate(${coordPx.join(' ')}) rotate(${getRotationForValue(value)})`}>
+    <g
+      transform={`translate(${coordPx.join(' ')}) rotate(${getRotationForValue(value)})`}
+      style:opacity={value === 0 ? 0 : 1}
+    >
       <!-- arrow body -->
       <path
         transform={`scale(${scaleArrowSize(value)} ${value * arrowHeight})`}

@@ -5,9 +5,8 @@
   import layouts from '../../../data/appdata-layouts.json';
   import parties from '../../../data/parties.json';
   import { decodeSchema } from 'hash-codec';
-  import { schema } from '../../lib/hashConfig';
+  import { schema } from '../../lib/hashConfig/schema';
   import { applyColourToPanels } from '../InlineHighlights/util';
-  import StyleRoot from '../StyleRoot/StyleRoot.svelte';
 
   let { panels = [], onMarker = () => {} } = $props();
   let options = $state();
@@ -47,7 +46,7 @@
 {#if options}
   <Scrollyteller panels={resolvedPanels} onMarker={setConfig} layout={{ align: 'left', resizeInteractive: true }}>
     <div class="container">
-      <MapRoot {...options} layout={layouts[options.layout]} {config} totals={parties.totals} />
+      <MapRoot {...options} layout={layouts[options.layout]} {config} />
     </div>
   </Scrollyteller>
 {/if}

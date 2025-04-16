@@ -1,10 +1,10 @@
-import { getRleCodec, makeSvelteStore, getBinaryCodec } from 'hash-codec';
-import layouts from '../../data/appdata-layouts.json';
-import data from '../../data/appdata-built.json';
-import mapConfig from '../../data/appdata-mapconfig.json';
-import parties from '../../data/parties.json';
+import { getRleCodec, getBinaryCodec } from 'hash-codec';
+import layouts from '../../../data/appdata-layouts.json';
+import data from '../../../data/appdata-built.json';
+import mapConfig from '../../../data/appdata-mapconfig.json';
+import parties from '../../../data/parties.json';
 
-import { invertMap } from '../lib/utils';
+import { invertMap } from '../../lib/utils';
 
 /** Array containing all the individual electorate hexes */
 export const electorates = data.groups
@@ -176,7 +176,7 @@ export const schema = {
       'ALP first preference',
       'LNP first preference',
       'GRN first preference',
-      'Independent first preference',
+      'IND first preference',
       'Informal votes',
       'Labor/Coalition 2CP Swing'
     ]
@@ -188,7 +188,7 @@ export const schema = {
   }
 };
 
-export const hashConfig = makeSvelteStore<{
+export type HashConfig = {
   version: number;
   vizType: string;
   layout: string;
@@ -203,14 +203,4 @@ export const hashConfig = makeSvelteStore<{
   showTotals: boolean;
   arrowChart: string;
   combineCoalition: boolean;
-}>(schema);
-
-// Version our hash. This way we can introduce/deprecate/upgrade features as needed.
-if (window.location.pathname.includes('/builder/')) {
-  hashConfig.subscribe(val => {
-    const CURRENT_VERSION = 1;
-    if (val && val.version !== CURRENT_VERSION) {
-      hashConfig.set({ ...val, version: CURRENT_VERSION });
-    }
-  });
-}
+};

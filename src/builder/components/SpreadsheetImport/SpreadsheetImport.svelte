@@ -1,8 +1,9 @@
 <script>
   import Modal from '../Modal/Modal.svelte';
   import Circle from '../Circle/Circle.svelte';
-  import { electorates, hashConfig } from '../../../lib/hashConfig';
+  import { electorates } from '../../../lib/hashConfig/schema';
   import { parseSpreadsheet, applyHashConfig } from './util';
+  import { hashConfig } from '../../../lib/hashConfig/svelteStore';
   let { onClose = () => {} } = $props();
 
   let status = $state('editing');

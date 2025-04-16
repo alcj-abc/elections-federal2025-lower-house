@@ -10,7 +10,7 @@
   import StyleRoot from '../components/StyleRoot/StyleRoot.svelte';
   import layouts from '../../data/appdata-layouts.json';
   import config from '../../data/appdata-built.json';
-  import { electoratesByCode } from '../lib/hashConfig';
+  import { electoratesByCode } from '../lib/hashConfig/schema';
   import { hexToPx } from '../lib/utils';
   let {
     allocations = {},

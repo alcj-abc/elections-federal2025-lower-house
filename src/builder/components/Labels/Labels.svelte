@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { hashConfig, electorates, defaultNullElectorates } from '../../../lib/hashConfig';
+  import { electorates, defaultNullElectorates } from '../../../lib/hashConfig/schema';
+  import { hashConfig } from '../../../lib/hashConfig/svelteStore';
   import { isDraggingEnabled } from '../LabelDragger/utils';
   import TypeaheadElectorate from '../TypeaheadElectorate/TypeaheadElectorate.svelte';
 </script>
