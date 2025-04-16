@@ -41,8 +41,6 @@
       const newPct = newPrimaryCounts[id];
       const diff = originalPct && newPct ? newPct - originalPct : 0;
 
-      console.log(id, originalPct, newPct, diff);
-
       obj[id] = diff;
       return obj;
     }, {});
