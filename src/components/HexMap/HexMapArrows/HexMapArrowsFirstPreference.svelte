@@ -14,7 +14,14 @@
     if (!resultsData) {
       return {};
     }
-    return getPrimaryCountPct(resultsData, [partyCode]);
+    const ALP_LIB_GRN = ['ALP', 'LNP', 'GRN'];
+    if (partyCode === 'OTH') {
+      return getPrimaryCountPct(resultsData, code => ![...ALP_LIB_GRN, 'IND'].includes(code));
+    }
+    if (partyCode === 'OTH+IND') {
+      return getPrimaryCountPct(resultsData, code => ![...ALP_LIB_GRN].includes(code));
+    }
+    return getPrimaryCountPct(resultsData, code => code === partyCode);
   });
 
   $effect(() => {
@@ -26,9 +33,15 @@
     }
     arrowData = _resultsData.data.electorates.reduce((obj, electorate) => {
       const id = electorate.code;
-      const originalPct = baselineFirstPreferences[id]?.pct?.[_partyCode];
+      const originalParties = baselineFirstPreferences[id]?.pct;
+      let originalPct = originalParties?.[_partyCode] || 0;
+      if (partyCode === 'OTH+IND') {
+        originalPct = (originalParties?.OTH || 0) + (originalParties?.IND || 0);
+      }
       const newPct = newPrimaryCounts[id];
       const diff = originalPct && newPct ? newPct - originalPct : 0;
+
+      console.log(id, originalPct, newPct, diff);
 
       obj[id] = diff;
       return obj;

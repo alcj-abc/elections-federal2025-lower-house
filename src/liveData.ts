@@ -25,14 +25,18 @@ import partiesConfig from '../data/parties.json';
 /**
  * Get primary vote count for the given party code(s)
  */
-export function getPrimaryCountPct(data, codes: string[] = []): { string: number | null } {
+export function getPrimaryCountPct(data, checkFn = code => true): { string: number | null } {
   return data.data.electorates.reduce((obj, electorate) => {
     const id = electorate.code;
-    const matchedCandidate = electorate.accumulatedCandidates.find(candidate =>
-      codes.includes(partiesConfig.synonyms[candidate.party.code] || candidate.party.code)
+    const matchedCandidates = electorate.accumulatedCandidates.filter(candidate =>
+      checkFn(partiesConfig.synonyms[candidate.party.code] || candidate.party.code)
     );
-    const pct = matchedCandidate?.simple?.pct;
-    obj[id] = pct ? Number(pct) : null;
+    const cumulativePct = matchedCandidates.reduce((currentPct, matchedCandidate) => {
+      const pct = matchedCandidate?.simple?.pct;
+      const sanitisedPct = pct ? Number(pct) : 0;
+      return currentPct + sanitisedPct;
+    }, 0);
+    obj[id] = cumulativePct;
     return obj;
   }, {});
 }
