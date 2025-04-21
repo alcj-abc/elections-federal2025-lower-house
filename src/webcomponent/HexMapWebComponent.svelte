@@ -31,7 +31,7 @@
     colours
   } = $props();
 
-  let rootEl = $state();
+  let rootEl = $state<HTMLDivElement>();
 
   let layoutDefinition = $derived.by(() => layouts[layout]);
 
@@ -53,7 +53,7 @@
   function getHex(id: string) {
     const hex = electoratesByCode[id];
     const groupOffset = layoutDefinition.positions[hex?.group];
-    if (!(rootEl instanceof HTMLDivElement)) {
+    if (!rootEl) {
       return;
     }
     const svg = rootEl.querySelector('svg');
@@ -78,11 +78,19 @@
     };
   }
 
+  function focusHex(id) {
+    const buttonElement = rootEl?.querySelector(`.hexmapkeyboardnav button[data-id="${id}"]`);
+    if (!(buttonElement instanceof HTMLButtonElement)) {
+      return;
+    }
+    buttonElement.focus();
+  }
+
   $effect(() => {
     if (!onApi) {
       return;
     }
-    onApi({ getHex });
+    onApi({ getHex, focusHex });
   });
 </script>
 
