@@ -1,55 +1,53 @@
 <script lang="ts">
   import ResultCardBar from './ResultCardBar.svelte';
-  const values = {
-    name: 'Adelaide',
-    state: 'SA',
-    countPct: 26,
-    updated: new Date(Date.now() - 1000 * 60 * 2),
-    label: {
-      type: 'TOO EARLY',
-      party: ''
-    },
-    candidates: [
-      {
-        id: 'ALP',
-        party: 'Labor Party',
-        candidate: 'Catherine King',
-        percent: 50.9
-      },
-      {
-        id: 'LIB',
-        party: 'Liberal Party',
-        candidate: 'Tim Vo',
-        percent: 49.1
-      }
-    ]
-  };
+  const { formatDistance } = require('date-fns');
+  let {
+    name,
+    state,
+    counted,
+    updated = new Date(),
+    isCalled,
+    label = { label: 'TOO EARLY', id: '' },
+    candidates = []
+  } = $props();
 </script>
 
 <aside class="result-card">
   <div class="result-card__top">
-    <div class="result-card__electorate">{values.name}</div>
-    <div class="result-card__state">{values.state}</div>
-    <div class={`result-card__party-tag result-card__party-tag--${values.label.type.replace(/\s/g, '')}`}>
-      {values.label.party}
-      {values.label.type}
+    <h3 class="result-card__electorate">{name}</h3>
+    <div class="result-card__state">{state}</div>
+    <div
+      class="result-card__prediction result-allocation"
+      class:result-card__prediction--called={isCalled}
+      data-allocation={label.id}
+    >
+      {label.label}
     </div>
   </div>
-  <div class="result__status">{values.countPct}% counted, updated 2m ago</div>
-  <div class="result__projection-disclaimer">Projection based on preference estimate</div>
 
-  <div class="result__bar">
-    <ResultCardBar candidates={values.candidates} />
-  </div>
-  <div class="result__candidates">
-    {#each values.candidates as { percent, party, candidate }}
-      <div class="result__candidate">
-        <div class="result__percentage">{percent}%</div>
-        <div class="result__party">{party}</div>
-        <div class="result__candidate">{candidate}</div>
-      </div>
-    {/each}
-  </div>
+  {#if isCalled}
+    <div class="result__status">{counted}% turnout, final figures</div>
+    <div class="result__projection-disclaimer">Final count</div>
+  {:else}
+    <div class="result__status">{counted}% counted, {formatDistance(updated, new Date())} ago</div>
+
+    <div class="result__projection-disclaimer">Projection based on preference estimate</div>
+  {/if}
+
+  {#if candidates}
+    <div class="result__bar">
+      <ResultCardBar {candidates} />
+    </div>
+    <div class="result__candidates">
+      {#each candidates as { percent, party, candidate, id }}
+        <div class="result__candidate">
+          <div class="result__percentage">{percent}%</div>
+          <div class="result__party result-allocation" data-allocation={id}>{party}</div>
+          <div class="result__candidate-name">{candidate}</div>
+        </div>
+      {/each}
+    </div>
+  {/if}
 </aside>
 
 <style lang="scss">
@@ -79,6 +77,8 @@
     font-style: normal;
     font-weight: 700;
     line-height: 125%; /* 1.40625rem */
+    padding: 0;
+    margin: 0;
   }
   .result-card__state {
     color: var(--Text-text-secondary, #60646c);
@@ -90,8 +90,9 @@
     font-weight: 700;
     line-height: 135%; /* 1.0125rem */
     flex: 1;
+    text-transform: uppercase;
   }
-  .result-card__party-tag {
+  .result-card__prediction {
     display: flex;
     width: 5rem;
     justify-content: center;
@@ -107,6 +108,18 @@
     font-weight: 600;
     line-height: 1.5rem; /* 200% */
   }
+
+  .result-card__prediction[data-allocation] {
+    background: white;
+    border: 1px solid var(--ptycolour);
+    color: var(--ptycolour);
+    &.result-card__prediction--called {
+      border: none;
+      background: var(--ptycolour);
+      color: white;
+    }
+  }
+
   .result__status {
     flex: 1 0 0;
     color: var(--Text-text-secondary, #60646c);
@@ -142,6 +155,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: 125%; /* 1.25rem */
+    text-align: left;
   }
 
   .result__candidate:last-child {
@@ -159,17 +173,17 @@
     font-style: normal;
     font-weight: 700;
     line-height: 135%; /* 1.0125rem */
-  }
-  .result__candidate {
-    /* Text Bold/sm */
-    font-family: 'ABC Sans Nova';
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 135%; /* 1.18125rem */
+    color: var(--ptycolour);
   }
   .result__bar {
     margin-bottom: -2.7rem;
     margin-top: 2.7rem;
+  }
+
+  $parties: Any, ALP, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal, CA;
+  @each $code in $parties {
+    .result-allocation:global([data-allocation='#{""+$code}']) {
+      --ptycolour: var(--a-#{$code});
+    }
   }
 </style>

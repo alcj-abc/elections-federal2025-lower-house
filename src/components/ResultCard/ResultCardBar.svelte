@@ -1,17 +1,20 @@
 <script lang="ts">
   let { candidates = [] } = $props();
+  let hasResults = $derived.by(() => candidates.every(({ percent }) => percent));
 </script>
 
 <div class="result-card-bar">
   <div class="result-card-bar__tick"></div>
   <div class="result-card-bar__tick result-card-bar__tick--top"></div>
-  <div class="result-card-bar__track">
+  <div class="result-card-bar__track" class:result-card-bar__track--empty={!hasResults}>
     {#each candidates as { id, percent }}
-      <div
-        class="result-card-bar__pty"
-        style:background-color={`var(--a-${id}, fuchsia)`}
-        style:width={`${percent}%`}
-      ></div>
+      {#if percent}
+        <div
+          class="result-card-bar__pty"
+          style:background-color={`var(--a-${id}, fuchsia)`}
+          style:width={`${percent}%`}
+        ></div>
+      {/if}
     {/each}
   </div>
 </div>
@@ -29,6 +32,9 @@
     display: flex;
     gap: 0.14rem;
     z-index: 2;
+  }
+  .result-card-bar__track--empty {
+    background: #f1f2f3;
   }
   .result-card-bar__pty {
     height: 100%;
