@@ -43,7 +43,8 @@
     };
   });
 
-  const getRotationForValue = value => (value < 0 ? 135 : 45);
+  // Point labor to the left, Coalition to the right
+  const getRotationForValue = value => (value < 0 ? -135 : -45);
 
   onMount(() => {
     getLiveData({ cache: true }).then(json => {
