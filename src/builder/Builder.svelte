@@ -16,12 +16,15 @@
   import { isDraggingEnabled, offsets } from './components/LabelDragger/utils';
   import { getLiveData, getMapAllocationsAndCertainty, liveDataName } from '../liveData';
   import { hashConfig } from '../lib/hashConfig/svelteStore';
-  let modal = $state<{
-    type: string;
-    props?: {};
-  }>();
+  import SpotlightSearch from './components/SpotlightSearch/SpotlightSearch.svelte';
+  import { modal } from './store';
+
+  $effect(() => {
+    console.log($modal);
+  });
+
   // @ts-ignore
-  let selectedElectorate = $derived.by(() => modal?.props?.electorate?.id);
+  let selectedElectorate = $derived.by(() => $modal?.props?.electorate?.id);
 
   function onVizClick({ code, clientX, clientY }) {
     if (!code) {
@@ -29,7 +32,7 @@
     }
     const electorate = electorates.find(electorate => electorate.id === code);
     const allocation = $hashConfig.allocations[code];
-    modal = {
+    $modal = {
       type: 'contextMenu',
       props: {
         electorate,
@@ -88,35 +91,36 @@
 
       <UpdateChecker />
 
-      {#if modal?.type === 'contextMenu'}
+      {#if $modal?.type === 'contextMenu'}
         <HexagonContextMenu
-          {...modal.props}
+          {...$modal.props}
           onClose={() => {
-            modal = undefined;
+            $modal = undefined;
           }}
         />
       {/if}
 
-      {#if modal?.type === 'spreadsheetImport'}
+      {#if $modal?.type === 'spreadsheetImport'}
         <SpreadsheetImport
           onClose={() => {
-            modal = undefined;
+            $modal = undefined;
           }}
         />
       {/if}
 
       <form class="container-controls">
-        <div class="fieldset">
-          <label
-            ><input
+        <div class="fieldset buttons">
+          <label>
+            <input
               name="vizType"
               type="radio"
               checked={$hashConfig.vizType === 'geo'}
               onchange={() => {
                 $hashConfig.vizType = 'geo';
               }}
-            />Geo map</label
-          >
+            />
+            Geo map
+          </label>
 
           <label>
             <input
@@ -126,8 +130,11 @@
               onchange={() => {
                 $hashConfig.vizType = 'hex';
               }}
-            />Hex map</label
-          >
+            />
+            Hex map
+          </label>
+          <div style="flex:1"></div>
+          <SpotlightSearch />
         </div>
 
         {#if $hashConfig.vizType === 'hex'}
@@ -283,30 +290,32 @@
             </label>
           </fieldset>
         {/if}
-        <fieldset>
-          <legend>Arrow charts</legend>
-          <label>
-            <select
-              bind:value={$hashConfig.arrowChart}
-              onchange={e => {
-                if ($hashConfig.arrowChart === 'None') {
-                  return;
-                }
-                $hashConfig.showStateLabels = false;
-                $hashConfig.showElectorateLabels = false;
-                $hashConfig.showTotals = false;
-                $hashConfig.allocations = electorates.reduce((obj, electorate) => {
-                  obj[electorate.id] = null;
-                  return obj;
-                }, {});
-              }}
-            >
-              {#each schema.arrowChart.values as value}
-                <option>{value}</option>
-              {/each}
-            </select>
-          </label>
-        </fieldset>
+        {#if $hashConfig.vizType === 'hex'}
+          <fieldset>
+            <legend>Arrow charts</legend>
+            <label>
+              <select
+                bind:value={$hashConfig.arrowChart}
+                onchange={e => {
+                  if ($hashConfig.arrowChart === 'None') {
+                    return;
+                  }
+                  $hashConfig.showStateLabels = false;
+                  $hashConfig.showElectorateLabels = false;
+                  $hashConfig.showTotals = false;
+                  $hashConfig.allocations = electorates.reduce((obj, electorate) => {
+                    obj[electorate.id] = null;
+                    return obj;
+                  }, {});
+                }}
+              >
+                {#each schema.arrowChart.values as value}
+                  <option>{value}</option>
+                {/each}
+              </select>
+            </label>
+          </fieldset>
+        {/if}
         <fieldset>
           <legend>Markers</legend>
           <MarkerAdmin
@@ -329,7 +338,7 @@
           <button
             onclick={e => {
               e.preventDefault();
-              modal = { type: 'spreadsheetImport' };
+              $modal = { type: 'spreadsheetImport' };
             }}>Spreadsheet import/export</button
           >
           <button

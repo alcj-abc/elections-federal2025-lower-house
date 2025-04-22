@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  let { children, footerChildren, title = 'Modal', onClose = () => {} } = $props();
+  let { children, footerChildren, title = '', onClose = () => {} } = $props();
   let dialogEl = $state<HTMLDialogElement | undefined>();
   let rect = $state<DOMRect>();
   $effect(() => {
@@ -27,26 +27,28 @@
 <dialog class="modal" bind:this={dialogEl} onclick={onCloseTypescriptProxy} onclose={onCloseTypescriptProxy}>
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div onclick={e => e.stopPropagation()}>
-    <div class="modal-title">
-      <h1>
-        {title}
-      </h1>
-      <button class="modal-close" onclick={onCloseTypescriptProxy}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-x"
-          viewBox="0 0 16 16"
-        >
-          <title>Close</title>
-          <path
-            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
-          />
-        </svg>
-      </button>
-    </div>
+    {#if title}
+      <div class="modal-title">
+        <h1>
+          {title}
+        </h1>
+        <button class="modal-close" onclick={onCloseTypescriptProxy}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-x"
+            viewBox="0 0 16 16"
+          >
+            <title>Close</title>
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+            />
+          </svg>
+        </button>
+      </div>
+    {/if}
 
     <div class="modal-content">
       {@render children?.()}
