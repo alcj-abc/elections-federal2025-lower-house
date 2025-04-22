@@ -1,7 +1,7 @@
 <script lang="ts">
   import AccessibleHide from '../../AccessibleHide/AccesibleHide.svelte';
   import SkipLink from '../../SkipLink/SkipLink.svelte';
-  let { groups, layout, onChange, onClick, onFocus } = $props();
+  let { groups, layout, onChange, onClick, onFocus, customElectorateAltText = {} } = $props();
   let focused = $state(null);
   function onFocusProxy(e) {
     const id = e.target.dataset.id;
@@ -55,7 +55,7 @@
         <ul>
           {#each group.hexes as hex}
             <li>
-              <button data-id={hex.id}>{hex.name}</button>
+              <button data-id={hex.id}>{hex.name} {customElectorateAltText[hex.id] || ''}</button>
             </li>
           {/each}
         </ul>

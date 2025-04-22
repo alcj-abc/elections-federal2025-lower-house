@@ -28,7 +28,8 @@
     onViewboxChange = () => {},
     isStaticLayout = true,
     isInteractive = true,
-    colours
+    colours,
+    customElectorateAltText = {}
   } = $props();
 
   let rootEl = $state<HTMLDivElement>();
@@ -112,5 +113,6 @@
     {isStaticLayout}
     {isInteractive}
     {onViewboxChange}
+    {customElectorateAltText}
   />
 </div>
