@@ -38,9 +38,10 @@
     [0, 0],
     [0, 0]
   ]);
+  let isFirstRun = $state(true);
   let isElectoratePolygonsLoaded = $state(false);
   let isInspecting = $state(false);
-  let resizeDirtyValue = $state(Math.random());
+  let resizeWidth = $state(window.innerWidth);
   let electorates = $derived.by(() => config.groups.flatMap(state => state.hexes));
 
   /** Are any of the electorates focused? If so, we use different styles for unallocated */
@@ -185,12 +186,11 @@
           map.resize();
         });
 
-        map.on(
-          'resize',
-          debounce(() => {
-            resizeDirtyValue = Math.random();
-          }, 1000)
-        );
+        map.on('resize', () => {
+          // We don't actually use the width, but this ensures we only call once
+          // per resize
+          resizeWidth = window.innerWidth;
+        });
 
         map.on('click', event => {
           if (!onClick) {
@@ -374,24 +374,32 @@
   });
 
   $effect(() => {
-    const deps = [map, bounds, resizeDirtyValue];
-    if (!map || !bounds || !deps) {
+    const _map = map;
+    const _bounds = bounds;
+    const _resizeWidth = resizeWidth;
+    const areBoundsValid = bounds.every(([x, y]) => x && y);
+    if (!_map || !_bounds || !_resizeWidth || !areBoundsValid) {
       return;
     }
-    let textIgnorePlacementTimeout;
-    map?.fitBounds(new LngLatBounds(bounds), {
-      ...mapConfig.fitBounds,
-      // If this is an inline map, we don't animate, it's essentially a static graphic
-      duration: isInline ? 0 : 3000
-    });
-    textIgnorePlacementTimeout = setTimeout(
-      () => map?.setLayoutProperty('electorate_points_label', 'text-ignore-placement', geoArea !== 'Australia'),
-      geoArea === 'Australia' ? 250 : 750
-    );
+    return untrack(() => {
+      let textIgnorePlacementTimeout;
 
-    return () => {
-      clearTimeout(textIgnorePlacementTimeout);
-    };
+      _map?.fitBounds(new LngLatBounds(_bounds as any), {
+        ...mapConfig.fitBounds,
+        // If this is an inline map, we don't animate, it's essentially a static graphic
+        duration: isInline || isFirstRun ? 0 : 3000
+      });
+      textIgnorePlacementTimeout = setTimeout(
+        () => _map?.setLayoutProperty('electorate_points_label', 'text-ignore-placement', geoArea !== 'Australia'),
+        geoArea === 'Australia' ? 250 : 750
+      );
+      if (isFirstRun) {
+        isFirstRun = false;
+      }
+      return () => {
+        clearTimeout(textIgnorePlacementTimeout);
+      };
+    });
   });
 </script>
 
@@ -403,7 +411,12 @@ help with authoring graphics in the editor. -->
   onkeyup={event => (isInspecting = isInteractive ? event.altKey : false)}
 />
 
-<div class="geomap" class:geomap--border={isInline && geoArea !== 'Australia'} bind:this={mapRootEl}></div>
+<div
+  class="geomap"
+  class:geomap--ready={!isFirstRun}
+  class:geomap--border={isInline && geoArea !== 'Australia'}
+  bind:this={mapRootEl}
+></div>
 
 <style lang="scss">
   .geomap {
