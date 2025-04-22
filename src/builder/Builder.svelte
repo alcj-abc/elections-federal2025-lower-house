@@ -19,10 +19,6 @@
   import SpotlightSearch from './components/SpotlightSearch/SpotlightSearch.svelte';
   import { modal } from './store';
 
-  $effect(() => {
-    console.log($modal);
-  });
-
   // @ts-ignore
   let selectedElectorate = $derived.by(() => $modal?.props?.electorate?.id);
 
@@ -64,7 +60,6 @@
     }
     return newLayout;
   });
-  $effect(() => console.log({ config }));
 </script>
 
 <svelte:head>
