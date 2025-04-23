@@ -169,7 +169,7 @@
     stroke: var(--c-emptyStateOutline);
   }
   .group--map-is-full:not(.group--has-focuses) .group-outline :global(.hex-outline) {
-    stroke: transparent;
+    stroke: var(--c-fullStateOutline);
   }
 
   // Party colours
@@ -237,10 +237,6 @@
     }
     .group-hex-strokes :global(.hex:not([data-allocation='null'])[data-focused='false']) {
       stroke: var(--c-white);
-    }
-
-    &:not(.group--map-is-empty) .group-outline :global(.hex-outline) {
-      stroke: #60646c;
     }
   }
 
