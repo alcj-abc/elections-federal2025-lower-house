@@ -1,4 +1,6 @@
 <script lang="ts">
+  import smallHash from '../../../public/small device hash.png';
+  import largeHash from '../../../public/large device hash.png';
   import AccesibleHide from '../AccessibleHide/AccesibleHide.svelte';
   import partiesConfig from '../../../data/parties.json';
 
@@ -75,6 +77,8 @@
   style:--seatWidth={seatWidth}
   style:opacity={showTotals ? 1 : 0}
   style:pointer-events={showTotals ? undefined : 'none'}
+  style:--smallHash={`url("${smallHash}")`}
+  style:--largeHash={`url("${largeHash}")`}
 >
   <div class="totals__win-marker">76 to win</div>
   <dl class="totals__chart" bind:clientWidth={chartWidth}>
@@ -201,29 +205,34 @@
 
   .totals__bar--alp {
     .totals__won {
-      background: var(--a-ALP);
+      background-color: var(--a-ALP);
     }
     .totals__likely {
-      background: var(--a-ALP);
-      background-image: url('hash-pattern.svg');
+      background-color: var(--a-ALP);
     }
   }
   .totals__bar--lnp {
     .totals__won {
-      background: var(--a-LNP);
+      background-color: var(--a-LNP);
     }
     .totals__likely {
-      background: var(--a-LNP);
-      background-image: url('hash-pattern.svg');
+      background-color: var(--a-LNP);
     }
   }
   .totals__bar--oth {
     .totals__won {
-      background: var(--a-OTH);
+      background-color: var(--a-OTH);
     }
     .totals__likely {
-      background: var(--a-OTH);
-      background-image: url('hash-pattern.svg');
+      background-color: var(--a-OTH);
+    }
+  }
+  .totals__likely {
+    background-image: var(--smallHash);
+
+    // large tablet
+    @media (min-width: 62rem) {
+      background-image: var(--largeHash);
     }
   }
 

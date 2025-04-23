@@ -9,7 +9,6 @@
    * 1. Mount the map, create layers with map.addLayer
    * 2. Apply state (style props) to the layers with map.setFeatureState
    */
-  import debounce from 'debounce';
   import mapConfig from '../../../data/appdata-mapconfig.json';
   import { untrack } from 'svelte';
   import { electorateIdToNumber } from './utils';

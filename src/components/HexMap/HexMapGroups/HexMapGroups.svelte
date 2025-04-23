@@ -101,9 +101,12 @@
   });
 
   let areStateOutlinesOnTop = $derived.by(() => showStateOutlinesOnTop || (hasAllocations && hasAnyFocuses));
+
+  import smallHash from '../../../../public/small device hash.svg';
+  import largeHash from '../../../../public/large device hash.svg';
 </script>
 
-<g bind:this={svgEl}>
+<g bind:this={svgEl} style:--smallHash={`url("${smallHash}")`} style:--largeHash={`url("${largeHash}")`}>
   <!-- hexagon colours, state outlines -->
   {#each derivedGroups as { groupProps, group }}
     <g {...groupProps}>
