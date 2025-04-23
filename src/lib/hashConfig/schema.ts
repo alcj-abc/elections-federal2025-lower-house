@@ -78,7 +78,7 @@ export const schema = {
   layout: {
     type: 'enum',
     key: 'l',
-    defaultValue: 'COUNTRY',
+    defaultValue: 'EXPLODED',
     values: Object.keys(layouts)
   },
   geoArea: {
