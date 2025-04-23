@@ -1,14 +1,15 @@
 <script lang="ts">
   import AccessibleHide from '../../AccessibleHide/AccesibleHide.svelte';
-  let { groups, layout, onChange, onClick, onFocus } = $props();
+  import SkipLink from '../../SkipLink/SkipLink.svelte';
+  let { groups, layout, onChange, onClick, onFocus, customElectorateAltText = {} } = $props();
   let focused = $state(null);
   function onFocusProxy(e) {
     const id = e.target.dataset.id;
-    focused = id
+    focused = id;
 
     onFocus?.({
       code: id
-    })
+    });
   }
   function onClickProxy(e) {
     const id = e.target.dataset.id;
@@ -26,7 +27,7 @@
       focused = null;
     }
 
-    onFocus?.({code: null})
+    onFocus?.({ code: null });
   }
   $effect(() => {
     onChange?.(focused);
@@ -43,6 +44,7 @@
   );
 </script>
 
+<SkipLink id="hex-map-top" target="hex-map-bottom" position="topleft">Skip past map</SkipLink>
 <AccessibleHide>
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
@@ -53,7 +55,7 @@
         <ul>
           {#each group.hexes as hex}
             <li>
-              <button data-id={hex.id}>{hex.name}</button>
+              <button data-id={hex.id}>{hex.name} {customElectorateAltText[hex.id] || ''}</button>
             </li>
           {/each}
         </ul>
@@ -61,6 +63,7 @@
     {/each}
   </ul>
 </AccessibleHide>
+<SkipLink id="hex-map-bottom" target="hex-map-top" position="bottomleft">Skip above map</SkipLink>
 
 <style lang="scss">
   .hexmapkeyboardnav {

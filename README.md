@@ -35,6 +35,7 @@ Once onApi returns, you can use the API to query hexagon dimensions. `screenCoor
 ```
   const el = document.querySelector('abcnews-hexmap');
   el.onApi = function (api) {
+    // Get hex info
     console.log(api.getHex('BRIS'));
     // {
     //   "code": "BRIS",
@@ -47,6 +48,9 @@ Once onApi returns, you can use the API to query hexagon dimensions. `screenCoor
     //     112
     //   ]
     // }
+
+    // put keyboard focus on the given hex
+    api.focusHex('BRIS');
   };
 ```
 

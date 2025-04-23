@@ -48,7 +48,9 @@
     /** Party for whom to show first preference arrows */
     arrowChart = 'None',
     /** which electorate is currently focused */
-    selectedElectorate = null
+    selectedElectorate = null,
+    /** Additional text to add to the alt text version of each electorate, e.g. `{ ADEL: 'ALP retain' }` */
+    customElectorateAltText
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgRatio = $state(0);
@@ -169,6 +171,7 @@
 
   {#if isInteractive}
     <HexMapKeyboardNav
+      {customElectorateAltText}
       groups={config.groups}
       {layout}
       onChange={newValue => {
