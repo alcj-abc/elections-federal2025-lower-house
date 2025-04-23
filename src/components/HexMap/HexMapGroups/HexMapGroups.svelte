@@ -12,7 +12,8 @@
     showElectorateLabels,
     showFocusedElectorateLabels,
     labelsToShow,
-    isOutlineOnly = false
+    isOutlineOnly = false,
+    showStateOutlinesOnTop = false
   } = $props();
 
   let svgEl = $state<SVGGElement>();
@@ -98,6 +99,8 @@
       };
     });
   });
+
+  let areStateOutlinesOnTop = $derived.by(() => showStateOutlinesOnTop || (hasAllocations && hasAnyFocuses));
 </script>
 
 <g bind:this={svgEl}>
@@ -107,7 +110,10 @@
       <g class="group-hexes">
         {@html group.svgHexes}
       </g>
-      <g class="group-outline group-outline__under">{@html group.svgOutline}</g>
+
+      {#if !areStateOutlinesOnTop}
+        <g class="group-outline group-outline__under">{@html group.svgOutline}</g>
+      {/if}
     </g>
   {/each}
   <!-- Hexagon focused/allocated outlines, labels above state outlines  -->
@@ -118,6 +124,9 @@
       </g>
       {#if isVisible}
         <HexLabels hexes={group.hexes} {allocations} {certainties} labelsToShow={labels} {showElectorateLabels} />
+      {/if}
+      {#if areStateOutlinesOnTop}
+        <g class="group-outline group-outline__over">{@html group.svgOutline}</g>
       {/if}
     </g>
   {/each}
@@ -215,7 +224,7 @@
 
     // unfocused null hexes turn white with grey border underneath
     .group-hexes :global(.hex[data-allocation='null'][data-focused='false']) {
-      fill: #ebebeb;
+      fill: #fff;
       stroke: #fff;
     }
     .group-hex-strokes :global(.hex[data-allocation='null'][data-focused='false']) {

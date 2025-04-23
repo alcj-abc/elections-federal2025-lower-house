@@ -50,7 +50,9 @@
     /** which electorate is currently focused */
     selectedElectorate = null,
     /** Additional text to add to the alt text version of each electorate, e.g. `{ ADEL: 'ALP retain' }` */
-    customElectorateAltText
+    customElectorateAltText,
+    /** An override for News Web*/
+    showStateOutlinesOnTop = false
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgRatio = $state(0);
@@ -137,6 +139,7 @@
         {showElectorateLabels}
         {showFocusedElectorateLabels}
         {labelsToShow}
+        {showStateOutlinesOnTop}
         isOutlineOnly={arrowChart !== 'None'}
       />
 

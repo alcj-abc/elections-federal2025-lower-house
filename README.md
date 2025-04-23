@@ -26,7 +26,8 @@ The properties are:
   onApi = (api) => { global.api = api },
   selectedElectorate='ADEL',
   customViewbox = null | [x, y, w, h],
-  onViewboxChange = ({newViewbox}) => {}
+  onViewboxChange = ({newViewbox}) => {},
+  areStateOutlinesOnTop = false
 }
 ```
 

@@ -29,7 +29,8 @@
     isStaticLayout = true,
     isInteractive = true,
     colours,
-    customElectorateAltText = {}
+    customElectorateAltText = {},
+    areStateOutlinesOnTop
   } = $props();
 
   let rootEl = $state<HTMLDivElement>();
@@ -114,5 +115,6 @@
     {isInteractive}
     {onViewboxChange}
     {customElectorateAltText}
+    {areStateOutlinesOnTop}
   />
 </div>
