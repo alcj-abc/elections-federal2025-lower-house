@@ -132,7 +132,7 @@
   .totals__win-marker {
     text-align: right;
     font-family: ABCSans;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 14px;
     text-align: right;
     margin-bottom: 0.38rem;
@@ -161,7 +161,7 @@
   }
   .totals__party {
     font-family: ABCSans;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     text-align: center;
   }
