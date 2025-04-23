@@ -99,7 +99,7 @@
         >
         <button
           onclick={() => {
-            const url = `${window.location.pathname.replace(/\/+s/, '').split('/').slice(0, -2).join('/')}/builder#${stringify(panelData.originalData || {})}`;
+            const url = `${window.location.pathname.split('/').slice(0, -2).join('/')}/builder/#${stringify(panelData.originalData || {})}`;
             // @ts-ignore
             window.location = url;
           }}>Open in builder</button
