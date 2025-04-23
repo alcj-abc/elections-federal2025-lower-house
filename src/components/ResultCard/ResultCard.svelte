@@ -53,17 +53,64 @@
 <style lang="scss">
   .result-card {
     display: flex;
-    width: 21.5rem;
     padding: 0.75rem 1rem;
     flex-direction: column;
     gap: 0.25rem;
     border-radius: 0.5rem;
-    border: 1px solid var(--Border-border-transparent-low, rgba(0, 0, 0, 0.1));
+    border: 1px solid rgba(0, 0, 0, 0.1);
     background: var(--Background-background-base, #fff);
+  }
+
+  // Here be hacks: integrate with Scrollyteller card styling
+  :global(.st-panel) {
+    .result-card {
+      // mobile view has blocks with borders. We should butt our cards upagainst these.
+      border-radius: 0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-style: solid none;
+      margin: 0 -1rem 0;
+      padding: 0.75rem 2rem;
+      background: transparent;
+
+      // smol tablet
+      @media (min-width: 46.5rem) {
+        margin: 0 -2rem 0;
+        padding: 0.75rem 3rem;
+      }
+
+      // large tablet
+      @media (min-width: 62rem) {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: var(--Background-background-base, #fff);
+        margin: 0 0 0;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+      }
+    }
+
+    & > :global(div[id*='electionresults']) {
+      margin-bottom: 1rem;
+      & + :global(div[id*='electionresults']) .result-card {
+        border-top-style: none;
+        margin-top: -1rem;
+
+        @media (min-width: 62rem) {
+          border-top-style: solid;
+          margin-top: -1.35rem;
+          border-radius: 0 0 0.5rem 0.5rem;
+        }
+      }
+    }
+
+    & > :global(div[id*='electionresults']:last-child) .result-card {
+      border-bottom-style: none;
+      @media (min-width: 62rem) {
+        border-bottom-style: solid;
+      }
+    }
   }
   .result-card__top {
     display: flex;
-    width: 19.5rem;
     justify-content: space-between;
     align-items: flex-end;
     gap: 0.38rem;

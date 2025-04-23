@@ -8,6 +8,7 @@ import { schema } from './lib/hashConfig/schema';
 import { decodeSchema } from 'hash-codec';
 import InlineGraphics from './components/InlineGraphics/InlineGraphics.svelte';
 import App from './components/App/App.svelte';
+import LiveResultCard from './components/ResultCard/LiveResultCard.svelte';
 
 async function mountThing(id, AppFetcher) {
   const [appMountNode] = selectMounts(id);
@@ -47,22 +48,27 @@ function mountScrollyteller() {
   });
 }
 
-async function mountInlineGraphics() {
-  const MARKER_NAME = 'electioninline';
-  const mounts = selectMounts(MARKER_NAME);
-
-  const adjacentMounts = await Promise.all(
+function decodeSchemas(mounts) {
+  return Promise.all(
     mounts.map(async (mountNode, i) => {
       const parsedData = parse(mountNode.id.slice(1));
       const decodedData = await decodeSchema({ schema, data: parsedData });
       return { mountNode, adjacent: mountNode.nextSibling === mounts[i + 1], data: decodedData };
     })
   );
+}
+
+async function mountInlineGraphics() {
+  const MARKER_NAME = 'electioninline';
+  const mounts = selectMounts(MARKER_NAME);
+
+  const adjacentMounts = await decodeSchemas(mounts);
 
   let accumulatedGraphics: Object[] = [];
   adjacentMounts.forEach(({ mountNode, adjacent, data }) => {
     accumulatedGraphics.push(data);
     if (!adjacent) {
+      console.log('accumulated graphics', accumulatedGraphics);
       try {
         mount(App, {
           target: mountNode,
@@ -76,8 +82,26 @@ async function mountInlineGraphics() {
   });
 }
 
+async function mountResultsCards() {
+  const MARKER_NAME = 'electionresults';
+  const mounts = selectMounts(MARKER_NAME);
+
+  const adjacentMounts = await decodeSchemas(mounts);
+
+  adjacentMounts.forEach(({ mountNode, data }) => {
+    try {
+      mount(LiveResultCard, {
+        target: mountNode,
+        props: data
+      });
+    } catch (e) {
+      console.error('eeee', e);
+    }
+  });
+}
+
 // Load the Odyssey app
-whenOdysseyLoaded.then(() => {
+whenOdysseyLoaded.then(async () => {
   // Builder
   mountThing(
     'electionsfederal2025builder',
@@ -90,11 +114,13 @@ whenOdysseyLoaded.then(() => {
     () => import(/* webpackChunkName: "dynamic-googledoc" */ './builder/GoogleDocEntrypoint.svelte')
   );
 
+  // Inline graphics - if using without a scrollyteller, also mount electionsfederal2025colours
+  await mountInlineGraphics();
+
+  await mountResultsCards();
+
   // Scrollyteller + StyleRoot into the page
   mountScrollyteller();
-
-  // Inline graphics - if using without a scrollyteller, also mount electionsfederal2025colours
-  mountInlineGraphics();
 });
 
 if (process.env.NODE_ENV === 'development') {
