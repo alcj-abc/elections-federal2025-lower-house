@@ -3,7 +3,7 @@
   import { getLiveData } from '../../liveData';
   import ResultCard from './ResultCard.svelte';
   import { getGainRetain } from './util';
-  let { id } = $props();
+  let { electorateId, ...rest } = $props();
 
   let results = $state({ data: { electorates: [] } });
 
@@ -13,7 +13,9 @@
     });
   });
 
-  let electorate = $derived.by(() => results.data.electorates.find(({ code }) => code === id) as any);
+  let electorate = $derived.by(
+    () => results.data.electorates.find(({ code }) => code === String(electorateId).toUpperCase()) as any
+  );
 
   let cardProps = $derived.by(() => {
     if (!electorate) {

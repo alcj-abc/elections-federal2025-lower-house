@@ -53,7 +53,6 @@
 <style lang="scss">
   .result-card {
     display: flex;
-    width: 21.5rem;
     padding: 0.75rem 1rem;
     flex-direction: column;
     gap: 0.25rem;
@@ -63,7 +62,6 @@
   }
   .result-card__top {
     display: flex;
-    width: 19.5rem;
     justify-content: space-between;
     align-items: flex-end;
     gap: 0.38rem;

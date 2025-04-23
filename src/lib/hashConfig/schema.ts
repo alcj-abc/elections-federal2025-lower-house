@@ -73,7 +73,7 @@ export const schema = {
     type: 'enum',
     key: 'v',
     defaultValue: 'hex',
-    values: ['hex', 'geo']
+    values: ['hex', 'geo', 'result']
   },
   layout: {
     type: 'enum',
@@ -186,6 +186,10 @@ export const schema = {
     type: 'boolean',
     key: 'cc',
     defaultValue: false
+  },
+  electorateId: {
+    type: 'string',
+    key: 'electorate'
   }
 };
 
