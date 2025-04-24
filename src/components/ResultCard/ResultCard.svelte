@@ -6,10 +6,10 @@
     state,
     counted,
     updated = new Date(),
-    isCalled,
     label = { label: 'TOO EARLY', id: '' },
     candidates = []
   } = $props();
+  let isCalled = $derived.by(() => label.label.includes('gain') || label.label.includes('retain'));
 </script>
 
 <aside class="result-card">
@@ -58,48 +58,22 @@
     gap: 0.25rem;
     border-radius: 0.5rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    background: var(--Background-background-base, #fff);
+    background: #f5f5f5;
   }
 
   // Here be hacks: integrate with Scrollyteller card styling
   :global(.st-panel) {
     .result-card {
-      // mobile view has blocks with borders. We should butt our cards upagainst these.
-      border-radius: 0;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-style: solid none;
-      margin: 0 -1rem 0;
-      padding: 0.75rem 2rem;
-      background: transparent;
-
-      // smol tablet
-      @media (min-width: 46.5rem) {
-        margin: 0 -2rem 0;
-        padding: 0.75rem 3rem;
-      }
+      border: none;
 
       // large tablet
       @media (min-width: 62rem) {
         border: 1px solid rgba(0, 0, 0, 0.1);
-        background: var(--Background-background-base, #fff);
-        margin: 0 0 0;
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
       }
     }
 
     & > :global(div[id*='electionresults']) {
       margin-bottom: 1rem;
-      & + :global(div[id*='electionresults']) .result-card {
-        border-top-style: none;
-        margin-top: -1rem;
-
-        @media (min-width: 62rem) {
-          border-top-style: solid;
-          margin-top: -1.35rem;
-          border-radius: 0 0 0.5rem 0.5rem;
-        }
-      }
     }
 
     & > :global(div[id*='electionresults']:last-child) .result-card {
@@ -167,9 +141,10 @@
     }
   }
 
-  .result__status {
+  .result__status,
+  .result__projection-disclaimer {
     flex: 1 0 0;
-    color: var(--Text-text-secondary, #60646c);
+    color: #000000;
 
     /* Text Regular/xs */
     font-family: 'ABC Sans Nova';
@@ -177,16 +152,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: 1rem; /* 133.333% */
-  }
-  .result__projection-disclaimer {
-    color: var(--Text-text-primary, #000);
-
-    /* Text Bold/sm */
-    font-family: 'ABC Sans Nova';
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 135%; /* 1.18125rem */
   }
 
   .result__candidates {
@@ -232,5 +197,10 @@
     .result-allocation:global([data-allocation='#{""+$code}']) {
       --ptycolour: var(--a-#{$code});
     }
+  }
+
+  .result-card__prediction:global([data-allocation='TOO EARLY']) {
+    color: white;
+    background: #767676;
   }
 </style>
