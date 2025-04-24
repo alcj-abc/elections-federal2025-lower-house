@@ -1,5 +1,6 @@
 <script lang="ts">
-  import hashPattern from '../../../public/Hash-two.png';
+  import hashPattern from '../../../public/Hash-three.png';
+  import hashPattern2x from '../../../public/Hash-three@2x.png';
   import AccesibleHide from '../AccessibleHide/AccesibleHide.svelte';
   import partiesConfig from '../../../data/parties.json';
 
@@ -77,6 +78,7 @@
   style:opacity={showTotals ? 1 : 0}
   style:pointer-events={showTotals ? undefined : 'none'}
   style:--hashPattern={`url("${hashPattern}")`}
+  style:--hashPattern2x={`url("${hashPattern2x}")`}
 >
   <div class="totals__win-marker">76 to win</div>
   <dl class="totals__chart" bind:clientWidth={chartWidth}>
@@ -227,6 +229,10 @@
   }
   .totals__likely {
     background-image: var(--hashPattern);
+    @media (min-resolution: 2dppx) {
+      background-image: var(--hashPattern2x);
+      background-size: 11px;
+    }
   }
 
   // tablet
