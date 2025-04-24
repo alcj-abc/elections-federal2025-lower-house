@@ -1,6 +1,6 @@
 <script lang="ts">
-  import hashPattern from '../../../public/Hash-three.png';
-  import hashPattern2x from '../../../public/Hash-three@2x.png';
+  import hashPattern from '../../../public/Hash-four.png';
+  import hashPattern2x from '../../../public/Hash-four@2x.png';
   import AccesibleHide from '../AccessibleHide/AccesibleHide.svelte';
   import partiesConfig from '../../../data/parties.json';
 
