@@ -12,14 +12,54 @@
       "WA": [0.05, 7]
     },
     "labels": [
-      { "left": 33.75, "top": 30.75, "width": 8, "name": "NT" },
-      { "left": 65.25, "top": 21.5, "width": 8, "name": "QLD" },
-      { "left": 57.75, "top": 44.25, "width": 8, "name": "NSW" },
-      { "left": 67.5, "top": 57.75, "width": 8, "name": "ACT" },
-      { "left": 58, "top": 67.25, "width": 8, "name": "VIC" },
-      { "left": 57.75, "top": 86.25, "width": 8, "name": "TAS" },
-      { "left": 34, "top": 48.75, "width": 8, "name": "SA" },
-      { "left": 24.5, "top": 53.25, "width": 8, "name": "WA" }
+      {
+        "left": 34,
+        "top": 30.25,
+        "width": 8,
+        "name": "NT"
+      },
+      {
+        "left": 65.25,
+        "top": 21.25,
+        "width": 8,
+        "name": "QLD"
+      },
+      {
+        "left": 57.75,
+        "top": 43.5,
+        "width": 8,
+        "name": "NSW"
+      },
+      {
+        "left": 67.5,
+        "top": 57.5,
+        "width": 8,
+        "name": "ACT"
+      },
+      {
+        "left": 58,
+        "top": 66.5,
+        "width": 8,
+        "name": "VIC"
+      },
+      {
+        "left": 58,
+        "top": 85.5,
+        "width": 8,
+        "name": "TAS"
+      },
+      {
+        "left": 34,
+        "top": 48.5,
+        "width": 8,
+        "name": "SA"
+      },
+      {
+        "left": 24.5,
+        "top": 53,
+        "width": 8,
+        "name": "WA"
+      }
     ],
     "overlayLabels": true
   },
@@ -36,14 +76,54 @@
       "WA": [0, 6.75]
     },
     "labels": [
-      { "left": 30, "top": 30.5, "width": 8, "name": "NT" },
-      { "left": 62.5, "top": 21.25, "width": 8, "name": "QLD" },
-      { "left": 67.5, "top": 47.75, "width": 8, "name": "NSW" },
-      { "left": 71, "top": 63.5, "width": 8, "name": "ACT" },
-      { "left": 60.25, "top": 75, "width": 8, "name": "VIC" },
-      { "left": 60.25, "top": 94.25, "width": 8, "name": "TAS" },
-      { "left": 30, "top": 52.25, "width": 8, "name": "SA" },
-      { "left": 15.75, "top": 52.25, "width": 8, "name": "WA" }
+      {
+        "left": 30,
+        "top": 30.25,
+        "width": 8,
+        "name": "NT"
+      },
+      {
+        "left": 62.5,
+        "top": 21.25,
+        "width": 8,
+        "name": "QLD"
+      },
+      {
+        "left": 67.5,
+        "top": 47.5,
+        "width": 8,
+        "name": "NSW"
+      },
+      {
+        "left": 71,
+        "top": 63,
+        "width": 8,
+        "name": "ACT"
+      },
+      {
+        "left": 60.25,
+        "top": 74.75,
+        "width": 8,
+        "name": "VIC"
+      },
+      {
+        "left": 60.25,
+        "top": 93.25,
+        "width": 8,
+        "name": "TAS"
+      },
+      {
+        "left": 30,
+        "top": 52,
+        "width": 8,
+        "name": "SA"
+      },
+      {
+        "left": 15.75,
+        "top": 51.75,
+        "width": 8,
+        "name": "WA"
+      }
     ],
     "overlayLabels": true
   },
@@ -58,12 +138,42 @@
       "WA": [0, 6.75]
     },
     "labels": [
-      { "left": 62.5, "top": 21.25, "width": 8, "name": "QLD" },
-      { "left": 67.5, "top": 47.75, "width": 8, "name": "NSW" },
-      { "left": 60.25, "top": 75, "width": 8, "name": "VIC" },
-      { "left": 60.25, "top": 94.25, "width": 8, "name": "TAS" },
-      { "left": 30, "top": 52.25, "width": 8, "name": "SA" },
-      { "left": 15.75, "top": 52.25, "width": 8, "name": "WA" }
+      {
+        "left": 62.5,
+        "top": 21.25,
+        "width": 8,
+        "name": "QLD"
+      },
+      {
+        "left": 67.5,
+        "top": 47.5,
+        "width": 8,
+        "name": "NSW"
+      },
+      {
+        "left": 60.25,
+        "top": 74.75,
+        "width": 8,
+        "name": "VIC"
+      },
+      {
+        "left": 60.25,
+        "top": 93.25,
+        "width": 8,
+        "name": "TAS"
+      },
+      {
+        "left": 30,
+        "top": 52,
+        "width": 8,
+        "name": "SA"
+      },
+      {
+        "left": 15.75,
+        "top": 51.75,
+        "width": 8,
+        "name": "WA"
+      }
     ],
     "overlayLabels": true
   },
