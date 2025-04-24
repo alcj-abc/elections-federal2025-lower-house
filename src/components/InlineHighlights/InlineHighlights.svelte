@@ -5,17 +5,19 @@
 
   // We can't be uncertain when there's no allocation
   const certainty = $derived.by(() => (!allocation ? true : _certainty));
+
+  import hashPattern from '../../../public/Hash-four@2x.png';
 </script>
 
-<span class="inline-highlight" class:inline-highlight--uncertain={certainty !== true} data-allocation={allocation}>
+<span
+  class="inline-highlight"
+  class:inline-highlight--uncertain={certainty !== true}
+  data-allocation={allocation}
+  style:--hashPattern={`url("${hashPattern}")`}
+>
   {name}
   {#if !certainty}
-    <span class="inline-highlight__uncertain">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="26" viewBox="0 0 12 33" fill="none">
-        <path d={LINES_D} stroke="inherit" />
-        <path transform="translate(0, 33)" d={LINES_D} stroke="inherit" />
-      </svg>
-    </span>
+    <span class="inline-highlight__uncertain"> </span>
   {/if}
 </span>
 
@@ -52,6 +54,9 @@
         background: var(--u-#{$code});
         color: black;
         stroke: var(--a-#{$code});
+        .inline-highlight__uncertain {
+          background-color: var(--a-#{$code});
+        }
       }
     }
   }
@@ -59,6 +64,10 @@
     position: absolute;
     right: 0;
     top: 0;
+    height: 100%;
+    width: 0.75231rem;
     border-left: 2px solid white;
+    background-image: var(--hashPattern);
+    background-size: 11px;
   }
 </style>
