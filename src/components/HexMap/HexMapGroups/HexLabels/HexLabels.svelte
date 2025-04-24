@@ -33,7 +33,7 @@
     pointer-events: none;
   }
   .hexlabels__text {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     font-family: ABCSans, sans-serif;
     text-anchor: middle;
