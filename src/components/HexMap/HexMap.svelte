@@ -55,6 +55,7 @@
     showStateOutlinesOnTop = false
   } = $props();
   let svgEl = $state<SVGElement>();
+  let svgElWidth = $state(0);
   let svgRatio = $state(0);
   let userFocusedElectorate = $state<null | string>(null);
   let userHoveredElectorate = $state<null | string>(null);
@@ -100,6 +101,20 @@
       }
     })
   );
+
+  /** How much is the SVG scaled? We use the inverse scale to keep the hash
+   *  pattern sizing consistent with other elements
+   */
+  let svgElCurrentScale = $derived.by(() => {
+    let _svgElWidth = svgElWidth;
+    let _viewboxWidth = viewboxWidth.current;
+    if (!_svgElWidth) {
+      return 1;
+    }
+    return _viewboxWidth / _svgElWidth;
+  });
+
+  import hashPattern2x from '../../../public/Hash-four@2x.png';
 </script>
 
 <div class="hexmap" transition:fade={{ duration: 750 }}>
@@ -112,20 +127,25 @@
     <svg
       bind:this={svgEl}
       viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
+      bind:clientWidth={svgElWidth}
     >
       <defs id="defs1">
         <pattern
           id="uncertainty-hash"
           patternUnits="userSpaceOnUse"
-          width="5.2070173"
-          height="2.9824252"
-          patternTransform="translate(393.99999,558.99999)"
+          width="10.5"
+          height="6"
+          patternTransform={`scale(${svgElCurrentScale.toFixed(2)})`}
           preserveAspectRatio="xMidYMid"
         >
-          <path
-            clip-path="none"
-            style="opacity:0.8;fill:#ffffff;fill-opacity:0.8;stroke:none;stroke-width:0.00999999;stroke-dasharray:none"
-            d="M 2.0117291,0 0,1.1523402 v 1.830085 L 5.2050898,0 Z M 5.2070173,1.1503748 2.0117291,2.9824252 h 3.1952882 z"
+          <image
+            x="0"
+            y="0"
+            width="22"
+            height="12"
+            transform="scale(0.5)"
+            transform-origin="top left"
+            href={hashPattern2x}
           />
         </pattern>
       </defs>
