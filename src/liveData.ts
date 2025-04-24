@@ -28,6 +28,10 @@ import partiesConfig from '../data/parties.json';
 export function getPrimaryCountPct(data, checkFn = code => true): { string: number | null } {
   return data.data.electorates.reduce((obj, electorate) => {
     const id = electorate.code;
+    if (!electorate.accumulatedCandidates) {
+      console.error('Missing accumulatedCandidates');
+      return obj;
+    }
     const matchedCandidates = electorate.accumulatedCandidates.filter(candidate =>
       checkFn(partiesConfig.synonyms[candidate.party.code] || candidate.party.code)
     );

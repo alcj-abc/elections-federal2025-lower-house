@@ -27,7 +27,7 @@
     "NAT": "#007056",
     "ONP": "#e5660b",
     "OTH": "#757575",
-    "PUP": "#cc8500",
+    "TOP": "#cc8500",
     "Teal": "#0098a6"
   },
   "uncertain": {
@@ -42,6 +42,6 @@
     "NAT": "#cce2dd",
     "ONP": "#f4dccc",
     "OTH": "#e3e3e3",
-    "PUP": "#f5e7cc"
+    "TOP": "#f5e7cc"
   }
 }

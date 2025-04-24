@@ -1,6 +1,5 @@
 <script lang="ts">
-  import smallHash from '../../../public/small device hash.png';
-  import largeHash from '../../../public/large device hash.png';
+  import hashPattern from '../../../public/Hash-two.png';
   import AccesibleHide from '../AccessibleHide/AccesibleHide.svelte';
   import partiesConfig from '../../../data/parties.json';
 
@@ -77,8 +76,7 @@
   style:--seatWidth={seatWidth}
   style:opacity={showTotals ? 1 : 0}
   style:pointer-events={showTotals ? undefined : 'none'}
-  style:--smallHash={`url("${smallHash}")`}
-  style:--largeHash={`url("${largeHash}")`}
+  style:--hashPattern={`url("${hashPattern}")`}
 >
   <div class="totals__win-marker">76 to win</div>
   <dl class="totals__chart" bind:clientWidth={chartWidth}>
@@ -228,12 +226,7 @@
     }
   }
   .totals__likely {
-    background-image: var(--smallHash);
-
-    // large tablet
-    @media (min-width: 62rem) {
-      background-image: var(--largeHash);
-    }
+    background-image: var(--hashPattern);
   }
 
   // tablet

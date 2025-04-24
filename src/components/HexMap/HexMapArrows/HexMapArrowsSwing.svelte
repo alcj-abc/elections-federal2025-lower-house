@@ -19,7 +19,7 @@
         electorate.swingDial[0].party.code === 'ALP' ? electorate.swingDial : [...electorate.swingDial].reverse();
       const isLaborCoalition = alpSwing.party.code === 'ALP' && coalitionParties.includes(lnpSwing.party.code);
       if (isLaborCoalition) {
-        obj[electorate.code] = Number(alpSwing.predicted2CP.swing || alpSwing.simple2CP.swing || 0);
+        obj[electorate.code] = Number(alpSwing.predicted2CP?.swing || alpSwing.simple2CP?.swing || 0);
       }
       return obj;
     }, {});

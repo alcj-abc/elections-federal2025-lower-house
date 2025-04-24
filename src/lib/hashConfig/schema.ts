@@ -176,9 +176,9 @@ export const schema = {
       'ALP first preference',
       'LNP first preference',
       'GRN first preference',
+      'ONP first preference',
+      'TOP first preference',
       'IND first preference',
-      'OTH first preference',
-      'OTH+IND first preference',
       'Labor/Coalition 2CP Swing'
     ]
   },

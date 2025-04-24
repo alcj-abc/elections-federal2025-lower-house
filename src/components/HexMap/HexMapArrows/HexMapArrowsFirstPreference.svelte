@@ -1,6 +1,6 @@
 <script lang="ts">
   import HexMapArrowsViz from './HexMapArrowsViz/HexMapArrowsViz.svelte';
-  import baselineFirstPreferences from '../../../../data/appdata-first-preference-baseline.json';
+  import baselineFirstPreferences from '../../../../data/appdata-first-preference-2019.json';
   import { onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
   import { getLiveData, getPrimaryCountPct } from '../../../liveData';
@@ -13,13 +13,6 @@
   let newPrimaryCounts = $derived.by(() => {
     if (!resultsData) {
       return {};
-    }
-    const ALP_LIB_GRN = ['ALP', 'LNP', 'GRN'];
-    if (partyCode === 'OTH') {
-      return getPrimaryCountPct(resultsData, code => ![...ALP_LIB_GRN, 'IND'].includes(code));
-    }
-    if (partyCode === 'OTH+IND') {
-      return getPrimaryCountPct(resultsData, code => ![...ALP_LIB_GRN].includes(code));
     }
     return getPrimaryCountPct(resultsData, code => code === partyCode);
   });
@@ -35,9 +28,6 @@
       const id = electorate.code;
       const originalParties = baselineFirstPreferences[id]?.pct;
       let originalPct = originalParties?.[_partyCode] || 0;
-      if (partyCode === 'OTH+IND') {
-        originalPct = (originalParties?.OTH || 0) + (originalParties?.IND || 0);
-      }
       const newPct = newPrimaryCounts[id];
       const diff = originalPct && newPct ? newPct - originalPct : 0;
 

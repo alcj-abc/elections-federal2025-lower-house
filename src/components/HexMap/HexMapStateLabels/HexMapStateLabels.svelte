@@ -47,7 +47,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    -webkit-text-stroke: 2px transparent;
+    -webkit-text-stroke: 5px transparent;
     paint-order: stroke fill;
 
     @container (min-width: 30rem) {
@@ -60,7 +60,7 @@
   }
 
   .state-labels--overlaid .state-labels__label {
-    -webkit-text-stroke: 2px #f1f1f1;
+    -webkit-text-stroke: 5px #f1f1f1;
     paint-order: stroke fill;
   }
 </style>
