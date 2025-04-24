@@ -125,11 +125,11 @@
       <g class="group-hex-strokes">
         {@html group.svgHexes}
       </g>
-      {#if isVisible}
-        <HexLabels hexes={group.hexes} {allocations} {certainties} labelsToShow={labels} {showElectorateLabels} />
-      {/if}
       {#if areStateOutlinesOnTop}
         <g class="group-outline group-outline__over">{@html group.svgOutline}</g>
+      {/if}
+      {#if isVisible}
+        <HexLabels hexes={group.hexes} {allocations} {certainties} labelsToShow={labels} {showElectorateLabels} />
       {/if}
     </g>
   {/each}
