@@ -168,7 +168,7 @@
     width: calc(100% * var(--seatWidth) * min(76, var(--seatCount)));
     color: #fff;
     text-align: right;
-    font-family: 'ABC Sans Nova';
+    font-family: ABCSans;
     font-size: 1rem;
     font-style: normal;
     font-weight: 700;

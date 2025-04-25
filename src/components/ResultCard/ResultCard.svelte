@@ -95,7 +95,7 @@
     color: var(--Text-text-primary, #000);
 
     /* Heading Bold/xs */
-    font-family: 'ABC Sans Nova';
+    font-family: ABCSans;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 700;
@@ -107,7 +107,7 @@
     color: var(--Text-text-secondary, #60646c);
 
     /* Text Bold/xs */
-    font-family: 'ABC Sans Nova';
+    font-family: ABCSans;
     font-size: 0.75rem;
     font-style: normal;
     font-weight: 700;
@@ -149,7 +149,7 @@
     color: #000000;
 
     /* Text Regular/xs */
-    font-family: 'ABC Sans Nova';
+    font-family: ABCSans;
     font-size: 0.75rem;
     font-style: normal;
     font-weight: 400;
@@ -164,7 +164,7 @@
     color: var(--Text-text-primary, #000);
 
     /* Heading Bold/xxs */
-    font-family: 'ABC Sans Nova';
+    font-family: ABCSans;
     font-size: 1rem;
     font-style: normal;
     font-weight: 700;
@@ -182,7 +182,7 @@
   }
   .result__party {
     /* Text Bold/xs */
-    font-family: 'ABC Sans Nova';
+    font-family: ABCSans;
     font-size: 0.75rem;
     font-style: normal;
     font-weight: 700;

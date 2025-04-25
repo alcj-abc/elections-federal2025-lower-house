@@ -42,7 +42,7 @@
 
     color: var(--Border, #000);
     text-align: center;
-    font-family: ABCSans, 'ABC Sans Nova';
+    font-family: ABCSans, ABCSans;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 700;
