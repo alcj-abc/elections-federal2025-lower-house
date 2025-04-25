@@ -36,7 +36,7 @@
     font-family: ABCSans;
     font-size: 1.25rem;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 125%; /* 1.5625rem */
     overflow: hidden;
     position: relative;
