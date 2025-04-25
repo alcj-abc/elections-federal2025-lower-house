@@ -59,5 +59,5 @@
 </script>
 
 {#if resultsData}
-  <HexMapArrowsViz {arrowData} arrowHeight={0.03} {hexes} {offset} {getRotationForValue} {getColourForValue} />
+  <HexMapArrowsViz {arrowData} arrowHeight={0.06} {hexes} {offset} {getRotationForValue} {getColourForValue} />
 {/if}
