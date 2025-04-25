@@ -14,12 +14,12 @@
     }
   },
   "fitBounds": {
-    "padding": { "top": 25, "left": 25, "right": 25, "bottom": 25 }
+    "padding": { "top": 0, "left": 0, "right": 0, "bottom": 0 }
   },
   "areas": {
     "Australia": [
       [112, -44],
-      [156, -10]
+      [154, -10]
     ],
     "Brisbane & surrounds": [
       [152.67620200034025, -27.85975844732532],
