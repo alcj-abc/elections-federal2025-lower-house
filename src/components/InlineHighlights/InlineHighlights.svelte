@@ -34,7 +34,6 @@
     stroke: black;
     border: 1px solid black;
     font-family: ABCSans;
-    font-size: 1.25rem;
     font-style: normal;
     font-weight: 400;
     line-height: 125%; /* 1.5625rem */
