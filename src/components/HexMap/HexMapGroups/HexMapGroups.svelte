@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount, tick } from 'svelte';
   import { hexToPx } from '../../../lib/utils';
   import HexLabels from './HexLabels/HexLabels.svelte';
 
@@ -17,6 +18,13 @@
   } = $props();
 
   let svgEl = $state<SVGGElement>();
+
+  let hasRendered = $state(false);
+  onMount(() => {
+    setTimeout(() => {
+      hasRendered = true;
+    }, 1);
+  });
 
   /** Are some of the electorates allocated?  */
   let hasAllocations = $derived.by(() => {
@@ -59,8 +67,6 @@
     });
   });
 
-  // TODO: hasBeenVisible must be calculated somehow
-
   /**
    * Derive the props to render each group. Svelte iterates this to
    * render each state.
@@ -79,13 +85,13 @@
         style: `transform: translate(${transform})`,
         class: [
           'group',
-          false && 'group--never-rendered',
           !isVisible && 'group--hidden',
           isStaticLayout && 'group--map-is-static',
           !hasAllocations && 'group--map-is-empty',
           hasAllAllocations && 'group--map-is-full',
           hasAnyFocuses && 'group--has-focuses',
-          isOutlineOnly && 'group--is-outline'
+          isOutlineOnly && 'group--is-outline',
+          hasRendered && 'group--rendered'
         ]
           .filter(Boolean)
           .join(' ')
@@ -101,12 +107,9 @@
   });
 
   let areStateOutlinesOnTop = $derived.by(() => showStateOutlinesOnTop || (hasAllocations && hasAnyFocuses));
-
-  import smallHash from '../../../../public/small device hash.svg';
-  import largeHash from '../../../../public/large device hash.svg';
 </script>
 
-<g bind:this={svgEl} style:--smallHash={`url("${smallHash}")`} style:--largeHash={`url("${largeHash}")`}>
+<g bind:this={svgEl}>
   <!-- hexagon colours, state outlines -->
   {#each derivedGroups as { groupProps, group }}
     <g {...groupProps}>
@@ -140,10 +143,19 @@
     transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
   }
 
-  .group--never-rendered {
-    // don't render states at all if they're not needed.
-    // prevents flash on first load
-    display: none;
+  // There is a race condition that starts the map black before filling it with
+  // allocations. Don't enable transitions until that has completed
+  .group--rendered {
+    :global {
+      .hex {
+        transition: all 0.5s;
+      }
+      .hex-outline {
+        transition:
+          opacity 0.5s,
+          stroke 0.5s;
+      }
+    }
   }
   .group--hidden {
     opacity: 0;
@@ -154,18 +166,16 @@
     pointer-events: none;
   }
   .group :global(.hex) {
-    transition: all 0.5s;
     vector-effect: non-scaling-stroke;
+    fill: transparent;
   }
 
   // Group/state outlines
   .group-outline :global(.hex-outline) {
-    fill: none;
+    display: none;
+    fill: transparent;
     stroke: var(--c-stateOutline);
     stroke-width: 1.5px;
-    transition:
-      opacity 0.5s,
-      stroke 0.5s;
     vector-effect: non-scaling-stroke;
   }
   .group--map-is-empty:not(.group--has-focuses) .group-outline :global(.hex-outline) {

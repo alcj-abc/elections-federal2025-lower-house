@@ -58,7 +58,7 @@
       {/if}
 
       {#if vizType === 'hex'}
-        <HexMap {allocations} {certainties} {...componentProps} />
+        <HexMap {allocations} {certainties} {isInline} {...componentProps} />
       {/if}
     </div>
   </div>

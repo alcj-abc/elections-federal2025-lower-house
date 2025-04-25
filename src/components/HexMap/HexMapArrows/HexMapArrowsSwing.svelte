@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
   import { getLiveData } from '../../../liveData';
+  import { resetViewboxPadding, setViewboxPadding } from '../store';
 
   let { hexes, offset } = $props();
   let resultsData = $state();
@@ -50,6 +51,10 @@
     getLiveData({ cache: true }).then(json => {
       resultsData = json;
     });
+
+    const guid = setViewboxPadding('HexMapArrowsSwing', [30, 0, 30, 0]);
+
+    return () => resetViewboxPadding(guid);
   });
 </script>
 

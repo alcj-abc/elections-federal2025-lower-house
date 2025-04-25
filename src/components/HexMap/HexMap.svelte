@@ -52,7 +52,9 @@
     /** Additional text to add to the alt text version of each electorate, e.g. `{ ADEL: 'ALP retain' }` */
     customElectorateAltText,
     /** An override for News Web*/
-    showStateOutlinesOnTop = false
+    showStateOutlinesOnTop = false,
+    /** An inline map never animates */
+    isInline = false
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgElWidth = $state(0);
@@ -60,10 +62,10 @@
   let userFocusedElectorate = $state<null | string>(null);
   let userHoveredElectorate = $state<null | string>(null);
 
-  const initial = layout.viewbox;
+  const initial = applyPaddingToViewbox(layout.viewbox, $viewboxPadding);
   const tweenOptions = {
     easing: cubicInOut,
-    duration: 1100
+    duration: isInline ? 0 : 1100
   };
   let viewboxX = new Tween(initial[0], tweenOptions);
   let viewboxY = new Tween(initial[1], tweenOptions);
@@ -71,7 +73,7 @@
   let viewboxHeight = new Tween(initial[3], tweenOptions);
 
   $effect(() => {
-    const [newX, newY, newW, newH] = customViewbox || layout.viewbox;
+    const [newX, newY, newW, newH] = applyPaddingToViewbox(customViewbox || layout.viewbox, $viewboxPadding);
     viewboxX.set(newX);
     viewboxY.set(newY);
     viewboxWidth.set(newW);
@@ -115,6 +117,7 @@
   });
 
   import hashPattern2x from '../../../public/Hash-four@2x.png';
+  import { applyPaddingToViewbox, viewboxPadding } from './store';
 </script>
 
 <div class="hexmap" transition:fade={{ duration: 750 }}>
@@ -123,6 +126,7 @@
     class:hexmap__viz--vertical={svgRatio <= 1}
     style:aspect-ratio={svgRatio ? svgRatio.toFixed(3) : null}
     {...interactionHandlers}
+    transition:fade={{ duration: isInline ? 0 : 250 }}
   >
     <svg
       bind:this={svgEl}
