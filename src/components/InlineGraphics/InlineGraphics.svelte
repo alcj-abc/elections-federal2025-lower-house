@@ -38,8 +38,6 @@
   }
   @media (min-width: 46.5rem) {
     .inline-graphics--grid-1 {
-      width: calc(50% - 1rem);
-      margin: 0 auto;
     }
     .inline-graphics--grid-2 {
       display: grid;

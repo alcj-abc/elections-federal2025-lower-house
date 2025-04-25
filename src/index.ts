@@ -68,7 +68,6 @@ async function mountInlineGraphics() {
   adjacentMounts.forEach(({ mountNode, adjacent, data }) => {
     accumulatedGraphics.push(data);
     if (!adjacent) {
-      console.log('accumulated graphics', accumulatedGraphics);
       try {
         mount(App, {
           target: mountNode,

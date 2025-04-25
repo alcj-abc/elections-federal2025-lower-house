@@ -1,10 +1,11 @@
 <script lang="ts">
   import HexMapArrowsViz from './HexMapArrowsViz/HexMapArrowsViz.svelte';
   import baselineFirstPreferences from '../../../../data/appdata-first-preference-2019.json';
-  import { onMount } from 'svelte';
+  import { getContext, onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
   import { getLiveData, getPrimaryCountPct } from '../../../liveData';
-  import { resetViewboxPadding, setViewboxPadding, viewboxPadding } from '../store';
+
+  const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
   let { arrowChart, hexes, offset } = $props();
   let arrowData = $state({});

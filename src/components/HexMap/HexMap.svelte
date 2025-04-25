@@ -9,7 +9,7 @@
   import { Tween } from 'svelte/motion';
   import { cubicInOut } from 'svelte/easing';
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
-  import { onMount } from 'svelte';
+  import { onMount, setContext } from 'svelte';
   import HexMapKeyboardNav from './HexMapKeyboardNav/HexMapKeyboardNav.svelte';
   import HexMapFocusIndicator from './HexMapFocusIndicator/HexMapFocusIndicator.svelte';
   import { getInteractionHandlers } from './utils';
@@ -17,6 +17,7 @@
   import { fade } from 'svelte/transition';
   import HexMapArrowsFirstPreference from './HexMapArrows/HexMapArrowsFirstPreference.svelte';
   import HexMapArrowsSwing from './HexMapArrows/HexMapArrowsSwing.svelte';
+  import { applyPaddingToViewbox, makeViewboxPaddingStore } from './store';
   let {
     config = {},
     layout = {},
@@ -61,6 +62,8 @@
   let svgRatio = $state(0);
   let userFocusedElectorate = $state<null | string>(null);
   let userHoveredElectorate = $state<null | string>(null);
+
+  const { viewboxPadding } = makeViewboxPaddingStore();
 
   const initial = applyPaddingToViewbox(layout.viewbox, $viewboxPadding);
   const tweenOptions = {
@@ -117,7 +120,6 @@
   });
 
   import hashPattern2x from '../../../public/Hash-four@2x.png';
-  import { applyPaddingToViewbox, viewboxPadding } from './store';
 </script>
 
 <div class="hexmap" transition:fade={{ duration: 750 }}>

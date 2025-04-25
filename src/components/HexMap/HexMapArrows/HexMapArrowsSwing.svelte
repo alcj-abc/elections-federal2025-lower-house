@@ -1,9 +1,9 @@
 <script lang="ts">
   import HexMapArrowsViz from './HexMapArrowsViz/HexMapArrowsViz.svelte';
-  import { onMount } from 'svelte';
+  import { getContext, onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
   import { getLiveData } from '../../../liveData';
-  import { resetViewboxPadding, setViewboxPadding } from '../store';
+  const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
   let { hexes, offset } = $props();
   let resultsData = $state();
