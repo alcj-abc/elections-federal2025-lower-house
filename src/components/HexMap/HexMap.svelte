@@ -116,7 +116,12 @@
     if (!_svgElWidth) {
       return 1;
     }
-    return _viewboxWidth / _svgElWidth;
+    /**
+     * We need an extra 10% to get the hexagon pattern looking the same as the
+     * non-scaled patterns.
+     */
+    const magicBuffer = 0.1;
+    return _viewboxWidth / _svgElWidth + magicBuffer;
   });
 
   import hashPattern2x from '../../../public/Hash-four@2x.png';
