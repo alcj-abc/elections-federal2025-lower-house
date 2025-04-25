@@ -59,6 +59,8 @@
     border-radius: 0.5rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
     background: #f5f5f5;
+    max-width: calc(100vw - 2rem);
+    margin: 0 auto;
   }
 
   // Here be hacks: integrate with Scrollyteller card styling

@@ -33,6 +33,8 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    max-width: calc(100vw - 2rem);
+    margin: 0 auto;
   }
   @media (min-width: 46.5rem) {
     .inline-graphics--grid-1 {
