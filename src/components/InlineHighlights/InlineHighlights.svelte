@@ -7,6 +7,7 @@
   const certainty = $derived.by(() => (!allocation ? true : _certainty));
 
   import hashPattern from '../../../public/Hash-four@2x.png';
+  import FireFont from '../FireFont/FireFont.svelte';
 </script>
 
 <span
@@ -15,7 +16,7 @@
   data-allocation={allocation}
   style:--hashPattern={`url("${hashPattern}")`}
 >
-  {name}
+  <FireFont>{name}</FireFont>
   {#if !certainty}
     <span class="inline-highlight__uncertain"> </span>
   {/if}
@@ -41,7 +42,7 @@
     position: relative;
   }
   .inline-highlight--uncertain {
-    padding-right: calc(15px + 0.37rem);
+    padding-right: 1rem;
   }
   $parties: Any, ALP, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal, CA;
   @each $code in $parties {
