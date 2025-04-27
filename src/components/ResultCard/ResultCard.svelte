@@ -160,6 +160,7 @@
     display: flex;
   }
 
+  .result__party,
   .result__candidate {
     color: var(--Text-text-primary, #000);
 
@@ -169,9 +170,10 @@
     font-style: normal;
     font-weight: 700;
     line-height: 125%; /* 1.25rem */
+  }
+  .result__candidate {
     text-align: left;
   }
-
   .result__candidate:last-child {
     flex: 1;
     text-align: right;
@@ -181,12 +183,6 @@
     margin-bottom: 1.75rem;
   }
   .result__party {
-    /* Text Bold/xs */
-    font-family: ABCSans;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 135%; /* 1.0125rem */
     color: var(--ptycolour);
   }
   .result__bar {
