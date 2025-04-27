@@ -12,7 +12,7 @@
   import mapConfig from '../../../data/appdata-mapconfig.json';
   import { untrack } from 'svelte';
   import { electorateIdToNumber } from './utils';
-  import patternURL from './hash-pattern.png';
+  import patternURL from '../../../public/Hash-four@2x.png';
   import { partyColours } from '../StyleRoot/store';
   import type { MapOptions, Map as MapType } from './maplibre-gl';
 
@@ -104,7 +104,7 @@
         });
 
         map.loadImage(patternURL).then(image => {
-          map?.addImage('diagonal_stripes_pattern', image.data);
+          map?.addImage('diagonal_stripes_pattern', image.data, { pixelRatio: 3 });
         });
 
         // empty electorate fill
