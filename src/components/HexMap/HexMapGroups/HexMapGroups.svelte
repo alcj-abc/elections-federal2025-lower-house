@@ -172,7 +172,6 @@
 
   // Group/state outlines
   .group-outline :global(.hex-outline) {
-    display: none;
     fill: transparent;
     stroke: var(--c-stateOutline);
     stroke-width: 1.5px;

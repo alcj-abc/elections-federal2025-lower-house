@@ -7,7 +7,7 @@
     "fullStateOutline": "transparent",
     "filledBorder": "#fff",
     "empty": "#f1f1f1",
-    "emptyBorder": "black",
+    "emptyBorder": "#767676",
     "tileFocusBorder": "black",
     "tileFocusBorderGap": "white",
     "tileInteractBorder": "black"
