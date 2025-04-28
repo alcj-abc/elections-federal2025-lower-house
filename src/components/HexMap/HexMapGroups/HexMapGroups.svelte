@@ -2,6 +2,7 @@
   import { onMount, tick } from 'svelte';
   import { hexToPx } from '../../../lib/utils';
   import HexLabels from './HexLabels/HexLabels.svelte';
+  import { fade } from 'svelte/transition';
 
   let {
     groups,
@@ -118,7 +119,7 @@
       </g>
 
       {#if !areStateOutlinesOnTop}
-        <g class="group-outline group-outline__under">{@html group.svgOutline}</g>
+        <g class="group-outline group-outline__under" transition:fade={{ duration: 200 }}>{@html group.svgOutline}</g>
       {/if}
     </g>
   {/each}
@@ -129,7 +130,7 @@
         {@html group.svgHexes}
       </g>
       {#if areStateOutlinesOnTop}
-        <g class="group-outline group-outline__over">{@html group.svgOutline}</g>
+        <g class="group-outline group-outline__over" transition:fade={{ duration: 200 }}>{@html group.svgOutline}</g>
       {/if}
       {#if isVisible}
         <HexLabels hexes={group.hexes} {allocations} {certainties} labelsToShow={labels} {showElectorateLabels} />
