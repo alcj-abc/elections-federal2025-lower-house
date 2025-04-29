@@ -94,7 +94,7 @@ async function mountResultsCards() {
         props: data
       });
     } catch (e) {
-      console.error('eeee', e);
+      console.error('live result card', e);
     }
   });
 }
@@ -111,6 +111,12 @@ whenOdysseyLoaded.then(async () => {
   mountThing(
     'electionsfederal2025google-doc-preview',
     () => import(/* webpackChunkName: "dynamic-googledoc" */ './builder/GoogleDocEntrypoint.svelte')
+  );
+
+  // Iframe, standalone graphic for use in screenshot tool/possibly embedding
+  mountThing(
+    'electionsfederal2025iframe',
+    () => import(/* webpackChunkName: "dynamic-iframe" */ './components/Iframe/Iframe.svelte')
   );
 
   // Inline graphics - if using without a scrollyteller, also mount electionsfederal2025colours
