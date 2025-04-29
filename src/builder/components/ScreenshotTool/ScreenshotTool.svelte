@@ -67,7 +67,8 @@
         GENERATOR_URL,
         new URLSearchParams({
           url: iframeUrl,
-          selector: `.iframe-mount > *`
+          selector: `.iframe-mount > *`,
+          width: 2000
         }).toString()
       ].join('?');
 
