@@ -8,7 +8,7 @@
   import { saveAs } from 'file-saver';
   import eachLimit from 'async/eachLimit';
 
-  const GENERATOR_URL = 'https://fallbacks.abcnewsdigital.com/api';
+  const GENERATOR_URL = 'https://fallback-automations-yknow.kyd.au/api';
   const GENERATOR_MAX_PARALLEL = 3;
   const GENERATOR_WIDTH = '1000';
   const IFRAME_URL = window.location.origin + window.location.pathname.replace('/builder/', '/iframe/');
