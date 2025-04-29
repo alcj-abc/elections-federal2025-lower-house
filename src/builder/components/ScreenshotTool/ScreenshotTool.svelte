@@ -17,7 +17,7 @@
 
   // closed => pasting => preview => generate => done
   let status = $state('closed');
-  let pastedState = $state(window.location.hash);
+  let pastedState = $state();
   let preview = $state([]);
   let progress = $state(0);
   let error = $state('');
@@ -37,8 +37,10 @@
         .split('\n')
         .filter(row => allowedPrefixes.find(prefix => row.slice(0, prefix.length) === prefix));
 
+      const uniqueMarkers = Array.from(new Set(markers));
+
       // parse to object
-      const encodedMarkers = markers.map(marker => parse(marker));
+      const encodedMarkers = uniqueMarkers.map(marker => parse(marker));
 
       // pass through schema
       const decodedMarkers = await Promise.all(
@@ -65,6 +67,10 @@
     });
   }
 
+  async function sleep(seconds) {
+    return new Promise(resolve => setTimeout(resolve, seconds));
+  }
+
   async function createScreenshots({ preview }) {
     const zip = new JSZip();
     let completed = 0;
@@ -82,10 +88,17 @@
         }).toString()
       ].join('?');
 
-      let blob = await doFetch(generatorUrl);
+      let blob;
       // retry. It fails sometimes.
-      if (!blob) {
+      for (let retry = 0; retry < 5; retry++) {
+        console.log(iframeUrl, 'attempt ', retry);
         blob = await doFetch(generatorUrl);
+        if (!blob) {
+          await sleep(1000 * 2 * retry);
+        }
+        if (blob) {
+          continue;
+        }
       }
       completed += 1;
       progress = completed / preview.length;
@@ -141,6 +154,7 @@
   onclick={e => {
     e.preventDefault();
     status = 'pasting';
+    pastedState = '';
   }}
 >
   Screenshot tool
@@ -191,7 +205,7 @@
     <div class="screenshot-tool">
       {#if status === 'pasting'}
         <p>Paste your story, or a series of markers to create screenshots</p>
-        <textarea bind:value={pastedState}></textarea>
+        <textarea bind:value={pastedState} placeholder="#markVER1"></textarea>
       {/if}
 
       {#if status === 'preview'}
