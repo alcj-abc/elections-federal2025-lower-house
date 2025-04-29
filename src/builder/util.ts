@@ -1,3 +1,9 @@
+export const markerPrefixes = {
+  'Scrolly mark': '#mark',
+  'Scrolly opener': '#scrollytellerNAMEelectionmap1',
+  'Inline graphic': '#electioninline'
+};
+
 /**
  * Given a config, attempt to work out a human readable name
  */

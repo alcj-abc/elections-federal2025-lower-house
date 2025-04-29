@@ -19,7 +19,7 @@
   import SpotlightSearch from './components/SpotlightSearch/SpotlightSearch.svelte';
   import { modal } from './store';
   import ScreenshotTool from './components/ScreenshotTool/ScreenshotTool.svelte';
-  import { defaultMarkerName } from './util';
+  import { defaultMarkerName, markerPrefixes } from './util';
 
   // @ts-ignore
   let selectedElectorate = $derived.by(() => $modal?.props?.electorate?.id);
@@ -352,14 +352,7 @@
         {/if}
         <fieldset>
           <legend>Markers</legend>
-          <MarkerAdmin
-            prefixes={{
-              'Scrolly mark': '#mark',
-              'Scrolly opener': '#scrollytellerNAMEelectionmap1',
-              'Inline graphic': '#electioninline'
-            }}
-            defaultName={() => defaultMarkerName($hashConfig)}
-          />
+          <MarkerAdmin prefixes={markerPrefixes} defaultName={() => defaultMarkerName($hashConfig)} />
         </fieldset>
         <fieldset>
           <legend>Tools</legend>
@@ -376,7 +369,7 @@
               window.location = String(window.location.pathname).replace('/builder', '/google-doc-preview');
             }}>Google Doc preview</button
           >
-          <ScreenshotTool {defaultMarkerName} />
+          <ScreenshotTool {defaultMarkerName} prefixes={markerPrefixes} />
         </fieldset>
       </form>
     </div>
