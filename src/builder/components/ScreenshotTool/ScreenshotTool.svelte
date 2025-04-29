@@ -97,7 +97,7 @@
           await sleep(1000 * 2 * retry);
         }
         if (blob) {
-          continue;
+          break;
         }
       }
       completed += 1;
