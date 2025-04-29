@@ -15,7 +15,8 @@
     showFocusedElectorateLabels,
     labelsToShow,
     isOutlineOnly = false,
-    showStateOutlinesOnTop = false
+    showStateOutlinesOnTop = false,
+    hexFlip = 'None'
   } = $props();
 
   let svgEl = $state<SVGGElement>();
@@ -47,6 +48,8 @@
   let hexElements = $derived.by(() =>
     Array.from(svgEl?.querySelectorAll('polygon.hex') || []).filter(hex => hex instanceof SVGPolygonElement)
   );
+
+  let existingValues = { allocation: {}, focus: {} };
   $effect(() => {
     const _allocations = { ...allocations };
     const _focuses = focuses;
@@ -60,9 +63,22 @@
 
       // set allocation
       const newAllocation = _allocations[electorateCode] || null;
-      hex.dataset.allocation = newAllocation;
+      const existingAllocation = existingValues.allocation[electorateCode];
+      if (newAllocation !== existingAllocation) {
+        hex.dataset.allocation = newAllocation;
+
+        if (hexFlip === 'Flip') {
+          hex.style.setProperty('--allocationFrom', `var(--a-${existingAllocation})`);
+          hex.style.setProperty('--allocationTo', `var(--a-${newAllocation})`);
+          hex.classList.add('hex--flip');
+        }
+      }
+      existingValues.allocation[electorateCode] = newAllocation;
+
       const newFocus = hasAnyFocuses ? _focuses[electorateCode] || false : true;
-      hex.dataset.focused = newFocus;
+      if (newFocus !== existingValues.focus[electorateCode]) hex.dataset.focused = newFocus;
+      existingValues.focus[electorateCode] = newFocus;
+
       const newCertainty = _certainties[electorateCode] || null;
       hex.dataset.certain = newCertainty;
     });
@@ -110,7 +126,13 @@
   let areStateOutlinesOnTop = $derived.by(() => showStateOutlinesOnTop || (hasAllocations && hasAnyFocuses));
 </script>
 
-<g bind:this={svgEl}>
+<g
+  bind:this={svgEl}
+  onanimationend={e => {
+    const hex = e.target as SVGPathElement;
+    hex.classList.remove('hex--flip');
+  }}
+>
   <!-- hexagon colours, state outlines -->
   {#each derivedGroups as { groupProps, group }}
     <g {...groupProps}>
@@ -166,9 +188,23 @@
   .group-outline {
     pointer-events: none;
   }
-  .group :global(.hex) {
-    vector-effect: non-scaling-stroke;
-    fill: transparent;
+  .group :global {
+    .hex {
+      vector-effect: non-scaling-stroke;
+      fill: transparent;
+
+      // hex flipping animation setup
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+      --hexFlipMinWidth: 0.03;
+      @media (min-width: 46.5rem) {
+        --hexFlipMinWidth: 0.03;
+      }
+
+      &.hex--flip {
+        animation: hex-flip 1s ease-in-out;
+      }
+    }
   }
 
   // Group/state outlines
@@ -261,6 +297,27 @@
     }
     .hex-outline {
       stroke: #cdcbcb !important;
+    }
+  }
+
+  @keyframes hex-flip {
+    from {
+      transform: none;
+      fill: var(--allocationFrom);
+    }
+
+    50% {
+      transform: scaleX(var(--hexFlipMinWidth));
+      stroke: transparent;
+      fill: var(--allocationFrom);
+    }
+    50.01% {
+      fill: var(--allocationTo);
+    }
+
+    to {
+      transform: none;
+      fill: var(--allocationTo);
     }
   }
 </style>

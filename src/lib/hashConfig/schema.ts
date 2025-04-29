@@ -190,6 +190,12 @@ export const schema = {
   electorateId: {
     type: 'string',
     key: 'electorate'
+  },
+  hexFlip: {
+    type: 'enum',
+    key: 'flip',
+    defaultValue: 'Fade',
+    values: ['Fade', 'Flip']
   }
 };
 
@@ -208,4 +214,5 @@ export type HashConfig = {
   showTotals: boolean;
   arrowChart: string;
   combineCoalition: boolean;
+  hexFlip: string;
 };

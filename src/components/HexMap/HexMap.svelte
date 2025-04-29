@@ -55,7 +55,9 @@
     /** An override for News Web*/
     showStateOutlinesOnTop = false,
     /** An inline map never animates */
-    isInline = false
+    isInline = false,
+    /** Which hexagon animation should we use? */
+    hexFlip = 'None'
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgElWidth = $state(0);
@@ -171,6 +173,7 @@
         {showFocusedElectorateLabels}
         {labelsToShow}
         {showStateOutlinesOnTop}
+        {hexFlip}
         isOutlineOnly={arrowChart !== 'None'}
       />
 

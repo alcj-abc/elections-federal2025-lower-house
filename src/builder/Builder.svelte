@@ -104,7 +104,7 @@
       {/if}
 
       <form class="container-controls">
-        <div class="fieldset buttons">
+        <div class="fieldset builder__inline">
           <label>
             <input
               name="vizType"
@@ -266,22 +266,31 @@
                 Full certainty
               </button>
             </div>
-
-            <label>
-              <input type="checkbox" bind:checked={$hashConfig.combineCoalition} />
-              Combine Coalition
-            </label>
           </fieldset>
         {/if}
         <Focuses />
         {#if $hashConfig.arrowChart === 'None'}
           <Labels />
           <fieldset>
-            <legend>Totals bar</legend>
+            <legend>Behaviour</legend>
 
             <label>
               <input type="checkbox" bind:checked={$hashConfig.showTotals} />
               Show totals
+            </label>
+
+            <label>
+              <input type="checkbox" bind:checked={$hashConfig.combineCoalition} />
+              Combine Coalition
+            </label>
+
+            <label class="builder__inline">
+              Animations:
+              <select bind:value={$hashConfig.hexFlip} style:flex="1">
+                {#each schema.hexFlip.values as value}
+                  <option>{value}</option>
+                {/each}
+              </select>
             </label>
           </fieldset>
         {/if}
@@ -314,8 +323,8 @@
                   />
                 </svg>
               </button>
-              Arrow charts</legend
-            >
+              Arrow charts
+            </legend>
             <label>
               <select
                 bind:value={$hashConfig.arrowChart}

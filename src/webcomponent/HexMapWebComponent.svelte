@@ -115,6 +115,6 @@
     {isInteractive}
     {onViewboxChange}
     {customElectorateAltText}
-    {areStateOutlinesOnTop}
+    showStateOutlinesOnTop={areStateOutlinesOnTop}
   />
 </div>
