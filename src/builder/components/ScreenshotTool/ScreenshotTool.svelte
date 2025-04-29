@@ -9,7 +9,8 @@
   import eachLimit from 'async/eachLimit';
 
   const GENERATOR_URL = 'https://fallbacks.abcnewsdigital.com/api';
-  const GENERATOR_MAX_PARALLEL = 5;
+  const GENERATOR_MAX_PARALLEL = 3;
+  const GENERATOR_WIDTH = '1000';
   const IFRAME_URL = window.location.origin + window.location.pathname.replace('/builder/', '/iframe/');
 
   let { defaultMarkerName = () => 'Marker', prefixes = {} } = $props();
@@ -55,6 +56,15 @@
     })();
   });
 
+  function doFetch(generatorUrl) {
+    return fetch(generatorUrl).then(response => {
+      if (response.status !== 200) {
+        return null;
+      }
+      return response.blob();
+    });
+  }
+
   async function createScreenshots({ preview }) {
     const zip = new JSZip();
     let completed = 0;
@@ -68,18 +78,18 @@
         new URLSearchParams({
           url: iframeUrl,
           selector: `.iframe-mount > *`,
-          width: 2000
+          width: GENERATOR_WIDTH
         }).toString()
       ].join('?');
 
-      const blob = await fetch(generatorUrl).then(response => {
-        completed += 1;
-        progress = completed / preview.length;
-        if (response.status !== 200) {
-          return null;
-        }
-        return response.blob();
-      });
+      let blob = await doFetch(generatorUrl);
+      // retry. It fails sometimes.
+      if (!blob) {
+        blob = await doFetch(generatorUrl);
+      }
+      completed += 1;
+      progress = completed / preview.length;
+
       imageBlobs.push(blob);
       callback();
     });
@@ -105,7 +115,9 @@
     }
 
     return zip.generateAsync({ type: 'blob' }).then(content => {
-      status = 'complete';
+      if (!errors.length) {
+        status = 'complete';
+      }
       saveAs(content, `fallback-bundle-${Date.now()}.zip`);
     });
   }
