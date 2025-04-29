@@ -18,6 +18,8 @@
   import { hashConfig } from '../lib/hashConfig/svelteStore';
   import SpotlightSearch from './components/SpotlightSearch/SpotlightSearch.svelte';
   import { modal } from './store';
+  import ScreenshotTool from './components/ScreenshotTool/ScreenshotTool.svelte';
+  import { defaultMarkerName } from './util';
 
   // @ts-ignore
   let selectedElectorate = $derived.by(() => $modal?.props?.electorate?.id);
@@ -356,13 +358,7 @@
               'Scrolly opener': '#scrollytellerNAMEelectionmap1',
               'Inline graphic': '#electioninline'
             }}
-            defaultName={() =>
-              [
-                $hashConfig.vizType,
-                $hashConfig.vizType === 'geo'
-                  ? $hashConfig.geoArea
-                  : $hashConfig.layout.replace(/_/g, ' ').toLowerCase()
-              ].join(' ')}
+            defaultName={() => defaultMarkerName($hashConfig)}
           />
         </fieldset>
         <fieldset>
@@ -380,6 +376,7 @@
               window.location = String(window.location.pathname).replace('/builder', '/google-doc-preview');
             }}>Google Doc preview</button
           >
+          <ScreenshotTool {defaultMarkerName} />
         </fieldset>
       </form>
     </div>
