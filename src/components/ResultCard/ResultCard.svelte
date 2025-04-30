@@ -190,7 +190,7 @@
     margin-top: 2.7rem;
   }
 
-  $parties: Any, ALP, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal, CA;
+  $parties: Any, ALP, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal, CA, TOP;
   @each $code in $parties {
     .result-allocation:global([data-allocation='#{""+$code}']) {
       --ptycolour: var(--a-#{$code});
