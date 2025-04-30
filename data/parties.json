@@ -15,7 +15,8 @@
     "OTH": "l",
     "UAP": "m",
     "Teal": "t",
-    "PUP": "m"
+    "PUP": "m",
+    "TOP": "m"
   },
   "totals": {
     "__usage": "These values control the totals bar",
