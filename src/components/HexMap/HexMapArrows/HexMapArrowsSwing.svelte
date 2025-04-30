@@ -58,17 +58,4 @@
   });
 </script>
 
-{#if resultsData}
-  {#each groups as group}
-    {#if layout.positions[group.name]}
-      <HexMapArrowsViz
-        {arrowData}
-        arrowHeight={0.06}
-        hexes={group.hexes}
-        offset={layout.positions[group.name]}
-        {getRotationForValue}
-        {getColourForValue}
-      />
-    {/if}
-  {/each}
-{/if}
+<HexMapArrowsViz {arrowData} arrowHeight={0.06} {getRotationForValue} {getColourForValue} {groups} {layout} />

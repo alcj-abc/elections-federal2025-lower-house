@@ -8,7 +8,7 @@
   const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
   let { arrowChart, groups, layout } = $props();
-  let arrowData = $state({});
+
   let resultsData = $state();
 
   let partyCode = $derived.by(() => String(arrowChart.split(' ')[0]));
@@ -19,14 +19,14 @@
     return getPrimaryCountPct(resultsData, code => code === partyCode);
   });
 
-  $effect(() => {
+  let arrowData = $derived.by(() => {
     const _resultsData = resultsData;
     const _partyCode = partyCode;
     const _newPrimaryCounts = newPrimaryCounts;
     if (!_resultsData || !_newPrimaryCounts) {
       return;
     }
-    arrowData = _resultsData.data.electorates.reduce((obj, electorate) => {
+    return _resultsData.data.electorates.reduce((obj, electorate) => {
       const id = electorate.code;
       const originalParties = baselineFirstPreferences[id]?.pct;
       let originalPct = originalParties?.[_partyCode] || 0;
@@ -71,16 +71,5 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
 </script>
 
 {#if resultsData}
-  {#each groups as group}
-    {#if layout.positions[group.name]}
-      <HexMapArrowsViz
-        {arrowData}
-        arrowHeight={0.08}
-        hexes={group.hexes}
-        offset={layout.positions[group.name]}
-        {getRotationForValue}
-        {getColourForValue}
-      />
-    {/if}
-  {/each}
+  <HexMapArrowsViz {groups} {layout} {arrowData} arrowHeight={0.08} {getRotationForValue} {getColourForValue} />
 {/if}
