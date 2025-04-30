@@ -187,15 +187,10 @@
       <HexMapFocusIndicator groups={config.groups} id={userHoveredElectorate} {layout} type="hover" />
 
       {#if arrowChart !== 'None'}
-        {#each config.groups as group}
-          {#if layout.positions[group.name]}
-            {#if arrowChart === 'Labor/Coalition 2CP Swing'}
-              <HexMapArrowsSwing hexes={group.hexes} offset={layout.positions[group.name]} />
-            {:else}
-              <HexMapArrowsFirstPreference hexes={group.hexes} offset={layout.positions[group.name]} {arrowChart} />
-            {/if}
-          {/if}
-        {/each}
+        {#if arrowChart === 'Labor/Coalition 2CP Swing'}
+          <HexMapArrowsSwing groups={config.groups} {layout} />{:else}
+          <HexMapArrowsFirstPreference groups={config.groups} {layout} {arrowChart} />
+        {/if}
       {/if}
     </svg>
 

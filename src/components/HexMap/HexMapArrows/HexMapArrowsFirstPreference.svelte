@@ -7,7 +7,7 @@
 
   const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
-  let { arrowChart, hexes, offset } = $props();
+  let { arrowChart, groups, layout } = $props();
   let arrowData = $state({});
   let resultsData = $state();
 
@@ -70,4 +70,17 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
   });
 </script>
 
-<HexMapArrowsViz {arrowData} arrowHeight={0.08} {hexes} {offset} {getRotationForValue} {getColourForValue} />
+{#if resultsData}
+  {#each groups as group}
+    {#if layout.positions[group.name]}
+      <HexMapArrowsViz
+        {arrowData}
+        arrowHeight={0.08}
+        hexes={group.hexes}
+        offset={layout.positions[group.name]}
+        {getRotationForValue}
+        {getColourForValue}
+      />
+    {/if}
+  {/each}
+{/if}
