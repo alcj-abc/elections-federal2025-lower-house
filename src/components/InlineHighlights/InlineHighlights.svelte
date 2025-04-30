@@ -44,7 +44,7 @@
   .inline-highlight--uncertain {
     padding-right: 1rem;
   }
-  $parties: Any, ALP, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal, CA;
+  $parties: Any, ALP, CLP, GRN, IND, KAP, LIB, LNP, NAT, ONP, OTH, PUP, Teal, CA, TOP;
   @each $code in $parties {
     .inline-highlight:global([data-allocation='#{""+$code}']) {
       border: none;
