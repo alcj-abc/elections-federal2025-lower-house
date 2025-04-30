@@ -74,7 +74,8 @@
   async function createScreenshots({ preview }) {
     const zip = new JSZip();
     let completed = 0;
-    progress = 0;
+    // Put a little bit in the bar at the start so it's clear what it is.
+    progress = 0.5 / preview.length;
     error = '';
     const imageBlobs = [];
     await eachLimit(preview, GENERATOR_MAX_PARALLEL, async ({ markerString }, callback) => {
