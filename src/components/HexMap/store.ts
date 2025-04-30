@@ -62,3 +62,5 @@ export function applyPaddingToViewbox(viewbox, padding = [0, 0, 0, 0]) {
   const [x, y, w, h] = viewbox;
   return [x - pLeft, y - pTop, w + pLeft + pRight, h + pTop + pBottom];
 }
+
+export const svgElCurrentScale = writable(1);

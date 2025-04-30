@@ -1,7 +1,7 @@
 <script lang="ts">
   import { hexToPx } from '../../../../lib/utils';
   import { fade } from 'svelte/transition';
-  import HexMapArrowVizArrow from './HexMapArrowVizArrow.svelte';
+  import HexMapArrow from '../HexMapArrow/HexMapArrow.svelte';
 
   let { groups, layout, arrowData, arrowHeight, getColourForValue, getRotationForValue } = $props();
 </script>
@@ -14,7 +14,7 @@
       transition:fade={{ duration: 750 }}
     >
       {#each group.hexes as { coordPx, id }}
-        <HexMapArrowVizArrow
+        <HexMapArrow
           {coordPx}
           rotation={getRotationForValue(arrowData[id])}
           opacity={!arrowData[id] ? 0 : 1}

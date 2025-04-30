@@ -17,7 +17,7 @@
   import { fade } from 'svelte/transition';
   import HexMapArrowsFirstPreference from './HexMapArrows/HexMapArrowsFirstPreference.svelte';
   import HexMapArrowsSwing from './HexMapArrows/HexMapArrowsSwing.svelte';
-  import { applyPaddingToViewbox, makeViewboxPaddingStore } from './store';
+  import { applyPaddingToViewbox, makeViewboxPaddingStore, svgElCurrentScale } from './store';
   let {
     config = {},
     layout = {},
@@ -112,7 +112,7 @@
   /** How much is the SVG scaled? We use the inverse scale to keep the hash
    *  pattern sizing consistent with other elements
    */
-  let svgElCurrentScale = $derived.by(() => {
+  $effect(() => {
     let _svgElWidth = svgElWidth;
     let _viewboxWidth = viewboxWidth.current;
     if (!_svgElWidth) {
@@ -123,7 +123,7 @@
      * non-scaled patterns.
      */
     const magicBuffer = 0.1;
-    return _viewboxWidth / _svgElWidth + magicBuffer;
+    $svgElCurrentScale = _viewboxWidth / _svgElWidth + magicBuffer;
   });
 
   import hashPattern2x from '../../../public/Hash-four@2x.png';
@@ -148,7 +148,7 @@
           patternUnits="userSpaceOnUse"
           width="10.5"
           height="6"
-          patternTransform={`scale(${svgElCurrentScale.toFixed(2)})`}
+          patternTransform={`scale(${$svgElCurrentScale.toFixed(2)})`}
           preserveAspectRatio="xMidYMid"
         >
           <image

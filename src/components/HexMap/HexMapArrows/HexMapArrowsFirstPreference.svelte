@@ -4,11 +4,12 @@
   import { getContext, onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
   import { getLiveData, getPrimaryCountPct } from '../../../liveData';
+  import HexMapArrowLegend from './HexMapArrowLegend/HexMapArrowLegend.svelte';
 
   const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
   let { arrowChart, groups, layout } = $props();
-
+  const ARROW_HEIGHT = 0.08;
   let resultsData = $state();
 
   let partyCode = $derived.by(() => String(arrowChart.split(' ')[0]));
@@ -71,5 +72,17 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
 </script>
 
 {#if resultsData}
-  <HexMapArrowsViz {groups} {layout} {arrowData} arrowHeight={0.08} {getRotationForValue} {getColourForValue} />
+  <HexMapArrowsViz {groups} {layout} {arrowData} arrowHeight={ARROW_HEIGHT} {getRotationForValue} {getColourForValue} />
+  <HexMapArrowLegend
+    countedPct={resultsData?.data?.overall?.counted}
+    arrowHeight={ARROW_HEIGHT}
+    {getRotationForValue}
+    {getColourForValue}
+    scales={[
+      { name: '-10', value: -10, tether: 'head' },
+      { name: '-5', value: -5, tether: 'head' },
+      { name: '5', value: 5, tether: 'base' },
+      { name: '10', value: 10, tether: 'base' }
+    ]}
+  />
 {/if}
