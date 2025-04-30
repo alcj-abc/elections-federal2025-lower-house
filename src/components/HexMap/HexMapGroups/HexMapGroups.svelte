@@ -49,7 +49,7 @@
     Array.from(svgEl?.querySelectorAll('polygon.hex') || []).filter(hex => hex instanceof SVGPolygonElement)
   );
 
-  let existingValues = { allocation: {}, focus: {} };
+  let existingValues = { allocation: {} };
   $effect(() => {
     const _allocations = { ...allocations };
     const _focuses = focuses;
@@ -64,20 +64,17 @@
       // set allocation
       const newAllocation = _allocations[electorateCode] || null;
       const existingAllocation = existingValues.allocation[electorateCode];
-      if (newAllocation !== existingAllocation) {
-        hex.dataset.allocation = newAllocation;
+      hex.dataset.allocation = newAllocation;
 
-        if (hexFlip === 'Flip') {
-          hex.style.setProperty('--allocationFrom', `var(--a-${existingAllocation})`);
-          hex.style.setProperty('--allocationTo', `var(--a-${newAllocation})`);
-          hex.classList.add('hex--flip');
-        }
+      if (hexFlip === 'Flip' && existingAllocation !== newAllocation) {
+        hex.style.setProperty('--allocationFrom', `var(--a-${existingAllocation})`);
+        hex.style.setProperty('--allocationTo', `var(--a-${newAllocation})`);
+        hex.classList.add('hex--flip');
       }
       existingValues.allocation[electorateCode] = newAllocation;
 
       const newFocus = hasAnyFocuses ? _focuses[electorateCode] || false : true;
-      if (newFocus !== existingValues.focus[electorateCode]) hex.dataset.focused = newFocus;
-      existingValues.focus[electorateCode] = newFocus;
+      hex.dataset.focused = newFocus;
 
       const newCertainty = _certainties[electorateCode] || null;
       hex.dataset.certain = newCertainty;
