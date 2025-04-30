@@ -3,6 +3,7 @@
   import SkipLink from '../../SkipLink/SkipLink.svelte';
   let { groups, layout, onChange, onClick, onFocus, customElectorateAltText = {} } = $props();
   let focused = $state(null);
+
   function onFocusProxy(e) {
     const id = e.target.dataset.id;
     focused = id;

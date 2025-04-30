@@ -1,20 +1,23 @@
 <script lang="ts">
+  import { links } from './store';
+
   let { id, target, children, position = 'topleft' } = $props();
-  let anchor = $derived.by(() => `#${target}`);
+  let rootEl = $state();
+  $effect(() => {
+    $links[id] = rootEl;
+  });
 </script>
 
 <a
   {id}
-  href={anchor}
+  bind:this={rootEl}
+  href={`#${target}`}
   class={`skip-link--${position}`}
   onclick={e => {
     e.preventDefault();
-    const element = document.querySelector(anchor);
-    if (!(element instanceof HTMLAnchorElement)) {
-      return;
-    }
-
-    element.focus();
+    const target = e.target as HTMLAnchorElement;
+    const targetId = target.href.split('#')[1];
+    $links[targetId]?.focus();
   }}
 >
   {@render children?.()}
