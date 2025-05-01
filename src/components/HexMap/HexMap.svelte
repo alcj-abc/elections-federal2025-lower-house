@@ -9,7 +9,7 @@
   import { Tween } from 'svelte/motion';
   import { cubicInOut } from 'svelte/easing';
   import HexMapStateLabels from './HexMapStateLabels/HexMapStateLabels.svelte';
-  import { onMount, setContext } from 'svelte';
+  import { setContext } from 'svelte';
   import HexMapKeyboardNav from './HexMapKeyboardNav/HexMapKeyboardNav.svelte';
   import HexMapFocusIndicator from './HexMapFocusIndicator/HexMapFocusIndicator.svelte';
   import { getInteractionHandlers } from './utils';
@@ -91,8 +91,9 @@
     onViewboxChange(layout.viewbox);
   });
 
-  onMount(() => {
-    if (!svgEl) {
+  // When the svg el is first found in the page, get the ratio outta it
+  $effect(() => {
+    if (!svgEl || !!svgRatio) {
       return;
     }
     // calculate the ratio of the SVG on first render. This shouldn't change.
@@ -112,7 +113,7 @@
   );
 
   /** How much is the SVG scaled? We use the inverse scale to keep the hash
-   *  pattern sizing consistent with other elements
+   *  pattern/font sizing consistent with other elements
    */
   $effect(() => {
     let _svgElWidth = svgElWidth;
@@ -136,6 +137,7 @@
   <div
     class="hexmap__viz"
     class:hexmap__viz--vertical={svgRatio <= 1}
+    data-svgratio={svgRatio || 'null'}
     style:aspect-ratio={svgRatio ? svgRatio.toFixed(3) : null}
     {...interactionHandlers}
     transition:fade={{ duration: isInline ? 0 : 250 }}
