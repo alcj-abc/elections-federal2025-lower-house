@@ -96,7 +96,8 @@
 
     select,
     button,
-    input {
+    input,
+    textarea {
       padding: 0.25rem 0.5rem;
       background: var(--background);
       border: 1px solid var(--border);
@@ -119,7 +120,8 @@
 
     select,
     input[type='text'],
-    input[type='password'] {
+    input[type='password'],
+    textarea {
       width: 100%;
     }
 

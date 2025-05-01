@@ -358,7 +358,7 @@
           </label>
           <label>
             Alt text
-            <input type="text" bind:value={$hashConfig.altText} />
+            <textarea type="text" bind:value={$hashConfig.altText}></textarea>
           </label>
         </fieldset>
         <fieldset>
