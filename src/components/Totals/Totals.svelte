@@ -95,12 +95,8 @@
             {/if}
           </AccesibleHide>
         </div>
-        <div
-          class="totals__inner totals__won"
-          style:--seatCount={party.certain}
-          class:totals__inner--rounded={!party.likely}
-        ></div>
-        <div class="totals__inner totals__likely totals__inner--rounded" style:--seatCount={party.likely}></div>
+        <div class="totals__inner totals__won" style:--seatCount={party.certain}></div>
+        <div class="totals__inner totals__likely" style:--seatCount={party.likely}></div>
       </dd>
     {/each}
   </dl>
@@ -189,16 +185,13 @@
     text-align: right;
     position: relative;
     display: flex;
-    height: bar-height;
+    height: bar(--barHeight);
   }
 
   .totals__inner {
     height: 100%;
     width: calc(100% * var(--seatWidth) * var(--seatCount));
     transition: all 0.5s;
-  }
-  .totals__inner--rounded {
-    border-radius: 0 4px 4px 0;
   }
 
   .totals__bar--alp {
