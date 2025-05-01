@@ -116,7 +116,8 @@
     let _svgElWidth = svgElWidth;
     let _viewboxWidth = viewboxWidth.current;
     if (!_svgElWidth) {
-      return 1;
+      $svgElCurrentScale = 1;
+      return;
     }
     /**
      * We need an extra 10% to get the hexagon pattern looking the same as the
