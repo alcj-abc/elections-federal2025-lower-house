@@ -138,7 +138,9 @@
       </g>
 
       {#if !areStateOutlinesOnTop}
-        <g class="group-outline group-outline__under" transition:fade={{ duration: 200 }}>{@html group.svgOutline}</g>
+        <g class="group-outline group-outline__under" out:fade={{ duration: 200, delay: 200 }}>
+          {@html group.svgOutline}
+        </g>
       {/if}
     </g>
   {/each}
