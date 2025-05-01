@@ -1,6 +1,6 @@
 {
 	"name": "@abcnews/elections-federal2025-lower-house",
-	"version": "1.0.35",
+	"version": "1.0.36",
 	"description": "Election hexagons & geo maps for 2025",
 	"license": "MIT",
 	"private": true,
