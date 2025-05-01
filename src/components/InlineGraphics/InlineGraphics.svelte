@@ -17,17 +17,23 @@
 
 <div class={`inline-graphics inline-graphics--grid-${gridStyle}`}>
   {#each graphics as { layout, caption, ...graphic }}
-    <figure class="inline-graphics__graphic">
-      <MapRoot {config} {...graphic} layout={layouts[layout]} hideTotals={!graphic.showTotals} isInline={true} />
+    <figure>
+      <div class="inline-graphics__graphic">
+        <MapRoot {config} {...graphic} layout={layouts[layout]} hideTotals={!graphic.showTotals} isInline={true} />
+      </div>
       {#if caption}<figcaption>{caption}</figcaption>{/if}
     </figure>
   {/each}
 </div>
 
 <style lang="scss">
+  .inline-graphics {
+    margin: var(--od-space-component-margin) 0 var(--od-space-component-margin);
+  }
   .inline-graphics__graphic {
     position: relative;
     aspect-ratio: 1/1;
+    overflow: hidden;
   }
   .inline-graphics {
     display: grid;
@@ -42,6 +48,9 @@
       gap: 1rem;
       grid-template-columns: 1fr 1fr;
     }
+  }
+  figure {
+    margin: 0;
   }
   figcaption {
     color: #60646c;
