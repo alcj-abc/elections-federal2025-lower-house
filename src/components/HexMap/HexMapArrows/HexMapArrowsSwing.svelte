@@ -3,6 +3,7 @@
   import { getContext, onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
   import { getLiveData } from '../../../liveData';
+  import HexMapArrowLegend from './HexMapArrowLegend/HexMapArrowLegend.svelte';
   const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
   let { groups, layout } = $props();
@@ -56,6 +57,22 @@
 
     return () => resetViewboxPadding(guid);
   });
+  const ARROW_HEIGHT = 0.06;
 </script>
 
-<HexMapArrowsViz {arrowData} arrowHeight={0.06} {getRotationForValue} {getColourForValue} {groups} {layout} />
+{#if resultsData}
+  <HexMapArrowsViz {arrowData} arrowHeight={ARROW_HEIGHT} {getRotationForValue} {getColourForValue} {groups} {layout} />
+  <HexMapArrowLegend
+    countedPct={resultsData?.data?.overall?.counted}
+    arrowHeight={ARROW_HEIGHT}
+    {getRotationForValue}
+    {getColourForValue}
+    scales={[
+      { name: '5', value: 5, tether: 'base' },
+      { name: '10', value: 10, tether: 'base' },
+      { name: '5', value: -5, tether: 'base' },
+      { name: '10', value: -10, tether: 'base' }
+    ]}
+    alpLnp={true}
+  />
+{/if}

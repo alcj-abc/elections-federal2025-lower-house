@@ -8,7 +8,7 @@
 
   let currentScale = $derived.by(() => Math.max(0.9, $svgElCurrentScale));
 
-  let { scales, arrowHeight, getRotationForValue, getColourForValue, countedPct } = $props();
+  let { scales, arrowHeight, getRotationForValue, getColourForValue, countedPct, alpLnp = false } = $props();
   let width = $state(0);
 
   const breakpoints = {
@@ -39,7 +39,7 @@
 
 <g
   class="hex-map-arrow-legend"
-  transform={`translate(${breakpoint.left} ${breakpoint.top})`}
+  transform={`translate(${breakpoint.left} ${breakpoint.top - (alpLnp ? breakpoint.yOffset : 0)})`}
   style:--fontSize={breakpoint.fontSize}
   transition:fade
 >
@@ -57,10 +57,19 @@
     </g>
   {/each}
 
-  <text y={breakpoint.yOffset * 2} {transform}>Primary vote change %</text>
-  {#if countedPct}<text class="hex-map-arrow-legend__light" y={breakpoint.yOffset * 3} {transform}
-      >{countedPct}% counted</text
-    >{/if}
+  {#if alpLnp}
+    <text class="labor" y={breakpoint.yOffset * 2} {transform}>Labor</text>
+    <g transform={`translate(${2 * breakpoint.arrowGap * currentScale} 0)`}>
+      <text class="lnp" y={breakpoint.yOffset * 2} {transform}>L/NP</text>
+    </g>
+  {/if}
+
+  <text y={breakpoint.yOffset * (alpLnp ? 3 : 2)} {transform}>Primary vote change %</text>
+  {#if countedPct}
+    <text class="hex-map-arrow-legend__light" y={breakpoint.yOffset * (alpLnp ? 4 : 3)} {transform}>
+      {countedPct}% counted
+    </text>
+  {/if}
 </g>
 
 <style lang="scss">
@@ -80,5 +89,16 @@
 
   text.hex-map-arrow-legend__light {
     fill: var(--Light-grey-compliant, #767676);
+  }
+
+  .lnp {
+    fill: var(--a-LNP);
+  }
+  .labor {
+    fill: var(--a-ALP);
+  }
+  .lnp,
+  .labor {
+    font-weight: bold;
   }
 </style>
