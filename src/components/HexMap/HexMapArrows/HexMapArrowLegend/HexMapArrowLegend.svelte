@@ -1,7 +1,9 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
-  import { svgElCurrentScale } from '../../store';
   import HexMapArrow from '../HexMapArrow/HexMapArrow.svelte';
+  import { getContext } from 'svelte';
+
+  const svgElCurrentScale = getContext('svgElCurrentScale');
 
   let { scales, arrowHeight, getRotationForValue, getColourForValue, countedPct } = $props();
   let width = $state(0);

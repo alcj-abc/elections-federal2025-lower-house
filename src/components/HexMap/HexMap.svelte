@@ -17,7 +17,7 @@
   import { fade } from 'svelte/transition';
   import HexMapArrowsFirstPreference from './HexMapArrows/HexMapArrowsFirstPreference.svelte';
   import HexMapArrowsSwing from './HexMapArrows/HexMapArrowsSwing.svelte';
-  import { applyPaddingToViewbox, makeViewboxPaddingStore, svgElCurrentScale } from './store';
+  import { applyPaddingToViewbox, makeViewboxPaddingStore, makeSvgElStore } from './store';
   let {
     config = {},
     layout = {},
@@ -66,6 +66,8 @@
   let userHoveredElectorate = $state<null | string>(null);
 
   const { viewboxPadding } = makeViewboxPaddingStore();
+  const { svgElCurrentScale } = makeSvgElStore();
+  setContext('svgElCurrentScale', svgElCurrentScale);
 
   const initial = applyPaddingToViewbox(layout.viewbox, $viewboxPadding);
   const tweenOptions = {
@@ -245,5 +247,6 @@
     margin: 0 auto;
     max-height: 100%;
     height: 100%;
+    width: 100%;
   }
 </style>
