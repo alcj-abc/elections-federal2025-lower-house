@@ -413,7 +413,7 @@ help with authoring graphics in the editor. -->
 <div
   class="geomap"
   class:geomap--ready={!isFirstRun}
-  class:geomap--border={isInline && geoArea !== 'Australia'}
+  class:geomap--border={geoArea !== 'Australia'}
   bind:this={mapRootEl}
 ></div>
 
@@ -422,12 +422,16 @@ help with authoring graphics in the editor. -->
     width: 100%;
     height: 100%;
     overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 1rem;
     :global(*) {
       box-sizing: border-box;
     }
   }
+  .geomap--ready {
+    transition: border 1s;
+  }
   .geomap--border {
-    border-radius: 1rem;
     border: 1px solid #cdcbcb;
   }
 </style>
