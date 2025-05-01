@@ -1,10 +1,24 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   let { labels, overlayLabels = false } = $props();
+  let isLoaded = $state();
+
+  // Bug: Labels are doing weird transitions on load, no idea why.
+  onMount(() => {
+    setTimeout(() => {
+      isLoaded = true;
+    });
+  });
 </script>
 
 <!-- These labels don't make sense on their own, need alternative content -->
-<div class="state-labels" aria-hidden="true" class:state-labels--overlaid={overlayLabels}>
+<div
+  class="state-labels"
+  aria-hidden="true"
+  class:state-labels--overlaid={overlayLabels}
+  class:state-labels--ready={isLoaded}
+>
   {#each labels as label}
     {#key label.name}
       <div
@@ -32,7 +46,6 @@
     container-type: inline-size;
   }
   .state-labels__label {
-    transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
     position: absolute;
     height: 2em;
     margin-top: -1em;
@@ -62,5 +75,9 @@
   .state-labels--overlaid .state-labels__label {
     -webkit-text-stroke: 5px #f1f1f1;
     paint-order: stroke fill;
+  }
+
+  .state-labels--ready .state-labels__label {
+    transition: all 1s cubic-bezier(0.42, 0, 0.58, 1);
   }
 </style>
