@@ -2,8 +2,11 @@
   import { fade } from 'svelte/transition';
   import HexMapArrow from '../HexMapArrow/HexMapArrow.svelte';
   import { getContext } from 'svelte';
+  import type { Writable } from 'svelte/store';
 
-  const svgElCurrentScale = getContext('svgElCurrentScale');
+  const svgElCurrentScale: Writable<number> = getContext('svgElCurrentScale');
+
+  let currentScale = $derived.by(() => Math.max(0.9, $svgElCurrentScale));
 
   let { scales, arrowHeight, getRotationForValue, getColourForValue, countedPct } = $props();
   let width = $state(0);
@@ -13,21 +16,23 @@
       left: 0,
       top: 460,
       fontSize: '12px',
-      yOffset: 20
+      yOffset: 20,
+      arrowGap: 35
     },
     smallScreen: {
-      left: -60,
+      left: 0,
       top: 460,
       fontSize: '12px',
-      yOffset: 15
+      yOffset: 15,
+      arrowGap: 20
     }
   };
 
   let breakpoint = $derived.by(() => {
-    return breakpoints[width > 800 ? 'largeScreen' : 'smallScreen'];
+    return breakpoints[currentScale < 1.2 ? 'largeScreen' : 'smallScreen'];
   });
 
-  let transform = $derived.by(() => `scale(${$svgElCurrentScale.toFixed(2)})`);
+  let transform = $derived.by(() => `scale(${currentScale.toFixed(2)})`);
 </script>
 
 <svelte:window bind:innerWidth={width} />
@@ -39,7 +44,7 @@
   transition:fade
 >
   {#each scales as { name, value, tether }, i}
-    <g transform={`translate(${i * 40 * $svgElCurrentScale} 0)`}>
+    <g transform={`translate(${i * breakpoint.arrowGap * currentScale} 0)`}>
       <HexMapArrow
         coordPx={[10, 0]}
         {arrowHeight}
@@ -52,7 +57,7 @@
     </g>
   {/each}
 
-  <text y={breakpoint.yOffset * 2} {transform}>Change in primary vote %</text>
+  <text y={breakpoint.yOffset * 2} {transform}>Primary vote change %</text>
   {#if countedPct}<text class="hex-map-arrow-legend__light" y={breakpoint.yOffset * 3} {transform}
       >{countedPct}% counted</text
     >{/if}
