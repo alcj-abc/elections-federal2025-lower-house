@@ -18,6 +18,7 @@
   import HexMapArrowsFirstPreference from './HexMapArrows/HexMapArrowsFirstPreference.svelte';
   import HexMapArrowsSwing from './HexMapArrows/HexMapArrowsSwing.svelte';
   import { applyPaddingToViewbox, makeViewboxPaddingStore, makeSvgElStore } from './store';
+  import hashPattern2x from '../../../public/Hash-four@2x.png';
   let {
     config = {},
     layout = {},
@@ -57,7 +58,9 @@
     /** An inline map never animates */
     isInline = false,
     /** Which hexagon animation should we use? */
-    hexFlip = 'None'
+    hexFlip = 'None',
+    /** optional alt text turns the svg into an img */
+    altText = ''
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgElWidth = $state(0);
@@ -130,7 +133,16 @@
     $svgElCurrentScale = _viewboxWidth / _svgElWidth + magicBuffer;
   });
 
-  import hashPattern2x from '../../../public/Hash-four@2x.png';
+  // Add alt text and proper role to the svg in cases where we've set alt text
+  let accessibleProperties = $derived.by(() => {
+    if (!altText) {
+      return {};
+    }
+    return {
+      'aria-label': altText,
+      role: 'img'
+    };
+  });
 </script>
 
 <div class="hexmap" transition:fade={{ duration: 750 }}>
@@ -146,6 +158,7 @@
       bind:this={svgEl}
       viewBox={[viewboxX.current, viewboxY.current, viewboxWidth.current, viewboxHeight.current].join(' ')}
       bind:clientWidth={svgElWidth}
+      {...accessibleProperties}
     >
       <defs id="defs1">
         <pattern

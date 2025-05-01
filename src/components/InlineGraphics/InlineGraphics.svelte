@@ -16,10 +16,11 @@
 </script>
 
 <div class={`inline-graphics inline-graphics--grid-${gridStyle}`}>
-  {#each graphics as { layout, ...graphic }}
-    <div class="inline-graphics__graphic">
+  {#each graphics as { layout, caption, ...graphic }}
+    <figure class="inline-graphics__graphic">
       <MapRoot {config} {...graphic} layout={layouts[layout]} hideTotals={!graphic.showTotals} isInline={true} />
-    </div>
+      {#if caption}<figcaption>{caption}</figcaption>{/if}
+    </figure>
   {/each}
 </div>
 
@@ -28,7 +29,6 @@
     position: relative;
     aspect-ratio: 1/1;
   }
-
   .inline-graphics {
     display: grid;
     grid-template-columns: 1fr;
@@ -42,5 +42,14 @@
       gap: 1rem;
       grid-template-columns: 1fr 1fr;
     }
+  }
+  figcaption {
+    color: #60646c;
+    font-family: ABCSans;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 1.6875rem */
+    padding-left: 0.41rem;
   }
 </style>

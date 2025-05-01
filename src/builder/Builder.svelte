@@ -351,6 +351,17 @@
           </fieldset>
         {/if}
         <fieldset>
+          <legend>Accessibility (for inline graphics)</legend>
+          <label>
+            Caption
+            <input type="text" bind:value={$hashConfig.caption} />
+          </label>
+          <label>
+            Alt text
+            <input type="text" bind:value={$hashConfig.altText} />
+          </label>
+        </fieldset>
+        <fieldset>
           <legend>Markers</legend>
           <MarkerAdmin prefixes={markerPrefixes} defaultName={() => defaultMarkerName($hashConfig)} />
         </fieldset>

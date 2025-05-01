@@ -3,6 +3,7 @@ import layouts from '../../../data/appdata-layouts.json';
 import data from '../../../data/appdata-built.json';
 import mapConfig from '../../../data/appdata-mapconfig.json';
 import parties from '../../../data/parties.json';
+import * as base36Codec from '@abcnews/base-36-text';
 
 import { invertMap } from '../../lib/utils';
 
@@ -196,6 +197,18 @@ export const schema = {
     key: 'flip',
     defaultValue: 'Fade',
     values: ['Fade', 'Flip']
+  },
+  altText: {
+    type: 'custom',
+    key: 'alt',
+    defaultValue: '',
+    codec: base36Codec
+  },
+  caption: {
+    type: 'custom',
+    key: 'cap',
+    defaultValue: '',
+    codec: base36Codec
   }
 };
 
@@ -215,4 +228,6 @@ export type HashConfig = {
   arrowChart: string;
   combineCoalition: boolean;
   hexFlip: string;
+  altText: string;
+  caption: string;
 };

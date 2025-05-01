@@ -28,7 +28,8 @@
     showElectorateLabels = false,
     showFocusedElectorateLabels = false,
     onClick = () => {},
-    isInline = false
+    isInline = false,
+    altText = ''
   } = $props();
 
   let mapRootEl = $state<HTMLElement>();
@@ -399,6 +400,16 @@
         clearTimeout(textIgnorePlacementTimeout);
       };
     });
+  });
+
+  // Add alt text and proper role to the map <canvas>
+  $effect(() => {
+    const canvas = map?._canvas;
+    if (!canvas || !altText) {
+      return;
+    }
+    canvas.setAttribute('aria-label', altText);
+    canvas.setAttribute('role', 'img');
   });
 </script>
 
