@@ -59,4 +59,8 @@
     width: 100%;
     height: 100%;
   }
+  /* override dark mode */
+  :global(.st-panel) {
+    color: black !important;
+  }
 </style>
