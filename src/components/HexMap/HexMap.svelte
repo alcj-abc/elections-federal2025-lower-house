@@ -246,7 +246,5 @@
     position: relative;
     margin: 0 auto;
     max-height: 100%;
-    height: 100%;
-    width: 100%;
   }
 </style>
