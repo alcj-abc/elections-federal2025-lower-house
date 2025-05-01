@@ -73,8 +73,13 @@
   }
 
   .state-labels--overlaid .state-labels__label {
-    -webkit-text-stroke: 5px #f1f1f1;
+    -webkit-text-stroke: 3px #f1f1f1;
     paint-order: stroke fill;
+
+    @container (min-width: 30rem) {
+      -webkit-text-stroke: 5px #f1f1f1;
+      font-size: 1.125rem;
+    }
   }
 
   .state-labels--ready .state-labels__label {
