@@ -424,6 +424,8 @@ help with authoring graphics in the editor. -->
     overflow: hidden;
     border: 1px solid transparent;
     border-radius: 1rem;
+    overflow: hidden;
+    animation: fade-in 1s;
     :global(*) {
       box-sizing: border-box;
     }
@@ -433,5 +435,13 @@ help with authoring graphics in the editor. -->
   }
   .geomap--border {
     border: 1px solid #cdcbcb;
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 </style>
