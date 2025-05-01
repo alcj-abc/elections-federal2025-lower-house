@@ -6,7 +6,7 @@
 
   const svgElCurrentScale: Writable<number> = getContext('svgElCurrentScale');
 
-  let currentScale = $derived.by(() => Math.max(0.9, $svgElCurrentScale));
+  let currentScale = $derived.by(() => $svgElCurrentScale);
 
   let { scales, arrowHeight, getRotationForValue, getColourForValue, countedPct, alpLnp = false } = $props();
   let width = $state(0);
