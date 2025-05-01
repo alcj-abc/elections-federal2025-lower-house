@@ -5,7 +5,7 @@
   import { onMount } from 'svelte';
 
   let { graphics, mountNode } = $props();
-  let gridStyle = $derived.by(() => (graphics.length === 1 ? '1' : graphics.length % 3 === 0 ? '3' : '2'));
+  let gridStyle = $derived.by(() => Math.min(graphics.length, 2));
 
   // Add the u-pull class in Odyssey to make graphics go full-width
   onMount(() => {
@@ -37,17 +37,10 @@
     margin: 0 auto;
   }
   @media (min-width: 46.5rem) {
-    .inline-graphics--grid-1 {
-    }
     .inline-graphics--grid-2 {
       display: grid;
       gap: 1rem;
       grid-template-columns: 1fr 1fr;
-    }
-    .inline-graphics--grid-3 {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 </style>
