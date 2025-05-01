@@ -51,6 +51,22 @@ export function matchAllocation(allocationName = '') {
       keywords: ['independent', 'teal', 'teals'],
       code: 'IND'
     },
+    {
+      keywords: ['katter'],
+      code: 'KAP'
+    },
+    {
+      keywords: ['trumpet'],
+      code: 'TOP'
+    },
+    {
+      keywords: ['one nation'],
+      code: 'ONP'
+    },
+    {
+      keywords: ['centre alliance'],
+      code: 'CA'
+    },
 
     // matches on party codes like 'onp', 'ind'(ependent), 'oth'(er)
     ...Object.keys(parties.hashCodes).map(code => ({
