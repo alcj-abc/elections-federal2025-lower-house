@@ -183,6 +183,11 @@ export const schema = {
       'Labor/Coalition 2CP Swing'
     ]
   },
+  arrowChartPercentCounted: {
+    type: 'boolean',
+    key: 'fpac',
+    defaultValue: true
+  },
   combineCoalition: {
     type: 'boolean',
     key: 'cc',

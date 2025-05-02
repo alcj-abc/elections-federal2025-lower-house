@@ -348,6 +348,11 @@
                 {/each}
               </select>
             </label>
+
+            <label>
+              <input type="checkbox" bind:checked={$hashConfig.arrowChartPercentCounted} />
+              Show percent counted
+            </label>
           </fieldset>
         {/if}
         <fieldset>

@@ -6,7 +6,7 @@
   import { getLiveData, getPrimaryCountPct } from '../../../liveData';
   import HexMapArrowLegend from './HexMapArrowLegend/HexMapArrowLegend.svelte';
 
-  const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
+  const { resetViewboxPadding, setViewboxPadding, arrowChartPercentCounted } = getContext<any>('viewbox-padding') || {};
 
   const partyNames = {
     ALP: 'Labor',
@@ -82,7 +82,7 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
   <HexMapArrowsViz {groups} {layout} {arrowData} arrowHeight={ARROW_HEIGHT} {getRotationForValue} {getColourForValue} />
   <HexMapArrowLegend
     caption={partyNames[partyCode] || partyCode}
-    countedPct={resultsData?.data?.overall?.counted}
+    countedPct={arrowChartPercentCounted ? resultsData?.data?.overall?.counted : undefined}
     arrowHeight={ARROW_HEIGHT}
     {getRotationForValue}
     {getColourForValue}

@@ -49,6 +49,8 @@
     isInteractive = false,
     /** Party for whom to show first preference arrows */
     arrowChart = 'None',
+    /** Whether to show percent counted on the arrow chart */
+    arrowChartPercentCounted = true,
     /** which electorate is currently focused */
     selectedElectorate = null,
     /** Additional text to add to the alt text version of each electorate, e.g. `{ ADEL: 'ALP retain' }` */
@@ -206,8 +208,9 @@
 
       {#if arrowChart !== 'None'}
         {#if arrowChart === 'Labor/Coalition 2CP Swing'}
-          <HexMapArrowsSwing groups={config.groups} {layout} />{:else}
-          <HexMapArrowsFirstPreference groups={config.groups} {layout} {arrowChart} />
+          <HexMapArrowsSwing groups={config.groups} {layout} {arrowChartPercentCounted} />
+        {:else}
+          <HexMapArrowsFirstPreference groups={config.groups} {layout} {arrowChart} {arrowChartPercentCounted} />
         {/if}
       {/if}
     </svg>

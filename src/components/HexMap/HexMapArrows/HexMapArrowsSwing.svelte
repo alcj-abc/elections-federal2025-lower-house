@@ -6,7 +6,7 @@
   import HexMapArrowLegend from './HexMapArrowLegend/HexMapArrowLegend.svelte';
   const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
-  let { groups, layout } = $props();
+  let { groups, layout, arrowChartPercentCounted } = $props();
   let resultsData = $state();
 
   let arrowData = $derived.by(() => {
@@ -63,7 +63,7 @@
 {#if resultsData}
   <HexMapArrowsViz {arrowData} arrowHeight={ARROW_HEIGHT} {getRotationForValue} {getColourForValue} {groups} {layout} />
   <HexMapArrowLegend
-    countedPct={resultsData?.data?.overall?.counted}
+    countedPct={arrowChartPercentCounted ? resultsData?.data?.overall?.counted : undefined}
     arrowHeight={ARROW_HEIGHT}
     {getRotationForValue}
     {getColourForValue}
