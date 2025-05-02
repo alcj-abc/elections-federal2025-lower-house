@@ -62,6 +62,6 @@
   }
   /* override dark mode */
   :global(.st-panel > *) {
-    color: var(--panel-color) !important;
+    color: black !important;
   }
 </style>
