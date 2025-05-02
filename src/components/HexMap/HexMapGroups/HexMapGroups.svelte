@@ -290,12 +290,10 @@
 
   .group--is-outline :global {
     .hex {
-      stroke: white !important;
-      fill: #f1f1f1;
-      stroke-width: 1.5 !important;
+      opacity: 0;
     }
     .hex-outline {
-      stroke: #cdcbcb !important;
+      stroke: var(--c-emptyBorder) !important;
     }
   }
 
