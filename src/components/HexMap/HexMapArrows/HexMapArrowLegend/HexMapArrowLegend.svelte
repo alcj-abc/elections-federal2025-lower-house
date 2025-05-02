@@ -8,8 +8,15 @@
 
   let currentScale = $derived.by(() => $svgElCurrentScale);
 
-  let { scales, arrowHeight, getRotationForValue, getColourForValue, countedPct, alpLnp = false } = $props();
-  let width = $state(0);
+  let {
+    caption = '',
+    scales,
+    arrowHeight,
+    getRotationForValue,
+    getColourForValue,
+    countedPct,
+    alpLnp = false
+  } = $props();
 
   const breakpoints = {
     largeScreen: {
@@ -17,14 +24,16 @@
       top: 460,
       fontSize: '18px',
       yOffset: 25,
-      arrowGap: 35
+      arrowGap: 35,
+      captionSize: '24px'
     },
     smallScreen: {
       left: 0,
       top: 460,
       fontSize: '12px',
       yOffset: 15,
-      arrowGap: 20
+      arrowGap: 20,
+      captionSize: '18px'
     }
   };
 
@@ -35,7 +44,13 @@
   let transform = $derived.by(() => `scale(${currentScale.toFixed(2)})`);
 </script>
 
-<svelte:window bind:innerWidth={width} />
+{#if caption}
+  <g transform={`scale(${$svgElCurrentScale.toFixed(2)})`}>
+    <g transform="translate(0,10)">
+      <text class="caption" style:font-size={breakpoint.captionSize}>{caption}</text>
+    </g>
+  </g>
+{/if}
 
 <g
   class="hex-map-arrow-legend"
@@ -102,5 +117,15 @@
   .lnp,
   .labor {
     font-weight: bold;
+  }
+
+  .caption {
+    color: #000;
+
+    /* Text Regular/lg */
+    font-family: ABCSans;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 1.6875rem */
   }
 </style>

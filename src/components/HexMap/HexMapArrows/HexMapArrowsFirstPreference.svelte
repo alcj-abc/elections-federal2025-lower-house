@@ -8,6 +8,13 @@
 
   const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
+  const partyNames = {
+    ALP: 'Labor',
+    LNP: 'L/NP',
+    IND: 'Independents',
+    ONP: 'One Nation',
+    TOP: 'Trumpet of Patriots'
+  };
   let { arrowChart, groups, layout } = $props();
   const ARROW_HEIGHT = 0.08;
   let resultsData = $state();
@@ -74,6 +81,7 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
 {#if resultsData}
   <HexMapArrowsViz {groups} {layout} {arrowData} arrowHeight={ARROW_HEIGHT} {getRotationForValue} {getColourForValue} />
   <HexMapArrowLegend
+    caption={partyNames[partyCode] || partyCode}
     countedPct={resultsData?.data?.overall?.counted}
     arrowHeight={ARROW_HEIGHT}
     {getRotationForValue}
@@ -86,3 +94,6 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
     ]}
   />
 {/if}
+
+<style lang="scss">
+</style>
