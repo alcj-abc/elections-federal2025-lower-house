@@ -60,6 +60,15 @@
   },
   "electoratesGeo": [
     {
+      "id": "bull",
+      "latitude": -31.8381,
+      "longitude": 116.5329,
+      "north": -31.1825,
+      "south": -32.361,
+      "west": 115.9007,
+      "east": 117.2524
+    },
+    {
       "id": "adel",
       "latitude": -34.9025454,
       "longitude": 138.5890261,

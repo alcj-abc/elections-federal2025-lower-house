@@ -220,6 +220,11 @@
     });
   });
 
+  const electoratesGeoById = mapConfig.electoratesGeo.reduce((obj, geo) => {
+    obj[geo.id.toUpperCase()] = geo;
+    return obj;
+  }, {});
+
   let electoratesRenderProps = $derived.by(() =>
     electorates.map(electorate => {
       const id = electorate.id;
@@ -234,7 +239,7 @@
         certainty: certainties ? certainties[id] : true,
         annotation: annotationBecauseFocused || showElectorateLabels || (labelsToShow ? labelsToShow[id] : false),
         focus: focuses ? focuses[id] : false,
-        geoProps: mapConfig.electoratesGeo.find(geoProps => geoProps.id.toUpperCase() === id)
+        geoProps: electoratesGeoById[id]
       };
     })
   );
@@ -338,29 +343,37 @@
     });
 
     if (!isInspectionChange) {
+      electoratesRenderProps.forEach(prop => {
+        if (!prop.geoProps) {
+          console.error('missing gepoperoper', prop.id);
+        }
+      });
       let nextBounds = mapConfig.areas[geoArea];
 
       const focusedElectoratesGeoProperties = electoratesRenderProps
         .filter(({ focus }) => focus)
         .map(electorate => electorate.geoProps);
 
-      if (geoArea === 'FocusDriven' && focusedElectoratesGeoProperties.length > 0) {
+      if (geoArea === 'Focus Driven' && focusedElectoratesGeoProperties.length > 0) {
         const [{ east, north, south, west }, ...remainingGeoProps] = focusedElectoratesGeoProperties;
 
-        nextBounds = [
+        let newBounds = [
           [east, north],
           [west, south]
         ];
 
         if (remainingGeoProps.length) {
-          nextBounds = remainingGeoProps.reduce(
+          newBounds = remainingGeoProps.reduce(
             (memo, geoProps) => [
               [Math.max(memo[0][0], geoProps.east), Math.max(memo[0][1], geoProps.north)],
               [Math.min(memo[1][0], geoProps.west), Math.min(memo[1][1], geoProps.south)]
             ],
-            nextBounds
+            newBounds
           );
         }
+
+        // This code was written in reverse and I can't be fixing it rn soz. Must be [bottom right, top left]
+        nextBounds = newBounds.reverse();
       }
 
       bounds = nextBounds;
@@ -373,6 +386,7 @@
     deps && updateMapState(false);
   });
 
+  // resize map to fit bounds
   $effect(() => {
     const _map = map;
     const _bounds = bounds;
@@ -381,11 +395,14 @@
     if (!_map || !_bounds || !_resizeWidth || !areBoundsValid) {
       return;
     }
+
     return untrack(() => {
       let textIgnorePlacementTimeout;
 
+      const padding = geoArea === 'Australia' ? undefined : { top: 16, left: 16, right: 16, bottom: 16 };
+
       _map?.fitBounds(new LngLatBounds(_bounds as any), {
-        ...mapConfig.fitBounds,
+        padding,
         // If this is an inline map, we don't animate, it's essentially a static graphic
         duration: isInline || isFirstRun ? 0 : 3000
       });
@@ -396,6 +413,7 @@
       if (isFirstRun) {
         isFirstRun = false;
       }
+
       return () => {
         clearTimeout(textIgnorePlacementTimeout);
       };
