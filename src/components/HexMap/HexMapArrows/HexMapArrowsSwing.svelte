@@ -68,10 +68,10 @@
     {getRotationForValue}
     {getColourForValue}
     scales={[
-      { name: '5', value: 5, tether: 'base' },
-      { name: '10', value: 10, tether: 'base' },
-      { name: '5', value: -5, tether: 'base' },
-      { name: '10', value: -10, tether: 'base' }
+      { name: '10', value: 10, tether: 'base', colour: 'var(--a-ALP)' },
+      { name: '5', value: 5, tether: 'base', colour: 'var(--a-ALP)' },
+      { name: '5', value: -5, tether: 'base', colour: 'var(--a-LNP)' },
+      { name: '10', value: -10, tether: 'base', colour: 'var(--a-LNP)' }
     ]}
     alpLnp={true}
   />

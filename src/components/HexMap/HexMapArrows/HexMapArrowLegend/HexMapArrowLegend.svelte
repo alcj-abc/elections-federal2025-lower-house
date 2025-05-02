@@ -43,7 +43,7 @@
   style:--fontSize={breakpoint.fontSize}
   transition:fade
 >
-  {#each scales as { name, value, tether }, i}
+  {#each scales as { name, value, tether, colour = null }, i}
     <g transform={`translate(${i * breakpoint.arrowGap * currentScale} 0)`}>
       <HexMapArrow
         coordPx={[10, 0]}
@@ -53,7 +53,9 @@
         {value}
         {tether}
       />
-      <text class="hex-map-arrow-legend" y={breakpoint.yOffset} {transform}><tspan>{name}</tspan></text>
+      <text class="hex-map-arrow-legend" y={breakpoint.yOffset} {transform} style:fill={colour}
+        ><tspan>{name}</tspan></text
+      >
     </g>
   {/each}
 
