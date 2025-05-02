@@ -60,5 +60,6 @@
     font-weight: 400;
     line-height: 150%; /* 1.6875rem */
     padding-left: 0.41rem;
+    margin-top: 0.39rem;
   }
 </style>
