@@ -15,8 +15,8 @@
     largeScreen: {
       left: 0,
       top: 460,
-      fontSize: '12px',
-      yOffset: 20,
+      fontSize: '18px',
+      yOffset: 25,
       arrowGap: 35
     },
     smallScreen: {
@@ -53,7 +53,7 @@
         {value}
         {tether}
       />
-      <text class="hex-map-arrow-legend__light" y={breakpoint.yOffset} {transform}><tspan>{name}</tspan></text>
+      <text class="hex-map-arrow-legend" y={breakpoint.yOffset} {transform}><tspan>{name}</tspan></text>
     </g>
   {/each}
 
