@@ -35,7 +35,7 @@
 		"@abcnews/aunty": "git+https://github.com/abcnews/aunty/tree/svelte-5",
 		"@abcnews/env-utils": "^4.0.0",
 		"@abcnews/mount-utils": "^3.0.0",
-		"@abcnews/svelte-scrollyteller": "github:abcnews/svelte-scrollyteller#feature/future-news",
+		"@abcnews/svelte-scrollyteller": "github:abcnews/svelte-scrollyteller#bug/future-news-dark-mode",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@testing-library/svelte": "^5.2.6",
 		"@types/jest": "^29.5.14",
