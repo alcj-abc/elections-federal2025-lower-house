@@ -32,11 +32,11 @@ export function getPrimarySwingPct(data, checkFn = code => true): { string: numb
       obj[id] = 0;
       return obj;
     }
-    if (!electorate.accumulatedCandidates) {
-      console.error('Missing accumulatedCandidates');
+    if (!electorate.runners) {
+      console.error('Missing runners');
       return obj;
     }
-    const matchedCandidates = electorate.accumulatedCandidates.filter(candidate => {
+    const matchedCandidates = electorate.runners.filter(candidate => {
       const code = partiesConfig.synonyms[candidate.party.code] || candidate.party.code;
       return checkFn(code);
     });
