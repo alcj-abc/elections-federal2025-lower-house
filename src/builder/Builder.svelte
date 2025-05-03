@@ -114,6 +114,7 @@
               checked={$hashConfig.vizType === 'geo'}
               onchange={() => {
                 $hashConfig.vizType = 'geo';
+                $hashConfig.arrowChart = 'None';
               }}
             />
             Geo map
