@@ -443,6 +443,7 @@ help with authoring graphics in the editor. -->
   class="geomap"
   class:geomap--ready={!isFirstRun}
   class:geomap--border={geoArea !== 'Australia'}
+  class:geomap--inline={isInline}
   bind:this={mapRootEl}
 ></div>
 
@@ -457,6 +458,9 @@ help with authoring graphics in the editor. -->
     animation: fade-in 1s;
     :global(*) {
       box-sizing: border-box;
+    }
+    &:not(.geomap--inline) {
+      height: calc(100% - 0.75rem);
     }
   }
   .geomap--ready {
