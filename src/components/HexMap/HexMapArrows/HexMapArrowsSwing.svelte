@@ -20,7 +20,7 @@
       const [alpSwing, lnpSwing] =
         electorate.swingDial[0].party.code === 'ALP' ? electorate.swingDial : [...electorate.swingDial].reverse();
       const isLaborCoalition = alpSwing.party.code === 'ALP' && coalitionParties.includes(lnpSwing.party.code);
-      if (isLaborCoalition) {
+      if (isLaborCoalition && Number(electorate.counted || 0) > 5) {
         obj[electorate.code] = Number(alpSwing.predicted2CP?.swing || alpSwing.simple2CP?.swing || 0);
       }
       return obj;
