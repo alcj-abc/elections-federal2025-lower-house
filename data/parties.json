@@ -29,7 +29,6 @@
     "LNP": "LNP",
     "CLP": "LNP",
     "NAT": "LNP",
-    "ALP": "ALP",
-    "UAP": "TOP"
+    "ALP": "ALP"
   }
 }

@@ -23,28 +23,6 @@ export function getMapAllocationsAndCertainty(data) {
 import partiesConfig from '../data/parties.json';
 
 /**
- * Get primary vote count for the given party code(s)
- */
-export function getPrimaryCountPct(data, checkFn = code => true): { string: number | null } {
-  return data.data.electorates.reduce((obj, electorate) => {
-    const id = electorate.code;
-    if (!electorate.accumulatedCandidates) {
-      console.error('Missing accumulatedCandidates');
-      return obj;
-    }
-    const matchedCandidates = electorate.accumulatedCandidates.filter(candidate =>
-      checkFn(partiesConfig.synonyms[candidate.party.code] || candidate.party.code)
-    );
-    const cumulativePct = matchedCandidates.reduce((currentPct, matchedCandidate) => {
-      const pct = matchedCandidate?.simple?.pct;
-      const sanitisedPct = pct ? Number(pct) : 0;
-      return currentPct + sanitisedPct;
-    }, 0);
-    obj[id] = cumulativePct;
-    return obj;
-  }, {});
-}
-/**
  * Get first preference swing for the given party code(s)
  */
 export function getPrimarySwingPct(data, checkFn = code => true): { string: number | null } {
@@ -54,15 +32,16 @@ export function getPrimarySwingPct(data, checkFn = code => true): { string: numb
       console.error('Missing accumulatedCandidates');
       return obj;
     }
-    const matchedCandidates = electorate.accumulatedCandidates.filter(candidate =>
-      checkFn(partiesConfig.synonyms[candidate.party.code] || candidate.party.code)
-    );
-    const cumulativePct = matchedCandidates.reduce((currentPct, matchedCandidate) => {
-      const pct = matchedCandidate?.simple?.swing;
-      const sanitisedPct = pct ? Number(pct) : 0;
-      return currentPct + sanitisedPct;
-    }, 0);
-    obj[id] = cumulativePct;
+    const matchedCandidates = electorate.accumulatedCandidates.filter(candidate => {
+      const code = partiesConfig.synonyms[candidate.party.code] || candidate.party.code;
+      return checkFn(code);
+    });
+    if (matchedCandidates.length > 1) {
+      // we can't show multiple candidates
+      obj[id] = 0;
+      return obj;
+    }
+    obj[id] = Number(matchedCandidates[0]?.simple?.swing || 0);
     return obj;
   }, {});
 }
