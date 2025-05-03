@@ -3,7 +3,7 @@
   import baselineFirstPreferences from '../../../../data/appdata-first-preference-2022.json';
   import { getContext, onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
-  import { getLiveData, getPrimaryCountPct } from '../../../liveData';
+  import { getLiveData, getPrimaryCountPct, getPrimarySwingPct } from '../../../liveData';
   import HexMapArrowLegend from './HexMapArrowLegend/HexMapArrowLegend.svelte';
 
   const { resetViewboxPadding, setViewboxPadding, arrowChartPercentCounted } = getContext<any>('viewbox-padding') || {};
@@ -21,30 +21,11 @@
   let resultsData = $state();
 
   let partyCode = $derived.by(() => String(arrowChart.split(' ')[0]));
-  let newPrimaryCounts = $derived.by(() => {
+  let arrowData = $derived.by(() => {
     if (!resultsData) {
       return {};
     }
-    return getPrimaryCountPct(resultsData, code => code === partyCode);
-  });
-
-  let arrowData = $derived.by(() => {
-    const _resultsData = resultsData;
-    const _partyCode = partyCode;
-    const _newPrimaryCounts = newPrimaryCounts;
-    if (!_resultsData || !_newPrimaryCounts) {
-      return;
-    }
-    return _resultsData.data.electorates.reduce((obj, electorate) => {
-      const id = electorate.code;
-      const originalParties = baselineFirstPreferences[id]?.pct;
-      let originalPct = originalParties?.[_partyCode] || 0;
-      const newPct = newPrimaryCounts[id];
-      const diff = originalPct && newPct ? newPct - originalPct : 0;
-
-      obj[id] = diff;
-      return obj;
-    }, {});
+    return getPrimarySwingPct(resultsData, code => code === partyCode);
   });
 
   // Sync to the store so the builder can access it
