@@ -39,7 +39,7 @@ export function getPrimarySwingPct(data, checkFn = code => true): { string: numb
       console.error('Missing runners');
       return obj;
     }
-    const matchedCandidates = electorate.runners.filter(candidate => {
+    const matchedCandidates = [...electorate.runners, ...(electorate.ghosts || [])].filter(candidate => {
       const code = partiesConfig.synonyms[candidate.party.code] || candidate.party.code;
       return checkFn(code);
     });
