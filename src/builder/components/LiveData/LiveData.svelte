@@ -23,15 +23,15 @@
       return null;
     }
     const newData = getMapAllocationsAndCertainty(json);
-    alert(
-      [
-        `Live (${liveDataName}) data loaded in to the map.`,
-        json.meta.afterCount && 'Data is finished counting.',
-        `Updated at: ${new Date(json.data.overall.updated).toLocaleString()} (local browser time)`
-      ]
-        .filter(Boolean)
-        .join('\n')
-    );
+    // alert(
+    //   [
+    //     `Live (${liveDataName}) data loaded in to the map.`,
+    //     json.meta.afterCount && 'Data is finished counting.',
+    //     `Updated at: ${new Date(json.data.overall.updated).toLocaleString()} (local browser time)`
+    //   ]
+    //     .filter(Boolean)
+    //     .join('\n')
+    // );
     return newData;
   }
 </script>
