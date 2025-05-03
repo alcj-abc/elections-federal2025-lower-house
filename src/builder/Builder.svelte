@@ -325,16 +325,17 @@
                 {/each}
               </select>
             </label>
+            {#if $hashConfig.arrowChart !== 'None'}
+              <label>
+                <input type="checkbox" bind:checked={$hashConfig.arrowChartPercentCounted} />
+                Show percent counted
+              </label>
 
-            <label>
-              <input type="checkbox" bind:checked={$hashConfig.arrowChartPercentCounted} />
-              Show percent counted
-            </label>
-
-            <label>
-              <input type="checkbox" bind:checked={$hashConfig.arrowChartCaption} />
-              Show party name
-            </label>
+              <label>
+                <input type="checkbox" bind:checked={$hashConfig.arrowChartCaption} />
+                Show party name
+              </label>
+            {/if}
           </fieldset>
         {/if}
         <fieldset>
