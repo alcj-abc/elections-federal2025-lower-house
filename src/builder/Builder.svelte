@@ -14,12 +14,12 @@
   import LabelDragger from './components/LabelDragger/LabelDragger.svelte';
   import { onMount } from 'svelte';
   import { isDraggingEnabled, offsets } from './components/LabelDragger/utils';
-  import { getLiveData, getMapAllocationsAndCertainty, liveDataName } from '../liveData';
   import { hashConfig } from '../lib/hashConfig/svelteStore';
   import SpotlightSearch from './components/SpotlightSearch/SpotlightSearch.svelte';
   import { modal } from './store';
   import ScreenshotTool from './components/ScreenshotTool/ScreenshotTool.svelte';
   import { defaultMarkerName, markerPrefixes } from './util';
+  import LiveData from './components/LiveData/LiveData.svelte';
 
   // @ts-ignore
   let selectedElectorate = $derived.by(() => $modal?.props?.electorate?.id);
@@ -211,41 +211,7 @@
               >
                 2022 redistributed
               </button>
-              <button
-                onclick={e => {
-                  e.preventDefault();
-                  const target = e.target as HTMLButtonElement;
-                  target.disabled = true;
-                  target.dataset.loading = 'true';
-                  const finished = () => {
-                    target.disabled = false;
-                    delete target.dataset.loading;
-                  };
-                  getLiveData({ cache: false })
-                    .then(json => {
-                      const newData = getMapAllocationsAndCertainty(json);
-
-                      $hashConfig = { ...$hashConfig, ...newData };
-                      finished();
-                      alert(
-                        [
-                          `Live (${liveDataName}) data loaded in to the map.`,
-                          json.meta.afterCount && 'Data is finished counting.',
-                          `Updated at: ${new Date(json.data.overall.updated).toLocaleString()} (local browser time)`
-                        ]
-                          .filter(Boolean)
-                          .join('\n')
-                      );
-                    })
-                    .catch(e => {
-                      alert('Error loading data: ' + e.message);
-                      console.error(e);
-                      finished();
-                    });
-                }}
-              >
-                Live ({liveDataName})
-              </button>
+              <LiveData />
               <button
                 onclick={e => {
                   e.preventDefault();

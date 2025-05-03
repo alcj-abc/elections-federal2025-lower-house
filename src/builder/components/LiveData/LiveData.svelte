@@ -1,0 +1,50 @@
+<script lang="ts">
+  import { hashConfig } from '../../../lib/hashConfig/svelteStore';
+  import { getLiveData, getMapAllocationsAndCertainty, liveDataName } from '../../../liveData';
+  import { parseSpreadsheet } from '../SpreadsheetImport/util';
+  import parties from '../../../../data/parties.json';
+
+  async function fetchLiveData(e) {
+    e.preventDefault();
+    const target = e.target as HTMLButtonElement;
+    target.disabled = true;
+    target.dataset.loading = 'true';
+    const finished = () => {
+      target.disabled = false;
+      delete target.dataset.loading;
+    };
+    const json = await getLiveData({ cache: false }).catch(e => {
+      alert('Error loading data: ' + e.message);
+      console.error(e);
+    });
+
+    finished();
+    if (!json) {
+      return null;
+    }
+    const newData = getMapAllocationsAndCertainty(json);
+    alert(
+      [
+        `Live (${liveDataName}) data loaded in to the map.`,
+        json.meta.afterCount && 'Data is finished counting.',
+        `Updated at: ${new Date(json.data.overall.updated).toLocaleString()} (local browser time)`
+      ]
+        .filter(Boolean)
+        .join('\n')
+    );
+    return newData;
+  }
+</script>
+
+<button
+  onclick={e => {
+    fetchLiveData(e).then(newData => {
+      $hashConfig = { ...$hashConfig, ...newData };
+    });
+  }}
+>
+  Live ({liveDataName})
+</button>
+
+<style lang="scss">
+</style>

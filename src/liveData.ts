@@ -10,7 +10,7 @@ export function getMapAllocationsAndCertainty(data) {
     (obj, electorate) => {
       const id = electorate.code;
       obj.allocations[id] = electorate.leadingCandidate?.party?.code || null;
-      obj.certainties[id] = !!electorate.isCalled;
+      obj.certainties[id] = !!electorate.isSafe;
       return obj;
     },
     {
