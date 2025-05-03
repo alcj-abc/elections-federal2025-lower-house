@@ -3,10 +3,10 @@
   import baselineFirstPreferences from '../../../../data/appdata-first-preference-2022.json';
   import { getContext, onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
-  import { getLiveData, getPrimaryCountPct, getPrimarySwingPct } from '../../../liveData';
+  import { getLiveData, getPrimarySwingPct } from '../../../liveData';
   import HexMapArrowLegend from './HexMapArrowLegend/HexMapArrowLegend.svelte';
 
-  const { resetViewboxPadding, setViewboxPadding, arrowChartPercentCounted } = getContext<any>('viewbox-padding') || {};
+  const { resetViewboxPadding, setViewboxPadding } = getContext<any>('viewbox-padding') || {};
 
   const partyNames = {
     ALP: 'Labor',
@@ -16,7 +16,7 @@
     ONP: 'One Nation',
     TOP: 'Trumpet of Patriots'
   };
-  let { arrowChart, groups, layout } = $props();
+  let { arrowChart, groups, layout, arrowChartPercentCounted } = $props();
   const ARROW_HEIGHT = 0.08;
   let resultsData = $state();
 
