@@ -51,16 +51,23 @@
     const previousYear = await fetch('./data/2022-redist.tsv', { cache: 'force-cache' })
       .then(res => res.text())
       .then(parseSpreadsheet);
-    const changing = previousYear.reduce((obj, { matchedElectorate, matchedAllocation }) => {
+
+    const newAllocations = {};
+    const newCertainties = {};
+    previousYear.forEach(({ matchedElectorate, matchedAllocation }) => {
       const id = matchedElectorate.id;
       const oldAllocation = parties.synonyms[matchedAllocation] || matchedAllocation;
       const newAllocationRaw = liveData.allocations[id];
       const newAllocation = parties.synonyms[newAllocationRaw] || newAllocationRaw;
-      obj[id] = oldAllocation === newAllocation ? null : newAllocation;
-      return obj;
-    }, {});
+      const isChanging = oldAllocation !== newAllocation;
+      if (!isChanging) {
+        return;
+      }
+      newAllocations[id] = newAllocation;
+      newCertainties[id] = liveData.certainties[id];
+    });
 
-    $hashConfig = { ...$hashConfig, allocations: changing };
+    $hashConfig = { ...$hashConfig, allocations: newAllocations, certainties: newCertainties };
   }}
 >
   {liveDataName} (Changing)
