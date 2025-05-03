@@ -50,7 +50,7 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
   const getRotationForValue = () => 20;
 
   onMount(() => {
-    const guid = setViewboxPadding('HexMapArrowsFirsPreference', [30, 0, 30, 0]);
+    const guid = setViewboxPadding('HexMapArrowsFirsPreference', [33, 0, 30, 0]);
 
     getLiveData({ cache: true }).then(json => {
       resultsData = json;
