@@ -15,7 +15,8 @@
     getRotationForValue,
     getColourForValue,
     countedPct,
-    alpLnp = false
+    alpLnp = false,
+    chartName = ''
   } = $props();
 
   const breakpoints = {
@@ -81,7 +82,7 @@
     </g>
   {/if}
 
-  <text y={breakpoint.yOffset * (alpLnp ? 3 : 2)} {transform}>Primary vote change %</text>
+  <text y={breakpoint.yOffset * (alpLnp ? 3 : 2)} {transform}>{chartName}</text>
   {#if countedPct}
     <text class="hex-map-arrow-legend__light" y={breakpoint.yOffset * (alpLnp ? 4 : 3)} {transform}>
       {countedPct}% counted

@@ -63,6 +63,7 @@
 {#if resultsData}
   <HexMapArrowsViz {arrowData} arrowHeight={ARROW_HEIGHT} {getRotationForValue} {getColourForValue} {groups} {layout} />
   <HexMapArrowLegend
+    chartName="Percentage point swing"
     countedPct={arrowChartPercentCounted ? resultsData?.data?.overall?.counted : undefined}
     arrowHeight={ARROW_HEIGHT}
     {getRotationForValue}

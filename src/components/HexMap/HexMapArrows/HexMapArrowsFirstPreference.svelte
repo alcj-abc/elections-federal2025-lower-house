@@ -82,6 +82,7 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
   <HexMapArrowsViz {groups} {layout} {arrowData} arrowHeight={ARROW_HEIGHT} {getRotationForValue} {getColourForValue} />
   <HexMapArrowLegend
     caption={partyNames[partyCode] || partyCode}
+    chartName="Primary vote change %"
     countedPct={arrowChartPercentCounted ? resultsData?.data?.overall?.counted : undefined}
     arrowHeight={ARROW_HEIGHT}
     {getRotationForValue}
