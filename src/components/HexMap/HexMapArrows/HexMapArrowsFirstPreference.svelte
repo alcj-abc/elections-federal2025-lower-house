@@ -16,7 +16,7 @@
     ONP: 'One Nation',
     TOP: 'Trumpet of Patriots'
   };
-  let { arrowChart, groups, layout, arrowChartPercentCounted } = $props();
+  let { arrowChart, groups, layout, arrowChartPercentCounted, arrowChartCaption } = $props();
   const ARROW_HEIGHT = 0.08;
   let resultsData = $state();
 
@@ -63,7 +63,7 @@ for ${partyCode}: ${arrowData[id] ? arrowData[id].toFixed(3) + '%' : 'not applic
 {#if resultsData}
   <HexMapArrowsViz {groups} {layout} {arrowData} arrowHeight={ARROW_HEIGHT} {getRotationForValue} {getColourForValue} />
   <HexMapArrowLegend
-    caption={partyNames[partyCode] || partyCode}
+    caption={arrowChartCaption ? partyNames[partyCode] || partyCode : ''}
     chartName="Primary vote change %"
     countedPct={arrowChartPercentCounted ? resultsData?.data?.overall?.counted : undefined}
     arrowHeight={ARROW_HEIGHT}

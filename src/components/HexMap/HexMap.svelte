@@ -51,6 +51,8 @@
     arrowChart = 'None',
     /** Whether to show percent counted on the arrow chart */
     arrowChartPercentCounted = true,
+    /** Should we show the caption on the arrow charts? */
+    arrowChartCaption,
     /** which electorate is currently focused */
     selectedElectorate = null,
     /** Additional text to add to the alt text version of each electorate, e.g. `{ ADEL: 'ALP retain' }` */
@@ -210,7 +212,13 @@
         {#if arrowChart === 'Labor/Coalition 2CP Swing'}
           <HexMapArrowsSwing groups={config.groups} {layout} {arrowChartPercentCounted} />
         {:else}
-          <HexMapArrowsFirstPreference groups={config.groups} {layout} {arrowChart} {arrowChartPercentCounted} />
+          <HexMapArrowsFirstPreference
+            groups={config.groups}
+            {layout}
+            {arrowChart}
+            {arrowChartPercentCounted}
+            {arrowChartCaption}
+          />
         {/if}
       {/if}
     </svg>

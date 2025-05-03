@@ -330,6 +330,11 @@
               <input type="checkbox" bind:checked={$hashConfig.arrowChartPercentCounted} />
               Show percent counted
             </label>
+
+            <label>
+              <input type="checkbox" bind:checked={$hashConfig.arrowChartCaption} />
+              Show party name
+            </label>
           </fieldset>
         {/if}
         <fieldset>

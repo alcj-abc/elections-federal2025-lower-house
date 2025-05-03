@@ -188,6 +188,11 @@ export const schema = {
     key: 'fpac',
     defaultValue: true
   },
+  arrowChartCaption: {
+    type: 'boolean',
+    key: 'arrowcaption',
+    defaultValue: true
+  },
   combineCoalition: {
     type: 'boolean',
     key: 'cc',
@@ -235,4 +240,5 @@ export type HashConfig = {
   hexFlip: string;
   altText: string;
   caption: string;
+  arrowChartCaption: boolean;
 };
