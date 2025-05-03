@@ -11,11 +11,14 @@ export function getMapAllocationsAndCertainty(data) {
       const id = electorate.code;
       obj.allocations[id] = electorate.leadingCandidate?.party?.code || null;
       obj.certainties[id] = !!electorate.isSafe;
+      obj.isDoubtful[id] = electorate.isDoubtful;
+
       return obj;
     },
     {
       allocations: {},
-      certainties: {}
+      certainties: {},
+      isDoubtful: {}
     }
   );
 }

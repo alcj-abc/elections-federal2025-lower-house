@@ -38,8 +38,8 @@
 
 <button
   onclick={e => {
-    fetchLiveData(e).then(newData => {
-      $hashConfig = { ...$hashConfig, ...newData };
+    fetchLiveData(e).then(({ allocations, certainties }) => {
+      $hashConfig = { ...$hashConfig, allocations, certainties };
     });
   }}
 >
@@ -61,6 +61,8 @@
       const newAllocation = parties.synonyms[newAllocationRaw] || newAllocationRaw;
       const isChanging = oldAllocation !== newAllocation;
       if (!isChanging) {
+        newAllocations[id] = null;
+        newCertainties[id] = true;
         return;
       }
       newAllocations[id] = newAllocation;
@@ -71,6 +73,27 @@
   }}
 >
   {liveDataName} (Changing)
+</button>
+<button
+  onclick={e => {
+    fetchLiveData(e).then(newData => {
+      const newAllocations = {};
+      const newCertainties = {};
+      Object.keys(newData.allocations).forEach(id => {
+        const isDoubtful = newData.isDoubtful[id];
+        if (isDoubtful) {
+          newAllocations[id] = newData.allocations[id];
+          newCertainties[id] = newData.certainties[id];
+        } else {
+          newAllocations[id] = null;
+          newCertainties[id] = true;
+        }
+      });
+      $hashConfig = { ...$hashConfig, allocations: newAllocations, certainties: newCertainties };
+    });
+  }}
+>
+  {liveDataName} (In doubt)
 </button>
 
 <style lang="scss">
