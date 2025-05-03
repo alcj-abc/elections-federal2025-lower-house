@@ -28,6 +28,10 @@ import partiesConfig from '../data/parties.json';
 export function getPrimarySwingPct(data, checkFn = code => true): { string: number | null } {
   return data.data.electorates.reduce((obj, electorate) => {
     const id = electorate.code;
+    if (Number(electorate.counted || 0) <= 5) {
+      obj[id] = 0;
+      return obj;
+    }
     if (!electorate.accumulatedCandidates) {
       console.error('Missing accumulatedCandidates');
       return obj;
