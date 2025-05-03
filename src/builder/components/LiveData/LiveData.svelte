@@ -45,6 +45,26 @@
 >
   Live ({liveDataName})
 </button>
+<button
+  onclick={async e => {
+    const liveData = await fetchLiveData(e);
+    const previousYear = await fetch('./data/2022-redist.tsv', { cache: 'force-cache' })
+      .then(res => res.text())
+      .then(parseSpreadsheet);
+    const changing = previousYear.reduce((obj, { matchedElectorate, matchedAllocation }) => {
+      const id = matchedElectorate.id;
+      const oldAllocation = parties.synonyms[matchedAllocation] || matchedAllocation;
+      const newAllocationRaw = liveData.allocations[id];
+      const newAllocation = parties.synonyms[newAllocationRaw] || newAllocationRaw;
+      obj[id] = oldAllocation === newAllocation ? null : newAllocation;
+      return obj;
+    }, {});
+
+    $hashConfig = { ...$hashConfig, allocations: changing };
+  }}
+>
+  Changing ({liveDataName})
+</button>
 
 <style lang="scss">
 </style>
