@@ -40,12 +40,15 @@ export function getPrimarySwingPct(data, checkFn = code => true): { string: numb
       const code = partiesConfig.synonyms[candidate.party.code] || candidate.party.code;
       return checkFn(code);
     });
-    if (matchedCandidates.length > 1) {
-      // we can't show multiple candidates
-      obj[id] = 0;
-      return obj;
-    }
-    obj[id] = Number(matchedCandidates[0]?.simple?.swing || 0);
+
+    const cumulativePct = matchedCandidates.reduce((currentPct, matchedCandidate) => {
+      const pct = matchedCandidate?.simple?.swing;
+
+      const sanitisedPct = pct ? Number(pct) : 0;
+
+      return currentPct + sanitisedPct;
+    }, 0);
+    obj[id] = cumulativePct;
     return obj;
   }, {});
 }
