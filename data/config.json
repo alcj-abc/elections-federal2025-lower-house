@@ -1,6 +1,6 @@
 {
   "liveData": {
-    "name": "2022 test run",
-    "url": "https://abcnewsdata.sgp1.digitaloceanspaces.com/elections-2025-results-data__ash-test/latest.json"
+    "name": "2025",
+    "url": "https://www.abc.net.au/news-web/api/syndicate/storylab/elections/federal/2025"
   }
 }
