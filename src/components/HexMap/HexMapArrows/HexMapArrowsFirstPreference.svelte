@@ -1,6 +1,6 @@
 <script lang="ts">
   import HexMapArrowsViz from './HexMapArrowsViz/HexMapArrowsViz.svelte';
-  import baselineFirstPreferences from '../../../../data/appdata-first-preference-2019.json';
+  import baselineFirstPreferences from '../../../../data/appdata-first-preference-2022.json';
   import { getContext, onMount } from 'svelte';
   import { arrowDataFormatter } from './utils';
   import { getLiveData, getPrimaryCountPct } from '../../../liveData';
