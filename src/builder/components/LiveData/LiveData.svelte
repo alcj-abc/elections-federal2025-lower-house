@@ -43,7 +43,7 @@
     });
   }}
 >
-  Live ({liveDataName})
+  {liveDataName} (Live)
 </button>
 <button
   onclick={async e => {
@@ -63,7 +63,7 @@
     $hashConfig = { ...$hashConfig, allocations: changing };
   }}
 >
-  Changing ({liveDataName})
+  {liveDataName} (Changing)
 </button>
 
 <style lang="scss">
