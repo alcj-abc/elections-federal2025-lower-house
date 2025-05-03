@@ -11,6 +11,7 @@
   const partyNames = {
     ALP: 'Labor',
     LNP: 'L/NP',
+    GRN: 'Greens',
     IND: 'Independents',
     ONP: 'One Nation',
     TOP: 'Trumpet of Patriots'
