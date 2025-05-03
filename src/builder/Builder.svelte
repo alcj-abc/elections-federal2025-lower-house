@@ -172,8 +172,18 @@
                     obj[electorate.id] = null;
                     return obj;
                   }, {});
-                }}>Blank</button
+                  $hashConfig.certainties = electorates.reduce((obj, electorate) => {
+                    obj[electorate.id] = true;
+                    return obj;
+                  }, {});
+                  $hashConfig.focuses = electorates.reduce((obj, electorate) => {
+                    obj[electorate.id] = false;
+                    return obj;
+                  }, {});
+                }}
               >
+                Blank
+              </button>
               <button
                 onclick={e => {
                   e.preventDefault();
