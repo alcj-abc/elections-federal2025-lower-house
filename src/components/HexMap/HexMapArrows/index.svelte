@@ -6,6 +6,7 @@
     import(/* webpackChunkName: "dynamic-hex-map-arrows" */ './HexMapArrowsFirstPreference.svelte').then(module => {
       Component = module.default as ComponentType;
     });
+    document.querySelector('.Header + p.u-dropcap')?.classList.remove('u-dropcap');
   });
 </script>
 
