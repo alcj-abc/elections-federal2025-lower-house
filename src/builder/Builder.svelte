@@ -20,6 +20,7 @@
   import ScreenshotTool from './components/ScreenshotTool/ScreenshotTool.svelte';
   import { defaultMarkerName, markerPrefixes } from './util';
   import LiveData from './components/LiveData/LiveData.svelte';
+  import { maps } from '../components/GeoMap/store';
 
   // @ts-ignore
   let selectedElectorate = $derived.by(() => $modal?.props?.electorate?.id);
@@ -105,7 +106,7 @@
         />
       {/if}
 
-      <form class="container-controls">
+      <form class="container-controls" onsubmit={e => e.preventDefault()}>
         <div class="fieldset builder__inline">
           <label>
             <input
@@ -149,16 +150,33 @@
         {/if}
 
         {#if $hashConfig.vizType === 'geo'}
-          <div class="fieldset">
-            <label>
-              <span>Map area</span>
+          <fieldset>
+            <legend>Map area</legend>
+            <div class="builder__inline" style:flex-wrap="nowrap">
               <select name="layout" bind:value={$hashConfig.geoArea}>
                 {#each Object.keys(mapConfig.areas) as item}
-                  <option>{item}</option>
+                  <option disabled={item === 'Custom snapshot'}>{item}</option>
                 {/each}
               </select>
-            </label>
-          </div>
+              <button
+                onclick={() => {
+                  const map = $maps[0];
+                  if (!map) {
+                    return;
+                  }
+                  const bounds = map.getBounds();
+                  $hashConfig = {
+                    ...$hashConfig,
+                    geoBoundsTopRight: [bounds.getEast(), bounds.getNorth()],
+                    geoBoundsBottomLeft: [bounds.getWest(), bounds.getSouth()],
+                    geoArea: 'Custom snapshot'
+                  };
+                }}
+              >
+                Snapshot
+              </button>
+            </div>
+          </fieldset>
         {/if}
 
         {#if $hashConfig.arrowChart === 'None'}
@@ -167,7 +185,6 @@
             <div class="buttons">
               <button
                 onclick={e => {
-                  e.preventDefault();
                   $hashConfig.allocations = electorates.reduce((obj, electorate) => {
                     obj[electorate.id] = null;
                     return obj;
@@ -186,7 +203,6 @@
               </button>
               <button
                 onclick={e => {
-                  e.preventDefault();
                   fetch('./data/2019.tsv', { cache: 'force-cache' })
                     .then(res => res.text())
                     .then(tsv => {
@@ -198,7 +214,6 @@
               </button>
               <button
                 onclick={e => {
-                  e.preventDefault();
                   fetch('./data/2022.tsv', { cache: 'force-cache' })
                     .then(res => res.text())
                     .then(tsv => {
@@ -211,7 +226,6 @@
               </button>
               <button
                 onclick={e => {
-                  e.preventDefault();
                   fetch('./data/2022-redist.tsv', { cache: 'force-cache' })
                     .then(res => res.text())
                     .then(tsv => {
@@ -224,7 +238,6 @@
               <LiveData />
               <button
                 onclick={e => {
-                  e.preventDefault();
                   $hashConfig.certainties = electorates.reduce((obj, electorate) => {
                     obj[electorate.id] = null;
                     return obj;
@@ -235,7 +248,6 @@
               </button>
               <button
                 onclick={e => {
-                  e.preventDefault();
                   $hashConfig.certainties = electorates.reduce((obj, electorate) => {
                     obj[electorate.id] = true;
                     return obj;
@@ -281,7 +293,6 @@
                 title="Clear focuses"
                 disabled={$hashConfig.arrowChart === 'None'}
                 onclick={e => {
-                  e.preventDefault();
                   $hashConfig.arrowChart = 'None';
                 }}
               >
@@ -357,14 +368,12 @@
           <legend>Tools</legend>
           <button
             onclick={e => {
-              e.preventDefault();
               $modal = { type: 'spreadsheetImport' };
             }}>Spreadsheet import/export</button
           >
           <button
             onclick={e => {
               // @ts-ignore
-              e.preventDefault();
               window.location = String(window.location.pathname).replace('/builder', '/google-doc-preview');
             }}>Google Doc preview</button
           >

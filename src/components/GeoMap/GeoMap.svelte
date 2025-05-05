@@ -15,6 +15,7 @@
   import patternURL from '../../../public/Hash-four@2x.png';
   import { partyColours } from '../StyleRoot/store';
   import type { MapOptions, Map as MapType } from './maplibre-gl';
+  import { maps } from './store';
 
   const { LngLatBounds, Map } = window.maplibregl;
   let {
@@ -29,7 +30,9 @@
     showFocusedElectorateLabels = false,
     onClick = () => {},
     isInline = false,
-    altText = ''
+    altText = '',
+    geoBoundsTopRight = [],
+    geoBoundsBottomLeft = []
   } = $props();
 
   let mapRootEl = $state<HTMLElement>();
@@ -49,6 +52,15 @@
 
   let hasAnyAllocations = $derived.by(() => Object.values(allocations).some(Boolean));
 
+  function getGeoArea(geoArea) {
+    if (geoArea === 'Custom snapshot') {
+      const customBounds = [geoBoundsBottomLeft, geoBoundsTopRight];
+      console.log({ customBounds });
+      return customBounds;
+    }
+    return mapConfig.areas[geoArea] || mapConfig.areas.Australia;
+  }
+
   // Load the map, set up the layers, get everything started
   $effect(() => {
     if (!mapRootEl) {
@@ -58,7 +70,7 @@
       if (!mapRootEl) {
         return;
       }
-      const center = new LngLatBounds(mapConfig.areas[geoArea] || mapConfig.areas.Australia).getCenter();
+      const center = new LngLatBounds(getGeoArea(geoArea)).getCenter();
       const mapOptions = {
         ...mapConfig.baseConfig,
         container: mapRootEl,
@@ -348,7 +360,7 @@
           console.error('missing gepoperoper', prop.id);
         }
       });
-      let nextBounds = mapConfig.areas[geoArea];
+      let nextBounds = getGeoArea(geoArea);
 
       const focusedElectoratesGeoProperties = electoratesRenderProps
         .filter(({ focus }) => focus)
@@ -392,6 +404,7 @@
     const _bounds = bounds;
     const _resizeWidth = resizeWidth;
     const areBoundsValid = bounds.every(([x, y]) => x && y);
+    const isCustomArea = geoArea === 'Custom snapshot';
     if (!_map || !_bounds || !_resizeWidth || !areBoundsValid) {
       return;
     }
@@ -399,7 +412,8 @@
     return untrack(() => {
       let textIgnorePlacementTimeout;
 
-      const padding = geoArea === 'Australia' ? undefined : { top: 16, left: 16, right: 16, bottom: 16 };
+      const padding =
+        geoArea === 'Australia' || isCustomArea ? undefined : { top: 16, left: 16, right: 16, bottom: 16 };
 
       _map?.fitBounds(new LngLatBounds(_bounds as any), {
         padding,
@@ -428,6 +442,20 @@
     }
     canvas.setAttribute('aria-label', altText);
     canvas.setAttribute('role', 'img');
+  });
+
+  // save our Map in the global store
+  $effect(() => {
+    const _map = map;
+    return untrack(() => {
+      if (!_map) {
+        return;
+      }
+      $maps = Array.from(new Set([...$maps, _map]));
+      return () => {
+        $maps = $maps.filter(thisMap => thisMap !== _map);
+      };
+    });
   });
 </script>
 

@@ -57,6 +57,15 @@ const binaryElectorateCodec = {
     return putValues(values);
   }
 };
+import Geohash from 'latlon-geohash';
+
+const geohashCodec = {
+  encode: coord => (coord ? Geohash.encode(...coord.toReversed(), 6) : ''),
+  decode: hash => {
+    const { lat, lon } = hash ? Geohash.decode(hash) : {};
+    return [lon || 0, lat || 0].filter(Boolean);
+  }
+};
 
 export const defaultNullElectorates = Object.freeze(
   electorates.reduce((obj, current) => {
@@ -219,6 +228,18 @@ export const schema = {
     key: 'cap',
     defaultValue: '',
     codec: base36Codec
+  },
+  geoBoundsTopRight: {
+    type: 'custom',
+    key: 'geot',
+    defaultValue: '',
+    codec: geohashCodec
+  },
+  geoBoundsBottomLeft: {
+    type: 'custom',
+    key: 'geob',
+    defaultValue: '',
+    codec: geohashCodec
   }
 };
 
@@ -241,4 +262,6 @@ export type HashConfig = {
   altText: string;
   caption: string;
   arrowChartCaption: boolean;
+  geoBoundsTopRight: number[];
+  geoBoundsBottomLeft: number[];
 };

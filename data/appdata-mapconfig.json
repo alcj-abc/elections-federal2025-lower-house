@@ -80,6 +80,10 @@
     "Inner-city Brisbane": [
       [153, -27.3],
       [153.1, -27.6]
+    ],
+    "Custom snapshot": [
+      [112, -44],
+      [156, -10]
     ]
   },
   "electoratesGeo": [
