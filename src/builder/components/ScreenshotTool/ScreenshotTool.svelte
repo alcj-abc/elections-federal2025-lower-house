@@ -1,5 +1,5 @@
 <script>
-  import { decodeSchema, encodeSchema } from 'hash-codec';
+  import { decodeSchema, encodeSchema } from '@abcnews/hash-codec';
   import { untrack } from 'svelte';
   import Modal from '../Modal/Modal.svelte';
   import parse, { stringify } from '@abcnews/alternating-case-to-object';

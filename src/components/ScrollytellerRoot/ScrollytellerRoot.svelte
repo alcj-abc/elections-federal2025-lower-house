@@ -3,8 +3,7 @@
   import MapRoot from '../MapRoot/MapRoot.svelte';
   import config from '../../../data/appdata-built.json';
   import layouts from '../../../data/appdata-layouts.json';
-  import parties from '../../../data/parties.json';
-  import { decodeSchema } from 'hash-codec';
+  import { decodeSchema } from '@abcnews/hash-codec';
   import { schema } from '../../lib/hashConfig/schema';
   import { applyColourToPanels } from '../InlineHighlights/util';
 

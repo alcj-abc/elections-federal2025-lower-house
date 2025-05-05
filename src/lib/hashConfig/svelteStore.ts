@@ -1,4 +1,4 @@
-import { makeSvelteStore } from 'hash-codec';
+import { makeSvelteStore } from '@abcnews/hash-codec';
 import { schema, type HashConfig } from './schema';
 
 export const hashConfig = makeSvelteStore<HashConfig>(schema);

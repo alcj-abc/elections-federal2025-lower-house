@@ -5,7 +5,7 @@ import { loadScrollyteller } from '@abcnews/svelte-scrollyteller';
 import { mount } from 'svelte';
 import ScrollytellerRoot from './components/ScrollytellerRoot/ScrollytellerRoot.svelte';
 import { schema } from './lib/hashConfig/schema';
-import { decodeSchema } from 'hash-codec';
+import { decodeSchema } from '@abcnews/hash-codec';
 import InlineGraphics from './components/InlineGraphics/InlineGraphics.svelte';
 import App from './components/App/App.svelte';
 import LiveResultCard from './components/ResultCard/LiveResultCard.svelte';

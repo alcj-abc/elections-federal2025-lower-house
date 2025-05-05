@@ -1,4 +1,4 @@
-import { getRleCodec, getBinaryCodec } from 'hash-codec';
+import { getRleCodec, getBinaryCodec } from '@abcnews/hash-codec';
 import layouts from '../../../data/appdata-layouts.json';
 import data from '../../../data/appdata-built.json';
 import mapConfig from '../../../data/appdata-mapconfig.json';

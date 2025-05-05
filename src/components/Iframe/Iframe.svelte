@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { decodeSchema } from 'hash-codec';
+  import { decodeSchema } from '@abcnews/hash-codec';
   import { onMount } from 'svelte';
   import { schema } from '../../lib/hashConfig/schema';
   import parse from '@abcnews/alternating-case-to-object';
