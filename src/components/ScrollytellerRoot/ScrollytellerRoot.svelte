@@ -40,7 +40,6 @@
       options = resolvedPanels[0]?.data;
     });
   });
-  console.log('dev');
 </script>
 
 {#if options}

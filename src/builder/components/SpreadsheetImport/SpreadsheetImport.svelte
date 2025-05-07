@@ -1,5 +1,5 @@
 <script>
-  import Modal from '../Modal/Modal.svelte';
+  import { Modal } from '@abcnews/components-builder';
   import Circle from '../Circle/Circle.svelte';
   import { electorates } from '../../../lib/hashConfig/schema';
   import { parseSpreadsheet, applyHashConfig } from './util';

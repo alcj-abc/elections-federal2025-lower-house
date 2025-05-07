@@ -5,7 +5,7 @@
    * standard typeahead [CODE] values.
    *
    */
-  import Typeahead from '../Typeahead/Typeahead.svelte';
+  import { Typeahead } from '@abcnews/components-builder';
   let { values, value = {}, onChange = () => {}, disabled } = $props();
 </script>
 

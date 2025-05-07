@@ -1,7 +1,7 @@
 <script lang="ts">
   import { allocationMap } from '../../../lib/hashConfig/schema';
   import Circle from '../Circle/Circle.svelte';
-  import ContextMenu from '../ContextMenu/ContextMenu.svelte';
+  import { ContextMenu } from '@abcnews/components-builder';
   import { arrowDataFormatter } from '../../../components/HexMap/HexMapArrows/utils';
   import { hashConfig } from '../../../lib/hashConfig/svelteStore';
   import { tick } from 'svelte';

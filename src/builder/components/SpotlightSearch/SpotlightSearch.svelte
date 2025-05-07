@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Modal from '../Modal/Modal.svelte';
+  import { Modal } from '@abcnews/components-builder';
   import { electorates, electoratesByCode } from '../../../lib/hashConfig/schema';
-  import Typeahead from '../Typeahead/Typeahead.svelte';
+  import { Typeahead } from '@abcnews/components-builder';
   import { modal } from '../../store';
   import { hashConfig } from '../../../lib/hashConfig/svelteStore';
 

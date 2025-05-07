@@ -7,9 +7,9 @@
   import Labels from './components/Labels/Labels.svelte';
   import MapRoot from '../components/MapRoot/MapRoot.svelte';
   import SpreadsheetImport from './components/SpreadsheetImport/SpreadsheetImport.svelte';
-  import UpdateChecker from './components/UpdateChecker/UpdateChecker.svelte';
-  import MarkerAdmin from './components/MarkerAdmin/MarkerAdmin.svelte';
-  import BuilderStyleRoot from './components/BuilderStyleRoot/BuilderStyleRoot.svelte';
+  import { UpdateChecker } from '@abcnews/components-builder';
+  import { MarkerAdmin } from '@abcnews/components-builder';
+  import { BuilderStyleRoot } from '@abcnews/components-builder';
   import { applyHashConfig, parseSpreadsheet } from './components/SpreadsheetImport/util';
   import LabelDragger from './components/LabelDragger/LabelDragger.svelte';
   import { onMount } from 'svelte';
@@ -17,10 +17,11 @@
   import { hashConfig } from '../lib/hashConfig/svelteStore';
   import SpotlightSearch from './components/SpotlightSearch/SpotlightSearch.svelte';
   import { modal } from './store';
-  import ScreenshotTool from './components/ScreenshotTool/ScreenshotTool.svelte';
+  import { ScreenshotTool } from '@abcnews/components-builder';
   import { defaultMarkerName, markerPrefixes } from './util';
   import LiveData from './components/LiveData/LiveData.svelte';
   import { maps } from '../components/GeoMap/store';
+  import parse, { stringify } from '@abcnews/alternating-case-to-object';
 
   // @ts-ignore
   let selectedElectorate = $derived.by(() => $modal?.props?.electorate?.id);
@@ -362,7 +363,11 @@
         </fieldset>
         <fieldset>
           <legend>Markers</legend>
-          <MarkerAdmin prefixes={markerPrefixes} defaultName={() => defaultMarkerName($hashConfig)} />
+          <MarkerAdmin
+            projectName="elections-federal2025-lower-house"
+            prefixes={markerPrefixes}
+            defaultMarkerName={() => defaultMarkerName($hashConfig)}
+          />
         </fieldset>
         <fieldset>
           <legend>Tools</legend>
@@ -377,7 +382,11 @@
               window.location = String(window.location.pathname).replace('/builder', '/google-doc-preview');
             }}>Google Doc preview</button
           >
-          <ScreenshotTool {defaultMarkerName} prefixes={markerPrefixes} />
+          <ScreenshotTool
+            {defaultMarkerName}
+            prefixes={markerPrefixes}
+            iframeUrl={window.location.origin + window.location.pathname.replace('/builder/', '/iframe/')}
+          />
         </fieldset>
       </form>
     </div>
