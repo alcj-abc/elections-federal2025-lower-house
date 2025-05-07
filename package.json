@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "@abcnews/base-36-text": "^1.0.1",
-    "@abcnews/components-builder": "^0.0.3",
+    "@abcnews/components-builder": "^0.0.4",
     "@abcnews/hash-codec": "^1.0.1",
     "async-es": "^3.2.6",
     "date-fns": "^4.1.0",
