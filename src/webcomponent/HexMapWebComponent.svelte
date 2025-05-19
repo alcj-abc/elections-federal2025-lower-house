@@ -31,12 +31,15 @@
     isSkippable = true,
     colours,
     customElectorateAltText = {},
-    areStateOutlinesOnTop
+    areStateOutlinesOnTop,
+    globalStyleRoot = true
   } = $props();
 
   let rootEl = $state<HTMLDivElement>();
 
   let layoutDefinition = $derived.by(() => layouts[layout]);
+
+  let styleRootEl = $derived.by(() => globalStyleRoot ? undefined : rootEl);
 
   /**
    * Get a screen coordinate from the given SVG coordinate
@@ -95,9 +98,15 @@
     }
     onApi({ getHex, focusHex });
   });
+
+  function getStyleRootBinding() {
+    if (!globalStyleRoot) {
+      return rootEl
+    }
+  }
 </script>
 
-<StyleRoot {colours}/>
+<StyleRoot {colours} bind:rootEl={styleRootEl} />
 <div bind:this={rootEl}>
   <HexMap
     {config}
