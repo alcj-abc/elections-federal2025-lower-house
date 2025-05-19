@@ -97,7 +97,7 @@
   });
 </script>
 
-<StyleRoot {colours}/>
+<StyleRoot {colours} bind:rootEl={rootEl} />
 <div bind:this={rootEl}>
   <HexMap
     {config}
