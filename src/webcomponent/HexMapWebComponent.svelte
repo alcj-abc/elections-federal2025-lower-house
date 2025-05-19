@@ -31,7 +31,8 @@
     isSkippable = true,
     colours,
     customElectorateAltText = {},
-    areStateOutlinesOnTop
+    areStateOutlinesOnTop,
+    globalStyleRoot = true
   } = $props();
 
   let rootEl = $state<HTMLDivElement>();
@@ -95,9 +96,15 @@
     }
     onApi({ getHex, focusHex });
   });
+
+  function getStyleRootBinding() {
+    if (!globalStyleRoot) {
+      return rootEl
+    }
+  }
 </script>
 
-<StyleRoot {colours}/>
+<StyleRoot {colours} bind:rootEl={() => undefined, getStyleRootBinding} />
 <div bind:this={rootEl}>
   <HexMap
     {config}
