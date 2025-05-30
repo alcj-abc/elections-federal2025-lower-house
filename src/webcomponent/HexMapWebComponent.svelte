@@ -99,14 +99,9 @@
     onApi({ getHex, focusHex });
   });
 
-  function getStyleRootBinding() {
-    if (!globalStyleRoot) {
-      return rootEl
-    }
-  }
 </script>
 
-<StyleRoot {colours} bind:rootEl={rootEl} />
+<StyleRoot {colours} bind:rootEl={rootEl} {isGlobalStyleRoot} />
 <div bind:this={rootEl}>
   <HexMap
     {config}

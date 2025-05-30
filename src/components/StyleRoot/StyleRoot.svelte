@@ -3,11 +3,13 @@
   import { partyColours } from './store';
   import defaultColours from '../../../data/appdata-colours.json';
 
-  let { rootEl = $bindable(), colours = defaultColours } = $props();
+  let { rootEl = $bindable(), isGlobalStyleRoot = true, colours = defaultColours } = $props();
+
+  let rootElement = isGlobalStyleRoot ? null : rootEl;
 
   $effect(() => {
     const _colours = colours;
-    const _rootEl = rootEl;
+    const _rootEl = rootElememt
     if (!_rootEl) {
       return;
     }
@@ -32,10 +34,10 @@
   });
 
   onMount(() => {
-    if (!rootEl) {
+    if (!rootElement) {
       return;
     }
   });
 </script>
 
-<svelte:body bind:this={rootEl} />
+<svelte:body bind:this={rootElement} />
