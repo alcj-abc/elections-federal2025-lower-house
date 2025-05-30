@@ -3,9 +3,10 @@
   import { partyColours } from './store';
   import defaultColours from '../../../data/appdata-colours.json';
 
-  let { rootEl = $bindable(), isGlobalStyleRoot = true, colours = defaultColours } = $props();
+  let { rootEl = $bindable(), rootElOverride, colours = defaultColours } = $props();
 
-  let rootElement = isGlobalStyleRoot ? null : rootEl;
+  // conditional rootEl binding
+  let rootElement = rootElOverride ?? rootEl;
 
   $effect(() => {
     const _colours = colours;

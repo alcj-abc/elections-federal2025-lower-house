@@ -101,7 +101,7 @@
 
 </script>
 
-<StyleRoot {colours} bind:rootEl={rootEl} {isGlobalStyleRoot} />
+<StyleRoot {colours} rootElOverride={!isGlobalStyleRoot ? rootEl : null} />
 <div bind:this={rootEl}>
   <HexMap
     {config}
