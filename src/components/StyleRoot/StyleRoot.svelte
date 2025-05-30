@@ -6,7 +6,9 @@
   let { rootEl = $bindable(), rootElOverride, colours = defaultColours } = $props();
 
   // conditional rootEl binding
-  let rootElement = rootElOverride ?? rootEl;
+  let rootElement = $derived(() => rootElOverride ?? rootEl);
+
+  console.log({rootElOverride, rootEl})
 
   $effect(() => {
     const _colours = colours;

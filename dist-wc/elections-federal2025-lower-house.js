@@ -4818,8 +4818,11 @@ const Hl = { black: "#000", white: "#fff", emptyStateOutline: "black", stateOutl
 function ba(e, t) {
   le(t, !0);
   const [r, o] = Ft();
-  let n = b(t, "rootEl", 15), a = b(t, "rootElOverride", 7), i = b(t, "colours", 7, en), s = a() ?? n();
-  Ee(() => {
+  let n = b(t, "rootEl", 15), a = b(t, "rootElOverride", 7), i = b(t, "colours", 7, en), s = /* @__PURE__ */ V(() => () => a() ?? n());
+  console.log({
+    rootElOverride: a(),
+    rootEl: n()
+  }), Ee(() => {
     const u = i(), f = rootElememt;
     if (!f)
       return;
@@ -4836,7 +4839,8 @@ function ba(e, t) {
       });
     });
   }), ft(() => {
-  }), Xt(Pn.body, (u) => s = u, () => s);
+    v(s);
+  }), Xt(Pn.body, (u) => Y(s, u, !0), () => v(s));
   var l = ue({
     get rootEl() {
       return n();
