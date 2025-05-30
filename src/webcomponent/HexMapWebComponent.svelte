@@ -29,10 +29,10 @@
     isStaticLayout = true,
     isInteractive = true,
     isSkippable = true,
+    isGlobalStyleRoot = true,
     colours,
     customElectorateAltText = {},
-    areStateOutlinesOnTop,
-    globalStyleRoot = true
+    areStateOutlinesOnTop
   } = $props();
 
   let rootEl = $state<HTMLDivElement>();

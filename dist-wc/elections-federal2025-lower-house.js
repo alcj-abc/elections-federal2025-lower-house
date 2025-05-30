@@ -5086,7 +5086,7 @@ function Eu(e, t) {
   }), d = y(t, "onFocus", 7, () => {
   }), h = y(t, "onApi", 7, () => {
   }), g = y(t, "onViewboxChange", 7, () => {
-  }), _ = y(t, "isStaticLayout", 7, !0), N = y(t, "isInteractive", 7, !0), p = y(t, "isSkippable", 7, !0), A = y(t, "colours", 7), x = y(t, "customElectorateAltText", 23, () => ({})), m = y(t, "areStateOutlinesOnTop", 7), P = y(t, "globalStyleRoot", 7, !0), w = /* @__PURE__ */ Z(void 0), E = /* @__PURE__ */ G(() => iu[s()]);
+  }), _ = y(t, "isStaticLayout", 7, !0), N = y(t, "isInteractive", 7, !0), p = y(t, "isSkippable", 7, !0), A = y(t, "isGlobalStyleRoot", 7, !0), x = y(t, "colours", 7), m = y(t, "customElectorateAltText", 23, () => ({})), P = y(t, "areStateOutlinesOnTop", 7), w = /* @__PURE__ */ Z(void 0), E = /* @__PURE__ */ G(() => iu[s()]);
   function T(C, O, R, q = !0) {
     const X = q ? R.getScreenCTM() : R.getCTM(), te = R.createSVGPoint();
     te.x = C, te.y = O;
@@ -5125,9 +5125,11 @@ function Eu(e, t) {
   var B = Su(), j = ye(B);
   wa(j, {
     get colours() {
+      return x();
+    },
+    get isGlobalStyleRoot() {
       return A();
     },
-    isGlobalStyleRoot,
     get rootEl() {
       return v(w);
     },
@@ -5178,10 +5180,10 @@ function Eu(e, t) {
     },
     onViewboxChange: g(),
     get customElectorateAltText() {
-      return x();
+      return m();
     },
     get showStateOutlinesOnTop() {
-      return m();
+      return P();
     }
   }), k(W), Qt(W, (C) => z(w, C), () => v(w)), I(e, B), le({
     get allocations() {
@@ -5285,28 +5287,28 @@ function Eu(e, t) {
     set isSkippable(C = !0) {
       p(C), b();
     },
-    get colours() {
+    get isGlobalStyleRoot() {
       return A();
     },
-    set colours(C) {
+    set isGlobalStyleRoot(C = !0) {
       A(C), b();
     },
-    get customElectorateAltText() {
+    get colours() {
       return x();
     },
-    set customElectorateAltText(C = {}) {
+    set colours(C) {
       x(C), b();
     },
-    get areStateOutlinesOnTop() {
+    get customElectorateAltText() {
       return m();
     },
-    set areStateOutlinesOnTop(C) {
+    set customElectorateAltText(C = {}) {
       m(C), b();
     },
-    get globalStyleRoot() {
+    get areStateOutlinesOnTop() {
       return P();
     },
-    set globalStyleRoot(C = !0) {
+    set areStateOutlinesOnTop(C) {
       P(C), b();
     }
   });
@@ -5330,10 +5332,10 @@ customElements.define("abcnews-hexmap", ve(
     isStaticLayout: {},
     isInteractive: {},
     isSkippable: {},
+    isGlobalStyleRoot: {},
     colours: {},
     customElectorateAltText: {},
-    areStateOutlinesOnTop: {},
-    globalStyleRoot: {}
+    areStateOutlinesOnTop: {}
   },
   [],
   [],
