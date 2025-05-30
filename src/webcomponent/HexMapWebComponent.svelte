@@ -28,6 +28,7 @@
     onViewboxChange = () => {},
     isStaticLayout = true,
     isInteractive = true,
+    globalStyleRoot = true,
     colours,
     customElectorateAltText = {},
     areStateOutlinesOnTop
@@ -36,6 +37,8 @@
   let rootEl = $state<HTMLDivElement>();
 
   let layoutDefinition = $derived.by(() => layouts[layout]);
+
+  let styleRootEl = $derived.by(() => globalStyleRoot ? undefined : rootEl);
 
   /**
    * Get a screen coordinate from the given SVG coordinate
@@ -96,7 +99,7 @@
   });
 </script>
 
-<StyleRoot {colours} bind:rootEl={rootEl}/>
+<StyleRoot {colours} bind:rootEl={styleRootEl}/>
 <div bind:this={rootEl}>
   <HexMap
     {config}
