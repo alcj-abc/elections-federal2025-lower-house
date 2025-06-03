@@ -64,7 +64,9 @@
     /** Which hexagon animation should we use? */
     hexFlip = 'None',
     /** optional alt text turns the svg into an img */
-    altText = ''
+    altText = '',
+    /** Show skip links for screen readers to skip the graphic */
+    isSkippable = true
   } = $props();
   let svgEl = $state<SVGElement>();
   let svgElWidth = $state(0);
